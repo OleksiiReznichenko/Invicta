@@ -1,0 +1,82 @@
+export default {
+  // Global page headers: https://go.nuxtjs.dev/config-head
+  head: {
+    title: 'Invicta',
+    htmlAttrs: {
+      lang: 'en'
+    },
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: '' },
+      { name: 'format-detection', content: 'telephone=no' }
+    ],
+    link: [
+      // { rel: 'icon', type: 'image/x-icon', href: '/projects/invicta/favicon.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap', as: 'style' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap' },
+      { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap', as: 'style' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap' },
+    ],
+    script: [
+      {
+        src: "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js"
+      },
+      {
+        // src: "/projects/invicta/smoothScroll.js"
+        src: "/smoothScroll.js"
+      }
+    ]
+  },
+
+  // Global CSS: https://go.nuxtjs.dev/config-css
+  css: [
+    '~assets/css/style.css'
+  ],
+
+  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  plugins: [
+  ],
+
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
+
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  buildModules: [
+    '@nuxtjs/style-resources'
+  ],
+
+  styleResources: {
+    scss: [
+      '~assets/scss/mixins.scss',
+      '~assets/scss/variables.scss',
+      '~assets/scss/typography.scss',
+    ]
+  },
+
+  // Modules: https://go.nuxtjs.dev/config-modules
+  modules: [
+  ],
+
+  // Build Configuration: https://go.nuxtjs.dev/config-build
+  build: {
+  },
+
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '*',
+        // component: resolve(__dirname, 'projects/sikuria/pages/index.vue')
+        component: resolve(__dirname, '~/pages/index.vue')
+      })
+    },
+    // base: '/projects/sikuria/',
+    linkActiveClass: 'active-link'
+  },
+
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  }
+}
