@@ -30,56 +30,20 @@ export default {
     },
     watch: {
         '$store.state.isLoggedIn'(newValue, oldValue) {
-            console.log('CHANGed');
             setTimeout(() => {
                 this.dropdownOpener = document.getElementById('dropdown-opener');
                 this.dropdown = document.getElementById('dropdown');
-                console.log(this.dropdownOpener)
-                this.dropdownFunctional(this.dropdownOpener, this.dropdown);
+                // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
+                this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown})
             }, 200);
-        }
-    },
-    methods: {
-        dropdownFunctional(dropdownOpener, dropdown) {
-            dropdownOpener.addEventListener('click', (e) => {
-                if (!dropdown.classList.contains('opened')) {
-                    dropdown.classList.add('opened');
-                    dropdown.style.display = 'block';
-                    setTimeout(() => {
-                        dropdown.style.opacity = 1;
-                    }, 10);
-                } else {
-                    // if (window.outerWidth < 600) return;
-                    dropdown.style.opacity = 0;
-                    setTimeout(() => {
-                        dropdown.style.display = 'none';
-                        dropdown.classList.remove('opened');
-                    }, 200);
-                }
-            })
-
-            window.addEventListener('click', (e) => {
-                if (window.outerWidth < 600) return;
-                const isClickInsideElement = dropdown.contains(e.target);
-                const isClickInsideElement2 = dropdownOpener.contains(e.target);
-
-                if (isClickInsideElement2) return;
-                if (!isClickInsideElement && dropdown.classList.contains('opened')) {
-                dropdown.style.opacity = 0;
-                    setTimeout(() => {
-                        dropdown.style.display = 'none';
-                        dropdown.classList.remove('opened');
-                    }, 200);
-                }
-            });
         }
     },
     mounted () {
         this.dropdownOpener = document.getElementById('dropdown-opener');
         this.dropdown = document.getElementById('dropdown');
 
-        // this.$store.dispatch('dropdownFunctional', {dropdownOpener, dropdown})
-        this.dropdownFunctional(this.dropdownOpener, this.dropdown);
+        this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown})
+        // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
         let prevWidth = window.outerWidth;
 
         window.addEventListener('resize', () => {
@@ -88,9 +52,9 @@ export default {
                 setTimeout(() => {
                     this.dropdownOpener = document.getElementById('dropdown-opener');
                     this.dropdown = document.getElementById('dropdown');
-                    this.dropdownFunctional(this.dropdownOpener, this.dropdown);
+                    // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
+                    this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown})
                 }, 200);
-                console.log('resizeDropDown')
             }
             prevWidth = window.outerWidth;
         })

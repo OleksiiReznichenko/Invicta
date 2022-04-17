@@ -2,21 +2,32 @@
     <div id="dropdown">
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="dropdown__container">
+
             <h2>More</h2>
-            <div v-if="!isLoggedIn" class="line line-top"></div>
+
             <img v-if="!isLoggedIn" src="@/assets/img/logoText.png" alt="Logo" class="logo">
-            <div v-if="!isLoggedIn" class="dropdown__search-container">
+
+            <div v-if="!isLoggedIn" class="line line-top"></div>
+
+            <!-- <div v-if="!isLoggedIn" class="dropdown__search-container">
                 <input type="search" class="dropdown__search-input" id="searchNavBeforeLogin" placeholder="Search">
                 <img src="@/assets/svg/searchIcon.svg" alt="Search icon" class="dropdown__search-icon">
-            </div>
+            </div> -->
+
             <nuxt-link v-if="isLoggedIn" to="/profile" class="user">
-                <div class="user__icon avatar"></div>
+                <img
+                    :src="$store.state.user.avatar"
+                    alt="Avatar"
+                    class="user__icon"
+                />
                 <div class="user__info">
-                    <div class="user__name">Wade Warren</div>
-                    <div class="user__balance">$5.00 balance</div>
+                    <div class="user__name">{{$store.state.user.firstName}} {{$store.state.user.lastName}}</div>
+                    <div class="user__balance">${{$store.state.user.balance}} balance</div>
                 </div>
             </nuxt-link>
+
             <div v-if="isLoggedIn" class="line"></div>
+
             <ul class="list">
                 <li>
                     <nuxt-link to="/discover">Browse</nuxt-link>
@@ -31,21 +42,28 @@
                     <nuxt-link to="/leaderboard">Invicta.ads</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn">
-                    <nuxt-link to="/leaderboard">My shopping <span class="shopping-number">(11)</span></nuxt-link>
+                    <nuxt-link to="/leaderboard">My shopping <span class="shopping-number">({{$store.state.user.shoppingNumber}})</span></nuxt-link>
                 </li>
             </ul>
+
             <div v-if="!isLoggedIn" class="line"></div>
+
             <nuxt-link v-if="!isLoggedIn" to="/profile" class="user">
                 <div class="user__icon profile__icon"><span>N</span></div>
                 <span class="user__name">No user</span>
             </nuxt-link>
-            <nuxt-link v-if="!isLoggedIn" to="/login" class="btn btn-gradient"><span>Login</span></nuxt-link>
+
+            <!-- <nuxt-link @click="isLoggedInToTrue" v-if="!isLoggedIn" to="/login" class="btn btn-gradient"><span>Login</span></nuxt-link> -->
+            <div @click="isLoggedInToTrue" v-if="!isLoggedIn" class="btn btn-gradient"><span>Login</span></div>
+            
             <div v-if="isLoggedIn" class="buttons">
                 <nuxt-link to="/login" class="btn btn-blue"><span>Deposit</span></nuxt-link>
                 <nuxt-link to="/login" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
                 <nuxt-link to="/login" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
             </div>
+
             <div v-if="isLoggedIn" class="line"></div>
+
             <ul v-if="isLoggedIn" class="list">
                 <li>
                     <nuxt-link class="link-flex" to="/discover">
@@ -53,11 +71,14 @@
                         <span>My orders</span>
                     </nuxt-link>
                 </li>
-                <li @click="isLoggedInFalse" class="link-flex">
-                    <img src="@/assets/svg/logout.svg" alt="Logout" class="link-icon">
-                    <span>Logout</span>
+                <li @click="isLoggedInToFalse">
+                    <div class="link-flex">
+                        <img src="@/assets/svg/logout.svg" alt="Logout" class="link-icon">
+                        <span>Logout</span>
+                    </div>
                 </li>
             </ul>
+
         </div>
     </div>
 </template>
@@ -84,9 +105,13 @@ export default {
         }
     },
     methods: {
-        isLoggedInFalse() {
-            this.$store.commit('isLoggedInFalse');
-            this.$router.push('/')
+        isLoggedInToFalse() {
+            this.$store.commit('isLoggedInToFalse');
+            this.$router.push('/');
+        },
+        isLoggedInToTrue() {
+            this.$store.commit('isLoggedInToTrue');
+            this.$router.push('/');
         },
     },
     mounted () {
@@ -158,7 +183,7 @@ export default {
         margin-bottom: 2.5rem;
     }
 
-    .line-top, h2 {
+    h2 {
         @media only screen and (min-width: 600px) {
             display: none;
         }
@@ -244,6 +269,7 @@ export default {
 
     li {
         color: $color-text-grey;
+        display: flex;
 
         // transition: all .3s;
 
@@ -259,11 +285,12 @@ export default {
             }
         }
 
-        a {
-            transition: all .3s;
+        a, 
+        .link-flex {
+            transition: all .3s !important;
 
             &:hover {
-                color: darken($color-text-grey, 25%);
+                color: darken($color-text-grey, 25%) !important;
             }
 
             @media only screen and (max-width: 600px) {
