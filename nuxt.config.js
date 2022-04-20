@@ -37,7 +37,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    // {src: '~/plugins/three.js', ssr: false},
+    '~/plugins/core-components.js',
+    // {src: '~/plugin  s/three.js', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

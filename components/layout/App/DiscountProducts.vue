@@ -1,6 +1,12 @@
 <template>
   <div class="products-line">
-      <ProductCard v-for="(card, i) in 4" :key="i"/>
+      <div class="banner">
+          <div class="info">
+                <h3>Have time to buy</h3>
+                <nuxt-link to="/discover" class="btn btn-white">promo codes</nuxt-link>
+          </div>
+      </div>
+      <ProductCard v-for="(card, i) in 6" :key="i"/>
   </div>
 </template>
 
@@ -11,7 +17,6 @@
 //     components: {
 //         ProductCard,
 //     },
-
 // }
 </script>
 
@@ -22,7 +27,6 @@
     // grid-template-rows: 100%;
     grid-column-gap: 3rem;
     grid-row-gap: 3rem;
-    margin-bottom: 12rem;
 
     @media only screen and (max-width: 850px) {
         grid-template-columns: repeat(2, 33%);

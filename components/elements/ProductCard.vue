@@ -65,10 +65,10 @@ export default {
             left: 50%;
             transform: translateX(-50%);
                 
-            // @media only screen and (min-width: 1450px) {
-            //     display: flex;
-            //     align-items: center;
-            // }
+                @media only screen and (max-width: 1100px) {
+                    transform: translateX(-50%) scale(.8);
+                    bottom: -1.5rem;
+                }
 
             .item {
                 color: black;
@@ -79,8 +79,13 @@ export default {
                 font-size: 1.4rem;
                 white-space: nowrap;
 
+
                 &:not(:last-of-type) {
                     margin-right: 1rem;
+                
+                    // @media only screen and (max-width: 1100px) {
+                    //     margin-right: 0;
+                    // }
                 }
             }
         }
@@ -100,6 +105,11 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
+                
+            @media only screen and (min-width: 1050px) {
+                display: flex;
+                align-items: center;
+            }
 
             .prices {
                 

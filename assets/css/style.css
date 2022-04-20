@@ -154,7 +154,7 @@ html {
   }
 }
 
-@media only screen and (max-width: 1100px) and (min-height: 930px) and (min-width: 900px) {
+/* @media only screen and (max-width: 1100px) and (min-height: 930px) and (min-width: 900px) {
   html {
     font-size: 9.2px;
   }
@@ -164,7 +164,7 @@ html {
   html {
     font-size: 8.7px;
   }
-}
+} */
 
 @media only screen and (max-width: 450px) {
   html {
@@ -250,7 +250,7 @@ main {
   margin: 0 auto;
 } */
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
   .section {
     /* width: 95rem; */
     width: 90%;
