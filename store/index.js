@@ -27,6 +27,10 @@ export const actions = {
                 setTimeout(() => {
                     payload.dropdown.style.opacity = 1;
                 }, 10);
+
+                if (window.outerWidth < 600) {
+                    payload.nav.style.width = '50rem';
+                }
             } else {
                 // if (window.outerWidth < 600) return;
                 payload.dropdown.style.opacity = 0;
@@ -34,6 +38,10 @@ export const actions = {
                     payload.dropdown.style.display = 'none';
                     payload.dropdown.classList.remove('opened');
                 }, 200);
+
+                if (window.outerWidth < 600) {
+                    payload.nav.style.width = '90%';
+                }
             }
         })
 
@@ -44,11 +52,15 @@ export const actions = {
 
             if (isClickInsideElement2) return;
             if (!isClickInsideElement && payload.dropdown.classList.contains('opened')) {
-            payload.dropdown.style.opacity = 0;
+                payload.dropdown.style.opacity = 0;
                 setTimeout(() => {
                     payload.dropdown.style.display = 'none';
                     payload.dropdown.classList.remove('opened');
                 }, 200);
+
+                if (window.outerWidth < 600) {
+                    payload.nav.style.width = '90%';
+                }
             }
         });
     }
