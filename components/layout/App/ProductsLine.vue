@@ -1,7 +1,9 @@
 <template>
-  <div class="products-line">
-      <ProductCard v-for="(card, i) in 4" :key="i"/>
-  </div>
+    <div class="section">
+        <div class="products-line">
+            <ProductCard v-for="(card, i) in 4" :key="i"/>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -23,9 +25,10 @@
     grid-column-gap: 3rem;
     grid-row-gap: 3rem;
     margin-bottom: 12rem;
+    width: 100%;
 
     @media only screen and (max-width: 850px) {
-        grid-template-columns: repeat(2, 33%);
+        grid-template-columns: repeat(2, 35%);
         justify-content: center;
     }
 

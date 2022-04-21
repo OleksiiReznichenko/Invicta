@@ -54,7 +54,7 @@ export default {
             display: block;
             width: 85%;
             margin: 0 auto;
-
+            border-radius: 8px;
         }
 
         .container {
@@ -66,7 +66,7 @@ export default {
             transform: translateX(-50%);
                 
                 @media only screen and (max-width: 1100px) {
-                    transform: translateX(-50%) scale(.8);
+                    transform: translateX(-50%) scale(.9);
                     bottom: -1.5rem;
                 }
 

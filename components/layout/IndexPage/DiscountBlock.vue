@@ -1,5 +1,5 @@
 <template>
-    <div class="root">
+    <div class="section root">
         <div class="discount left">
             <div class="info">
                 <h2>discounts</h2>
@@ -32,8 +32,13 @@ export default {
     display: flex;
     margin-bottom: 4rem;
 
-    @media only screen and (max-width: 550px) {
+    @media only screen and (max-width: 850px) {
         flex-direction: column;
+        width: 66%;
+    }
+
+    @media only screen and (max-width: 600px) {
+        width: 90%;
     }
 
     .left {
@@ -54,7 +59,7 @@ export default {
         //     width: 90%;
         // }
 
-        @media only screen and (max-width: 550px) {
+        @media only screen and (max-width: 850px) {
             width: 100%;
         }
 
@@ -66,7 +71,7 @@ export default {
         }
 
         .btn {
-            padding: 1.25rem 5rem;
+            padding: 1rem 5rem;
             font-weight: 400 !important;
         }
     }
@@ -79,7 +84,7 @@ export default {
             width: 26%;
         }
 
-        @media only screen and (max-width: 550px) {
+        @media only screen and (max-width: 850px) {
             width: 100%;
             margin-top: 3rem;
         }
@@ -89,7 +94,7 @@ export default {
             text-transform: uppercase;
             margin-bottom: .5rem;
 
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 850px) {
                 font-size: 2.4rem;
                 margin-bottom: 1rem;
             }
@@ -104,20 +109,20 @@ export default {
         .promo {
             margin-bottom: 1.5rem;
 
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 850px) {
                 margin-bottom: 0;
             }
 
             h3 {
                 width: 17rem;
 
-                @media only screen and (max-width: 550px) {
+                @media only screen and (max-width: 850px) {
                     width: 20rem;
                 }
             }
 
             .subheading {
-                @media only screen and (max-width: 550px) {
+                @media only screen and (max-width: 850px) {
                     font-size: 1.8rem;
                 }
             }
@@ -130,7 +135,7 @@ export default {
                 color: white;
                 margin-top: 1rem;
 
-                @media only screen and (max-width: 550px) {
+                @media only screen and (max-width: 850px) {
                     // width: 70%;
                     width: 30rem;
                     padding: 1rem 3rem;
@@ -147,7 +152,7 @@ export default {
             position: absolute;
             bottom: 0;
 
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 850px) {
                 display: none;
             }
 
