@@ -228,11 +228,6 @@ html {
   }
 } */
 
-main {
-  position: relative;
-  z-index: 10000;
-}
-
 .section {
   /* position: relative;
   height: 100vh;
@@ -244,24 +239,12 @@ main {
   margin: 0 auto;
 }
 
-/* .section-inside {
-  width: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
-} */
-
 @media only screen and (max-width: 1000px) {
   .section {
     /* width: 95rem; */
     width: 90%;
   }
 }
-
-/* .limiting-container {
-  width: 85%;
-  max-width: 1360px;
-  margin: 0 auto;
-} */
 
 
 .relative-container {
@@ -284,6 +267,8 @@ h1, h2, h3 {
   position: absolute;
   top: 0;
   left: 0;
+  /* width: 1000px; */
+  /* height: 1000px; */
 }
 
 .cards-scene canvas {
@@ -292,6 +277,7 @@ h1, h2, h3 {
   left: 17%;
   width: 100% !important;
   height: 100% !important;
+  transition: all .2s;
   /* max-height: 850px !important; */
 }
 

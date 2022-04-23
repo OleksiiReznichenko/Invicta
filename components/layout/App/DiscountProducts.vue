@@ -1,5 +1,6 @@
 <template>
     <div class="root">
+        <!-- <img src="@/assets/svg/discountProductsLight.svg" alt="Light" class="light"> -->
         <div class="section heading-container">
                 <h4 class="heading">Take it at a discount</h4>
         </div>
@@ -21,25 +22,44 @@
                 </div>
                 <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
             </div>
-            <ProductCard v-for="(card, i) in 6" :key="i"/>
+            <ProductCard 
+                v-for="card in cards"
+                :key="card.id"
+                :name="card.name"
+                :photo="card.photo"
+                :price="card.price"
+                :oldPrice="card.oldPrice"
+                :amountInStock="card.amountInStock"
+            />
         </div>
     </div>
 </template>
 
 <script>
-// import ProductCard from '@/components/elements/ProductCard';
-
-// export default {
-//     components: {
-//         ProductCard,
-//     },
-// }
+export default {
+    computed: {
+        cards() {
+            const filteredArrayDiscount = this.$store.state.products.products.cards.filter(el => {
+                return el.oldPrice;
+            })
+            const filteredArray = filteredArrayDiscount.filter((el, i) => {
+                return i < 6;
+            })
+            return filteredArray;
+        }
+    },
+}
 </script>
 
 <style lang='scss' scoped>
 .root {
+    position: relative;
     
-    .heading {
+    .light {
+        position: absolute;
+        z-index: 50;
+        right: 0;
+        bottom: -100%;
     }
 
     .banner-desktop {
@@ -150,6 +170,8 @@
 }
 
 .discount-products-line {
+    position: relative;
+    z-index: 100;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-columns: 1fr;

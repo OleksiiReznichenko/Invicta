@@ -2,18 +2,18 @@
     <div class="product-card">
         <div class="header">
             <div class="top-rect"></div>
-            <img src="/products/ozon.png" alt="Ozon" class="product-image">
+            <img :src="photo" alt="Ozon" class="product-image">
             <div class="container">
-                <div class="item items-in-stock">1 items</div>
-                <div class="item discount">save 32%</div>
+                <div class="item items-in-stock">{{amountInStock}} {{itemsTextComp}}</div>
+                <div v-if="oldPrice" class="item discount">save {{discountComp}}%</div>
             </div>
         </div>
         <div class="info">
-            <div class="name">Ozon</div>
+            <div class="name">{{name}}</div>
             <div class="container">
                 <div class="prices">
-                    <h3 class="new-price">$259.99</h3>
-                    <span class="old-price">$299.99</span>
+                    <h3 class="new-price">${{price}}</h3>
+                    <span v-if="oldPrice" class="old-price">${{oldPrice}}</span>
                 </div>
                 <div class="btn">+Add</div>
             </div>
@@ -23,7 +23,30 @@
 
 <script>
 export default {
+    props: ['name', 'photo', 'price', 'oldPrice', 'amountInStock'],
+    data() {
+        return {
+            discount: 0,
+            itemsText: 'items'
+        }
+    },
+    computed: {
+        discountComp() {
+            return this.discount
+        },
+        itemsTextComp() {
+            return this.itemsText
+        },
+    },
+    mounted () {
+        if (this.oldPrice) {
+            this.discount = Math.round(100 - this.price / this.oldPrice * 100);
+        }
 
+        if (this.amountInStock == 1) {
+            this.itemsText = 'item'
+        }
+    },
 }
 </script>
 

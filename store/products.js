@@ -37,7 +37,7 @@ export const state = () => ({
                 id: 'Dole',
                 name: 'Dole',
                 price: 134.99,
-                oldPrice: undefined,
+                oldPrice: 159.99,
                 photo: '/products/dole.png',
                 discount: '',
                 amountInStock: 20,

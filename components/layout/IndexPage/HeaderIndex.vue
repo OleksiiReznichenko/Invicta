@@ -1,14 +1,12 @@
 <template>
-    <div class="relative-container">
+    <div class=".header relative-container">
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <header class="section">
             <img src="@/assets/img/gridIndexHeader.png" alt="Grid" class="grid-image">
             <div class="info">
-                <span class="border-text">buy, sell & save money</span>
+                <span class="border-text-blue">buy, sell & save money</span>
                 <h1>
-                    T
-                    <img src="@/assets/svg/bigH.svg" alt="H" class="h">
-                    e best giftcard hub
+                    T<img src="@/assets/svg/bigH.svg" alt="H" class="h">e best giftcard hub
                 </h1>
                 <p>
                     Led as possible mistress relation elegance eat likewise debating. <br> By message or am nothing amongst chiefly address. The its enable direct men depend highly. Ham windows sixteen who inquiry fortune demands. Is be upon sang fond must show.
@@ -100,31 +98,36 @@ export default {
         // scene.add(light);
 
         const clock = new THREE.Clock();
+
+        function cardsModelScailing(model) {
+            model.scale.set(1.65, 1.65, 1.65);
+            // if (window.outerWidth < 1000 && window.outerHeight > 520) {
+            //     model.scale.set(1.55, 1.55, 1.55);
+            // }
+
+            if (window.outerWidth < 1000 && window.outerHeight > 600) {
+                model.scale.set(1.3, 1.3, 1.3);
+                model.position.set(-1, 0, 0);
+            }
+
+            if (window.outerWidth < 1000 && window.outerHeight < 520) {
+                model.scale.set(1.85, 1.85, 1.85);
+            }
+            
+            if (window.outerWidth < 700 && window.outerHeight > 600) {
+                model.scale.set(1.1, 1.1, 1.1);
+            }
+        }
         
         // LOAD SETUP
         const loader = new GLTFLoader();
-        loader.load('/cards2.glb', (gltf) => {
+        loader.load('/cards.glb', (gltf) => {
             cardsModel = gltf.scene;
             scene.add(cardsModel);
             // cardsModel.castShadow = true;
             // // cardsModel.receiveShadow = true;
-            cardsModel.scale.set(1.65, 1.65, 1.65);
-            // if (window.outerWidth < 1000 && window.outerHeight > 520) {
-            //     cardsModel.scale.set(1.55, 1.55, 1.55);
-            // }
-
-            if (window.outerWidth < 1000 && window.outerHeight > 600) {
-                cardsModel.scale.set(1.3, 1.3, 1.3);
-                cardsModel.position.set(-1, 0, 0);
-            }
-
-            if (window.outerWidth < 1000 && window.outerHeight < 520) {
-                cardsModel.scale.set(1.85, 1.85, 1.85);
-            }
             
-            if (window.outerWidth < 700 && window.outerHeight > 600) {
-                cardsModel.scale.set(1.1, 1.1, 1.1);
-            }
+            cardsModelScailing(cardsModel);
 
             clips = gltf.animations;
 
@@ -132,9 +135,8 @@ export default {
             //     el.castShadow = true;
             //     el.receiveShadow = true;
             // })
+            // console.log(cardsModel)
             
-            console.log(gltf)
-
             mixer = new THREE.AnimationMixer(cardsModel);
             clips.forEach(clip => {
                 mixer.clipAction(clip).play();
@@ -144,6 +146,17 @@ export default {
 
             // renderer.render(scene, camera);
             animate();
+
+            if (window.outerWidth > 1000) {
+                const canvas = document.querySelector('.cards-scene canvas');
+
+                document.querySelector('.header').addEventListener('mousemove', (e) => {
+                    cardsModel.position.x = -(e.clientX - window.innerWidth / 2) / 200;
+                    cardsModel.position.y = -(e.clientY - window.innerHeight / 2) / 200;
+                    cardsModel.position.z = -(e.clientX - window.innerWidth / 2) / 1000;
+                    // parallax(e, 10, container)
+                });
+            }
         });
 
         function animate() {
@@ -158,13 +171,24 @@ export default {
         }
 
         function onWindowResize() {
+            cardsModelScailing(cardsModel);
+
             camera.aspect = window.innerWidth / window.innerHeight;
+
             camera.updateProjectionMatrix();
 
-            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.setSize(window.innerWidth, window.innerHeight)
         }
 
-        window.addEventListener( 'resize', onWindowResize);
+        window.addEventListener('resize', onWindowResize);
+
+        const parallax = (mouse, resistance, el) => {
+            el.style.transform = `translateX(${-(mouse.clientX - window.innerWidth / 2) / resistance})`
+            // this.$gsap.to(el, {duration: .2,
+            //     x: -((mouse.clientX - window.innerWidth / 2) / resistance),
+            //     // y: -((mouse.clientY - window.innerHeight / 2) / resistance)
+            // })
+        };
     },
 }
 </script>
@@ -246,17 +270,13 @@ header {
             text-align: center;
         }
 
-        @media only screen and (max-width: 700px) and (min-height: 600px) {
+        @media only screen and (max-width: 600px) and (min-height: 600px) {
             // top: 60%;
-            bottom: 13%;
+            bottom: 15%;
         }
 
-        .border-text {
-            border: 1px solid $color-primary;
-            border-radius: 6px;
-            color: $color-text-grey;
+        .border-text-blue {
             padding: .75rem 1.5rem;
-            font-size: 1.5rem;
 
             @media only screen and (max-width: 600px) {
                 display: none;
@@ -270,7 +290,8 @@ header {
             margin: 2rem 0;
 
             .h {
-                width: 10rem;
+                width: 10.4rem;
+                margin: 0 1rem;
             }
         }
 
@@ -286,6 +307,10 @@ header {
                 br {
                     display: none;
                 }
+            }
+
+            @media only screen and (max-width: 600px) {
+                margin-bottom: 4rem;
             }
 
             @media only screen and (max-width: 450px) {

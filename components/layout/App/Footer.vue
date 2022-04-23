@@ -63,16 +63,21 @@ footer {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-top: 40vh;
+    // margin-top: 40vh;
     border-top: 1px solid $color-grey-2;
     padding-top: 3rem;
     padding-right: 2rem;
+    padding-bottom: 7rem;
 
     @media only screen and (max-width: 700px) {
         justify-content: flex-start;
         align-items: center;
         flex-direction: column;
         text-align: center;
+    }
+
+    @media only screen and (max-width: 600px) {
+        padding-bottom: 13rem;
     }
 
     @media only screen and (max-width: 450px) {

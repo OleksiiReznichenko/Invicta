@@ -42,8 +42,9 @@ export default {
         this.nav = document.querySelector('.nav');
         this.navLeft = document.querySelector('.nav__left');
         this.navRight = document.querySelector('.nav__right');
+        this.closeNavBtn = document.querySelector('.close-nav-btn');
 
-        this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav});
+        this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
         // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
         let prevWidth = window.outerWidth;
 
@@ -54,7 +55,7 @@ export default {
                     this.dropdownOpener = document.getElementById('dropdown-opener');
                     this.dropdown = document.getElementById('dropdown');
                     // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
-                    this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav});
+                    this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
 
                     if (window.outerWidth <= 900 && window.outerWidth > 600) {
                         this.nav.style.width = '90%';
@@ -79,6 +80,13 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+.layout, .error-content {
+    width: 100% !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
 .info {
     @include abs-center;
     top: 42% !important;

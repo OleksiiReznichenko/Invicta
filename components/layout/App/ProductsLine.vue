@@ -1,20 +1,30 @@
 <template>
     <div class="section">
         <div class="products-line">
-            <ProductCard v-for="(card, i) in 4" :key="i"/>
+            <ProductCard 
+                v-for="card in cards"
+                :key="card.id"
+                :name="card.name"
+                :photo="card.photo"
+                :price="card.price"
+                :oldPrice="card.oldPrice"
+                :amountInStock="card.amountInStock"
+            />
         </div>
     </div>
 </template>
 
 <script>
-// import ProductCard from '@/components/elements/ProductCard';
-
-// export default {
-//     components: {
-//         ProductCard,
-//     },
-
-// }
+export default {
+    computed: {
+        cards() {
+            const filteredArray = this.$store.state.products.products.cards.filter((el, i) => {
+                return i < 4;
+            })
+            return filteredArray
+        }
+    },
+}
 </script>
 
 <style lang='scss' scoped>

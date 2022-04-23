@@ -213,7 +213,10 @@ export default {
   width: 100%;
   overflow: hidden;
   // height: 100vh;
+  // position: relative;
+  // z-index: 10000;
 }
+
 .nav {
   // width: 100%;
   position: absolute;

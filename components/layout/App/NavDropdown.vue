@@ -3,7 +3,15 @@
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="dropdown__container">
 
-            <h2>More</h2>
+            <div class="heading-container">
+                <h2>More</h2>
+                <div class="close-nav-btn">
+                    <svg class="close-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path class="close-icon__path" d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path class="close-icon__path" d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
 
             <img v-if="!isLoggedIn" src="@/assets/img/logoText.png" alt="Logo" class="logo">
 
@@ -178,15 +186,24 @@ export default {
         }
     }
 
-    h2 {
-        font-size: 3rem;
+    .heading-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 2.5rem;
-    }
 
-    h2 {
         @media only screen and (min-width: 600px) {
             display: none;
         }
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    .close-icon {
+        width: 3rem;
+        height: 3rem;
     }
 
     .line {

@@ -20,7 +20,7 @@ export const mutations = {
 
 export const actions = {
     dropdownFunctional(state, payload) {
-        payload.dropdownOpener.addEventListener('click', (e) => {
+        payload.dropdownOpener.addEventListener('click', () => {
             if (!payload.dropdown.classList.contains('opened')) {
                 payload.dropdown.classList.add('opened');
                 payload.dropdown.style.display = 'block';
@@ -30,6 +30,7 @@ export const actions = {
 
                 if (window.outerWidth < 600) {
                     payload.nav.style.width = '50rem';
+                    payload.nav.style.position = 'fixed';
                 }
             } else {
                 // if (window.outerWidth < 600) return;
@@ -41,8 +42,22 @@ export const actions = {
 
                 if (window.outerWidth < 600) {
                     payload.nav.style.width = '90%';
+                    payload.nav.style.position = 'absolute';
                 }
             }
+        })
+
+        payload.closeNavBtn.addEventListener('click', () => {
+            if (window.outerWidth >= 600) return;
+            
+            payload.dropdown.style.opacity = 0;
+            setTimeout(() => {
+                payload.dropdown.style.display = 'none';
+                payload.dropdown.classList.remove('opened');
+            }, 200);
+
+            payload.nav.style.width = '90%';
+            payload.nav.style.position = 'absolute';
         })
 
         window.addEventListener('click', (e) => {
@@ -57,10 +72,6 @@ export const actions = {
                     payload.dropdown.style.display = 'none';
                     payload.dropdown.classList.remove('opened');
                 }, 200);
-
-                if (window.outerWidth < 600) {
-                    payload.nav.style.width = '90%';
-                }
             }
         });
     }
