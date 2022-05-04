@@ -91,6 +91,12 @@ input {
   font-size: 1.5rem;
 }
 
+@media only screen and (max-width: 850px) {
+  input {
+    font-size: 13px;
+  }
+}
+
 textarea {
   resize: none;
 }
@@ -156,6 +162,13 @@ html {
   }
 }
 
+@media only screen and (max-width: 850px) and (min-height: 930px) and (min-width: 680px) {
+  html {
+    font-size: 8.7px;
+  }
+}
+
+
 /* @media only screen and (max-width: 1100px) and (min-height: 930px) and (min-width: 900px) {
   html {
     font-size: 9.2px;
@@ -168,10 +181,18 @@ html {
   }
 } */
 
+@media only screen and (max-width: 600px) {
+  html {
+    /* font-size: 44%; */
+    font-size: 8px;
+  }
+}
+
 @media only screen and (max-width: 450px) {
   html {
     /* font-size: 42%; */
-    font-size: 6.72px;
+    /* font-size: 6.72px; */
+    font-size: 7.2px;
   }
 }
 

@@ -28,8 +28,13 @@ export const actions = {
                     payload.dropdown.style.opacity = 1;
                 }, 10);
 
-                if (window.outerWidth < 600) {
+                if (window.outerWidth < 600 && window.outerWidth > 450) {
                     payload.nav.style.width = '50rem';
+                    payload.nav.style.position = 'fixed';
+                }
+
+                if (window.outerWidth <= 450) {
+                    payload.nav.style.width = '44rem';
                     payload.nav.style.position = 'fixed';
                 }
             } else {

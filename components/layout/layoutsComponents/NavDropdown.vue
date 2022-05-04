@@ -176,6 +176,10 @@ export default {
             @include abs-center;
             top: 48% !important;
         }
+        
+        @media only screen and (max-width: 450px) {
+            width: 44rem;
+        }
     }
 
     .logo {
