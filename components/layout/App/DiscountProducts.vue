@@ -8,7 +8,7 @@
             <div class="banner">
                     <div class="info">
                         <h3>Have time <br> to buy</h3>
-                        <nuxt-link to="/discover" class="btn btn-white">promo codes</nuxt-link>
+                        <nuxt-link to="/promo" class="btn btn-white">promo codes</nuxt-link>
                     </div>
                     <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
                 </div>
@@ -18,7 +18,7 @@
             <div class="banner banner-desktop">
                 <div class="info">
                     <h3>Have time <br> to buy</h3>
-                    <nuxt-link to="/discover" class="btn btn-white">promo codes</nuxt-link>
+                    <nuxt-link to="/promo" class="btn btn-white">promo codes</nuxt-link>
                 </div>
                 <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
             </div>
@@ -39,7 +39,7 @@
 export default {
     computed: {
         cards() {
-            const filteredArrayDiscount = this.$store.state.products.products.cards.filter(el => {
+            const filteredArrayDiscount = this.$store.state.products.products.giftcards.filter(el => {
                 return el.oldPrice;
             })
             const filteredArray = filteredArrayDiscount.filter((el, i) => {

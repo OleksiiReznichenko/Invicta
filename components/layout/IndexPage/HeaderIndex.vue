@@ -1,6 +1,6 @@
 <template>
-    <div class=".header relative-container">
-        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
+    <div ref="header" class="header relative-container">
+        <!-- <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light"> -->
         <header class="section">
             <img src="@/assets/img/gridIndexHeader.png" alt="Grid" class="grid-image">
             <div class="info">
@@ -12,7 +12,7 @@
                     Led as possible mistress relation elegance eat likewise debating. <br> By message or am nothing amongst chiefly address. The its enable direct men depend highly. Ham windows sixteen who inquiry fortune demands. Is be upon sang fond must show.
                 </p>
                 <div class="btn-container">
-                    <nuxt-link class="btn btn-transparent" to="/discover"><div class="background"></div><span>Browse products</span></nuxt-link>
+                    <nuxt-link class="btn btn-transparent" to="/browse"><div class="background"></div><span>Browse products</span></nuxt-link>
                 </div>
             </div>
             <div class="cards-scene">
@@ -29,6 +29,64 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export default {
     mounted () {
+        let check = true;
+
+        // const header = document.querySelector('.header');
+        // const main = document.querySelector('.main');
+
+        // const observerOptions = {
+        //     root: null,
+        //     rootMargin: "0px",
+        //     threshold: 1,
+        // };
+
+        // const observerOptions2 = {
+        //     root: null,
+        //     rootMargin: "0px",
+        //     threshold: 1,
+        // };
+
+
+        // const observerCallback = (entries) => {
+        //     entries.forEach((entry) => {
+        //         console.log(entry, 'header')
+        //         // if (!entry.isIntersecting && (window.outerWidth > 600 && window.outerHeight > 520 || window.outerWidth > 1000)) return;
+        //         if (!entry.isIntersecting) return;
+
+        //             if (check === false) {
+        //                 console.log('HEADER', true);
+        //                 check = true;
+        //                 requestAnimationFrame( animate );
+        //             }
+        //     });
+        // }
+
+        // const observerCallback2 = (entries) => {
+        //     entries.forEach((entry) => {
+        //         console.log(entry, 'main')
+        //         // if (!entry.isIntersecting && (window.outerWidth > 600 && window.outerHeight > 520 || window.outerWidth > 1000)) return;
+        //         if (!entry.isIntersecting) return;
+
+        //             if (check === true) {
+        //                 console.log('MAIN', false);
+        //                 check = false;
+        //             }
+        //     });
+        // }
+
+        // const observer = new IntersectionObserver(
+        //     observerCallback,
+        //     observerOptions
+        // );
+
+        // const observer2 = new IntersectionObserver(
+        //     observerCallback2,
+        //     observerOptions2
+        // );
+
+        // observer.observe(header);
+        // observer2.observe(main);
+
         let cardsModel;
         let mixer;
         let clips;
@@ -121,6 +179,7 @@ export default {
         
         // LOAD SETUP
         const loader = new GLTFLoader();
+        // loader.load('/kermaWaits.glb', (gltf) => {
         loader.load('/cards.glb', (gltf) => {
             cardsModel = gltf.scene;
             scene.add(cardsModel);
@@ -144,8 +203,8 @@ export default {
             // let action = mixer.clipAction(gltf.animations);
             // action.play();
 
-            // renderer.render(scene, camera);
-            animate();
+            renderer.render(scene, camera);
+            // animate();
 
             if (window.outerWidth > 1000) {
                 const canvas = document.querySelector('.cards-scene canvas');
@@ -160,6 +219,7 @@ export default {
         });
 
         function animate() {
+            // if (!check) return;
             const delta = clock.getDelta();
             
             if ( mixer ) mixer.update( delta );
@@ -182,13 +242,13 @@ export default {
 
         window.addEventListener('resize', onWindowResize);
 
-        const parallax = (mouse, resistance, el) => {
-            el.style.transform = `translateX(${-(mouse.clientX - window.innerWidth / 2) / resistance})`
-            // this.$gsap.to(el, {duration: .2,
-            //     x: -((mouse.clientX - window.innerWidth / 2) / resistance),
-            //     // y: -((mouse.clientY - window.innerHeight / 2) / resistance)
-            // })
-        };
+        // const parallax = (mouse, resistance, el) => {
+        //     el.style.transform = `translateX(${-(mouse.clientX - window.innerWidth / 2) / resistance})`
+        //     // this.$gsap.to(el, {duration: .2,
+        //     //     x: -((mouse.clientX - window.innerWidth / 2) / resistance),
+        //     //     // y: -((mouse.clientY - window.innerHeight / 2) / resistance)
+        //     // })
+        // };
     },
 }
 </script>
@@ -240,9 +300,9 @@ header {
         // top: 20%;
         // bottom: 30%;
         width: 55rem;
-        z-index: 100;
+            z-index: 100;
 
-        @media only screen and (min-width: 1300px) {
+            @media only screen and (min-width: 1300px) {
             top: 50%;
             transform: translateY(-50%);
         }

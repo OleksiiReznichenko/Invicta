@@ -18,7 +18,7 @@
                         <nuxt-link class="btn btn-gradient" to="/register"><span>Sign up</span></nuxt-link>
                     </div>
                     <div class="btn-container btn-transparent-container">
-                        <nuxt-link class="btn btn-transparent" to="/discover"><div class="background"></div><span>Browse</span></nuxt-link>
+                        <nuxt-link class="btn btn-transparent" to="/browse"><div class="background"></div><span>Browse</span></nuxt-link>
                     </div>
                 </div>
                 <img src="@/assets/img/spiralIndex.png" alt="Spiral" class="spiral">

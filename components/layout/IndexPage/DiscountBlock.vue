@@ -3,7 +3,7 @@
         <div class="discount left">
             <div class="info">
                 <h2>discounts</h2>
-                <nuxt-link to="/discover" class="btn btn-white">Browse products</nuxt-link>
+                <nuxt-link to="/browse" class="btn btn-white">Browse products</nuxt-link>
             </div>
         </div>
         <div class="right">

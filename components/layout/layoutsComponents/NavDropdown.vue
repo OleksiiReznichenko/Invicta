@@ -3,18 +3,26 @@
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="dropdown__container">
 
-            <h2>More</h2>
+            <div class="heading-container">
+                <h2>More</h2>
+                <div class="close-nav-btn">
+                    <svg class="close-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path class="close-icon__path" d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path class="close-icon__path" d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
 
-            <img v-if="!isLoggedIn" src="@/assets/img/logoText.png" alt="Logo" class="logo">
+            <img v-if="!isLoggedIn" key="logo" src="@/assets/img/logoText.png" alt="Logo" class="logo">
 
-            <div v-if="!isLoggedIn" class="line line-top"></div>
+            <div v-if="!isLoggedIn" key="line-top" class="line line-top"></div>
 
-            <!-- <div v-if="!isLoggedIn" class="dropdown__search-container">
+            <!-- <div v-if="!isLoggedIn" key="dropdownSearch" class="dropdown__search-container">
                 <input type="search" class="dropdown__search-input" id="searchNavBeforeLogin" placeholder="Search">
                 <img src="@/assets/svg/searchIcon.svg" alt="Search icon" class="dropdown__search-icon">
             </div> -->
 
-            <nuxt-link v-if="isLoggedIn" to="/profile" class="user">
+            <nuxt-link v-if="isLoggedIn" key="userLogin" to="/profile" class="user">
                 <img
                     :src="$store.state.user.avatar"
                     alt="Avatar"
@@ -26,47 +34,47 @@
                 </div>
             </nuxt-link>
 
-            <div v-if="isLoggedIn" class="line"></div>
+            <div v-if="isLoggedIn" key="line" class="line"></div>
 
             <ul class="list">
                 <li>
-                    <nuxt-link to="/discover">Browse</nuxt-link>
+                    <nuxt-link to="/browse">Browse</nuxt-link>
                 </li>
-                <li v-if="!isLoggedIn">
+                <li v-if="!isLoggedIn"  key="updates">
                     <nuxt-link to="/updates">Updates</nuxt-link>
                 </li>
-                <li v-if="!isLoggedIn || isLoggedIn && isPhone">
+                <li v-if="!isLoggedIn || isLoggedIn && isPhone" key="leaderboard">
                     <nuxt-link to="/leaderboard">Leaderboard</nuxt-link>
                 </li>
-                <li v-if="isLoggedIn">
+                <li v-if="isLoggedIn" key="ads">
                     <nuxt-link to="/leaderboard">Invicta.ads</nuxt-link>
                 </li>
-                <li v-if="isLoggedIn">
+                <li v-if="isLoggedIn" key="myShopping">
                     <nuxt-link to="/leaderboard">My shopping <span class="shopping-number">({{$store.state.user.shoppingNumber}})</span></nuxt-link>
                 </li>
             </ul>
 
-            <div v-if="!isLoggedIn" class="line"></div>
+            <div v-if="!isLoggedIn" key="line-2" class="line"></div>
 
-            <nuxt-link v-if="!isLoggedIn" to="/profile" class="user">
+            <nuxt-link v-if="!isLoggedIn" key="userNoLogin" to="/profile" class="user">
                 <div class="user__icon profile__icon"><span>N</span></div>
                 <span class="user__name">No user</span>
             </nuxt-link>
 
-            <!-- <nuxt-link @click="isLoggedInToTrue" v-if="!isLoggedIn" to="/login" class="btn btn-gradient"><span>Login</span></nuxt-link> -->
-            <div @click="isLoggedInToTrue" v-if="!isLoggedIn" class="btn btn-gradient"><span>Login</span></div>
+            <!-- <nuxt-link @click="isLoggedInToTrue" v-if="!isLoggedIn" key="loginBtn" to="/login" class="btn btn-gradient"><span>Login</span></nuxt-link> -->
+            <div @click="isLoggedInToTrue" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></div>
             
-            <div v-if="isLoggedIn" class="buttons">
+            <div v-if="isLoggedIn" key="buttonsDropdown" class="buttons">
                 <nuxt-link to="/login" class="btn btn-blue"><span>Deposit</span></nuxt-link>
                 <nuxt-link to="/login" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
                 <nuxt-link to="/login" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
             </div>
 
-            <div v-if="isLoggedIn" class="line"></div>
+            <div v-if="isLoggedIn" key="line-3" class="line"></div>
 
-            <ul v-if="isLoggedIn" class="list">
+            <ul v-if="isLoggedIn" key="list" class="list">
                 <li>
-                    <nuxt-link class="link-flex" to="/discover">
+                    <nuxt-link class="link-flex" to="/browse">
                         <img src="@/assets/svg/notification.svg" alt="Notification" class="link-icon">
                         <span>My orders</span>
                     </nuxt-link>
@@ -135,7 +143,7 @@ export default {
     top: 3.4rem;
     right: 0;
     padding: 2.25rem 1.5rem;
-    box-shadow: 0px .5rem 5rem 0px rgba(#000000, .5);
+    box-shadow: 0px .5rem 5rem 0px rgba(#000000, .4);
     font-size: 1.4rem !important;
     transition: all .2s;
 
@@ -178,14 +186,50 @@ export default {
         }
     }
 
-    h2 {
-        font-size: 3rem;
+    .heading-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 2.5rem;
+
+        @media only screen and (min-width: 600px) {
+            display: none;
+        }
     }
 
     h2 {
-        @media only screen and (min-width: 600px) {
-            display: none;
+        font-size: 3rem;
+    }
+
+    // .close-icon {
+    //     width: 3rem;
+    //     height: 3rem;
+    // }
+
+    .close-nav-btn {
+        position: relative;
+        width: 8rem;
+        height: 8rem;
+        margin-right: -2.2rem;
+
+        // @media only screen and (min-width: 850px) {
+        //     width: 5rem;
+        //     height: 5rem;
+        // }
+
+        .close-icon {
+            position: absolute;
+            top: 2.5rem;
+            right: 2.2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+
+            // @media only screen and (min-width: 850px) {
+            //     top: 1rem;
+            //     right: 1rem;
+            //     width: 2.25rem;
+            //     height: 2.25rem;
+            // }
         }
     }
 
@@ -211,10 +255,6 @@ export default {
 
         .avatar {
             background-color: white;
-        }
-
-        &__info {
-
         }
 
         &__balance {

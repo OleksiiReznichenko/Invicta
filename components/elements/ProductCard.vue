@@ -162,8 +162,8 @@ export default {
                 
                 &:hover {
                     // background-color: $color-text-grey-dark;
-                    background-color: white;
-                    color: black;
+                    background-color: $color-primary;
+                    // color: black;
                     border: 2px solid transparent;
                 }
             }

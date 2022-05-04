@@ -1,50 +1,48 @@
 <template>
-    <div class="relative-container">
-        <footer class="section">
-            <div class="left">
-                    <img src="@/assets/img/logoText.png" alt="Logo" class="logo">
-                    <p class="paragraph-primary">The best giftcard hub.</p>
-                    <p class="paragraph-secondary">Copyright © 2022 invicta.cards. <br> All rights reserved.</p>
-            </div>
-            <div class="right">
-                <div class="two-lists-container">
-                    <ul>
-                        <h4>Invicta</h4>
-                        <li>
-                            <nuxt-link to="/">Home</nuxt-link>
-                        </li>
-                        <li>
-                            <nuxt-link to="/discover">Discover</nuxt-link>
-                        </li>
-                    </ul>
-                    <ul>
-                        <h4>Info</h4>
-                        <li>
-                            <nuxt-link to="/">Terms of service</nuxt-link>
-                        </li>
-                        <li>
-                            <nuxt-link to="/">Support</nuxt-link>
-                        </li>
-                    </ul>
-                </div>
+    <footer class="section">
+        <div class="left">
+                <img src="@/assets/img/logoText.png" alt="Logo" class="logo">
+                <p class="paragraph-primary">The best giftcard hub.</p>
+                <p class="paragraph-secondary">Copyright © 2022 invicta.cards. <br> All rights reserved.</p>
+        </div>
+        <div class="right">
+            <div class="two-lists-container">
                 <ul>
-                    <h4>Account</h4>
-                    <li v-if="!isLoggedIn">
-                        <nuxt-link to="/login">Login</nuxt-link>
+                    <h4>Invicta</h4>
+                    <li>
+                        <nuxt-link to="/">Home</nuxt-link>
                     </li>
-                    <li v-if="!isLoggedIn">
-                        <nuxt-link to="/register">Register</nuxt-link>
+                    <li>
+                        <nuxt-link to="/browse">Browse</nuxt-link>
                     </li>
-                    <li v-if="isLoggedIn">
-                        <nuxt-link to="/profile">Profile</nuxt-link>
+                </ul>
+                <ul>
+                    <h4>Info</h4>
+                    <li>
+                        <nuxt-link to="/">Terms of service</nuxt-link>
                     </li>
-                    <li v-if="isLoggedIn">
-                        <nuxt-link to="/">Create Product</nuxt-link>
+                    <li>
+                        <nuxt-link to="/">Support</nuxt-link>
                     </li>
                 </ul>
             </div>
-        </footer>
-    </div>
+            <ul>
+                <h4>Account</h4>
+                <li v-if="!isLoggedIn">
+                    <nuxt-link to="/login">Login</nuxt-link>
+                </li>
+                <li v-if="!isLoggedIn">
+                    <nuxt-link to="/register">Register</nuxt-link>
+                </li>
+                <li v-if="isLoggedIn">
+                    <nuxt-link to="/profile">Profile</nuxt-link>
+                </li>
+                <li v-if="isLoggedIn">
+                    <nuxt-link to="/">Create Product</nuxt-link>
+                </li>
+            </ul>
+        </div>
+    </footer>
 </template>
 
 <script>

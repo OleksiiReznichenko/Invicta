@@ -10,7 +10,7 @@
             <p>
                 we couldn’t find any <br> results for this search
             </p>
-            <nuxt-link class="btn btn-transparent" to="/discover"><div class="background"></div><span>Back to browse</span></nuxt-link>
+            <nuxt-link class="btn btn-transparent" to="/browse"><div class="background"></div><span>Back to browse</span></nuxt-link>
         </div>
 
         <img src="@/assets/img/sphereBigErrorPage.png" alt="Sphere big" class="sphere sphere-big">
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Navigation from '@/components/layout/App/Navigation';
+import Navigation from '@/components/layout/layoutsComponents/Navigation';
 
 export default {
     components: {
@@ -31,8 +31,9 @@ export default {
             setTimeout(() => {
                 this.dropdownOpener = document.getElementById('dropdown-opener');
                 this.dropdown = document.getElementById('dropdown');
+                this.closeNavBtn = document.querySelector('.close-nav-btn');
                 // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
-                this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav});
+                this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
             }, 200);
         }
     },
@@ -54,14 +55,14 @@ export default {
                 setTimeout(() => {
                     this.dropdownOpener = document.getElementById('dropdown-opener');
                     this.dropdown = document.getElementById('dropdown');
+                    this.closeNavBtn = document.querySelector('.close-nav-btn');
                     // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
                     this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
 
-                    if (window.outerWidth <= 900 && window.outerWidth > 600) {
-                        this.nav.style.width = '90%';
-                        this.navLeft.style.transform = 'translate(0)';
-                        this.navRight.style.transform = 'translate(0)';
-                    }
+                    this.nav.style.position = 'absolute';
+                    this.nav.style.width = '90%';
+                    this.navLeft.style.transform = 'translate(0)';
+                    this.navRight.style.transform = 'translate(0)';
                 }, 200);
             }
             prevWidth = window.outerWidth;

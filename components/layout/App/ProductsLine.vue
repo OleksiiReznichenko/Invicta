@@ -18,7 +18,7 @@
 export default {
     computed: {
         cards() {
-            const filteredArray = this.$store.state.products.products.cards.filter((el, i) => {
+            const filteredArray = this.$store.state.products.products.giftcards.filter((el, i) => {
                 return i < 4;
             })
             return filteredArray
