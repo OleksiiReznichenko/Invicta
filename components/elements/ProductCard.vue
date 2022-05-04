@@ -122,6 +122,10 @@ export default {
             font-size: 1.8rem;
             color: $color-text-grey;
             margin-bottom: 2rem;
+
+            @media only screen and (max-width: 850px) {
+                font-size: 2.1rem;
+            }
         }
 
         .container {
@@ -134,6 +138,11 @@ export default {
                 align-items: center;
             }
 
+            // @media only screen and (max-width: 450px) {
+            //     flex-direction: column;
+            //     align-items: flex-start;
+            // }
+
             .prices {
                 
                 @media only screen and (min-width: 1450px) {
@@ -144,12 +153,24 @@ export default {
 
                 .old-price {
                     color: $color-text-grey-dark;
-                    font-size: 1.3rem;
+                    font-size: 1.4rem;
                     text-decoration: line-through;
+
+                    @media only screen and (max-width: 850px) {
+                        font-size: 1.5rem;
+                    }
                 }
 
                 .new-price {
                     margin-right: .4rem;
+
+                    @media only screen and (max-width: 850px) {
+                        font-size: 2.2rem;
+                    }
+
+                    @media only screen and (max-width: 450px) {
+                        font-size: 2rem;
+                    }
                 }
             }
 
@@ -159,6 +180,10 @@ export default {
                 border: 2px solid $color-text-grey-dark;
                 border-radius: 100px;
                 padding: .35rem 1.25rem;
+
+                // @media only screen and (max-width: 450px) {
+                //     margin-top: 1.4rem;
+                // }
                 
                 &:hover {
                     // background-color: $color-text-grey-dark;

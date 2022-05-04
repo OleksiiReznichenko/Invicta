@@ -50,8 +50,9 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="line"></div>
                         <div class="product-payment-container info-container">
-                            <h4 class="product-paymeny-title info-title">Payment</h4>
+                            <h4 class="product-payment-title info-title">Payment</h4>
                             <div class="product-payment-methods">
                                 <div class="product-payment-method">
                                     <img src="@/assets/img/ethereumCoin.png" alt="Ethereum coin">
@@ -197,6 +198,10 @@ export default {
                 &-name {
                     font-size: 4rem;
                     color: white;
+
+                    @media only screen and (max-width: 850px) {
+                        font-size: 4.4rem;
+                    }
                 }
 
                 &-buttons {
@@ -212,12 +217,20 @@ export default {
                     cursor: pointer;
                     transition: all .3s;
 
+                    @media only screen and (max-width: 850px) {
+                        background-color: $color-grey-2;
+                    }
+
                     &:hover {
                         background-color: $color-grey-2;
                     }
 
                     img {
                         height: 1.8rem;
+
+                        @media only screen and (max-width: 850px) {
+                            height: 2.1rem;
+                        }
                     }
                 }
 
@@ -230,6 +243,14 @@ export default {
                     display: flex;
                     justify-content: space-between;
                     margin-bottom: 2rem;
+
+                    @media only screen and (max-width: 850px) {
+                        margin-bottom: 3rem;
+                        
+                        * {
+                            font-size: 1.7rem !important;
+                        }
+                    }
 
                     span {
                         display: inline-block;
@@ -269,14 +290,34 @@ export default {
 
                 .info-container {
                     padding-left: 1.25rem;
+
+                    @media only screen and (max-width: 850px) {
+                        padding: 0;
+                    }
                 }
 
                 .info-title {
                     margin-bottom: 1rem;
+
+                    @media only screen and (max-width: 850px) {
+                        font-size: 1.8rem;
+                    }
                 }
 
-                .product-paymeny-title {
+                .product-payment-title {
                     margin-bottom: 2rem;
+                }
+
+                .line {
+                    width: 100%;
+                    background-color: $color-grey-2;
+                    height: 1.5px;
+                    border-radius: 100px;
+                    margin-bottom: 2.5rem;
+
+                    @media only screen and (min-width: 850px) {
+                        display: none;
+                    }
                 }
 
                 &-payment-methods {
@@ -305,6 +346,10 @@ export default {
 
                     }
                 }
+
+                p, &-payment-method {
+                    font-size: 1.7rem;
+                }
             }
 
             .payment-form {
@@ -322,6 +367,7 @@ export default {
 
                 @media only screen and (max-width: 850px) {
                     width: 100%;
+                    margin-top: 1.5rem;
                 }
 
 
@@ -407,8 +453,12 @@ export default {
 
                             .old-price {
                                 color: $color-text-grey-dark;
-                                font-size: 1.3rem;
+                                font-size: 1.4rem;
                                 text-decoration: line-through;
+
+                                @media only screen and (max-width: 850px) {
+                                    font-size: 1.5rem;
+                                }
                             }
 
                             .new-price {
