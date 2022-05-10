@@ -46,22 +46,19 @@ export default {
         border-radius: 8px;
         // background-color: $color-orange;
         background-color: #D94C36;
-        width: 78%;
-        margin-right: 3rem;
+        // width: 78%;
+        width: 100%;
+        // margin-right: 3rem;
         padding: 3.6rem 0;
         text-align: center;
 
-        @media only screen and (max-width: 800px) {
-            width: 74%;
-        }
-
-        // @media only screen and (max-width: 700px) {
-        //     width: 90%;
+        // @media only screen and (max-width: 800px) {
+        //     width: 74%;
         // }
 
-        @media only screen and (max-width: 850px) {
-            width: 100%;
-        }
+        // @media only screen and (max-width: 850px) {
+        //     width: 100%;
+        // }
 
         h2 {
             font-size: 7.2rem;
@@ -79,6 +76,7 @@ export default {
     .right {
         position: relative;
         width: 22%;
+        display: none !important;
 
         @media only screen and (max-width: 800px) {
             width: 26%;

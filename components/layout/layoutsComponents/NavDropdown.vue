@@ -1,7 +1,7 @@
 <template>
-    <div id="dropdown">
+    <div ref="dropdown" id="dropdown">
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
-        <div class="dropdown__container">
+        <div @click="checkLink" class="dropdown__container">
 
             <div class="heading-container">
                 <h2>More</h2>
@@ -37,20 +37,20 @@
             <div v-if="isLoggedIn" key="line" class="line"></div>
 
             <ul class="list">
-                <li>
+                <li v-if="!isPhone">
                     <nuxt-link to="/browse">Browse</nuxt-link>
                 </li>
-                <li v-if="!isLoggedIn"  key="updates">
+                <li v-if="isPhone"  key="updates">
                     <nuxt-link to="/updates">Updates</nuxt-link>
                 </li>
                 <li v-if="!isLoggedIn || isLoggedIn && isPhone" key="leaderboard">
                     <nuxt-link to="/leaderboard">Leaderboard</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn" key="ads">
-                    <nuxt-link to="/leaderboard">Invicta.ads</nuxt-link>
+                    <nuxt-link to="/InvictaAds">Invicta.ads</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn" key="myShopping">
-                    <nuxt-link to="/leaderboard">My shopping <span class="shopping-number">({{$store.state.user.shoppingNumber}})</span></nuxt-link>
+                    <nuxt-link to="/myShopping">My shopping <span class="shopping-number">({{$store.state.user.shoppingNumber}})</span></nuxt-link>
                 </li>
             </ul>
 
@@ -99,32 +99,72 @@ export default {
         }
     },
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS LOGGED IN
         isLoggedIn() {
             return this.$store.state.isLoggedIn
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS PHONE VERSION
         isPhone() {
             return this.isPhoneInitial
         }
     },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHECK MOBILE VERSION
     created(){
         if (process.browser){
             // eslint-disable-next-line nuxt/no-globals-in-created
-            this.isPhoneInitial = window.outerWidth <= 600;
+            this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600;
         }
     },
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // LOG OUT
         isLoggedInToFalse() {
             this.$store.commit('isLoggedInToFalse');
             this.$router.push('/');
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // LOG IN
         isLoggedInToTrue() {
             this.$store.commit('isLoggedInToTrue');
             this.$router.push('/');
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE DROPDOWN BEFORE GOING TO ANOTHER PAGE
+        checkLink(e) {
+            const target = e.target.tagName.toLowerCase();
+            if (target == 'a' || target == 'span' || target == 'img') {
+                this.$refs.dropdown.style.opacity = 0;
+                setTimeout(() => {
+                    this.$refs.dropdown.style.display = 'none';
+                    this.$refs.dropdown.classList.remove('opened');
+                }, 200)
+
+                if (window.outerWidth < 850 && window.outerHeight > 600) {
+                    this.nav.style.position = 'absolute';
+                    this.nav.style.width = '66%';
+                }
+
+                if (window.outerWidth < 600) {
+                    this.nav.style.position = 'absolute';
+                    this.nav.style.width = '90%';
+                }
+            }
+        },
     },
     mounted () {
+        // DOM
+        this.nav = document.querySelector('.nav');
+
+        // RESIZE
         window.addEventListener('resize', () => {
-            if (window.outerWidth <= 600) {
+            if (window.outerWidth <= 850 && window.outerHeight > 600) {
                 this.isPhoneInitial = true;
             } else {
                 this.isPhoneInitial = false;
@@ -151,7 +191,7 @@ export default {
     display: none;
     min-width: 23rem;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
         position: fixed;
         top: 0;
         left: 0;
@@ -164,20 +204,21 @@ export default {
     .corner-light {
         top: -30%;
         left: -30%;
-        @media only screen and (min-width: 600px) {
+        @media only screen and (min-width: 850px),
+        only screen and (max-width: 850px) and (max-height: 600px) {
             display: none;
         }
     }
 
     .dropdown__container {
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px) {
             width: 50rem;
 
             @include abs-center;
             top: 48% !important;
         }
         
-        @media only screen and (max-width: 450px) {
+        @media only screen and (max-width: 550px) {
             width: 44rem;
         }
     }
@@ -185,7 +226,7 @@ export default {
     .logo {
         width: 11rem;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px) {
             display: none;
         }
     }
@@ -196,7 +237,8 @@ export default {
         align-items: center;
         margin-bottom: 2.5rem;
 
-        @media only screen and (min-width: 600px) {
+        @media only screen and (min-width: 850px),
+        only screen and (max-width: 850px) and (max-height: 600px) {
             display: none;
         }
     }
@@ -216,7 +258,8 @@ export default {
         height: 8rem;
         margin-right: -2.2rem;
 
-        // @media only screen and (min-width: 850px) {
+        // @media only screen and (min-width: 850px),
+        // only screen and (max-width: 850px) and (max-height: 600px) {
         //     width: 5rem;
         //     height: 5rem;
         // }
@@ -228,7 +271,8 @@ export default {
             width: 3.5rem;
             height: 3.5rem;
 
-            // @media only screen and (min-width: 850px) {
+            // @media only screen and (min-width: 850px),
+            // only screen and (max-width: 850px) and (max-height: 600px) {
             //     top: 1rem;
             //     right: 1rem;
             //     width: 2.25rem;
@@ -242,7 +286,7 @@ export default {
         background-color: $color-grey-2;
         margin: 2rem 0;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px) {
             margin: 2.5rem 0;
         }
     }
@@ -252,7 +296,7 @@ export default {
         align-items: center;
         margin-bottom: 2rem;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px) {
             margin-bottom: 2.5rem;
             font-size: 2rem;
         }
@@ -273,7 +317,7 @@ export default {
         padding: .75rem 0;
         text-align: center;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px) {
             padding: 1.5rem 0;
             font-size: 2rem !important;
         }
@@ -290,7 +334,7 @@ export default {
     .buttons {
         margin-top: 2.25rem;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px) {
             margin-top: 3.5rem;
         }
 
@@ -298,7 +342,7 @@ export default {
             transition: all .3s;
             margin-bottom: .75rem;
 
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 850px) and (min-height: 600px) {
                 margin-bottom: 1.25rem;
             }
 
@@ -324,7 +368,7 @@ export default {
         &:not(:last-of-type) {
             margin-bottom: 2.25rem;
 
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 850px) and (min-height: 600px) {
                 margin-bottom: 3.25rem;
             }
         }
@@ -337,7 +381,7 @@ export default {
                 color: darken($color-text-grey, 25%) !important;
             }
 
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 850px) and (min-height: 600px) {
                 font-size: 2rem !important;
             }
         }
@@ -370,7 +414,7 @@ export default {
         overflow: hidden;
         margin: 2rem 0 2.5rem;
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px) {
             display: none;
         }
     }

@@ -27,17 +27,19 @@ export default {
         Navigation,
     },
     watch: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // REINIT NAVIGATION DROPDOWN ON LOG IN & LOG OUT
         '$store.state.isLoggedIn'(newValue, oldValue) {
             setTimeout(() => {
                 this.dropdownOpener = document.getElementById('dropdown-opener');
                 this.dropdown = document.getElementById('dropdown');
                 this.closeNavBtn = document.querySelector('.close-nav-btn');
-                // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
                 this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
             }, 200);
         }
     },
     mounted () {
+        // DOM
         this.dropdownOpener = document.getElementById('dropdown-opener');
         this.dropdown = document.getElementById('dropdown');
         this.nav = document.querySelector('.nav');
@@ -45,40 +47,41 @@ export default {
         this.navRight = document.querySelector('.nav__right');
         this.closeNavBtn = document.querySelector('.close-nav-btn');
 
+        // INIT NAVIGATION DROPDOWN
         this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
-        // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
+
+
+        // RESIZE
+
         let prevWidth = window.outerWidth;
+        let prevHeight = window.outerHeight;
 
         window.addEventListener('resize', () => {
-            if (prevWidth >= 600 && window.outerWidth < 600 ||
-            prevWidth <= 600 && window.outerWidth > 600) {
+            if (prevWidth >= 850 && window.outerWidth < 850 ||
+            prevWidth <= 850 && window.outerWidth > 850 ||
+            prevHeight <= 600 && window.outerHeight > 600 ||
+            prevHeight >= 600 && window.outerHeight < 600) {
                 setTimeout(() => {
                     this.dropdownOpener = document.getElementById('dropdown-opener');
                     this.dropdown = document.getElementById('dropdown');
                     this.closeNavBtn = document.querySelector('.close-nav-btn');
-                    // this.dropdownFunctional(this.dropdownOpener, this.dropdown);
                     this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
-
+                    
+                    if (window.outerWidth > 600) {
+                        this.nav.style.width = '90%';
+                    }
+                    
                     this.nav.style.position = 'absolute';
-                    this.nav.style.width = '90%';
                     this.navLeft.style.transform = 'translate(0)';
                     this.navRight.style.transform = 'translate(0)';
                 }, 200);
             }
             prevWidth = window.outerWidth;
+            prevHeight = window.outerHeight;
         })
     },
 }
 </script>
-
-<style>
-/* html, body, .layout, .error-content {
-    width: 100% !important;
-    height: 100vh !important;
-    overflow: hidden !important;
-    position: relative !important;
-} */
-</style>
 
 <style lang="scss" scoped>
 .layout, .error-content {

@@ -1,9 +1,10 @@
 <template>
-    <div class="section">
+    <div class="section-page">
         <div class="products-line">
             <ProductCard 
                 v-for="card in cards"
                 :key="card.id"
+                :id="card.id"
                 :name="card.name"
                 :photo="card.photo"
                 :price="card.price"
@@ -16,12 +17,19 @@
 
 <script>
 export default {
+    props: ['exception'],
     computed: {
         cards() {
             const filteredArray = this.$store.state.products.products.giftcards.filter((el, i) => {
-                return i < 4;
+                if (this.exception) {
+                    if (el.id !== this.exception) {
+                        return i < 5;
+                    }
+                } else {
+                    return i < 4;
+                }
             })
-            return filteredArray
+            return filteredArray.slice(0, 4);
         }
     },
 }

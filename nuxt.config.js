@@ -16,16 +16,19 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap', as: 'style' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap' },
-      { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap', as: 'style' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap' },
+      { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Rowdies:wght@300;700&display=swap', as: 'style' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rowdies:wght@300;700&display=swap' },
     ],
     script: [
       {
         src: "https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js"
       },
       {
+        src: "https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"
+      },
+      {
         // src: "/projects/invicta/smoothScroll.js"
-        src: "/smoothScroll.js"
+        src: "/librariesScript.js"
       }
     ]
   },
@@ -53,7 +56,6 @@ export default {
     scss: [
       '~assets/scss/mixins.scss',
       '~assets/scss/variables.scss',
-      '~assets/scss/typography.scss',
     ]
   },
 

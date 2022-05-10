@@ -1,5 +1,5 @@
 <template>
-    <footer class="section">
+    <footer class="section-page">
         <div class="left">
                 <img src="@/assets/img/logoText.png" alt="Logo" class="logo">
                 <p class="paragraph-primary">The best giftcard hub.</p>
@@ -19,7 +19,7 @@
                 <ul>
                     <h4>Info</h4>
                     <li>
-                        <nuxt-link to="/">Terms of service</nuxt-link>
+                        <nuxt-link to="/termsOfService">Terms of service</nuxt-link>
                     </li>
                     <li>
                         <nuxt-link to="/">Support</nuxt-link>
@@ -38,7 +38,7 @@
                     <nuxt-link to="/profile">Profile</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn">
-                    <nuxt-link to="/">Create Product</nuxt-link>
+                    <nuxt-link to="/createProduct">Create Product</nuxt-link>
                 </li>
             </ul>
         </div>
@@ -66,16 +66,26 @@ footer {
     padding-top: 3rem;
     padding-right: 2rem;
     padding-bottom: 7rem;
+    margin: 0 auto;
+    margin-top: 12rem;
+    // position: absolute;
+    // bottom: 0;
+    // left: 50%;
+    // transform: translateX(-50%);
 
-    @media only screen and (max-width: 700px) {
+    @media only screen and (min-width: 600px) and (max-width: 1000px) {
+        width: 90% !important;
+    }
+
+    @media only screen and (max-width: 850px) {
+        padding-bottom: 13rem;
+    }
+
+    @media only screen and (max-width: 850px) {
         justify-content: flex-start;
         align-items: center;
         flex-direction: column;
         text-align: center;
-    }
-
-    @media only screen and (max-width: 600px) {
-        padding-bottom: 13rem;
     }
 
     @media only screen and (max-width: 450px) {
@@ -104,13 +114,13 @@ footer {
 
             br {
                 @media only screen and (min-width: 800px),
-                only screen and (max-width: 700px) {
+                only screen and (max-width: 850px) {
                     display: none;
                 }
             }
         }
 
-        @media only screen and (max-width: 700px) {
+        @media only screen and (max-width: 850px) {
             order: 1;
         }
     }
@@ -139,7 +149,7 @@ footer {
         @include flex-center;
         align-items: flex-start;
 
-        @media only screen and (max-width: 700px) {
+        @media only screen and (max-width: 850px) {
             margin-bottom: 4rem;
             order: 0;
         }

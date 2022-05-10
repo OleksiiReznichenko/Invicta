@@ -8,7 +8,7 @@
             <div class="banner">
                     <div class="info">
                         <h3>Have time <br> to buy</h3>
-                        <nuxt-link to="/promo" class="btn btn-white">promo codes</nuxt-link>
+                        <nuxt-link to="/browse" class="btn btn-white">Go to shop</nuxt-link>
                     </div>
                     <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
                 </div>
@@ -18,13 +18,14 @@
             <div class="banner banner-desktop">
                 <div class="info">
                     <h3>Have time <br> to buy</h3>
-                    <nuxt-link to="/promo" class="btn btn-white">promo codes</nuxt-link>
+                    <nuxt-link to="/browse" class="btn btn-white">Go to shop</nuxt-link>
                 </div>
                 <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
             </div>
             <ProductCard 
                 v-for="card in cards"
                 :key="card.id"
+                :id="card.id"
                 :name="card.name"
                 :photo="card.photo"
                 :price="card.price"

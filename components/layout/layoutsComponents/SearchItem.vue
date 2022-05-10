@@ -1,28 +1,51 @@
 <template>
-  <div class="search-item">
-      <img :src="image" alt="Image" class="item-image">
-      <!-- <div ref="image" class="item-image"></div> -->
-      <div class="item-info">
-          <h5 class="item-name">{{name}}</h5>
-          <div class="item-small-info">
-              <span v-if="oldPrice" class="item-discount item-gradient">Save {{discount}}%</span>
-              <span class="item-in-stock">{{inStock}} in stock</span>
-              <span class="item-country">{{country}}</span>
-              <span class="item-price item-gradient">{{price}}$</span>
-          </div>
-      </div>
-  </div>
+    <div class="search-item">
+        <div @click="closeSearch" class="search-item-link">
+            <img :src="image" alt="Image" class="item-image">
+        </div>
+        <div @click="closeSearch" class="search-item-link">
+            <div class="item-info">
+                <h5 class="item-name">{{name}}</h5>
+                <div class="item-small-info">
+                    <span v-if="oldPrice" class="item-discount item-gradient">Save {{discount}}%</span>
+                    <span class="item-in-stock">{{inStock}} in stock</span>
+                    <span class="item-country">{{country}}</span>
+                    <span class="item-price item-gradient">{{price}}$</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 export default {
-    props: ['image', 'name', 'inStock', 'country', 'price', 'oldPrice'],
+    props: ['image', 'name', 'inStock', 'country', 'price', 'oldPrice', 'id'],
     computed: {
         discount() {
             if (this.oldPrice) {
                 return Math.round(100 - this.price / this.oldPrice * 100);
             }
         }
+    },
+    methods: {
+        closeSearch() {
+            // this.searchInput.value = '';
+                
+            this.searchResultsContainer.style.transition = 'all .2s';
+
+            this.searchResultsContainer.style.opacity = 0;
+
+            this.$router.push('/browse/' + this.id)
+
+            setTimeout(() => {
+                this.searchResultsContainer.style.display = 'none';
+                this.searchResultsContainer.classList.remove('opened');
+            }, 200);
+        }
+    },
+    mounted () {
+        this.searchResultsContainer = document.querySelector('.search-results-container');
+        this.searchInput = document.getElementById('searchInput');
     },
 }
 </script>
@@ -31,6 +54,13 @@ export default {
 .search-item {
     display: flex;
     align-items: center;
+    // justify-content: flex-start;
+
+    &-link {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
 
     .item-image {
         width: 2.75rem;
@@ -38,6 +68,8 @@ export default {
         border-radius: 1rem;
         margin-right: 1rem;
         object-fit: cover;
+        // position: relative;
+        // z-index: 100;
         // background-size: cover;
         // background-repeat: no-repeat;
         // background-position: left center;

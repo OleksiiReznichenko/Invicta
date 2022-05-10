@@ -1,6 +1,5 @@
 <template>
     <div ref="header" class="header relative-container">
-        <!-- <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light"> -->
         <header class="section">
             <img src="@/assets/img/gridIndexHeader.png" alt="Grid" class="grid-image">
             <div class="info">
@@ -29,7 +28,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export default {
     mounted () {
-        let check = true;
+        // let check = true;
 
         // const header = document.querySelector('.header');
         // const main = document.querySelector('.main');
@@ -87,13 +86,18 @@ export default {
         // observer.observe(header);
         // observer2.observe(main);
 
+
+
+        // VARIABLES
         let cardsModel;
         let mixer;
         let clips;
-        let action;
-        const container = document.querySelector('.cards-scene');
 
+
+        // SCENE
+        const container = document.querySelector('.cards-scene');
         const scene = new THREE.Scene();
+
 
         // CAMERA SETUP
         const fov = 35;
@@ -101,39 +105,21 @@ export default {
         const near = 0.1;
         const far = 600;
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        // camera.position.set(10, 8, 15);
         camera.position.set(8, 8, 15);
         camera.lookAt(scene.position);
+
 
         // RENDERER SETUP
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.outputEncoding = THREE.sRGBEncoding;
-        // renderer.shadowMap.enabled = true;
-        // renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-
         container.appendChild(renderer.domElement);
+
 
         // LIGHTNING SETUP
         const ambient = new THREE.AmbientLight(0xaaaaaa);
-        // const ambient = new THREE.AmbientLight(0x999999);
         scene.add(ambient);
-
-        // const directionalLightning = new THREE.DirectionalLight(0xaaaaaa, 1);
-        // directionalLightning.position.set(10, 10, 10);
-        // scene.add(directionalLightning);
-
-        // const hemisphereLight = new THREE.HemisphereLight( 0x2c14e1, 0x4B36DA, 1 );
-        // scene.add( hemisphereLight );
-
-        // const pointLight = new THREE.PointLight(0x2c14e1, 2, 1000);
-        // pointLight.position.set(-30, -30, -10);
-        // scene.add(pointLight);
-
-        // const spotLight = new THREE.SpotLight( 0xffffff );
-        // spotLight.position.set( 10, 10, 10 );
 
         const pointLight2 = new THREE.PointLight(0x2c14e1, 2, 1000);
         pointLight2.position.set(10, 5, -10);
@@ -145,24 +131,12 @@ export default {
 
         const pointLight4 = new THREE.PointLight(0x2c14e1, 10, 500);
         pointLight4.position.set(15, 15, -10);
-        // pointLight4.castShadow = true;
         scene.add(pointLight4);
 
-        // const pointLight5 = new THREE.PointLight(0xaaaaaa, 1, 1000);
-        // pointLight5.position.set(5, 5, 1);
-        // scene.add(pointLight5);
 
-        // const light = new THREE.HemisphereLight(0xF037C7, 0x4530E0, 5);
-        // scene.add(light);
-
-        const clock = new THREE.Clock();
-
+        // SCAILING
         function cardsModelScailing(model) {
             model.scale.set(1.65, 1.65, 1.65);
-            // if (window.outerWidth < 1000 && window.outerHeight > 520) {
-            //     model.scale.set(1.55, 1.55, 1.55);
-            // }
-
             if (window.outerWidth < 1000 && window.outerHeight > 600) {
                 model.scale.set(1.3, 1.3, 1.3);
                 model.position.set(-1, 0, 0);
@@ -177,31 +151,21 @@ export default {
             }
         }
         
+
         // LOAD SETUP
         const loader = new GLTFLoader();
-        // loader.load('/kermaWaits.glb', (gltf) => {
         loader.load('/cards.glb', (gltf) => {
             cardsModel = gltf.scene;
             scene.add(cardsModel);
-            // cardsModel.castShadow = true;
-            // // cardsModel.receiveShadow = true;
             
             cardsModelScailing(cardsModel);
 
             clips = gltf.animations;
-
-            // cardsModel.children.forEach(el => {
-            //     el.castShadow = true;
-            //     el.receiveShadow = true;
-            // })
-            // console.log(cardsModel)
             
             mixer = new THREE.AnimationMixer(cardsModel);
             clips.forEach(clip => {
                 mixer.clipAction(clip).play();
             })
-            // let action = mixer.clipAction(gltf.animations);
-            // action.play();
 
             renderer.render(scene, camera);
             // animate();
@@ -213,10 +177,13 @@ export default {
                     cardsModel.position.x = -(e.clientX - window.innerWidth / 2) / 200;
                     cardsModel.position.y = -(e.clientY - window.innerHeight / 2) / 200;
                     cardsModel.position.z = -(e.clientX - window.innerWidth / 2) / 1000;
-                    // parallax(e, 10, container)
                 });
             }
         });
+
+
+        // ANIMATION
+        const clock = new THREE.Clock();
 
         function animate() {
             // if (!check) return;
@@ -229,7 +196,9 @@ export default {
             requestAnimationFrame( animate );
 
         }
+        
 
+        // RESIZE
         function onWindowResize() {
             cardsModelScailing(cardsModel);
 
@@ -269,18 +238,6 @@ header {
         // }
     }
 
-    // .cards-shadow {
-    //     position: absolute;
-    //     width: 50rem;
-    //     height: 50rem;
-    //     top: 35%;
-    //     left: 53%;
-    //     // width: 60rem;
-    //     // height: 60rem;
-    //     // top: 23%;
-    //     // left: 51%;
-    // }
-
     .grid-image {
         position: absolute;
         right: 0;
@@ -300,19 +257,14 @@ header {
         // top: 20%;
         // bottom: 30%;
         width: 55rem;
-            z-index: 100;
+        z-index: 100;
 
-            @media only screen and (min-width: 1300px) {
-            top: 50%;
-            transform: translateY(-50%);
-        }
+        // @media only screen and (max-width: 1300px) {
+        //     bottom: 30%;
+        //     // transform: translateY(50%);
+        // }
 
-        @media only screen and (max-width: 1300px) {
-            bottom: 30%;
-            // transform: translateY(50%);
-        }
-
-        @media only screen and (max-width: 1300px) and (min-height: 700px) {
+        @media only screen and (max-width: 1200px) and (min-height: 800px) {
             bottom: 35%;
             // transform: translateY(50%);
         }
@@ -333,6 +285,12 @@ header {
         @media only screen and (max-width: 600px) and (min-height: 600px) {
             // top: 60%;
             bottom: 15%;
+        }
+
+        @media only screen and (min-width: 1200px),
+        only screen and (min-width: 1000px) and (max-height: 800px) {
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .border-text-blue {

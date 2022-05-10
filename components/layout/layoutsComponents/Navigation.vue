@@ -50,7 +50,7 @@
         <nuxt-link
           v-if="!isPhone && isLoggedIn"
           key="nav-login-link"
-          to="/login"
+          to="/myShopping"
           class="link-notification"
         >
           <img
@@ -94,19 +94,19 @@
 
     <nav v-if="isPhone" key="nav-mobile" class="nav--mobile">
       <ul class="list">
-        <li class="item">
+        <li @click="checkLink" class="item">
           <nuxt-link class="link" to="/">
             <img src="@/assets/svg/home.svg" alt="Home" class="icon" />
             <span>Main</span>
           </nuxt-link>
         </li>
-        <li class="item">
+        <li @click="checkLink" class="item">
           <nuxt-link class="link" to="/browse">
             <img src="@/assets/svg/cart.svg" alt="Cart" class="icon" />
             <span>Browse</span>
           </nuxt-link>
         </li>
-        <li class="item">
+        <li @click="checkLink" class="item">
           <nuxt-link class="link" to="/profile">
             <img src="@/assets/svg/user.svg" alt="Profile" class="icon" />
             <span>Profile</span>
@@ -137,19 +137,27 @@ export default {
     data() {
         return {
           isPhoneInitial: false,
-          dropdownIndicator: false,
+          // dropdownIndicator: false,
           isOpen: false,
           searchValue: '',
           searchValueValidated: '',
         }
     },
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS LOGGED IN
         isLoggedIn() {
           return this.$store.state.isLoggedIn
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS PHONE VERSION
         isPhone() {
           return this.isPhoneInitial
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ARRAY OF FILTERED PRODUCTS ON NAME SEARCH
         productsFiltered() {
           let productsObject = this.$store.state.products.products;
 
@@ -170,47 +178,61 @@ export default {
           return productsObjectFiltered;
         },
     },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHECK MOBILE VERSION
     created() {
         if (process.browser) {
         // eslint-disable-next-line nuxt/no-globals-in-created
-        this.isPhoneInitial = window.outerWidth <= 600
+        this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600;
         }
     },
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // LOG OUT
         isLoggedInToFalse() {
             this.$store.commit('isLoggedInToFalse');
             this.$router.push('/');
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // LOG IN
         isLoggedInToTrue() {
             this.$store.commit('isLoggedInToTrue');
             this.$router.push('/');
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CHANGE SEARCH INPUT AND LOGO POSITIONS ON MOBILE
         changePositionOnMobile(navLeft, navRight) {
-          if (window.outerWidth > 600) return;
-          navLeft.style.transform = 'translate(-20rem)';
+          // if (window.outerWidth > 600) return;
+          // navLeft.style.transform = 'translate(-19rem)';
 
-          if (window.outerWidth < 600 && window.outerWidth >= 550) {
-            navRight.style.transform = 'translate(18rem)';
-          }
+          // if (window.outerWidth < 600 && window.outerWidth >= 550) {
+          //   navRight.style.transform = 'translate(17rem)';
+          // }
 
-          if (window.outerWidth < 550 && window.outerWidth >= 500) {
-            navRight.style.transform = 'translate(16rem)';
-          }
+          // if (window.outerWidth < 550 && window.outerWidth >= 500) {
+          //   navRight.style.transform = 'translate(15rem)';
+          // }
 
-          if (window.outerWidth < 500 && window.outerWidth >= 450) {
-            navRight.style.transform = 'translate(14rem)';
-          }
+          // if (window.outerWidth < 500 && window.outerWidth >= 450) {
+          //   navRight.style.transform = 'translate(13rem)';
+          // }
 
-          if (window.outerWidth < 450 && window.outerWidth >= 400) {
-            navRight.style.transform = 'translate(12rem)';
-          }
+          // if (window.outerWidth < 450 && window.outerWidth >= 400) {
+          //   navRight.style.transform = 'translate(11rem)';
+          // }
 
-          if (window.outerWidth < 400) {
-            navRight.style.transform = 'translate(10rem)';
-          }
+          // if (window.outerWidth < 400) {
+          //   navRight.style.transform = 'translate(9rem)';
+          // }
 
           this.isOpen = true;
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // REMOVE EXCESSIVE WHITE SPACES IN VALUE AND CONVERT TO LOWERCASE
         validateSearchValue() {
           this.searchValueValidated = '';
           if (this.searchValue.includes(' ') >= 0) {
@@ -229,6 +251,9 @@ export default {
             this.searchValueValidated = this.searchValue.toLowerCase();
           }
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SHOW SEARCH RESULTS CONTAINER ON CLICK AND KEY TYPING IF SEARCH INPUT CONTAINS LETTERS
         searchFunction(e) {
           if (this.searchValueValidated) {
             if (!this.$refs.searchResultsContainer.classList.contains('opened')) {
@@ -242,22 +267,36 @@ export default {
 
 
             }
-          } 
-          // else {
-          //   if (this.$refs.searchResultsContainer.classList.contains('opened')) {
-          //     this.$refs.searchResultsContainer.style.opacity = 0;
+          }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE DROPDOWN BEFORE GOING TO ANOTHER PAGE
+        checkLink(e) {
+            const target = e.target.tagName.toLowerCase();
+            if (target == 'a' || target == 'span' || target == 'img' && this.dropdown.classList.contains('opened')) {
+                this.dropdown.style.opacity = 0;
+                setTimeout(() => {
+                    this.dropdown.style.display = 'none';
+                    this.dropdown.classList.remove('opened');
+                }, 200)
 
-          //     setTimeout(() => {
-          //         this.$refs.searchResultsContainer.style.display = 'none';
-          //         this.$refs.searchResultsContainer.classList.remove('opened');
-          //     }, 200);
-          //   }
-          // }
+                if (window.outerWidth < 850 && window.outerHeight > 600) {
+                    this.nav.style.position = 'absolute';
+                    this.nav.style.width = '66%';
+                }
 
-        }
+                if (window.outerWidth < 600) {
+                    this.nav.style.position = 'absolute';
+                    this.nav.style.width = '90%';
+                }
+            }
+        },
     },
 
     watch: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // HIDE SEARCH RESULTS CONTAINER IF SEARCH INPUT IS EMPTY
       searchValue(newValue, oldValue) {
         this.validateSearchValue();
         if (this.searchValueValidated) return;
@@ -272,12 +311,18 @@ export default {
           }
       }
     },
+
     mounted() {
+      // DOM
       this.navLeft = document.querySelector('.nav__left');
       this.navRight = document.querySelector('.nav__right');
+      this.nav = document.querySelector('.nav');
+      this.dropdown = document.getElementById('dropdown');
 
+      // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
       window.addEventListener('click', (e) => {
-          if (window.outerWidth <= 600 && this.isOpen) {
+          // CHANGE SEARCH INPUT AND LOGO POSITIONS BACK ON MOBILE
+          if (window.outerWidth > 850 && window.outerHeight > 600 && this.isOpen) {
             const isClickInsideElement = this.navRight.contains(e.target);
 
             if (!isClickInsideElement) {
@@ -287,11 +332,14 @@ export default {
             }
           }
 
-          if (this.$refs?.searchResultsContainer.classList.contains('opened')) {
-            const isClickInsideElement = this.$refs.searchResultsContainer.contains(e.target);
-            const isClickInsideElement2 = this.$refs.searchInput.contains(e.target);
+          // CLOSE SEARCH RESULTS CONTAINER
+          if (!this.$refs.searchResultsContainer) return;
 
-            if (!isClickInsideElement && !isClickInsideElement2 && this.$refs.searchResultsContainer.classList.contains('opened')) {
+          if (this.$refs.searchResultsContainer.classList.contains('opened')) {
+            const isClickInsideElement = this.$refs.searchResultsContainer.contains(e.target);
+            const isClickSearchInput = this.$refs.searchInput.contains(e.target);
+
+            if (!isClickInsideElement && !isClickSearchInput && this.$refs.searchResultsContainer.classList.contains('opened')) {
                 // this.$refs.searchInput.value = '';
                 
                 this.$refs.searchResultsContainer.style.transition = 'all .2s';
@@ -303,13 +351,14 @@ export default {
                     this.$refs.searchResultsContainer.classList.remove('opened');
                 }, 200);
             }
-          }
-
-          
+          }          
       });
 
+
+      // RESIZE
       window.addEventListener('resize', () => {
-        if (window.outerWidth <= 600) {
+        this.dropdown = document.getElementById('dropdown');
+        if (window.outerWidth <= 850 && window.outerHeight > 600) {
             this.isPhoneInitial = true
         } else {
             this.isPhoneInitial = false
@@ -342,14 +391,39 @@ export default {
   z-index: 10000;
   font-size: 1.4rem !important;
   transition: all .3s;
+  // width: 100%;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 850px) and (min-height: 600px) {
     justify-content: flex-start;
     top: 5rem;
     // width: 50rem;
   }
 
-  @media only screen and (max-width: 600px) and (max-height: 700px) {
+  @media only screen and (min-width: 1000px) {
+    // width: 50rem
+    width: 80% !important;
+  }
+
+  @media only screen and (max-width: 1000px) and (min-height: 600px) and (min-width: 850px) {
+    // width: 50rem
+    width: 90% !important;
+  }
+
+  @media only screen and (max-width: 850px) and (min-height: 600px) and (min-width: 600px) {
+    // width: 50rem
+    width: 66%;
+  }
+
+  @media only screen and (max-width: 850px) and (max-height: 600px) and (min-width: 600px) {
+    // width: 50rem
+    width: 80% !important;
+  }
+
+  // @media only screen and (max-width: 850px) and (min-height: 600px) and (min-width: 600px) and (min-height: 900px) {
+  //     width: 57rem;
+  // }
+
+  @media only screen and (max-width: 850px) and (min-height: 600px) and (max-height: 700px) {
     top: 2.5rem;
   }
 
@@ -358,7 +432,7 @@ export default {
     align-items: center;
     transition: all .3s;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
       order: 1;
     }
   }
@@ -368,9 +442,10 @@ export default {
     align-items: center;
     transition: all .3s;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
       order: 0;
       width: 40%;
+      // margin-left: 17%;
     }
   }
 
@@ -379,7 +454,7 @@ export default {
     height: 3rem;
     margin-right: 3.5rem;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
       margin-right: 0;
       width: 3.5rem;
       height: 3.5rem;
@@ -408,6 +483,7 @@ export default {
     position: absolute;
     top: 4rem;
     right: 0;
+    max-width: 100%;
     width: 100%;
     padding: 2.5rem;
     // height: 20rem;
@@ -422,14 +498,19 @@ export default {
     opacity: 0;
     // transition: all .1s;
 
+    // @media only screen and (max-width: 850px) and (min-height: 600px) and (min-width: 600px) {
+    //   left: 0;
+    // }
+
     &::-webkit-scrollbar {
-      height: 5px;
-      width: 5px;
+      height: 6px;
+      width: 6px;
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 17px;
-      background-color: #343234;
+      // background-color: #343234;
+      background-color: #615f61;
     }
 
     &::-webkit-scrollbar-track {
@@ -485,7 +566,7 @@ export default {
       width: 14rem;
     }
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
       width: 100%;
       border-radius: 6px;
       overflow: hidden;
@@ -501,7 +582,7 @@ export default {
     width: 1.75rem;
     height: 1.75rem;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
       width: 2rem;
       height: 2rem;
       // left: 2rem;
@@ -514,7 +595,7 @@ export default {
     color: white;
     font-family: Montserrat;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
       padding: 1rem 2rem;
       padding-left: 4rem;
     }

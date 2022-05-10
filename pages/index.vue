@@ -3,11 +3,11 @@
         <HeaderIndex/>
         <main>
             <DiscountBlock/>
-            <ProductsLine class="main"/>
+            <ProductsLine/>
             <DiscountProducts/>
             <Signup/>
         </main>
-        <Footer/>
+        <Footer class="section" />
     </div>
 </template>
 
@@ -36,6 +36,32 @@ export default {
         margin-top: -15rem;
     }
 }
+
+footer {
+    margin-top: 0;
+}
+
+::v-deep {
+    .section-page {
+        width: 80%;
+        max-width: 1920px;
+        margin: 0 auto;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .section-page {
+            width: 90% !important;
+        }
+    }
+}
+
+// .products-line {
+//     @media only screen and (max-width: 1000px) {
+//         .section-page {
+//             width: 90% !important;
+//         }
+//     }
+// }
 // main {
 //     margin-bottom: 25rem !important;
 // }

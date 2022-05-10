@@ -9,4 +9,6 @@ SmoothScroll({
     pulseScale       : 4,
     pulseNormalize   : 1,
     touchpadSupport   : true,
-  });
+});
+
+window.Sharer.init();

@@ -15,7 +15,8 @@
                     <h3 class="new-price">${{price}}</h3>
                     <span v-if="oldPrice" class="old-price">${{oldPrice}}</span>
                 </div>
-                <div class="btn">+Add</div>
+                <!-- <div class="btn">+Add</div> -->
+                <nuxt-link class="btn" :to="'/browse/' + this.id">+Add</nuxt-link>
             </div>
         </div>
     </div>
@@ -23,7 +24,7 @@
 
 <script>
 export default {
-    props: ['name', 'photo', 'price', 'oldPrice', 'amountInStock'],
+    props: ['name', 'photo', 'price', 'oldPrice', 'amountInStock', 'id'],
     data() {
         return {
             discount: 0,
@@ -77,7 +78,11 @@ export default {
             display: block;
             width: 85%;
             margin: 0 auto;
-            border-radius: 8px;
+            border-radius: 1rem;
+
+            @media only screen and (max-width: 1300px) {
+                border-radius: 10px;
+            }
         }
 
         .container {
@@ -138,14 +143,15 @@ export default {
                 align-items: center;
             }
 
-            // @media only screen and (max-width: 450px) {
-            //     flex-direction: column;
-            //     align-items: flex-start;
-            // }
+            @media only screen and (max-width: 450px) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
             .prices {
                 
-                @media only screen and (min-width: 1450px) {
+                @media only screen and (min-width: 1450px),
+                only screen and (max-width: 450px) {
                     display: flex;
                     align-items: center;
                 }
@@ -153,7 +159,7 @@ export default {
 
                 .old-price {
                     color: $color-text-grey-dark;
-                    font-size: 1.4rem;
+                    font-size: 1.3rem;
                     text-decoration: line-through;
 
                     @media only screen and (max-width: 850px) {
@@ -181,9 +187,10 @@ export default {
                 border-radius: 100px;
                 padding: .35rem 1.25rem;
 
-                // @media only screen and (max-width: 450px) {
-                //     margin-top: 1.4rem;
-                // }
+                @media only screen and (max-width: 450px) {
+                    margin-top: 1.8rem;
+                    padding: .35rem 2rem;
+                }
                 
                 &:hover {
                     // background-color: $color-text-grey-dark;

@@ -8,6 +8,10 @@
   opacity: 0;
 }
 
+.nuxt-link-exact-active {
+  color: #9f949f;
+}
+
 /* .active-link {
   color: #4B36DA;
 } */
@@ -70,9 +74,13 @@ ul {
 a,
 button {
   text-decoration: none;
+  font-family: inherit;
   color: inherit;
   font-weight: 300 !important;
   font-size: 1.4rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
   /* cursor: url(/CustomCursor2.png), pointer; */
 }
 
@@ -162,7 +170,14 @@ html {
   }
 }
 
-@media only screen and (max-width: 850px) and (min-height: 930px) and (min-width: 680px) {
+@media only screen and (max-width: 680px) and (min-height: 800px) {
+  html {
+    /* font-size: 44%; */
+    font-size: 8px;
+  }
+}
+
+@media only screen and (max-width: 950px) and (min-height: 900px) and (min-width: 680px) {
   html {
     font-size: 8.7px;
   }
@@ -183,22 +198,18 @@ html {
 
 @media only screen and (max-width: 600px) {
   html {
-    /* font-size: 44%; */
-    font-size: 8px;
+    font-size: 7.5px;
   }
 }
 
 @media only screen and (max-width: 450px) {
   html {
-    /* font-size: 42%; */
-    /* font-size: 6.72px; */
-    font-size: 7.2px;
+    font-size: 7.1px;
   }
 }
 
 @media only screen and (max-width: 350px) {
   html {
-    /* font-size: 41%; */
     font-size: 6.56px;
   }
 }
@@ -251,21 +262,22 @@ html {
   }
 } */
 
+
 .section {
-  /* position: relative;
-  height: 100vh;
-  width: 100%;
-  max-width: none !important; */
   width: 80%;
-  /* max-width: 1360px; */
   max-width: 1920px;
   margin: 0 auto;
 }
 
 @media only screen and (max-width: 1000px) {
   .section {
-    /* width: 95rem; */
     width: 90%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 850px) {
+  .section-page {
+    width: 100% !important;
   }
 }
 
@@ -274,6 +286,7 @@ html {
   position: relative;
 }
 
+
 .layout,
 #__nuxt,
 #__layout {
@@ -281,9 +294,16 @@ html {
   height: 100%;
 }
 
+
 h1, h2, h3 {
   font-family: Rowdies;
   font-weight: 700;
+}
+
+
+.on-top {
+    position: relative;
+    z-index: 2000;
 }
 
 .corner-light {
@@ -291,9 +311,8 @@ h1, h2, h3 {
   top: 0;
   left: 0;
   max-width: 100%;
-  /* width: 1000px; */
-  /* height: 1000px; */
 }
+
 
 .cards-scene canvas {
   position: absolute;
@@ -331,15 +350,5 @@ h1, h2, h3 {
 @media only screen and (max-width: 600px) and (max-height: 700px) {
   .cards-scene canvas {
     top: -14%;
-  }
-}
-
-.layout {
-  padding-top: 11rem;
-}
-
-@media only screen and (max-width: 600px) {
-  .layout {
-    padding-top: 15rem;
   }
 }

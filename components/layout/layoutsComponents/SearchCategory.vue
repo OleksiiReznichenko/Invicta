@@ -8,6 +8,7 @@
             <SearchItem 
              v-for="item in categoryItems"
              :key="item.id + Math.random()"
+             :id="item.id"
              :image='item.photo'
              :name='item.name'
              :inStock='item.amountInStock'
@@ -77,7 +78,7 @@ export default {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        @media only screen and (max-width: 650px) {
+        @media only screen and (max-width: 850px) {
             grid-template-columns: 1fr;
         }
     }
