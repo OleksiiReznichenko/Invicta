@@ -1,41 +1,41 @@
 <template>
-    <div class="shopping-item-page section section-page">
+    <div class="order-page section section-page">
         <div class="content">
             <div class="page-sequence">
                 <nuxt-link to="/">Main</nuxt-link>
                 <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                <nuxt-link to="/myShopping">My shopping</nuxt-link>
+                <nuxt-link to="/orders">My orders</nuxt-link>
                 <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                <span>{{item.name}}</span>
+                <span>{{order.name}}</span>
             </div>
             <div class="main-content">
                 <div class="left">
-                    <div class="grey-container item-container">
-                        <img :src="item.image" alt="Item image" class="image">
+                    <div class="grey-container order-container">
+                        <img :src="order.image" alt="order image" class="image">
                         <div class="info">
-                            <h3 class="name">{{item.name}}</h3>
+                            <h3 class="name">{{order.name}}</h3>
                             <div class="date-id-container desktop">
-                                <span class="id">order {{item.id}}</span>
-                                <span class="date">{{item.date}}</span>
+                                <span class="id">order {{order.id}}</span>
+                                <span class="date">{{order.date}}</span>
                             </div>
                             <div class="status-price-container">
-                                <div :class="{'border-text-green': isValidated, 'border-text-red': !isValidated}" class="status">{{item.status}}</div>
-                                <div class="price">${{item.price}}</div>
+                                <div :class="{'border-text-green': isConfirmed, 'border-text-red': !isConfirmed}" class="status">{{order.status}}</div>
+                                <div class="price">${{order.price}}</div>
                             </div>
                             <div class="date-id-container mobile">
-                                <span class="id">order {{item.id}}</span>
-                                <span class="date">{{item.date}}</span>
+                                <span class="id">order {{order.id}}</span>
+                                <span class="date">{{order.date}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="grey-container chat">
                         <div class="top-container">
-                            <h3 v-if="item.chat.messages.length == 0" class="no-messages">No messages yet</h3>
-                            <div v-if="item.chat.messages.length > 0" class="messages">
+                            <h3 v-if="order.chat.messages.length == 0" class="no-messages">No messages yet</h3>
+                            <div v-if="order.chat.messages.length > 0" class="messages">
                                 <ChatMessage 
-                                v-for="message in item.chat.messages"
+                                v-for="message in order.chat.messages"
                                 :key="message.id"
-                                :person='message.person === "me" ? user : item.seller'
+                                :person='message.person === "me" ? user : order.buyer'
                                 :isMe='message.person === "me"'
                                 :text='message.text'
                                 :date='message.date'
@@ -69,7 +69,7 @@
                             <textarea @keypress.enter="sendMessage" @input="autoGrow" v-model="newMessage" ref="messageInput" name="message" id="messageInput" cols="30" rows="1" wrap="soft" placeholder="Write a message"></textarea>
                             <button @click="sendMessage" class="send-button">Send</button>
                         </div>
-                        <div @click="toggleEvent" v-if="item.chat.notifications.length > 0" class="toggle-container notifications">
+                        <div @click="toggleEvent" v-if="order.chat.notifications.length > 0" class="toggle-container notifications">
                             <div class="title-container">
                                 <div class="title-container__left">
                                     <div class="icon-container">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="notifications-list description-container">
                                 <ChatNotification 
-                                v-for="notification in item.chat.notifications"
+                                v-for="notification in order.chat.notifications"
                                 :key="notification.id"
                                 :text='notification.text'
                                 :date='notification.date'
@@ -94,18 +94,18 @@
                     <div class="grey-container users-container">
                         <nuxt-link :to="'/users/' + user.id" class="user buyer">
                             <div class="info">
-                                <span>Buyer</span>
+                                <span>Seller</span>
                                 <!-- <h4 class="user-name">{{user.firstName}} <br> {{user.lastName}}</h4> -->
                                 <h4 class="user-name">Me</h4>
                             </div>
                             <img :src="user.avatar" alt="User photo" class="user-photo">
                         </nuxt-link>
-                        <nuxt-link :to="'/users/' + item.seller.id" class="user seller">
+                        <nuxt-link :to="'/users/' + order.buyer.id" class="user buyer">
                             <div class="info">
-                                <span>Seller</span>
-                                <h4 class="user-name">{{item.seller.firstName}} <br> {{item.seller.lastName}}</h4>
+                                <span>Buyer</span>
+                                <h4 class="user-name">{{order.buyer.firstName}} <br> {{order.buyer.lastName}}</h4>
                             </div>
-                            <img :src="item.seller.avatar" alt="User photo" class="user-photo">
+                            <img :src="order.buyer.avatar" alt="User photo" class="user-photo">
                         </nuxt-link>
                     </div>
                     <div @click="toggleEvent" class="toggle-container grey-container help-container">
@@ -123,7 +123,7 @@
                             <a class="support-link" href="#">Write to support</a>
                         </div>
                     </div>
-                    <button @click="validateEvent" :class="{'validated': isValidated}" class="validate-button">{{buttonContent}}</button>
+                    <button @click="validateEvent" :class="{'confirmed': isConfirmed}" class="confirm-button">{{buttonContent}}</button>
                 </div>
             </div>
         </div>
@@ -158,18 +158,18 @@ export default {
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // IS VALIDATED SHOPPING ITEM INDICATOR
-        isValidated() {
-            return this.item.isValidated;
+        // IS CONFIRMED ORDER INDICATOR
+        isConfirmed() {
+            return this.order.isConfirmed;
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // VALIDATE BUTTON TEXT CONTENT
+        // CONFIRM BUTTON TEXT CONTENT
         buttonContent() {
-            if (this.isValidated) {
-                return 'Validated';
+            if (this.isConfirmed) {
+                return 'Confirmed';
             } else {
-                return 'Validate the fulfilment';
+                return 'Confirm the order';
             }
         }
     },
@@ -206,11 +206,11 @@ export default {
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // CHANGE NOT VALIDATED TO VALIDATED
+        // CHANGE NOT CONFIRMED TO CONFIRMED
         validateEvent(e) {
-            if (this.isValidated) return;
-            this.$store.commit('myShoppingItems/statusToValidated', {id: this.item.id});
-            this.$store.commit('myShoppingItems/isValidatedToTrue', {id: this.item.id});
+            if (this.isConfirmed) return;
+            this.$store.commit('orders/statusToConfirmed', {id: this.order.id});
+            this.$store.commit('orders/isConfirmedToTrue', {id: this.order.id});
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -293,7 +293,7 @@ export default {
                 date: this.getDate()
             }
 
-            this.$store.commit('myShoppingItems/addChatMessage', {id: this.item.id, message: this.messageObject});
+            this.$store.commit('orders/addChatMessage', {id: this.order.id, message: this.messageObject});
 
             this.newMessage = '';
             this.$refs.messageInput.style.height = 'auto';
@@ -301,14 +301,14 @@ export default {
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // FIND AND LOAD THE ITEM
+    // FIND AND LOAD THE ORDER
     created () {
-        // MY SHOPPING ITEMS ARRAY
-        const myShoppingItemsArray = this.$store.state.myShoppingItems.myShoppingItems;
+        // MY ORDERS ARRAY
+        const ordersArray = this.$store.state.orders.myOrders;
 
-        // FIND ITEM IN MY SHOPPING ITEMS ARRAY
-        this.item = myShoppingItemsArray.find(el => {
-            if (this.item || el.id !== this.$route.params.id) return;
+        // FIND ORDER IN MY ORDERS ARRAY
+        this.order = ordersArray.find(el => {
+            if (this.order || el.id !== this.$route.params.id) return;
             return el;
         })
     },
@@ -316,7 +316,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.shopping-item-page {
+.order-page {
     min-height: 80vh;
 
     .content {
@@ -379,7 +379,7 @@ export default {
                     margin-right: 0;
                 }
 
-                .item-container {
+                .order-container {
                     display: flex;
                     align-items: center;
                     padding: 3.5rem;
@@ -764,7 +764,7 @@ export default {
                     }
                 }
 
-                .validate-button {
+                .confirm-button {
                     background-color: $color-orange;
                     width: 100%;
                     border-radius: 12px;
@@ -782,7 +782,7 @@ export default {
                     }
                 }
 
-                .validated {
+                .confirmed {
                     background-color: darken($color-green, 10%) !important;
                     cursor: default;
                 }

@@ -1,6 +1,6 @@
 <template>
     <div ref="dropdown" id="dropdown">
-        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light corner-light-dropdown">
         <div @click="checkLink" class="dropdown__container">
 
             <div class="heading-container">
@@ -22,15 +22,15 @@
                 <img src="@/assets/svg/searchIcon.svg" alt="Search icon" class="dropdown__search-icon">
             </div> -->
 
-            <nuxt-link v-if="isLoggedIn" key="userLogin" to="/profile" class="user">
+            <nuxt-link v-if="isLoggedIn" key="userLogin" :to="'/users/' + user.id" class="user">
                 <img
-                    :src="$store.state.user.avatar"
+                    :src="user.avatar"
                     alt="Avatar"
                     class="user__icon"
                 />
-                <div class="user__info">
-                    <div class="user__name">{{$store.state.user.firstName}} {{$store.state.user.lastName}}</div>
-                    <div class="user__balance">${{$store.state.user.balance}} balance</div>
+                <div class="close-dropdown user__info">
+                    <div class="close-dropdown user__name">{{user.firstName}} {{user.lastName}}</div>
+                    <div class="close-dropdown user__balance">${{user.balance}} balance</div>
                 </div>
             </nuxt-link>
 
@@ -40,7 +40,7 @@
                 <li v-if="!isPhone">
                     <nuxt-link to="/browse">Browse</nuxt-link>
                 </li>
-                <li v-if="isPhone"  key="updates">
+                <li v-if="!isLoggedIn || isLoggedIn && isPhone"  key="updates">
                     <nuxt-link to="/updates">Updates</nuxt-link>
                 </li>
                 <li v-if="!isLoggedIn || isLoggedIn && isPhone" key="leaderboard">
@@ -50,13 +50,13 @@
                     <nuxt-link to="/InvictaAds">Invicta.ads</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn" key="myShopping">
-                    <nuxt-link to="/myShopping">My shopping <span class="shopping-number">({{$store.state.user.shoppingNumber}})</span></nuxt-link>
+                    <nuxt-link to="/myShopping">My shopping <span class="shopping-number">({{shoppingItemsAmount}})</span></nuxt-link>
                 </li>
             </ul>
 
             <div v-if="!isLoggedIn" key="line-2" class="line"></div>
 
-            <nuxt-link v-if="!isLoggedIn" key="userNoLogin" to="/profile" class="user">
+            <nuxt-link v-if="!isLoggedIn" key="userNoLogin" to="/login" class="user">
                 <div class="user__icon profile__icon"><span>N</span></div>
                 <span class="user__name">No user</span>
             </nuxt-link>
@@ -74,13 +74,13 @@
 
             <ul v-if="isLoggedIn" key="list" class="list">
                 <li>
-                    <nuxt-link class="link-flex" to="/browse">
+                    <nuxt-link class="link-flex" to="/orders">
                         <img src="@/assets/svg/notification.svg" alt="Notification" class="link-icon">
                         <span>My orders</span>
                     </nuxt-link>
                 </li>
-                <li @click="isLoggedInToFalse">
-                    <div class="link-flex">
+                <li class="logout" @click="isLoggedInToFalse">
+                    <div class="logout link-flex">
                         <img src="@/assets/svg/logout.svg" alt="Logout" class="link-icon">
                         <span>Logout</span>
                     </div>
@@ -99,6 +99,22 @@ export default {
         }
     },
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY USER
+        user() {
+            return this.$store.state.user;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY SHOPPING ITEMS AMOUNT
+        shoppingItemsAmount() {
+            if (this.$store.state.myShoppingItems.myShoppingItems.length > 0) {
+                return this.$store.state.myShoppingItems.myShoppingItems.length;
+            } else {
+                return 0;
+            }
+        },
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // IS LOGGED IN
         isLoggedIn() {
@@ -139,7 +155,9 @@ export default {
         // CLOSE DROPDOWN BEFORE GOING TO ANOTHER PAGE
         checkLink(e) {
             const target = e.target.tagName.toLowerCase();
-            if (target == 'a' || target == 'span' || target == 'img') {
+            if (e.target?.closest('.logout')) return;
+            if (target == 'a' || target == 'span' || target == 'img' ||
+            e.target.classList.contains('close-dropdown')) {
                 this.$refs.dropdown.style.opacity = 0;
                 setTimeout(() => {
                     this.$refs.dropdown.style.display = 'none';
@@ -199,11 +217,12 @@ export default {
         width: 100%;
         z-index: 9000;
         padding-top: 10rem;
+        border-radius: 0;
     }
 
-    .corner-light {
-        top: -30%;
-        left: -30%;
+    .corner-light-dropdown {
+        // top: -30%;
+        // left: -30%;
         @media only screen and (min-width: 850px),
         only screen and (max-width: 850px) and (max-height: 600px) {
             display: none;

@@ -1,11 +1,38 @@
 export const state = () => ({
     isLoggedIn: true,
     user: {
+        id: 'warrenjs',
         firstName: 'Wade',
         lastName: 'Warren',
+        username: 'warrenjs',
         avatar: '/avatar.png',
         balance: '5.00',
-        shoppingNumber: 11
+        shoppingNumber: 11,
+        registrationDate: 'Jul 09, 2021',
+        selledAmount: 10,
+        workingPlaces: [
+            {
+                name: 'Figma',
+                image: '/figma.png'
+            },
+            {
+                name: 'Yandex',
+                image: '/yandex.png'
+            },
+        ],
+        following: 10,
+        followers: 23,
+        rank: 'super seller',
+        bio: `
+        I love, I hate, I'm losing my mind. It's 
+        'cause I'm in the loony bin I love, I hate, 
+        I'm losing my mind It's 'cause, 'cause,
+        cause I'm crazy
+        `,
+        backgroundImage: '/backProfileImage.jpg',
+        discordLink: '',
+        telegramUsername: 'aleksys228',
+        isMyProfile: true,
     }
 })
 

@@ -1,17 +1,20 @@
 <template>
-  <div class="layout">
-    <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
-    <Navigation/>
-    <nuxt class="on-top" />
-  </div>
+    <div class="layout">
+        <Preloader />
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
+        <Navigation/>
+        <nuxt class="on-top" />
+    </div>
 </template>
 
 <script>
 import Navigation from '@/components/layout/layoutsComponents/Navigation';
+import Preloader from '@/components/layout/App/Preloader';
 
 export default {
     components: {
         Navigation,
+        Preloader,
     },
     watch: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,9 +57,9 @@ export default {
                     this.closeNavBtn = document.querySelector('.close-nav-btn');
                     this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
                     
-                    if (window.outerWidth > 600) {
-                        this.nav.style.width = '90%';
-                    }
+                    // if (window.outerWidth > 600) {
+                    //     this.nav.style.width = '90%';
+                    // }
                     
                     this.nav.style.position = 'absolute';
                     this.navLeft.style.transform = 'translate(0)';
@@ -96,8 +99,8 @@ export default {
         top: 0;
         left: 0;
         z-index: 20;
-        width: 100%;
-        height: 100%;
+        // width: 100%;
+        // height: 100%;
         border-radius: 4px;
         width: calc(100% - 3px);
         height: calc(100% - 3px);
@@ -228,8 +231,6 @@ export default {
     border: 1px solid $color-orange;
 }
 
-
-
 .profile__icon {
     width: 3.3rem;
     height: 3.3rem;
@@ -297,5 +298,14 @@ export default {
     transform: rotate(-90deg);
     margin: 0 1rem;
     width: 1.25rem;
+}
+
+
+.arrow {
+    transition: all .3s;
+}
+
+.arrow-active {
+    transform: rotate(-180deg);
 }
 </style>

@@ -25,12 +25,6 @@ export const state = () => ({
             time: 25
         },
         {
-            id: 'MacDonalds',
-            name: 'MacDonalds',
-            image: '/products/mac.jpg',
-            time: 23
-        },
-        {
             id: 'PG',
             name: 'P&G',
             image: '/products/pg.jpg',

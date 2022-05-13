@@ -1,6 +1,6 @@
 <template>
   <div class="relative-container">
-        <div class="leaderboard-page section">
+        <div class="leaderboard-page section section-page">
             <div class="content">
                 <div class="page-sequence">
                     <nuxt-link to="/">Main</nuxt-link>
@@ -13,9 +13,9 @@
                     v-for="(user, i) in leaderboardUsers"
                     :key="user.id"
                     :id='user.id'
-                    :name='user.name'
+                    :name='user.firstName'
                     :username='user.username'
-                    :photo='user.photo'
+                    :avatar='user.avatar'
                     :registrationDate='user.registrationDate'
                     :selledAmount='user.selledAmount'
                     :workingPlaces='user.workingPlaces'
@@ -78,6 +78,15 @@ export default {
         min-height: 70vh;
         position: relative;
         z-index: 100;
+
+        @media only screen and (max-width: 850px) {
+            width: 66%;
+            margin: 0 auto;
+        }
+
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+        }
 
         .page-title {
             font-size: 4.5rem;

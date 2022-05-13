@@ -1,10 +1,10 @@
 <template>
     <div class="index-page">
-        <HeaderIndex/>
+        <HeaderIndex />
         <main>
-            <DiscountBlock/>
-            <ProductsLine/>
-            <DiscountProducts/>
+            <DiscountBlock />
+            <ProductsLine />
+            <DiscountProducts />
             <Signup/>
         </main>
         <Footer class="section" />
@@ -38,7 +38,7 @@ export default {
 }
 
 footer {
-    margin-top: 0;
+    margin-top: 0 !important;
 }
 
 ::v-deep {

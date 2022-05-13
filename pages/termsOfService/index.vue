@@ -50,7 +50,7 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // TOGGLE EVENT
         toggleEvent(e) {
-            const parent = e.target?.closest('.term-item');
+            const parent = e.target?.closest('.toggle-container');
             const titleContainer = e.target?.closest('.title-container');
 
             if (titleContainer && parent && !parent.classList.contains('animating')) {
@@ -60,24 +60,22 @@ export default {
 
                 let timeoutTime = 500;
 
-                if (description.textContent.length > 1000) {
+                if (description?.textContent.length > 1000) {
                     this.$store.dispatch('slideToggle', {target: descriptionContainer, duration: 700})
-                    // this.slideToggle(descriptionContainer, 700);
                     timeoutTime = 700;
                 } else {
-                    // this.slideToggle(descriptionContainer);
                     this.$store.dispatch('slideToggle', {target: descriptionContainer})
                 }
 
-                arrow.classList.toggle('opened');
+                arrow.classList.toggle('arrow-active');
 
-                parent.classList.add('animating')
+                parent.classList.add('animating');
 
                 setTimeout(() => {
-                    parent.classList.remove('animating')
+                    parent.classList.remove('animating');
                 }, timeoutTime);
             }
-        }
+        },
     },
 }
 </script>
@@ -85,13 +83,20 @@ export default {
 <style lang="scss" scoped>
 .terms-page {
     min-height: 80vh;
-    // min-height: 70vh;
 
     .content {
         min-height: 70vh;
-        // min-height: 60vh;
         position: relative;
         z-index: 100;
+
+        // @media only screen and (max-width: 850px) {
+        //     width: 66%;
+        //     margin: 0 auto;
+        // }
+
+        // @media only screen and (max-width: 600px) {
+        //     width: 100%;
+        // }
 
         .page-title {
             font-size: 4.5rem;

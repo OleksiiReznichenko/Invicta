@@ -1,5 +1,5 @@
 <template>
-  <div class="term-item">
+  <div class="toggle-container term-item">
       <div class="container title-container">
           <h4 class="title">{{title}}</h4>
           <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">

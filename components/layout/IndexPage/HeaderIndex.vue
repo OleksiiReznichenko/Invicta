@@ -167,18 +167,18 @@ export default {
                 mixer.clipAction(clip).play();
             })
 
-            renderer.render(scene, camera);
-            // animate();
+            // renderer.render(scene, camera);
+            animate();
 
-            if (window.outerWidth > 1000) {
-                const canvas = document.querySelector('.cards-scene canvas');
+            // if (window.outerWidth > 1000) {
+            //     const canvas = document.querySelector('.cards-scene canvas');
 
-                document.querySelector('.header').addEventListener('mousemove', (e) => {
-                    cardsModel.position.x = -(e.clientX - window.innerWidth / 2) / 200;
-                    cardsModel.position.y = -(e.clientY - window.innerHeight / 2) / 200;
-                    cardsModel.position.z = -(e.clientX - window.innerWidth / 2) / 1000;
-                });
-            }
+            //     document.querySelector('.header').addEventListener('mousemove', (e) => {
+            //         cardsModel.position.x = -(e.clientX - window.innerWidth / 2) / 200;
+            //         cardsModel.position.y = -(e.clientY - window.innerHeight / 2) / 200;
+            //         cardsModel.position.z = -(e.clientX - window.innerWidth / 2) / 1000;
+            //     });
+            // }
         });
 
 
@@ -346,6 +346,7 @@ header {
 
             .background {
                 background-image: linear-gradient(to right bottom, #191522, #16131B);
+                // width: 98% !important;
             }
         }
     }

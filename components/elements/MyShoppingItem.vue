@@ -1,6 +1,6 @@
 <template>
-    <div class="shopping-item">
-        <div class="left">
+    <nuxt-link :to="'/myShopping/' + id" class="shopping-item">
+        <div class="desktop left">
             <div class="number">#{{number}}</div>
             <img :src="image" alt="Shopping item image" class="image">
             <div class="info">
@@ -11,8 +11,20 @@
                 </div>
             </div>
         </div>
-        <nuxt-link class="shopping-item-link" :to="'/myShopping/' + id">watch order</nuxt-link>
-    </div>
+        <nuxt-link class="desktop shopping-item-link" :to="'/myShopping/' + id">watch order</nuxt-link>
+
+        <img :src="image" alt="Order image" class="mobile image">
+        <div class="mobile info">
+            <div class="title-container">
+                <h4 class="order-title">{{name}}</h4>
+            </div>
+            <div class="bottom-container id-status-container">
+                <span :class="{'border-text-green': isValidated, 'border-text-red': !isValidated}" class="status">{{status}}</span>
+                <span class="id">{{id}}</span>
+            </div>
+            <nuxt-link class="mobile shopping-item-link" :to="'/myShopping/' + id">watch order</nuxt-link>
+        </div>
+    </nuxt-link>
 </template>
 
 <script>
@@ -30,16 +42,41 @@ export default {
     background-color: $color-grey-dark;
     border-radius: 10px;
     padding: 2rem 2.5rem;
+    transition: all .3s;
+
+    &:hover {
+        background-color: lighten($color-grey-dark, 5%);
+    }
 
     &:not(:last-of-type) {
         margin-bottom: 1.5rem;
     }
 
-    @media only screen and (max-width: 450px) {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 3rem 4.5rem;
+    @media only screen and (max-width: 850px) {
+        justify-content: center;
+        padding: 3rem 2.5rem;
+    }
+
+    .desktop {
+        @media only screen and (max-width: 850px) {
+            display: none !important;
+        }
+    }
+
+    .mobile {
+        @media only screen and (min-width: 850px) {
+            display: none !important;
+        }
+        font-size: 2rem;
+    }
+
+    .title-container {
+        margin-bottom: .75rem;
+    }
+
+    .id-status-container {
+        margin-bottom: .75rem;
+        color: $color-text-grey;
     }
 
     .shopping-item-link {
@@ -47,28 +84,16 @@ export default {
         border-radius: 7px;
         padding: .65rem 5.5rem;
         transition: all .3s;
+        text-align: center;
+        color: white;
 
         &:hover {
             background-color: darken($color-primary, 15%);
         }
 
-        @media only screen and (max-width: 550px) {
-            padding: .65rem 3.5rem;
-        }
-
-        @media only screen and (max-width: 500px) {
-            padding: .65rem 2.5rem;
-        }
-
-        @media only screen and (max-width: 450px) {
-            padding: .65rem 4.5rem;
-            margin-top: 2rem;
-            font-size: 1.8rem;
-            margin-left: 15.5rem;
-        }
-
-        @media only screen and (max-width: 360px) {
-            padding: .65rem 4rem;
+        @media only screen and (max-width: 850px) {
+            display: block;
+            margin-top: 1.25rem;
         }
     }
 
@@ -77,58 +102,66 @@ export default {
         align-items: center;
 
         .number {
-            @media only screen and (max-width: 450px) {
+            @media only screen and (max-width: 850px) {
                 font-size: 1.8rem;
                 margin-bottom: -5rem;
+                font-size: 2rem !important;
             }
 
         }
+    }
 
-        .image {
-            width: 4.25rem;
-            height: 4.25rem;
-            border-radius: 100%;
-            object-fit: cover;
-            margin: 0 2.25rem;
+    .image {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 100%;
+        object-fit: cover;
+        margin: 0 2.25rem;
 
-            @media only screen and (max-width: 450px) {
-                width: 7.5rem;
-                height: 7.5rem;
-                margin-right: 3.5rem;
-                margin-bottom: -5rem;
+        @media only screen and (max-width: 850px) {
+            width: 9.5rem;
+            height: 9.5rem;
+            border-radius: 10px;
+        }
+    }
+
+    .info {
+        color: $color-text-grey;
+
+        .name {
+            font-weight: 600 !important;
+            font-size: 2rem;
+            margin-bottom: .75rem;
+
+            @media only screen and (max-width: 850px) {
+                font-size: 2.3rem;
             }
         }
 
-        .info {
-            color: $color-text-grey;
+        .bottom-container {
+            display: flex;
+            align-items: center;
 
-            .name {
-                font-weight: 600 !important;
+            @media only screen and (max-width: 850px) {
                 font-size: 2rem;
-                margin-bottom: .75rem;
-
-                @media only screen and (max-width: 450px) {
-                    font-size: 2.3rem;
-                }
             }
 
-            .bottom-container {
-                display: flex;
-                align-items: center;
+            @media only screen and (max-width: 380px) {
+                font-size: 1.8rem;
+            }
 
-                @media only screen and (max-width: 450px) {
-                    font-size: 1.8rem;
+
+            .status {
+                display: inline-block;
+                padding: .3rem 1rem;
+                margin-right: 1.5rem;
+
+                @media only screen and (max-width: 850px) {
+                    font-size: 2rem;
                 }
 
-
-                .status {
-                    display: inline-block;
-                    padding: .3rem 1rem;
-                    margin-right: 1.5rem;
-
-                    @media only screen and (max-width: 450px) {
-                        font-size: 1.8rem;
-                    }
+                @media only screen and (max-width: 380px) {
+                    font-size: 1.8rem;
                 }
             }
         }

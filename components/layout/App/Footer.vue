@@ -35,7 +35,7 @@
                     <nuxt-link to="/register">Register</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn">
-                    <nuxt-link to="/profile">Profile</nuxt-link>
+                    <nuxt-link :to="'/users/' + user.id">Profile</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn">
                     <nuxt-link to="/createProduct">Create Product</nuxt-link>
@@ -49,8 +49,16 @@
 export default {
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS LOGGED IN
         isLoggedIn() {
           return this.$store.state.isLoggedIn
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY USER
+        user() {
+            return this.$store.state.user;
         },
     },
 }
@@ -67,7 +75,7 @@ footer {
     padding-right: 2rem;
     padding-bottom: 7rem;
     margin: 0 auto;
-    margin-top: 12rem;
+    margin-top: 12rem !important;
     // position: absolute;
     // bottom: 0;
     // left: 50%;

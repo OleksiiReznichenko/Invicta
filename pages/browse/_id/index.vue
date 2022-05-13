@@ -384,6 +384,7 @@ footer {
                         padding-left: 2.75rem;
                         cursor: pointer;
                         transition: all .2s;
+                        border-radius: 1.2rem;
 
                         &:hover {
                             background-color: $color-grey-2;
@@ -425,6 +426,11 @@ footer {
                     height: 25rem;
                     border-radius: 2rem;
                     margin-bottom: 1.5rem;
+                    // object-fit: cover;
+
+                    @media only screen and (max-width: 850px) {
+                        height: 32rem;
+                    }
 
                     @media only screen and (max-width: 1300px) {
                         border-radius: 20px;

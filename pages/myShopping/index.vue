@@ -1,6 +1,6 @@
 <template>
     <div class="relative-container">
-        <div class="my-shopping-page section">
+        <div class="my-shopping-page section section-page">
             <div class="content">
                 <div class="page-sequence">
                     <nuxt-link to="/">Main</nuxt-link>
@@ -8,7 +8,10 @@
                     <span>My shopping</span>
                 </div>
                 <h1 class="page-title">My shopping</h1>
-                <div class="shopping-items">
+                <div v-if="shoppingItems.length == 0" class="no-items">
+                    No shopping items yet
+                </div>
+                <div v-if="shoppingItems.length > 0" class="shopping-items">
                     <MyShoppingItem
                     v-for="(item, i) in shoppingItems"
                     :key="item.id"
@@ -55,10 +58,28 @@ export default {
         position: relative;
         z-index: 100;
 
+        @media only screen and (max-width: 850px) {
+            width: 66%;
+            margin: 0 auto;
+        }
+
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+        }
+
         .page-title {
             font-size: 4.5rem;
             margin-top: -.5rem;
             margin-bottom: 3rem;
+        }
+        
+        .no-items {
+            width: 100%;
+            font-family: Rowdies;
+            font-weight: 300 !important;
+            font-size: 3.75rem !important;
+            text-align: center;
+            @include abs-center;
         }
     }
 

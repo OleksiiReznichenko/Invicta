@@ -1,7 +1,7 @@
 <template>
     <div class="root">
-        <!-- <img src="@/assets/svg/discountProductsLight.svg" alt="Light" class="light"> -->
         <div class="section heading-container">
+        <!-- <div class="heading-container"> -->
                 <h4 class="heading">Take it at a discount</h4>
         </div>
         <div class="banner-container banner-mobile">
@@ -15,6 +15,7 @@
                 <img src="@/assets/img/gridIndexSignup.png" alt="Grid" class="grid-image">
         </div>
         <div class="section discount-products-line">
+        <!-- <div class="discount-products-line"> -->
             <div class="banner banner-desktop">
                 <div class="info">
                     <h3>Have time <br> to buy</h3>
@@ -146,6 +147,8 @@ export default {
         }
 
         .info {
+            position: relative;
+            z-index: 100;
 
             h3 {
                 text-transform: uppercase;

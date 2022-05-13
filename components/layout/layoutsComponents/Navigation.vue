@@ -50,7 +50,7 @@
         <nuxt-link
           v-if="!isPhone && isLoggedIn"
           key="nav-login-link"
-          to="/myShopping"
+          to="/orders"
           class="link-notification"
         >
           <img
@@ -107,7 +107,7 @@
           </nuxt-link>
         </li>
         <li @click="checkLink" class="item">
-          <nuxt-link class="link" to="/profile">
+          <nuxt-link class="link" :to="'/users/' + user.id">
             <img src="@/assets/svg/user.svg" alt="Profile" class="icon" />
             <span>Profile</span>
           </nuxt-link>
@@ -144,6 +144,12 @@ export default {
         }
     },
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY USER
+        user() {
+            return this.$store.state.user;
+        },
+        
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // IS LOGGED IN
         isLoggedIn() {
@@ -297,7 +303,7 @@ export default {
     watch: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // HIDE SEARCH RESULTS CONTAINER IF SEARCH INPUT IS EMPTY
-      searchValue(newValue, oldValue) {
+      searchValue() {
         this.validateSearchValue();
         if (this.searchValueValidated) return;
         if (this.$refs.searchResultsContainer.classList.contains('opened')) {

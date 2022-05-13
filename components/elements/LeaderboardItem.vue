@@ -2,7 +2,7 @@
     <nuxt-link :to="'/users/' + id" class="user-item">
         <div class="left">
             <div class="number">#{{number}}</div>
-            <img :src="photo" alt="User photo" class="photo">
+            <img :src="avatar" alt="User avatar" class="avatar">
             <div class="info">
                 <div class="top-container">
                     <h4 class="name">{{name}}</h4>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-    props: ['id', 'name', 'username', 'photo', 'registrationDate', 'selledAmount', 'workingPlaces', 'number']
+    props: ['id', 'name', 'username', 'avatar', 'registrationDate', 'selledAmount', 'workingPlaces', 'number']
 }
 </script>
 
@@ -60,7 +60,7 @@ export default {
             font-weight: 600 !important;
             margin-bottom: 1rem;
 
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 850px) {
                 font-size: 2.3rem;
                 margin-bottom: 0;
             }
@@ -69,7 +69,7 @@ export default {
         .date {
             color: $color-text-grey;
 
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 850px) {
                 display: none;
             }
         }
@@ -80,25 +80,28 @@ export default {
         align-items: center;
 
         .number {
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 850px) {
                 font-size: 1.8rem;
                 // margin-bottom: -5rem;
             }
 
         }
 
-        .photo {
-            width: 4.25rem;
-            height: 4.25rem;
+        .avatar {
+            width: 5rem;
+            height: 5rem;
             border-radius: 100%;
             object-fit: cover;
             margin: 0 2.25rem;
 
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 850px) {
                 width: 6.5rem;
                 height: 6.5rem;
-                // margin-right: 3.5rem;
-                // margin-bottom: -5rem;
+            }
+
+            @media only screen and (max-width: 450px) {
+                width: 7rem;
+                height: 7rem;
             }
         }
 
@@ -107,7 +110,7 @@ export default {
                 color: $color-text-grey;
                 margin-top: 1rem;
 
-                @media only screen and (min-width: 500px) {
+                @media only screen and (min-width: 850px) {
                     display: none;
                 }
             }
@@ -123,7 +126,7 @@ export default {
                     font-size: 2rem;
                     margin-right: 1rem;
 
-                    @media only screen and (max-width: 500px) {
+                    @media only screen and (max-width: 850px) {
                         font-size: 2.3rem;
                     }
                 }
@@ -133,7 +136,7 @@ export default {
                 display: flex;
                 align-items: center;
 
-                @media only screen and (max-width: 500px) {
+                @media only screen and (max-width: 850px) {
                     font-size: 1.8rem;
                 }
 
