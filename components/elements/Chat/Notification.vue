@@ -67,7 +67,6 @@ export default {
 
         .info {
 
-
             .title-red {
                 color: $color-orange;
                 font-size: 1.5rem;

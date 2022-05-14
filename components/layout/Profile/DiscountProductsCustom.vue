@@ -1,20 +1,26 @@
 <template>
     <div class="root">
         <div class="section heading-container">
-                <h4 class="heading">Take it at a discount</h4>
+            <h4 class="heading">Take it at a discount</h4>
         </div>
         <div class="banner-container banner-mobile">
+            <div class="overlay">
+                <button class="btn btn-gradient"><span>Edit banners</span></button>
+            </div>
             <div class="banner">
-                    <div class="info">
-                        <h3>Have time <br> to buy</h3>
-                        <nuxt-link to="/browse" class="btn btn-white">Go to shop</nuxt-link>
-                    </div>
-                    <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
+                <div class="info">
+                    <h3>Have time <br> to buy</h3>
+                    <nuxt-link to="/browse" class="btn btn-white">Go to shop</nuxt-link>
                 </div>
-                <img src="@/assets/img/gridIndexSignup.png" alt="Grid" class="grid-image">
+                <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
+            </div>
+            <img src="@/assets/img/gridIndexSignup.png" alt="Grid" class="grid-image">
         </div>
         <div class="section discount-products-line">
             <div class="banner banner-desktop">
+                <div class="overlay">
+                    <button class="btn btn-gradient"><span>Edit banners</span></button>
+                </div>
                 <div class="info">
                     <h3>Have time <br> to buy</h3>
                     <nuxt-link to="/browse" class="btn btn-white">Go to shop</nuxt-link>
@@ -42,11 +48,9 @@ export default {
             const filteredArrayDiscount = this.$store.state.products.products.giftcards.filter(el => {
                 return el.oldPrice;
             })
-
             const filteredArray = filteredArrayDiscount.filter((el, i) => {
                 return i < 6;
             })
-
             return filteredArray;
         }
     },
@@ -54,8 +58,38 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.edit-class {
+
+    ::v-deep {
+        .product-card {
+            .overlay {
+                display: block !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 10000;
+                width: 100%;
+                height: 100%;
+                background-color: rgba($color-grey, .85);
+            }
+            
+            @media only screen and (max-width: 850px) {
+                display: none;
+            }
+        }
+    }
+
+    .heading-container {
+        display: none;
+    }
+}
+
 .root {
     position: relative;
+
+    .overlay {
+        display: none;
+    }
     
     .light {
         position: absolute;
@@ -74,6 +108,7 @@ export default {
         @media only screen and (min-width: 850px) {
             display: none;
         }
+        position: relative; 
     }
 
     .grid-image {

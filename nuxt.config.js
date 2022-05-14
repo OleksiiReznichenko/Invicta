@@ -12,8 +12,8 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      // { rel: 'icon', type: 'image/x-icon', href: '/projects/invicta/favicon.png' },
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/projects/Invicta/favicon.png' },
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap', as: 'style' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap' },
       { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Rowdies:wght@300;700&display=swap', as: 'style' },
@@ -27,8 +27,8 @@ export default {
         src: "https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"
       },
       {
-        // src: "/projects/invicta/smoothScroll.js"
-        src: "/librariesScript.js"
+        src: "/projects/Invicta/librariesScript.js"
+        // src: "/librariesScript.js"
       }
     ]
   },
@@ -65,6 +65,15 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend (config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          exclude: /(node_modules)/
+        })
+      }
+    },
     transpile: ["three"]
   },
 
@@ -76,7 +85,7 @@ export default {
         component: resolve(__dirname, '~/pages/index.vue')
       })
     },
-    // base: '/projects/sikuria/',
+    base: '/projects/Invicta/',
     linkActiveClass: 'active-link'
   },
 

@@ -1,13 +1,14 @@
 <template>
     <div class="section custom-banner">
+        <div class="overlay">
+            <button class="btn btn-gradient"><span>Edit banners</span></button>
+        </div>
         <div class="info">
             <h1 class="title">Hot Sale</h1>
             <p class="subheading">Most bought this month "The North Face"</p>
             <nuxt-link to="/browse" class="btn btn-white">Browse products</nuxt-link>
         </div>
-        <!-- <div class="image-composition"> -->
-            <img :src="image" alt="" class="image">
-        <!-- </div> -->
+        <img :src="image" alt="" class="image">
     </div>
 </template>
 
@@ -15,7 +16,7 @@
 export default {
     data() {
         return {
-            image: '/CustomBannerComposition.png'
+            image: '/projects/Invicta/CustomBannerComposition.png'
         }
     },
 }
@@ -25,7 +26,6 @@ export default {
 .custom-banner {
     background-color: $color-pink;
     border-radius: 10px;
-    // width: 100%;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -42,6 +42,10 @@ export default {
         width: 90%;
     }
 
+    .overlay {
+        display: none;
+    }
+
     .info {
         padding: 4.75rem 6rem;
         position: relative;
@@ -50,7 +54,6 @@ export default {
         @media only screen and (max-width: 850px) {
             text-align: center;
         }
-
 
         .title {
             text-transform: uppercase;
@@ -76,24 +79,19 @@ export default {
         }
     }
 
-    // .image-composition {
+    .image {
+        width: 55rem;
+        margin-right: 4rem;
 
-
-        .image {
-            // height: 100%;
-            width: 55rem;
-            margin-right: 4rem;
-
-            @media only screen and (max-width: 1100px) {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-            }
-
-            @media only screen and (max-width: 850px) {
-                display: none;
-            }
+        @media only screen and (max-width: 1100px) {
+            position: absolute;
+            bottom: 0;
+            right: 0;
         }
-    // }
+
+        @media only screen and (max-width: 850px) {
+            display: none;
+        }
+    }
 }
 </style>

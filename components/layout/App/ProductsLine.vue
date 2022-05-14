@@ -29,6 +29,7 @@ export default {
                     return i < 4;
                 }
             })
+
             return filteredArray.slice(0, 4);
         }
     },
@@ -39,7 +40,6 @@ export default {
 .products-line {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    // grid-template-rows: 100%;
     grid-column-gap: 3rem;
     grid-row-gap: 3rem;
     margin-bottom: 12rem;

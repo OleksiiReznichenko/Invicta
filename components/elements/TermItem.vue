@@ -63,11 +63,6 @@ export default {
             padding-bottom: 3.5rem;
             font-size: 1.8rem;
         }
-        
-
-        .description {
-            
-        }
     }
 }
 </style>

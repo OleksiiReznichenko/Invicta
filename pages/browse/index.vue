@@ -159,8 +159,6 @@ export default {
             if (this.filteredProductsArray.length > 0) {
                 this.finalArray = this.filteredProductsArray;
             } else {
-                // this.sortedArray = this.productsArray;
-
                 this.finalArray = this.productsArray;
             }
 
@@ -207,9 +205,11 @@ export default {
             if ( a.price < b.price ) {
                 return 1;
             }
+
             if ( a.price > b.price ) {
                 return -1;
             }
+
             return 0;
         },
         
@@ -219,9 +219,11 @@ export default {
             if ( a.price < b.price ) {
                 return -1;
             }
+
             if ( a.price > b.price ) {
                 return 1;
             }
+
             return 0;
         },
         
@@ -372,7 +374,6 @@ export default {
 
                 this.categoryFiltrationPart();
             }
-
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -760,7 +761,6 @@ export default {
         this.productsArray.sort(this.fromExpensive);
     },
 
-
     mounted () {
         // DOM
         this.pageNumbers = Array.from(document.querySelectorAll('.page-number'));
@@ -830,10 +830,6 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-            
-    // @media only screen and (max-width: 850px) {
-    //     margin-bottom: 20px;
-    // }
     
     a {
         color: $color-text-grey-dark;
@@ -865,7 +861,6 @@ export default {
         background-color: $color-grey-2;
     }
 
-
     .content {
         position: relative;
         z-index: 100;
@@ -878,7 +873,6 @@ export default {
         @media only screen and (max-width: 600px) {
             width: 100%;
         }
-
 
         .order-sort-container {
             position: absolute;
@@ -1114,11 +1108,6 @@ export default {
                                 opacity: 1;
                             }
 
-
-                            span {
-                                
-                            }
-
                             .arrow {
                                 transform: rotate(-90deg);
                                 width: 1rem;
@@ -1157,7 +1146,6 @@ export default {
                 .products-list {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    // grid-template-rows: 100%;
                     grid-column-gap: 3rem;
                     grid-row-gap: 3rem;
                     margin-bottom: 4.5rem;
@@ -1291,7 +1279,6 @@ export default {
                         @media only screen and (max-width: 850px) {
                             display: none !important;
                         }
-                        // display: none;
 
                         .arrow {
                             transform: rotate(90deg);
@@ -1305,5 +1292,4 @@ export default {
         }
     }
 }
-
 </style>

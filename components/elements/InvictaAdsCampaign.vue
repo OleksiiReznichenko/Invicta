@@ -2,7 +2,6 @@
     <div class="toggle-container campaign">
         <div class="title-container">
             <div class="title-container__left">
-                <!-- <h3 class="title">{{customName}}</h3> -->
                 <input @input="setWidth" ref="customNameInput" @keypress.enter="addDisabled" @blur="addDisabled" disabled minlength="1" maxlength="18" type="text" class="custom-name title" v-model="customNameLocal">
                 <div class="icon-container">
                     <img src="@/assets/svg/editIcon.svg" alt="Icon" class="icon">
@@ -131,7 +130,6 @@ export default {
             font-family: Rowdies;
             font-weight: 300 !important;
             font-size: 2.75rem;
-            // width: 20rem;
 
             @media only screen and (max-width: 500px) {
                 font-size: 3.2rem;

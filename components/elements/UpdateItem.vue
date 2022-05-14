@@ -97,7 +97,6 @@ export default {
         }
     }
 
-
     .left {
         display: flex;
         align-items: center;
@@ -108,7 +107,6 @@ export default {
                 margin-bottom: -5rem;
                 font-size: 2rem !important;
             }
-
         }
     }
 
@@ -150,7 +148,6 @@ export default {
             @media only screen and (max-width: 380px) {
                 font-size: 1.8rem;
             }
-
 
             .new-stock {
                 display: inline-block;

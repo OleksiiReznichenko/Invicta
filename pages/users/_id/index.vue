@@ -1,34 +1,27 @@
 <template>
     <div class="profile-page">
-        <!-- <HeaderProfile :userObject='userSelected' v-bind="{ userObject: userSelected }" /> -->
         <HeaderProfile :userObject='userSelected' />
         <main>
             <CustomBanner />
             <ProductsLine/>
-            <DiscountProducts/>
+            <DiscountProductsCustom/>
         </main>
         <Footer class="section" />
     </div>
 </template>
 
 <script>
-export default {
-
-}
-</script>
-
-<script>
 import HeaderProfile from '@/components/layout/Profile/HeaderProfile';
 import CustomBanner from '@/components/layout/Profile/CustomBanner';
-import DiscountProducts from '@/components/layout/App/DiscountProducts';
+import DiscountProductsCustom from '@/components/layout/Profile/DiscountProductsCustom';
 
 export default {
     components: {
         HeaderProfile,
         CustomBanner,
-        DiscountProducts,
-        user: {}
+        DiscountProductsCustom,
     },
+
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
@@ -42,6 +35,7 @@ export default {
             return this.user;
         }
      },
+     
     created() {
         if (this.myUser.id === this.$route.params.id) {
             this.user = this.myUser;
@@ -55,7 +49,6 @@ export default {
                 return el;
             })
         }
-        console.log(this.user, this.$route.params.id)
     },
 }
 </script>

@@ -3,7 +3,7 @@ export const state = () => ({
         {
             id: 'MacDonalds',
             name: 'MacDonalds',
-            image: '/products/mac.jpg',
+            image: '/projects/Invicta/products/mac.jpg',
             date: '14 march, 10:25',
             time: '10:25',
             price: 49.99,
@@ -12,10 +12,10 @@ export const state = () => ({
             isConfirmed: false,
             status: 'waiting',
             buyer: {
-                id: 'valeriibord',
-                firstName: 'Valerii',
+                id: 'antoniojr',
+                firstName: 'Antonio',
                 lastName: 'Bord',
-                avatar: '/avatar3.png',
+                avatar: '/projects/Invicta/avatar2.png',
             },
             chat: {
                 messages: [
@@ -98,7 +98,7 @@ export const state = () => ({
         {
             id: 'Dell',
             name: 'Dell',
-            image: '/products/dell.jpg',
+            image: '/projects/Invicta/products/dell.jpg',
             date: '14 march, 12:00',
             time: '12:00',
             price: 199.99,
@@ -107,10 +107,10 @@ export const state = () => ({
             isConfirmed: false,
             status: 'validated',
             buyer: {
-                id: 'valeriibord',
-                firstName: 'Valerii',
+                id: 'antoniojr',
+                firstName: 'Antonio',
                 lastName: 'Bord',
-                avatar: '/avatar3.png',
+                avatar: '/projects/Invicta/avatar2.png',
             },
             chat: {
                 messages: [
@@ -193,7 +193,7 @@ export const state = () => ({
         {
             id: 'Dole',
             name: 'Dole',
-            image: '/products/dole.jpg',
+            image: '/projects/Invicta/products/dole.jpg',
             date: '24 march, 16:33',
             time: '16:33',
             price: 134.99,
@@ -202,10 +202,10 @@ export const state = () => ({
             isConfirmed: false,
             status: 'validated',
             buyer: {
-                id: 'valeriibord',
-                firstName: 'Valerii',
+                id: 'antoniojr',
+                firstName: 'Antonio',
                 lastName: 'Bord',
-                avatar: '/avatar3.png',
+                avatar: '/projects/Invicta/avatar2.png',
             },
             chat: {
                 messages: [
@@ -288,7 +288,7 @@ export const state = () => ({
         {
             id: 'NikeUk',
             name: 'Nike Uk',
-            image: '/products/nikeUk.jpg',
+            image: '/projects/Invicta/products/nikeUK.jpg',
             date: '11 march, 5:20',
             time: '5:20',
             price: 254.99,
@@ -297,10 +297,10 @@ export const state = () => ({
             isConfirmed: false,
             status: 'waiting',
             buyer: {
-                id: 'valeriibord',
-                firstName: 'Valerii',
+                id: 'antoniojr',
+                firstName: 'Antonio',
                 lastName: 'Bord',
-                avatar: '/avatar3.png',
+                avatar: '/projects/Invicta/avatar2.png',
             },
             chat: {
                 messages: [
@@ -383,7 +383,7 @@ export const state = () => ({
         {
             id: 'PG',
             name: 'P&G',
-            image: '/products/pg.jpg',
+            image: '/projects/Invicta/products/pg.jpg',
             date: '4 march, 10:55',
             time: '10:55',
             price: 240.99,
@@ -392,10 +392,10 @@ export const state = () => ({
             isConfirmed: false,
             status: 'waiting',
             buyer: {
-                id: 'valeriibord',
-                firstName: 'Valerii',
+                id: 'antoniojr',
+                firstName: 'Antonio',
                 lastName: 'Bord',
-                avatar: '/avatar3.png',
+                avatar: '/projects/Invicta/avatar2.png',
             },
             chat: {
                 messages: [
@@ -478,7 +478,7 @@ export const state = () => ({
         {
             id: 'M',
             name: 'M',
-            image: '/products/m.jpg',
+            image: '/projects/Invicta/products/m.jpg',
             date: '5 may, 11:25',
             time: '11:25',
             price: 129.99,
@@ -487,10 +487,10 @@ export const state = () => ({
             isConfirmed: false,
             status: 'waiting',
             buyer: {
-                id: 'valeriibord',
-                firstName: 'Valerii',
+                id: 'antoniojr',
+                firstName: 'Antonio',
                 lastName: 'Bord',
-                avatar: '/avatar3.png',
+                avatar: '/projects/Invicta/avatar2.png',
             },
             chat: {
                 messages: [

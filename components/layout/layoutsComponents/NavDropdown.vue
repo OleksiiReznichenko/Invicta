@@ -17,11 +17,6 @@
 
             <div v-if="!isLoggedIn" key="line-top" class="line line-top"></div>
 
-            <!-- <div v-if="!isLoggedIn" key="dropdownSearch" class="dropdown__search-container">
-                <input type="search" class="dropdown__search-input" id="searchNavBeforeLogin" placeholder="Search">
-                <img src="@/assets/svg/searchIcon.svg" alt="Search icon" class="dropdown__search-icon">
-            </div> -->
-
             <nuxt-link v-if="isLoggedIn" key="userLogin" :to="'/users/' + user.id" class="user">
                 <img
                     :src="user.avatar"
@@ -61,7 +56,6 @@
                 <span class="user__name">No user</span>
             </nuxt-link>
 
-            <!-- <nuxt-link @click="isLoggedInToTrue" v-if="!isLoggedIn" key="loginBtn" to="/login" class="btn btn-gradient"><span>Login</span></nuxt-link> -->
             <div @click="isLoggedInToTrue" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></div>
             
             <div v-if="isLoggedIn" key="buttonsDropdown" class="buttons">
@@ -132,7 +126,6 @@ export default {
     // CHECK MOBILE VERSION
     created(){
         if (process.browser){
-            // eslint-disable-next-line nuxt/no-globals-in-created
             this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600;
         }
     },
@@ -195,7 +188,6 @@ export default {
 <style lang="scss" scoped>
 #dropdown {
     background-color: $color-grey-dark;
-    // background-color: $color-text-grey-dark;
     border-radius: 13px;
     position: absolute;
     top: 3.4rem;
@@ -221,8 +213,6 @@ export default {
     }
 
     .corner-light-dropdown {
-        // top: -30%;
-        // left: -30%;
         @media only screen and (min-width: 850px),
         only screen and (max-width: 850px) and (max-height: 600px) {
             display: none;
@@ -266,22 +256,11 @@ export default {
         font-size: 3rem;
     }
 
-    // .close-icon {
-    //     width: 3rem;
-    //     height: 3rem;
-    // }
-
     .close-nav-btn {
         position: relative;
         width: 8rem;
         height: 8rem;
         margin-right: -2.2rem;
-
-        // @media only screen and (min-width: 850px),
-        // only screen and (max-width: 850px) and (max-height: 600px) {
-        //     width: 5rem;
-        //     height: 5rem;
-        // }
 
         .close-icon {
             position: absolute;
@@ -289,14 +268,6 @@ export default {
             right: 2.2rem;
             width: 3.5rem;
             height: 3.5rem;
-
-            // @media only screen and (min-width: 850px),
-            // only screen and (max-width: 850px) and (max-height: 600px) {
-            //     top: 1rem;
-            //     right: 1rem;
-            //     width: 2.25rem;
-            //     height: 2.25rem;
-            // }
         }
     }
 
@@ -378,12 +349,6 @@ export default {
         color: $color-text-grey;
         display: flex;
 
-        // transition: all .3s;
-
-        // &:hover {
-        //     background-color: lighten($color-grey-dark, 20%);
-        // }
-
         &:not(:last-of-type) {
             margin-bottom: 2.25rem;
 
@@ -425,6 +390,7 @@ export default {
 }
 
 .dropdown__search {
+
     &-container {
         background-color: #111111;
         width: 100%;

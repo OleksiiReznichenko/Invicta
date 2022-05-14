@@ -18,7 +18,7 @@
         </ul>
       </div>
       <div class="nav__right">
-        <div @click="changePositionOnMobile(navLeft, navRight)" class="search-container">
+        <div class="search-container">
           <input @click="searchFunction " @keyup="searchFunction" ref="searchInput" v-model="searchValue"
           type="search" id="searchInput" placeholder="Search" />
           <img
@@ -78,12 +78,6 @@
       </div>
 
       <div ref="searchResultsContainer" class="search-results-container">
-        <!-- <div class="close-search-btn">
-            <svg class="close-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path class="close-icon__path" d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path class="close-icon__path" d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div> -->
         <SearchCategory v-for="(category, i) in productsFiltered"
          :key="category.toString() + Math.random()" 
          :categoryName='i'
@@ -134,15 +128,15 @@ export default {
         NavDropdown,
         SearchCategory,
     },
+
     data() {
         return {
           isPhoneInitial: false,
-          // dropdownIndicator: false,
-          isOpen: false,
           searchValue: '',
           searchValueValidated: '',
         }
     },
+
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
@@ -167,7 +161,6 @@ export default {
         productsFiltered() {
           let productsObject = this.$store.state.products.products;
 
-
           const productsObjectToArray = Object.entries(productsObject);
 
           const productsObjectToArrayFiltered = productsObjectToArray.map(([key, value]) => {
@@ -189,7 +182,6 @@ export default {
     // CHECK MOBILE VERSION
     created() {
         if (process.browser) {
-        // eslint-disable-next-line nuxt/no-globals-in-created
         this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600;
         }
     },
@@ -209,42 +201,12 @@ export default {
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // CHANGE SEARCH INPUT AND LOGO POSITIONS ON MOBILE
-        changePositionOnMobile(navLeft, navRight) {
-          // if (window.outerWidth > 600) return;
-          // navLeft.style.transform = 'translate(-19rem)';
-
-          // if (window.outerWidth < 600 && window.outerWidth >= 550) {
-          //   navRight.style.transform = 'translate(17rem)';
-          // }
-
-          // if (window.outerWidth < 550 && window.outerWidth >= 500) {
-          //   navRight.style.transform = 'translate(15rem)';
-          // }
-
-          // if (window.outerWidth < 500 && window.outerWidth >= 450) {
-          //   navRight.style.transform = 'translate(13rem)';
-          // }
-
-          // if (window.outerWidth < 450 && window.outerWidth >= 400) {
-          //   navRight.style.transform = 'translate(11rem)';
-          // }
-
-          // if (window.outerWidth < 400) {
-          //   navRight.style.transform = 'translate(9rem)';
-          // }
-
-          this.isOpen = true;
-        },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REMOVE EXCESSIVE WHITE SPACES IN VALUE AND CONVERT TO LOWERCASE
         validateSearchValue() {
           this.searchValueValidated = '';
           if (this.searchValue.includes(' ') >= 0) {
             const searchInputArr = this.$refs.searchInput.value.split(' ');
 
-            // eslint-disable-next-line array-callback-return
             const searchInputArr2 = searchInputArr.filter(el => {
               if (el.replace(/\s/g, '')) {
                 return el.replace(/\s/g, '');
@@ -270,8 +232,6 @@ export default {
               setTimeout(() => {
                   this.$refs.searchResultsContainer.style.opacity = 1;
               }, 10);
-
-
             }
           }
         },
@@ -328,13 +288,12 @@ export default {
       // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
       window.addEventListener('click', (e) => {
           // CHANGE SEARCH INPUT AND LOGO POSITIONS BACK ON MOBILE
-          if (window.outerWidth > 850 && window.outerHeight > 600 && this.isOpen) {
+          if (window.outerWidth > 850 && window.outerHeight > 600) {
             const isClickInsideElement = this.navRight.contains(e.target);
 
             if (!isClickInsideElement) {
               this.navLeft.style.transform = 'translate(0)';
               this.navRight.style.transform = 'translate(0)';
-              this.isOpen = false;
             }
           }
 
@@ -346,7 +305,6 @@ export default {
             const isClickSearchInput = this.$refs.searchInput.contains(e.target);
 
             if (!isClickInsideElement && !isClickSearchInput && this.$refs.searchResultsContainer.classList.contains('opened')) {
-                // this.$refs.searchInput.value = '';
                 
                 this.$refs.searchResultsContainer.style.transition = 'all .2s';
 
@@ -376,17 +334,11 @@ export default {
 
 <style lang="scss" scoped>
 .root {
-  // position: relative;
-  // z-index: 10000;
   width: 100%;
   overflow: hidden;
-  // height: 100vh;
-  // position: relative;
-  // z-index: 10000;
 }
 
 .nav {
-  // width: 100%;
   position: absolute;
   top: 2rem;
   left: 50%;
@@ -397,37 +349,27 @@ export default {
   z-index: 10000;
   font-size: 1.4rem !important;
   transition: all .3s;
-  // width: 100%;
 
   @media only screen and (max-width: 850px) and (min-height: 600px) {
     justify-content: flex-start;
     top: 5rem;
-    // width: 50rem;
   }
 
   @media only screen and (min-width: 1000px) {
-    // width: 50rem
     width: 80% !important;
   }
 
   @media only screen and (max-width: 1000px) and (min-height: 600px) and (min-width: 850px) {
-    // width: 50rem
     width: 90% !important;
   }
 
   @media only screen and (max-width: 850px) and (min-height: 600px) and (min-width: 600px) {
-    // width: 50rem
     width: 66%;
   }
 
   @media only screen and (max-width: 850px) and (max-height: 600px) and (min-width: 600px) {
-    // width: 50rem
     width: 80% !important;
   }
-
-  // @media only screen and (max-width: 850px) and (min-height: 600px) and (min-width: 600px) and (min-height: 900px) {
-  //     width: 57rem;
-  // }
 
   @media only screen and (max-width: 850px) and (min-height: 600px) and (max-height: 700px) {
     top: 2.5rem;
@@ -451,7 +393,6 @@ export default {
     @media only screen and (max-width: 850px) and (min-height: 600px) {
       order: 0;
       width: 40%;
-      // margin-left: 17%;
     }
   }
 
@@ -492,21 +433,14 @@ export default {
     max-width: 100%;
     width: 100%;
     padding: 2.5rem;
-    // height: 20rem;
     background-color: $color-grey-dark;
     border-radius: 30px;
-    // display: grid;
     grid-row-gap: 3rem;
     max-height: 70vh;
     overflow-x: hidden;
     overflow-y: scroll;
     display: none;
     opacity: 0;
-    // transition: all .1s;
-
-    // @media only screen and (max-width: 850px) and (min-height: 600px) and (min-width: 600px) {
-    //   left: 0;
-    // }
 
     &::-webkit-scrollbar {
       height: 6px;
@@ -515,7 +449,6 @@ export default {
 
     &::-webkit-scrollbar-thumb {
       border-radius: 17px;
-      // background-color: #343234;
       background-color: #615f61;
     }
 
@@ -532,30 +465,9 @@ export default {
       padding: 4rem;
       top: 35px;
     }
-
-    // .close-search-btn {
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   width: 5rem;
-    //   height: 5rem;
-
-    //   @media only screen and (min-width: 1000px) {
-    //     display: none;
-    //   }
-
-    //   .close-icon {
-    //     position: absolute;
-    //     top: 1.5rem;
-    //     right: 1.5rem;
-    //     width: 2.5rem;
-    //     height: 2.5rem;
-    //   }
-    // }
   }
 
   .search-container {
-    // width: 10rem;
     width: 15rem;
     margin-right: 1rem;
     position: relative;
@@ -591,7 +503,6 @@ export default {
     @media only screen and (max-width: 850px) and (min-height: 600px) {
       width: 2rem;
       height: 2rem;
-      // left: 2rem;
     }
   }
 
@@ -639,9 +550,6 @@ export default {
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 2.5rem;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
   }
 }
 

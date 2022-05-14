@@ -54,9 +54,11 @@ export default {
             if ( a.selledAmount < b.selledAmount ) {
                 return 1;
             }
+
             if ( a.selledAmount > b.selledAmount ) {
                 return -1;
             }
+            
             return 0;
         },
     },

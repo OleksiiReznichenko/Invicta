@@ -27,30 +27,6 @@
     </div>
 </template>
 
-<script>
-export default {
-    // mounted () {
-    //     const transparent = document.querySelector('.btn-transparent-container');
-    //     const gradient = document.querySelector('.btn-gradient-container');
-
-    //     transparent.addEventListener('mouseover', () => {
-    //         gradient.style.transform = 'scale(0.95)';
-    //     })
-
-    //     transparent.addEventListener('mouseout', () => {
-    //         gradient.style.transform = 'scale(1)';
-    //     })
-
-    //     gradient.addEventListener('mouseover', () => {
-    //         transparent.style.transform = 'scale(0.95)';
-    //     })
-
-    //     gradient.addEventListener('mouseout', () => {
-    //         transparent.style.transform = 'scale(1)';
-    //     })
-    // },
-}
-</script>
 
 <style lang="scss" scoped>
 .root {
@@ -115,7 +91,6 @@ export default {
             
             @media only screen and (max-width: 850px) {
                 margin-bottom: 2.5rem;
-                // width: auto;
             }
             
             @media only screen and (max-width: 450px) {
@@ -144,7 +119,6 @@ export default {
             }
 
             &-long {
-
 
                 @media only screen and (min-width: 850px) {
                     display: none;

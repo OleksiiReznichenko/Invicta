@@ -69,17 +69,12 @@ footer {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    // margin-top: 40vh;
     border-top: 1px solid $color-grey-2;
     padding-top: 3rem;
     padding-right: 2rem;
     padding-bottom: 7rem;
     margin: 0 auto;
     margin-top: 12rem !important;
-    // position: absolute;
-    // bottom: 0;
-    // left: 50%;
-    // transform: translateX(-50%);
 
     @media only screen and (min-width: 600px) and (max-width: 1000px) {
         width: 90% !important;
@@ -97,7 +92,6 @@ footer {
     }
 
     @media only screen and (max-width: 450px) {
-        // align-items: flex-start;
         text-align: left;
         font-size: 1.8rem;
     }

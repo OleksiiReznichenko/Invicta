@@ -52,7 +52,6 @@ export default {
             width: 4rem;
             height: 4rem;
             border-radius: 100%;
-            // object-fit: cover;
         }
     }
 
@@ -62,6 +61,8 @@ export default {
         border-bottom-left-radius: 0;
         padding: 1.5rem;
         width: 100%;
+        overflow: hidden;
+        word-break: break-all;
 
         .name-date-container {
             display: flex;
@@ -77,10 +78,6 @@ export default {
             .date {
                 color: $color-text-grey-dark;
             }
-        }
-
-        .message-text {
-
         }
     }
 }

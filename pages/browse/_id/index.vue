@@ -1,7 +1,6 @@
 <template>
     <div class="relative-container">
         <div class="product-page section section-page">
-            <!-- <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light"> -->
             <div class="content">
                 <div class="page-sequence">
                     <nuxt-link to="/">Main</nuxt-link>
@@ -183,7 +182,6 @@ export default {
             inputc.select();
             document.execCommand('copy');
             inputc.parentNode.removeChild(inputc);
-            // alert('Link copied');
 
             this.linkCopiedNotification.style.display = 'block';
             setTimeout(() => {
@@ -290,12 +288,6 @@ footer {
     width: 100% !important;
 }
 
-// .section {
-//     @media only screen and (min-width: 600px) {
-//         width: 100% !important;
-//     }
-// }
-
 .product-page {
 
     #linkCopiedNotification {
@@ -376,7 +368,6 @@ footer {
 
                 .share-list {
 
-
                     .item {
                         display: flex;
                         align-items: center;
@@ -403,10 +394,6 @@ footer {
                             height: 2.4rem;
                             margin-right: 1rem;
                         }
-
-                        // span {
-
-                        // }
                     }
                 }
             }
@@ -426,7 +413,6 @@ footer {
                     height: 25rem;
                     border-radius: 2rem;
                     margin-bottom: 1.5rem;
-                    // object-fit: cover;
 
                     @media only screen and (max-width: 850px) {
                         height: 32rem;
@@ -513,10 +499,6 @@ footer {
                     .product-discount {
                         color: $color-green;
                     }
-
-                    // &:not(:last-child) {
-                    //     marri
-                    // }
                 }
 
                 &-warranty-eta-container {
@@ -596,10 +578,6 @@ footer {
                     img {
                         margin-right: 1rem;
                     }
-
-                    // span {
-
-                    // }
                 }
 
                 p, &-payment-method {
@@ -624,7 +602,6 @@ footer {
                     width: 100%;
                     margin-top: 1.5rem;
                 }
-
 
                 .user-info {
                     display: flex;
@@ -660,7 +637,6 @@ footer {
 
                 form {
 
-
                     input {
                         font-family: Montserrat;
                         display: block;
@@ -687,11 +663,6 @@ footer {
                         justify-content: space-between;
                         align-items: center;
                         margin-top: 3rem;
-                            
-                        // @media only screen and (min-width: 1050px) {
-                        //     display: flex;
-                        //     align-items: center;
-                        // }
 
                         .login-button {
                             padding: .75rem 4rem;
@@ -700,12 +671,6 @@ footer {
                         .prices {
                             display: flex;
                             align-items: center;
-
-                            // @media only screen and (min-width: 1450px) {
-                                // display: flex;
-                                // align-items: center;
-                            // }
-
 
                             .old-price {
                                 color: $color-text-grey-dark;
@@ -723,7 +688,6 @@ footer {
                             }
                         }
                     }
-
                 }
             }
         }
@@ -733,7 +697,6 @@ footer {
             margin-bottom: 16rem;
 
             .title-container {
-
 
                 .title {
                     text-transform: uppercase;

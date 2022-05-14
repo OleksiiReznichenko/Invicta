@@ -5,7 +5,7 @@ export const state = () => ({
         firstName: 'Wade',
         lastName: 'Warren',
         username: 'warrenjs',
-        avatar: '/avatar.png',
+        avatar: '/projects/Invicta/avatar.png',
         balance: '5.00',
         shoppingNumber: 11,
         registrationDate: 'Jul 09, 2021',
@@ -13,11 +13,11 @@ export const state = () => ({
         workingPlaces: [
             {
                 name: 'Figma',
-                image: '/figma.png'
+                image: '/projects/Invicta/figma.png'
             },
             {
                 name: 'Yandex',
-                image: '/yandex.png'
+                image: '/projects/Invicta/yandex.png'
             },
         ],
         following: 10,
@@ -29,9 +29,14 @@ export const state = () => ({
         I'm losing my mind It's 'cause, 'cause,
         cause I'm crazy
         `,
-        backgroundImage: '/backProfileImage.jpg',
-        discordLink: '',
+        backgroundImage: '/projects/Invicta/backProfileImage.png',
+        discordId: '',
         telegramUsername: 'aleksys228',
+        achievements: {
+            achievementHeart: true,
+            achievementComment: true,
+            achievementLike: true,
+        },
         isMyProfile: true,
     }
 })
@@ -42,7 +47,31 @@ export const mutations = {
     },
     isLoggedInToTrue(state) {
         state.isLoggedIn = true;
-    }
+    },
+    editProfileUsername(state, {value}) {
+        state.user.username = value;
+    },
+    editProfileFirstName(state, {value}) {
+        state.user.firstName = value;
+    },
+    editProfileLastName(state, {value}) {
+        state.user.lastName = value;
+    },
+    editProfileTelegramUsername(state, {value}) {
+        state.user.telegramusername = value;
+    },
+    editProfileDiscordUserId(state, {value}) {
+        state.user.discordUserId = value;
+    },
+    editProfileBio(state, {value}) {
+        state.user.bio = value;
+    },
+    subscribe(state) {
+        state.user.following += 1;
+    },
+    unSubscribe(state) {
+        state.user.following -= 1;
+    },
 }
 
 export const actions = {

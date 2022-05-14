@@ -31,9 +31,7 @@ export default {
             }
             this.percent += 1;
 
-            // setTimeout(() => {
-                requestAnimationFrame(this.addToPercent);
-            // }, 8);
+            requestAnimationFrame(this.addToPercent);
         }
     },
     mounted () {
@@ -55,10 +53,6 @@ export default {
     text-align: center;
     @include flex-center;
     transition: all .5s;
-
-    &-content {
-        
-    }
 
     &-image {
         width: 20rem;

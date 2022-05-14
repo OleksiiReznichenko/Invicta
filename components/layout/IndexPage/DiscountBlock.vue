@@ -44,21 +44,10 @@ export default {
     .left {
         @include flex-center;
         border-radius: 8px;
-        // background-color: $color-orange;
         background-color: #D94C36;
-        // width: 78%;
         width: 100%;
-        // margin-right: 3rem;
         padding: 3.6rem 0;
         text-align: center;
-
-        // @media only screen and (max-width: 800px) {
-        //     width: 74%;
-        // }
-
-        // @media only screen and (max-width: 850px) {
-        //     width: 100%;
-        // }
 
         h2 {
             font-size: 7.2rem;
@@ -138,10 +127,6 @@ export default {
                     width: 30rem;
                     padding: 1rem 3rem;
                     margin-top: 1.5rem;
-                }
-
-                @media only screen and (max-width: 450px) {
-                    // width: 80%;
                 }
             }
         }

@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </EmojiPicker>
-                            <textarea @keypress.enter="sendMessage" @input="autoGrow" v-model="newMessage" ref="messageInput" name="message" id="messageInput" cols="30" rows="1" wrap="soft" placeholder="Write a message"></textarea>
+                            <textarea @keypress.enter="sendMessage" @input="autoGrow" v-model="newMessage" :maxlength="maxMessageLength" ref="messageInput" name="message" id="messageInput" cols="30" rows="1" wrap="soft" placeholder="Write a message"></textarea>
                             <button @click="sendMessage" class="send-button">Send</button>
                         </div>
                         <div @click="toggleEvent" v-if="item.chat.notifications.length > 0" class="toggle-container notifications">
@@ -95,7 +95,6 @@
                         <nuxt-link :to="'/users/' + user.id" class="user buyer">
                             <div class="info">
                                 <span>Buyer</span>
-                                <!-- <h4 class="user-name">{{user.firstName}} <br> {{user.lastName}}</h4> -->
                                 <h4 class="user-name">Me</h4>
                             </div>
                             <img :src="user.avatar" alt="User photo" class="user-photo">
@@ -146,6 +145,7 @@ export default {
 
     data() {
         return {
+            maxMessageLength: 400,
             newMessage: ''
         }
     },
@@ -220,6 +220,8 @@ export default {
             e.target.style.height = (e.target.scrollHeight) + "px";
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD EMOJI TO THE INPUT
         onEmoji(e) {
             this.newMessage += e;
         },
@@ -248,7 +250,6 @@ export default {
         // GET DATE
         getDate() {
             const dateObj = new Date();
-            // const year = dateObj.getUTCFullYear();
             const monthNumber = dateObj.getMonth();
             const day = dateObj.getDate();
             const hours = dateObj.getHours();
@@ -332,7 +333,6 @@ export default {
         @media only screen and (max-width: 600px) {
             width: 100%;
         }
-
 
         .main-content {
             display: flex;
@@ -491,21 +491,6 @@ export default {
                         height: 100%;
                         display: flex;
                         flex-direction: column;
-                        
-                        // &::-webkit-scrollbar {
-                        //     height: 6px;
-                        //     width: 6px;
-                        // }
-
-                        // &::-webkit-scrollbar-thumb {
-                        //     border-radius: 17px;
-                        //     background-color: #615f61;
-                        // }
-
-                        // &::-webkit-scrollbar-track {
-                        //     background-color: $color-grey;
-                        // }
-
                     }
 
                     .notifications {
@@ -542,7 +527,6 @@ export default {
                             margin-top: 2px;
                             padding: 2rem 3rem;
                             padding-left: 6rem;
-                            // min-height: 1.6rem;
                         }
 
                         .send-button {
@@ -550,7 +534,6 @@ export default {
                             top: 50%;
                             right: 3rem;
                             transform: translateY(-50%);
-                            // color: lighten($color-primary, 10%);
                             color: white;
                             font-weight: 500 !important;
                             background-color: $color-primary;
@@ -573,10 +556,7 @@ export default {
                                 position: absolute;
                                 left: 0;
                                 bottom: 6rem;
-                                // border: 1px solid $color-grey-2;
-                                // border: none;
                                 border-radius: 10px;
-                                // overflow: hidden;
 
                                 @media only screen and (max-width: 450px) {
                                     left: -1.25rem;
@@ -587,9 +567,6 @@ export default {
                                     border-bottom: 10px solid $color-grey-2;
                                     border-left: 9px solid rgba(0, 0, 0, 0);
                                     border-right: 9px solid rgba(0, 0, 0, 0);
-                                    // border-bottom: 1rem solid $color-grey-2;
-                                    // border-left: .9rem solid rgba(0, 0, 0, 0);
-                                    // border-right: .9rem solid rgba(0, 0, 0, 0);
                                     transform: rotate(180deg);
                                     content: "";
                                     display: inline-block;
@@ -600,8 +577,6 @@ export default {
                             }
 
                             .emoji-picker {
-                                // width: 295px;
-                                // height: 170px;
                                 width: 295px;
                                 height: 170px;
                                 overflow: auto;
@@ -637,11 +612,7 @@ export default {
                                     font-family: Montserrat;
                                     margin-bottom: 5px;
                                     font-size: 15px;
-                                    // line-height: 21px;
-
-                                    // &:not(:first-of-type) {
-                                        margin-top: 10px;
-                                    // }
+                                    margin-top: 10px;
                                 }
 
                                 &::-webkit-scrollbar {
@@ -675,7 +646,6 @@ export default {
                 }
 
                 .users-container {
-                    // padding: 2rem 0;
                     overflow: hidden;
 
                     .user {
@@ -777,7 +747,6 @@ export default {
                     }
 
                     &:hover {
-                        // background-color: darken($color-orange, 15%);
                         background-color: darken($color-green, 10%);
                     }
                 }

@@ -23,7 +23,6 @@ export default {
         DiscountBlock,
         DiscountProducts,
         Signup,
-        // Preloader,
     },
 }
 </script>
@@ -54,15 +53,4 @@ footer {
         }
     }
 }
-
-// .products-line {
-//     @media only screen and (max-width: 1000px) {
-//         .section-page {
-//             width: 90% !important;
-//         }
-//     }
-// }
-// main {
-//     margin-bottom: 25rem !important;
-// }
 </style>

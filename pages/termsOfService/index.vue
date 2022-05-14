@@ -17,7 +17,6 @@
                     />
                 </div>
             </div>
-            <!-- <img src="@/assets/img/gridtermsUpdates.png" alt="Grid" class="grid-image"> -->
 
             <Footer />
         </div>
@@ -88,15 +87,6 @@ export default {
         min-height: 70vh;
         position: relative;
         z-index: 100;
-
-        // @media only screen and (max-width: 850px) {
-        //     width: 66%;
-        //     margin: 0 auto;
-        // }
-
-        // @media only screen and (max-width: 600px) {
-        //     width: 100%;
-        // }
 
         .page-title {
             font-size: 4.5rem;

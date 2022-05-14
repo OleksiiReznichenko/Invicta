@@ -18,8 +18,7 @@
                         </div>
                         <div class="right">
                             <div class="search-container">
-                                <!-- <input ref="searchInput" type="text" class="search-input"> -->
-                                <input v-if="orders.length > 0" @click="searchFunction" @keyup="searchFunction" ref="searchInput" v-model="searchValue"
+                                <input v-if="orders.length > 0" ref="searchInput" v-model="searchValue"
                                 type="search" id="searchInput" placeholder="Search" />
                                 <img v-if="orders.length > 0"
                                     src="@/assets/svg/searchIcon.svg"
@@ -72,7 +71,7 @@ export default {
 
     watch: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // HIDE SEARCH RESULTS CONTAINER IF SEARCH INPUT IS EMPTY
+      // VALIDATE SEARCH VALUE ON TYPING
       searchValue() {
         this.validateSearchValue();
       }
@@ -94,6 +93,7 @@ export default {
                 const filteredOrders = orders.filter(order => {
                     return order.name.toLowerCase().includes(this.searchValueValidated);
                 })
+
                 return filteredOrders;
             } else {
                 return orders;
@@ -108,7 +108,6 @@ export default {
           if (this.searchValue.includes(' ') >= 0) {
             const searchInputArr = this.$refs.searchInput.value.split(' ');
 
-            // eslint-disable-next-line array-callback-return
             const searchInputArr2 = searchInputArr.filter(el => {
               if (el.replace(/\s/g, '')) {
                 return el.replace(/\s/g, '');
@@ -120,26 +119,6 @@ export default {
           } else {
             this.searchValueValidated = this.searchValue.toLowerCase();
           }
-        },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // SHOW SEARCH RESULTS CONTAINER ON CLICK AND KEY TYPING IF SEARCH INPUT CONTAINS LETTERS
-        searchFunction(e) {
-            // if (this.order.length == 0) return;
-            this.validateSearchValue()  
-            if (this.searchValueValidated) {
-                // if (!this.$refs.searchResultsContainer.classList.contains('opened')) {
-                //   this.$refs.searchResultsContainer.style.transition = 'none';
-                //   this.$refs.searchResultsContainer.classList.add('opened');
-                //   this.$refs.searchResultsContainer.style.display = 'grid';
-
-                //   setTimeout(() => {
-                //       this.$refs.searchResultsContainer.style.opacity = 1;
-                //   }, 10);
-
-
-                // }
-            }
         },
     },
 }
@@ -171,7 +150,6 @@ export default {
 
         .main-content {
 
-            
             .no-orders {
                 width: 100%;
                 background-color: $color-grey-dark;
@@ -248,32 +226,31 @@ export default {
 
 
 .search-container {
-    // width: 10rem;
     width: 15rem;
     margin-right: 1rem;
     position: relative;
 
     @media only screen and (max-width: 900px) {
-      width: 11rem;
+        width: 11rem;
     }
 
     @media only screen and (max-width: 700px) {
-      width: 12rem;
+        width: 12rem;
     }
 
     @media only screen and (max-width: 1050px) and (max-height: 520px) {
-      width: 14rem;
+        width: 14rem;
     }
 
     @media only screen and (max-width: 850px) and (min-height: 600px) {
-      width: 100%;
-      border-radius: 6px;
-      overflow: hidden;
-      margin-right: 3rem;
+        width: 100%;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-right: 3rem;
     }
-  }
+}
 
-  .search-icon {
+.search-icon {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -282,26 +259,24 @@ export default {
     height: 1.75rem;
 
     @media only screen and (max-width: 850px) and (min-height: 600px) {
-      width: 2rem;
-      height: 2rem;
-      // left: 2rem;
+        width: 2rem;
+        height: 2rem;
     }
-  }
+}
 
-  #searchInput {
+#searchInput {
     width: 100%;
     padding-left: 3rem;
     color: white;
     font-family: Montserrat;
 
     @media only screen and (max-width: 850px) and (min-height: 600px) {
-      padding: 1rem 2rem;
-      padding-left: 4rem;
+        padding: 1rem 2rem;
+        padding-left: 4rem;
     }
 
     &::placeholder {
-      color: $color-text-grey;
+        color: $color-text-grey;
     }
-  }
-
+}
 </style>

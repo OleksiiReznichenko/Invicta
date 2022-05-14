@@ -4,17 +4,17 @@ export const state = () => ({
             id: 'mikhailjr',
             firstName: 'Mikhail',
             username: 'mikhailjr',
-            avatar: '/avatar5.png',
+            avatar: '/projects/Invicta/avatar5.png',
             registrationDate: 'Jul 09, 2021',
             selledAmount: 10,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ],
             following: 10,
@@ -26,9 +26,14 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/backProfileImage.jpg',
-            discordLink: '',
+            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            discordId: '',
             telegramUsername: '',
+            achievements: {
+                achievementHeart: false,
+                achievementComment: false,
+                achievementLike: false,
+            },
             isFollowedByYou: false,
             // achievements: {
 
@@ -38,17 +43,17 @@ export const state = () => ({
             id: 'antoniojr',
             firstName: 'Antonio',
             username: 'antoniojr',
-            avatar: '/avatar2.png',
+            avatar: '/projects/Invicta/avatar2.png',
             registrationDate: 'Sep 12, 2021',
             selledAmount: 13,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ],
             following: 33,
@@ -60,26 +65,31 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/backProfileImage.jpg',
-            discordLink: '',
+            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            discordId: '',
             telegramUsername: '',
+            achievements: {
+                achievementHeart: true,
+                achievementComment: true,
+                achievementLike: true,
+            },
             isFollowedByYou: false,
         },
         {
             id: 'alexjr',
             firstName: 'Alex',
             username: 'alexjr',
-            avatar: '/avatar3.png',
+            avatar: '/projects/Invicta/avatar3.png',
             registrationDate: 'May 1, 2021',
             selledAmount: 20,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ],
             following: 12,
@@ -91,26 +101,31 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/backProfileImage.jpg',
-            discordLink: '',
+            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            discordId: '',
             telegramUsername: '',
+            achievements: {
+                achievementHeart: true,
+                achievementComment: false,
+                achievementLike: true,
+            },
             isFollowedByYou: false,
         },
         {
             id: 'johnjr',
             firstName: 'John',
             username: 'johnjr',
-            avatar: '/avatar4.png',
+            avatar: '/projects/Invicta/avatar4.png',
             registrationDate: 'Jan 21, 2021',
             selledAmount: 14,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ],
             following: 44,
@@ -122,26 +137,31 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/backProfileImage.jpg',
-            discordLink: '',
+            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            discordId: '',
             telegramUsername: '',
+            achievements: {
+                achievementHeart: true,
+                achievementComment: false,
+                achievementLike: false,
+            },
             isFollowedByYou: true,
         },
         {
             id: 'donaldmaen',
             firstName: 'Donald',
             username: 'donaldmaen',
-            avatar: '/avatar.png',
+            avatar: '/projects/Invicta/avatar.png',
             registrationDate: 'Jul 19, 2021',
             selledAmount: 9,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ],
             following: 102,
@@ -153,9 +173,14 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/backProfileImage.jpg',
-            discordLink: '',
+            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            discordId: '',
             telegramUsername: '',
+            achievements: {
+                achievementHeart: false,
+                achievementComment: false,
+                achievementLike: true,
+            },
             isFollowedByYou: true,
         },
     ],
@@ -164,17 +189,17 @@ export const state = () => ({
             id: 'mikhailjr',
             firstName: 'Mikhail',
             username: 'mikhailjr',
-            avatar: '/avatar5.png',
+            avatar: '/projects/Invicta/avatar5.png',
             registrationDate: 'Jul 09, 2021',
             selledAmount: 10,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ]
         },
@@ -182,17 +207,17 @@ export const state = () => ({
             id: 'antoniojr',
             firstName: 'Antonio',
             username: 'antoniojr',
-            avatar: '/avatar2.png',
+            avatar: '/projects/Invicta/avatar2.png',
             registrationDate: 'Sep 12, 2021',
             selledAmount: 13,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ]
         },
@@ -200,17 +225,17 @@ export const state = () => ({
             id: 'alexjr',
             firstName: 'Alex',
             username: 'alexjr',
-            avatar: '/avatar3.png',
+            avatar: '/projects/Invicta/avatar3.png',
             registrationDate: 'May 1, 2021',
             selledAmount: 20,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ]
         },
@@ -218,17 +243,17 @@ export const state = () => ({
             id: 'johnjr',
             firstName: 'John',
             username: 'johnjr',
-            avatar: '/avatar4.png',
+            avatar: '/projects/Invicta/avatar4.png',
             registrationDate: 'Jan 21, 2021',
             selledAmount: 14,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ]
         },
@@ -236,19 +261,36 @@ export const state = () => ({
             id: 'donaldmaen',
             firstName: 'Donald',
             username: 'donaldmaen',
-            avatar: '/avatar.png',
+            avatar: '/projects/Invicta/avatar.png',
             registrationDate: 'Jul 19, 2021',
             selledAmount: 9,
             workingPlaces: [
                 {
                     name: 'Figma',
-                    image: '/figma.png'
+                    image: '/projects/Invicta/figma.png'
                 },
                 {
                     name: 'Yandex',
-                    image: '/yandex.png'
+                    image: '/projects/Invicta/yandex.png'
                 },
             ]
         },
     ]
 })
+
+export const mutations = {
+    subscribe(state, {id}) {
+        const user = state.users.find(el => {
+            return el.id === id;
+        })
+        user.followers += 1;
+        user.isFollowedByYou = true;
+    },
+    unSubscribe(state, {id}) {
+        const user = state.users.find(el => {
+            return el.id === id;
+        })
+        user.followers -= 1;
+        user.isFollowedByYou = false;
+    },
+}

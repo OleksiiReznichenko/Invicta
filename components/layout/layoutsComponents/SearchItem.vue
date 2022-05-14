@@ -27,10 +27,9 @@ export default {
             }
         }
     },
+
     methods: {
         closeSearch() {
-            // this.searchInput.value = '';
-                
             this.searchResultsContainer.style.transition = 'all .2s';
 
             this.searchResultsContainer.style.opacity = 0;
@@ -43,6 +42,7 @@ export default {
             }, 200);
         }
     },
+
     mounted () {
         this.searchResultsContainer = document.querySelector('.search-results-container');
         this.searchInput = document.getElementById('searchInput');
@@ -54,7 +54,6 @@ export default {
 .search-item {
     display: flex;
     align-items: center;
-    // justify-content: flex-start;
 
     &-link {
         display: flex;
@@ -68,11 +67,6 @@ export default {
         border-radius: 1rem;
         margin-right: 1rem;
         object-fit: cover;
-        // position: relative;
-        // z-index: 100;
-        // background-size: cover;
-        // background-repeat: no-repeat;
-        // background-position: left center;
 
         @media only screen and (max-width: 900px) {
             width: 4rem;
@@ -110,32 +104,12 @@ export default {
             }
 
             .item-gradient {
-                // background: $gradient-primary;
                 background: linear-gradient(135deg, #F037C7 0%, #744BDE 100%);
                 background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 font-size: 1.7rem;
-
-                // @media only screen and (max-width: 600px) {
-                    padding-top: 2px;
-                // }
-            }
-
-            .item-discount {
-
-            }
-
-            .item-in-stock {
-
-            }
-
-            .item-country {
-
-            }
-
-            .item-price {
-
+                padding-top: 2px;
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="header section">
+    <div ref="header" class="header section">
         <div class="content">
             <div class="top-content">
                 <img :src="user.avatar" alt="Avatar" class="avatar">
@@ -10,32 +10,35 @@
                     </div>
                     <span class="rank">{{user.rank}}</span>
                     <div class="flex-container achievements">
-                        <div class="achievement-dropdown dropdown" id="achieveHeartDropdown">
-                            <h4 class="title">Super star</h4>
-                            <p class="description">
-                                Received more than 100 positive reviews
-                            </p>
-                        </div>
-                        <div class="achievement-dropdown dropdown" id="achieveCommentDropdown">
-                            <h4 class="title">Super star</h4>
-                            <p class="description">
-                                Received more than 100 positive reviews
-                            </p>
-                        </div>
-                        <div class="achievement-dropdown dropdown" id="achieveLikeDropdown">
-                            <h4 class="title">Super star</h4>
-                            <p class="description">
-                                Received more than 100 positive reviews
-                            </p>
-                        </div>
-                        <button @click="dropdownEvent(achieveHeartDropdown)" class="achievement-button dropdown-opener" id="achieveHeartDropdownOpener">
+                        <!-- <div class="achievements-dropdowns">
+                            
+                        </div> -->
+                        <button v-if="achievementHeart" @click="dropdownEvent(achievemtHeartDropdown)" class="achievement-button dropdown-opener" id="achievemtHeartDropdownOpener">
                             <img src="@/assets/svg/heart.svg" alt="Icon" class="icon">
+                            <div v-if="achievementHeart" class="achievement-dropdown dropdown" id="achievemtHeartDropdown">
+                                <h4 class="title">Super star</h4>
+                                <p class="description">
+                                    Received more than 100 positive reviews
+                                </p>
+                            </div>
                         </button>
-                        <button @click="dropdownEvent(achieveCommentDropdown)" class="achievement-button dropdown-opener" id="achieveCommentDropdownOpener">
+                        <button v-if="achievementComment" @click="dropdownEvent(achievementCommentDropdown)" class="achievement-button dropdown-opener" id="achievementCommentDropdownOpener">
                             <img src="@/assets/svg/comment.svg" alt="Icon" class="icon">
+                            <div v-if="achievementComment" class="achievement-dropdown dropdown" id="achievementCommentDropdown">
+                                <h4 class="title">Super star</h4>
+                                <p class="description">
+                                    Received more than 100 positive reviews
+                                </p>
+                            </div>
                         </button>
-                        <button @click="dropdownEvent(achieveLikeDropdown)" class="achievement-button dropdown-opener" id="achieveLikeDropdownOpener">
+                        <button v-if="achievementLike" @click="dropdownEvent(achievemtLikeDropdown)" class="achievement-button dropdown-opener" id="achievemtLikeDropdownOpener">
                             <img src="@/assets/svg/thumbsUp.svg" alt="Icon" class="icon">
+                            <div v-if="achievementLike" class="achievement-dropdown dropdown" id="achievemtLikeDropdown">
+                                <h4 class="title">Super star</h4>
+                                <p class="description">
+                                    Received more than 100 positive reviews
+                                </p>
+                            </div>
                         </button>
                     </div>
                 </div>
@@ -47,16 +50,15 @@
                 </p>
                 <div class="flex-container followers-container">
                     <span>{{user.followers}} Followers</span>
-                    <span>{{user.following}} Followers</span>
+                    <span>{{user.following}} Following</span>
                 </div>
                 <p class="date">Member since May 16, 2021</p>
                 <div class="flex-container buttons-container">
                     <nuxt-link v-if="user.isMyProfile" to="/editProfile" class="btn btn-transparent"><div class="background"></div><span>Edit</span></nuxt-link>
-                    <button v-if="!user.isMyProfile && !user.isFollowedByYou" class="btn btn-transparent"><div class="background"></div><span>Follow</span></button>
-                    <button v-if="!user.isMyProfile && user.isFollowedByYou" class="btn btn-gradient"><span>Unfollow</span></button>
+                    <button v-if="!user.isMyProfile && !user.isFollowedByYou" @click="subscribe" class="btn btn-transparent"><div class="background"></div><span>Follow</span></button>
+                    <button v-if="!user.isMyProfile && user.isFollowedByYou" @click="unSubscribe" class="btn btn-gradient"><span>Unfollow</span></button>
                     <div class="flex-container other-buttons">
                         <button @click="dropdownEvent(moreDropdown)" href="#" class="button dropdown-opener" id="moreDropdownOpener">
-                            <!-- <img src="@/assets/svg/more.svg" alt="More" class="icon"> -->
                             <span class="dots">...</span>
                         </button>
                         <a ref="discordButton" :href="discordLink" target="_blank" class="button custom-social-link">
@@ -123,10 +125,10 @@ export default {
         return {
             copyLinkIndicator: true,
             url: '',
-            // discordId: 'aleksys228',
-            // discordLinkBase: 'https://discordapp.com/users/',
+            // discordId: '333252',
+            discordLinkBase: 'https://discordapp.com/users/',
             discordLink: '#',
-            // telegramUsername: 'aleksys228',
+            // telegramUsername: 'antojse',
             telegramLinkBase: 'https://t.me/',
             telegramLink: '#',
         }
@@ -137,10 +139,29 @@ export default {
         user() {
             return this.userObject;
         },
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PAGE URL
         urlComp() {
             return this.url;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ACHIEVEMENT HEART
+        achievementHeart() {
+            return this.user.achievements.achievementHeart;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ACHIEVEMENT COMMENT
+        achievementComment() {
+            return this.user.achievements.achievementComment;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ACHIEVEMENT LIKE
+        achievementLike() {
+            return this.user.achievements.achievementLike;
         },
     },
     methods: {
@@ -158,7 +179,6 @@ export default {
             inputc.select();
             document.execCommand('copy');
             inputc.parentNode.removeChild(inputc);
-            // alert('Link copied');
 
             this.linkCopiedNotification.style.display = 'block';
             setTimeout(() => {
@@ -174,6 +194,7 @@ export default {
                 }, 200);
             }, 1000);
         },
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SHARE BUTTON EVENT
         shareEvent(dropdown) {
@@ -214,6 +235,20 @@ export default {
                 dropdown.classList.remove('opened');
             }, 200);
         },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SUBSCRIBE ON USER EVENT
+        subscribe() {
+            this.$store.commit('subscribe');
+            this.$store.commit('users/subscribe', {id: this.user.id});
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // UNSUBSCRIBE FROM USER EVENT
+        unSubscribe() {
+            this.$store.commit('unSubscribe');
+            this.$store.commit('users/unSubscribe', {id: this.user.id});
+        },
     },
     mounted () {
         // DOM
@@ -223,25 +258,16 @@ export default {
         this.linkCopiedNotification = document.getElementById('linkCopiedNotification');
         this.moreDropdown = document.getElementById('moreDropdown');
         this.shareDropdown = document.getElementById('shareDropdown');
-        this.achieveHeartDropdown = document.getElementById('achieveHeartDropdown');
-        this.achieveCommentDropdown = document.getElementById('achieveCommentDropdown');
-        this.achieveLikeDropdown = document.getElementById('achieveLikeDropdown');
+        this.achievemtHeartDropdown = document.getElementById('achievemtHeartDropdown');
+        this.achievementCommentDropdown = document.getElementById('achievementCommentDropdown');
+        this.achievemtLikeDropdown = document.getElementById('achievemtLikeDropdown');
 
         this.telegramLink = this.user.telegramUsername ? this.telegramLinkBase + this.user.telegramUsername : '#';
-        this.discordLink = this.user.discordLink ? this.user.discordLink : '#';
+        this.discordLink = this.user.discordId ? this.user.discordLink + this.user.discordId : '#';
 
-        // this.customSocialLinks.forEach(el => {
-        //     console.log(el.getAttribute('href'))
-        //     if (el.getAttribute('href') === '#') {
-        //         el.addEventListener('click', (e) => {
-        //             e.preventDefault();
-        //         });
-        //     } else {
-        //         el.removeEventListener('click', (e) => {
-        //             e.preventDefault();
-        //         });
-        //     }
-        // })
+        this.$refs.header.style.background = `url(${this.user.backgroundImage})`;
+        this.$refs.header.style.backgroundSize = 'cover';
+        this.$refs.header.style.backgroundRepeat = 'no-repeat';
 
         if (this.telegramLink === '#') {
             this.$refs.telegramButton.addEventListener('click', (e) => {
@@ -276,8 +302,6 @@ export default {
                 const isClickInsideElement = el.contains(e.target);
                 const isClickInsideElement2 = this.dropdownOpeners[i].contains(e.target);
 
-
-                // if (!isClickInsideElement && !isClickInsideElement2 && this.shareDropdown.classList.contains('opened')) {
                 if (!isClickInsideElement && !isClickInsideElement2) {
                     this.dropdownCloseEvent(el);
                 }
@@ -289,22 +313,16 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-    // height: 80vh;
-    background-image: url(/backProfileImage.png);
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 1.2rem;
     margin-bottom: 3.5rem;
-    // overflow: hidden;
     position: relative;
     
     @media only screen and (max-width: 850px) {
         width: 100% !important;
         height: 100vh;
         min-height: 600px;
-        // border-radius: 0 !important;
-        // border-top-left-radius: 0 !important;
-        // border-top-right-radius: 0 !important;
         margin-bottom: 5rem;
     }
 
@@ -381,7 +399,6 @@ export default {
                         margin-right: 1.5rem;
                     }
 
-
                     .icon {
                         width: 2.4rem;
                         height: 2.4rem;
@@ -400,7 +417,6 @@ export default {
                 margin-left: 2.75rem;
                 font-size: 2.4rem;
                 margin-bottom: 1.25rem;
-                // margin-left: 2.75rem;
             }
 
             .list {
@@ -427,61 +443,6 @@ export default {
                         margin-right: 1rem;
                     }
                 }
-            }
-        }
-
-        #achieveHeartDropdown {
-            left: 8.4%;
-        }
-
-        #achieveCommentDropdown {
-            left: 32%;
-
-            @media only screen and (max-width: 850px) {
-                left: 35%;
-            }
-        }
-
-        #achieveLikeDropdown {
-            left: 54.5%;
-
-            @media only screen and (max-width: 850px) {
-                left: 61%;
-            }
-        }
-
-        .achievement-dropdown {
-            background-color: $color-grey-2 !important;
-            top: 140%;
-            transform: translateX(-50%);
-            width: 20rem;
-            text-align: center;
-            padding: 1.75rem;
-
-            @media only screen and (max-width: 850px) {
-                top: 147%;
-            }
-
-            &::before {
-                content: '';
-                background-color: $color-grey-2;
-                display: block;
-                position: absolute;
-                top: -.7rem;
-                left: 50%;
-                transform: translateX(-50%) rotate(45deg);
-                width: 1.5rem;
-                height: 1.5rem;
-            }
-
-            .title {
-                font-weight: 600 !important;
-                font-size: 1.8rem;
-                margin-bottom: .5rem;
-            }
-
-            .description {
-                color: $color-text-grey;
             }
         }
 
@@ -514,10 +475,6 @@ export default {
 
             .avatar-info {
 
-                // .name-container {
-                //     align-items: flex-end !important;
-                // }
-
                 .name {
                     font-size: 2.75rem;
                     margin-right: 2rem;
@@ -541,15 +498,85 @@ export default {
 
                 .achievements {
                     position: relative;
+                    width: fit-content;
+
+                    .achievement-dropdown {
+                        background-color: $color-grey-2 !important;
+                        top: 140%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 20rem;
+                        text-align: center;
+                        padding: 1.75rem;
+
+                        @media only screen and (max-width: 850px) {
+                            top: 147%;
+                        }
+
+                        &::before {
+                            content: '';
+                            background-color: $color-grey-2;
+                            display: block;
+                            position: absolute;
+                            top: -.7rem;
+                            left: 50%;
+                            transform: translateX(-50%) rotate(45deg);
+                            width: 1.5rem;
+                            height: 1.5rem;
+                        }
+
+                        .title {
+                            font-weight: 600 !important;
+                            font-size: 1.8rem;
+                            margin-bottom: .5rem;
+                        }
+
+                        .description {
+                            color: $color-text-grey;
+                        }
+                    }
+
+                    // .achievements-dropdowns {
+
+                    //     .achievement-dropdown:last-of-type {
+                    //         // left: 54.5%;
+                    //         // left: 67%;
+                    //         // right: 1.3rem !important;
+                    //         // left: 70% !important;
+                    //         left: 75% !important;
+                    //         // transform: translateX(-50%) !important;
+
+                    //         // @media only screen and (max-width: 850px) {
+                    //         //     left: 61%;
+                    //         // }
+                    //     }
+
+                    //     .achievement-dropdown:first-of-type {
+                    //         // left: 8.4%;
+                    //         // left: 18% !important;
+                    //         left: 1.3rem !important;
+                    //     }
+
+                    //     .achievement-dropdown:nth-of-type(2) {
+                    //         // left: 32%;
+                    //         // left: 46%;
+                    //         left: 46% !important;
+
+                    //         @media only screen and (max-width: 850px) {
+                    //             left: 35%;
+                    //         }
+                    //     }
+                    // }
+                    
 
                     .achievement-button {
                         background-image: $gradient-pink;
-                        // padding: .75rem;
                         width: 2.75rem !important;
                         height: 2.75rem !important;
                         border-radius: 100%;
                         margin-right: 1rem;
                         @include flex-center;
+                        position: relative;
 
                         @media only screen and (max-width: 850px) {
                             transform: scale(1.2);
@@ -566,7 +593,6 @@ export default {
         }
 
         .bottom-content {
-
 
             .line {
                 background-color: $color-grey-2;
@@ -602,12 +628,10 @@ export default {
 
             .buttons-container {
 
-
                 .btn {
                     font-size: 1.8rem;
                     font-weight: 500 !important;
                     margin-right: 2rem;
-                    // padding: .75rem 5.5rem;
                     padding: .75rem 0;
                     width: 17rem;
                     text-align: center;
@@ -618,10 +642,6 @@ export default {
                         width: 15rem;
                         text-align: center;
                     }
-
-                    // @media only screen and (max-width: 500px) {
-                    //     width: 20rem;
-                    // }
 
                     .background {
                         background-color: $color-grey-dark;
@@ -665,7 +685,6 @@ export default {
                            letter-spacing: 1px;
                            display: inline-block;
                            margin-top: -1.25rem;
-                        //    line-height: .5;
                         }
                     }
 

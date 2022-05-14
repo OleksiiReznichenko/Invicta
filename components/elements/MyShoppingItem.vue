@@ -107,7 +107,6 @@ export default {
                 margin-bottom: -5rem;
                 font-size: 2rem !important;
             }
-
         }
     }
 

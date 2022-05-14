@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <Preloader />
+        <!-- <Preloader /> -->
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <Navigation/>
         <nuxt class="on-top" />
@@ -307,5 +307,35 @@ export default {
 
 .arrow-active {
     transform: rotate(-180deg);
+}
+
+.edit-class {
+    .overlay {
+        display: block !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10000;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color-grey, .85);
+
+        button {
+            @include abs-center;
+            padding: 1.25rem 4.5rem;
+            white-space: nowrap;
+            text-align: center;
+            font-weight: 500 !important;
+            border: none !important;
+
+            &::before {
+                opacity: 1 !important;
+            }
+
+            &:hover {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+    }
 }
 </style>

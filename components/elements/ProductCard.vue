@@ -1,5 +1,6 @@
 <template>
     <div class="product-card">
+        <div class="overlay"></div>
         <div class="header">
             <div class="top-rect"></div>
             <img :src="photo" alt="Ozon" class="product-image">
@@ -15,7 +16,6 @@
                     <h3 class="new-price">${{price}}</h3>
                     <span v-if="oldPrice" class="old-price">${{oldPrice}}</span>
                 </div>
-                <!-- <div class="btn">+Add</div> -->
                 <nuxt-link class="btn" :to="'/browse/' + this.id">+Add</nuxt-link>
             </div>
         </div>
@@ -31,6 +31,7 @@ export default {
             itemsText: 'items'
         }
     },
+
     computed: {
         discountComp() {
             return this.discount
@@ -39,6 +40,7 @@ export default {
             return this.itemsText
         },
     },
+
     mounted () {
         if (this.oldPrice) {
             this.discount = Math.round(100 - this.price / this.oldPrice * 100);
@@ -54,15 +56,17 @@ export default {
 <style lang='scss' scoped>
 .product-card {
     background-color: $color-grey;
-    // width: 23%;
-    // height: 35rem;
     border-radius: 8px;
-    // padding: 1rem 0 2.4rem;
     padding: 1rem 0 3.4rem;
+    position: relative;
+    overflow: hidden;
+
+    .overlay {
+        display: none;
+    }
 
     .header {
         position: relative;
-        // margin-bottom: 2.25rem;
         margin-bottom: 3rem;
 
         .top-rect {
@@ -110,10 +114,6 @@ export default {
 
                 &:not(:last-of-type) {
                     margin-right: 1rem;
-                
-                    // @media only screen and (max-width: 1100px) {
-                    //     margin-right: 0;
-                    // }
                 }
             }
         }
@@ -156,7 +156,6 @@ export default {
                     align-items: center;
                 }
 
-
                 .old-price {
                     color: $color-text-grey-dark;
                     font-size: 1.3rem;
@@ -193,9 +192,7 @@ export default {
                 }
                 
                 &:hover {
-                    // background-color: $color-text-grey-dark;
                     background-color: $color-primary;
-                    // color: black;
                     border: 2px solid transparent;
                 }
             }

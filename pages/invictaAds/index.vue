@@ -175,7 +175,6 @@ export default {
         }
 
         .campaigns-container {
-            // min-height: 50vh;
             min-height: 200px;
             margin-bottom: 100px;
             position: relative;

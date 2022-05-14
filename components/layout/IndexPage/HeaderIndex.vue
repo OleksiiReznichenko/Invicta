@@ -14,10 +14,7 @@
                     <nuxt-link class="btn btn-transparent" to="/browse"><div class="background"></div><span>Browse products</span></nuxt-link>
                 </div>
             </div>
-            <div class="cards-scene">
-                
-                <!-- <img src="@/assets/img/cardsShadow.png" alt="Shadow" class="cards-shadow"> -->
-            </div>
+            <div class="cards-scene"></div>
         </header>
     </div>
 </template>
@@ -154,7 +151,7 @@ export default {
 
         // LOAD SETUP
         const loader = new GLTFLoader();
-        loader.load('/cards.glb', (gltf) => {
+        loader.load('/projects/Invicta/cards.glb', (gltf) => {
             cardsModel = gltf.scene;
             scene.add(cardsModel);
             
@@ -167,7 +164,6 @@ export default {
                 mixer.clipAction(clip).play();
             })
 
-            // renderer.render(scene, camera);
             animate();
 
             // if (window.outerWidth > 1000) {
@@ -232,10 +228,6 @@ header {
         left: 0;
         width: 100% !important;
         height: 100% !important;
-
-        // @media only screen and (max-width: 1000px) {
-        //     transform: scale(.8) !important;
-        // }
     }
 
     .grid-image {
@@ -246,27 +238,17 @@ header {
 
         @media only screen and (max-width: 1000px) and (max-height: 520px),
         only screen and (max-width: 1000px) {
-            // bottom: 0%;
-            // width: 25rem;
             display: none;
         }
     }
 
     .info {
         position: absolute;
-        // top: 20%;
-        // bottom: 30%;
         width: 55rem;
         z-index: 100;
 
-        // @media only screen and (max-width: 1300px) {
-        //     bottom: 30%;
-        //     // transform: translateY(50%);
-        // }
-
         @media only screen and (max-width: 1200px) and (min-height: 800px) {
             bottom: 35%;
-            // transform: translateY(50%);
         }
 
         @media only screen and (max-width: 1000px) and (max-height: 520px) {
@@ -275,7 +257,6 @@ header {
         }
 
         @media only screen and (max-width: 1000px) and (min-height: 600px) and (min-width: 600px) {
-            // top: 60%;
             bottom: 6%;
             left: 50%;
             transform: translateX(-50%);
@@ -283,7 +264,6 @@ header {
         }
 
         @media only screen and (max-width: 600px) and (min-height: 600px) {
-            // top: 60%;
             bottom: 15%;
         }
 
@@ -304,7 +284,6 @@ header {
         h1 {
             text-transform: uppercase;
             font-size: 5.6rem;
-
             margin: 2rem 0;
 
             .h {
@@ -316,7 +295,6 @@ header {
         p {
             color: $color-text-grey;
             line-height: 1.3;
-
             margin-bottom: 6rem;
 
             @media only screen and (max-width: 1000px) and (max-height: 520px) {
@@ -346,7 +324,6 @@ header {
 
             .background {
                 background-image: linear-gradient(to right bottom, #191522, #16131B);
-                // width: 98% !important;
             }
         }
     }

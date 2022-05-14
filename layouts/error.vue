@@ -177,21 +177,13 @@ p {
     span {
         position: relative;
         z-index: 30;
-        // display: block;
-        // width: 100%;
-        // height: 100%;
     }
 }
 
 .btn-transparent {
     border: 1px solid transparent;
-    // background-color: #111111;
     background-clip: padding-box;
     border-radius: 8px;
-
-    // .background {
-    //     background-color: #111111;
-    // }
 
     &::before {
         content: '';
@@ -269,5 +261,4 @@ p {
         margin-right: 2.5rem;
     }
 }
-
 </style>

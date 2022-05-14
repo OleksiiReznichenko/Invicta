@@ -82,9 +82,7 @@ export default {
         .number {
             @media only screen and (max-width: 850px) {
                 font-size: 1.8rem;
-                // margin-bottom: -5rem;
             }
-
         }
 
         .avatar {
@@ -139,7 +137,6 @@ export default {
                 @media only screen and (max-width: 850px) {
                     font-size: 1.8rem;
                 }
-
 
                 .working-place {
                     display: flex;

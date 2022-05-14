@@ -1,0 +1,601 @@
+<template>
+    <div class="edit-profile-page">
+        <div ref="notificationWindow" id="notificationWindow">
+            <h3 ref="notificationWindowTitle" class="title">Changes saved succefully</h3>
+        </div>
+        <div class="relative-container">
+            <div class="content">
+                <div class="section page-sequence">
+                    <nuxt-link to="/">Main</nuxt-link>
+                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                    <nuxt-link :to="'/users/' + user.id">Profile</nuxt-link>
+                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                    <span>Edit profile</span>
+                </div>
+                <h1 class="section page-title">Edit profile</h1>
+                <div class="section edit-form">
+                    <div class="left">
+                        <img :src="user.avatar" alt="Avatar" class="avatar">
+                        <button class="change-button">
+                            <img src="@/assets/svg/editSquareIcon.svg" alt="Icon" class="icon">
+                            <span class="span-change">change</span>
+                        </button>
+                    </div>
+                    <div class="right">
+                        <div class="flex-container">
+                            <div class="input-group">
+                                <label for="username">Username</label>
+                                <input v-model="username" type="text" id="username" placeholder="mikhailjr">
+                            </div>
+                            <div class="input-group">
+                                <label for="telegramUsername">Telegram username</label>
+                                <input v-model="telegramUsername" type="text" id="telegramUsername" placeholder="mikhailjr">
+                            </div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="input-group">
+                                <label for="firstname">Firstname</label>
+                                <input v-model="firstName" type="text" id="firstname" placeholder="Mikhail">
+                            </div>
+                            <div class="input-group">
+                                <label for="discordUserId">Discord user ID</label>
+                                <input v-model="discordUserId" type="text" id="discordUserId" placeholder="352656">
+                            </div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="input-group">
+                                <label for="lastname">Lastname</label>
+                                <input v-model="lastName" type="text" id="lastname" placeholder="Djorgio">
+                            </div>
+                            <div class="input-group">
+                                <label for="twitterUsername">Twitter Username</label>
+                                <input v-model="twitterUsername" type="text" id="twitterUsername" placeholder="mikhailjr">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="bio">Bio</label>
+                            <textarea @input="autoGrow" v-model="bio" :maxlength="maxBioLength" ref="bioInput" id="bio" name="bio" cols="30" rows="5" wrap="soft" placeholder="Enter your bio"></textarea>
+                            <EmojiPicker class="emoji-main-container" @emoji="onEmoji">
+                                <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" 
+                                    @click.stop="clickEvent">
+                                    <button class="emoji-btn" type="button">
+                                        <img src="@/assets/svg/emojiButton.svg" alt="Emoji button" class="emoji-icon">
+                                    </button>
+                                </div>
+                                <div class="emoji-picker-wrapper" slot="emoji-picker" slot-scope="{ emojis, insert }">
+                                    <div class="emoji-picker">
+                                        <div v-for="(emojiGroup, category) in emojis" :key="category">
+                                            <h5>{{ category }}</h5>
+                                            <div>
+                                                <span class="emoji"
+                                                    v-for="(emoji, emojiName) in emojiGroup"
+                                                    :key="emojiName"
+                                                    @click="insert(emoji)"
+                                                    :title="emojiName"
+                                                >{{ emoji }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </EmojiPicker>
+                        </div>
+                    </div>
+                </div>
+                <button @click="editProfileEvent" class="btn btn-gradient save-button save-margin-bottom"><span>Save changes</span></button>
+
+                <h1 class="section page-title">Profile banners</h1>
+                <CustomBanner class="edit-class" />
+                <DiscountProductsCustom class="edit-class" />
+                <button @click="editProfileEvent" class="btn btn-gradient save-button"><span>Save changes</span></button>
+            </div>
+            <img src="@/assets/img/gridEditProfile.png" alt="Grid" class="grid-image">
+
+            <Footer />
+        </div>
+    </div>
+</template>
+
+<script>
+import EmojiPicker from 'vue-emoji-picker';
+import CustomBanner from '@/components/layout/Profile/CustomBanner';
+import DiscountProductsCustom from '@/components/layout/Profile/DiscountProductsCustom';
+
+export default {
+    components: {
+        CustomBanner,
+        DiscountProductsCustom,
+        EmojiPicker,
+    },
+    data() {
+        return {
+            isOpenNofication: false,
+            isInvalidUsername: false,
+            maxBioLength: 220,
+            username: '',
+            firstName: '',
+            lastName: '',
+            telegramUsername: '',
+            discordUserId: '',
+            twitterUsername: '',
+            bio: '',
+        }
+    },
+    computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER
+        user() {
+            return this.$store.state.user;
+        },
+    },
+    methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GROW TEXTAREA ON TEXT WRAP
+        autoGrow(e) {
+            e.target.style.height = this.minHeight + "px";
+            if (e.target.scrollHeight <= this.minHeight) {
+                e.target.style.height = this.minHeight + "px";
+            } else {
+                e.target.style.height = (e.target.scrollHeight) + "px";
+            }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD EMOJI TO THE INPUT
+        onEmoji(e) {
+            this.bio += e;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // REMOVE EXCESSIVE WHITE SPACES IN VALUE
+        validateValue(value) {
+          if (!value) return;
+          if (value.includes(' ') >= 0) {
+            const inputArr = value.split(' ');
+
+            const inputArr2 = inputArr.filter(el => {
+              if (el.replace(/\s/g, '')) {
+                return el.replace(/\s/g, '');
+              }
+            })
+
+            const validatedValue = inputArr2.join(' ');
+            return validatedValue;
+          } else {
+              return value;
+          }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // EDIT PROFILE EVENT
+        editProfileEvent() {
+            this.isInvalidUsername = false;
+
+            // IF USERNAME IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (!this.username) {
+                this.$refs.notificationWindowTitle.textContent = 'Username can\'be empty';
+                this.showNotificationWindow();
+                return;
+            }
+
+            // IF FIRSTNAME IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (!this.firstName) {
+                this.$refs.notificationWindowTitle.textContent = 'First name can\'be empty';
+                this.showNotificationWindow();
+                return;
+            }
+
+            // IF LASTNAME IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (!this.lastName) {
+                this.$refs.notificationWindowTitle.textContent = 'Last name can\'be empty';
+                this.showNotificationWindow();
+                return;
+            }
+
+            // CHECK IF USERNAME IS TAKEN
+            this.$store.state.users.users.forEach(el => {
+                if (this.username === el.username) {
+                    this.isInvalidUsername = true;
+                }
+            })
+
+            // IF USERNAME IS TAKEN - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (this.isInvalidUsername) {
+                this.$refs.notificationWindowTitle.textContent = 'This Username is taken';
+                this.showNotificationWindow();
+                return;
+            }
+
+            // IF THERE ARE NO CHANGES - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (
+                this.validateValue(this.username) === this.validateValue(this.user.username) &&
+                this.validateValue(this.firstName) === this.validateValue(this.user.firstName) &&
+                this.validateValue(this.lastName) === this.validateValue(this.user.lastName) &&
+                this.validateValue(this.telegramUsername) === this.validateValue(this.user.telegramUsername) &&
+                this.validateValue(this.discordUserId) === this.validateValue(this.user.discordUserId) &&
+                this.validateValue(this.twitterUsername) === this.validateValue(this.user.twitterUsername) &&
+                this.validateValue(this.bio) === this.validateValue(this.user.bio)
+            ) {
+                this.$refs.notificationWindowTitle.textContent = 'No changes';
+                this.showNotificationWindow();
+                return;
+            }
+
+            // IF THERE ARE CHANGES - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            this.$refs.notificationWindowTitle.textContent = 'Changes are succefully saved';
+            this.showNotificationWindow();
+
+            // SAVE CHANGES
+            this.$store.commit('editProfileUsername', {value: this.validateValue(this.username)});
+            this.$store.commit('editProfileFirstName', {value: this.validateValue(this.firstName)});
+            this.$store.commit('editProfileLastName', {value: this.validateValue(this.lastName)});
+            this.$store.commit('editProfileTelegramUsername', {value: this.validateValue(this.telegramUsername)});
+            this.$store.commit('editProfileDiscordUserId', {value: this.validateValue(this.discordUserId)});
+            this.$store.commit('editProfileBio', {value: this.validateValue(this.bio)});
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SHOW NOTIFICATION WINDOW
+        showNotificationWindow() {
+            if (this.isOpenNofication) return;
+            this.isOpenNofication = true;
+            this.$refs.notificationWindow.style.display = 'block';
+            setTimeout(() => {
+                this.$refs.notificationWindow.style.opacity = 1;
+            }, 10);
+
+            setTimeout(() => {
+                this.$refs.notificationWindow.style.opacity = 0;
+                setTimeout(() => {
+                    this.$refs.notificationWindow.style.display = 'none';
+
+                    this.isOpenNofication = false;
+                }, 200);
+            }, 1000);
+        },
+    },
+    mounted () {
+        // ASSIGN INITIAL INPUTS VALUES TO CURRENT PROFILE VALUES AND REMOVE EXCESSIVE WHITE SPACES
+        this.username = this.validateValue(this.user.username);
+        this.firstName = this.validateValue(this.user.firstName);
+        this.lastName = this.validateValue(this.user.lastName);
+        this.telegramUsername = this.validateValue(this.user.telegramUsername);
+        this.discordUserId = this.validateValue(this.user.discordUserId);
+        this.twitterUsername = this.validateValue(this.user.twitterUsername);
+        this.bio = this.validateValue(this.user.bio);
+    },
+}
+</script>
+
+<style lang="scss" scoped>
+::v-deep {
+    .section-page {
+        width: 80%;
+        max-width: 1920px;
+        margin: 0 auto;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .section-page {
+            width: 90% !important;
+        }
+    }
+}
+
+.edit-profile-page {
+
+    .content {
+        position: relative;
+        z-index: 100;
+
+        .save-button {
+            margin-left: 10%;
+            padding: 1.25rem 5rem;
+            font-weight: 500 !important;
+            margin-top: 4.5rem;
+            
+            @media only screen and (max-width: 1000px) {
+                margin-left: 5%;
+            }
+            
+            @media only screen and (max-width: 850px) {
+                margin-left: 17%;
+            }
+            
+            @media only screen and (max-width: 600px) {
+                margin-left: 5%;
+            }
+        }
+
+        .save-margin-bottom {
+            margin-bottom: 10rem;
+        }
+
+        .page-title {
+            font-size: 4.5rem;
+            margin-top: -.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .page-sequence,
+        .page-title {
+            
+            @media only screen and (max-width: 850px) {
+                width: 66%;
+            }
+
+            @media only screen and (max-width: 600px) {
+                width: 90%;
+            }
+        }
+
+        .edit-form {
+            background: $color-grey-dark;
+            box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
+            border-radius: 24px;
+            display: flex;
+            width: 90rem;
+            padding: 3.25rem 6.5rem 3.25rem 3.75rem;
+            margin-top: 4.25rem;
+            margin-left: 10%;
+            
+            @media only screen and (max-width: 1000px) {
+                margin-left: 5%;
+            }
+            
+            @media only screen and (max-width: 850px) {
+                margin-left: auto;
+                width: 66%;
+                flex-direction: column;
+                align-items: center;
+                padding: 4.5rem 4.5rem 4.5rem 4.5rem;
+            }
+            
+            @media only screen and (max-width: 600px) {
+                width: 90%;
+            }
+            
+            .left {
+                padding-top: 1rem;
+                padding-right: 4rem;
+            
+                @media only screen and (max-width: 850px) {
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 4rem;
+                }
+
+                .avatar {
+                    width: 14.5rem;
+                    height: 14.5rem;
+                    border-radius: 100%;
+                    margin-bottom: 1.5rem;
+            
+                    @media only screen and (max-width: 850px) {
+                        margin-bottom: 0;
+                        margin-right: 2.5rem;
+                    }
+                }
+
+                .change-button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    font-size: 1.6rem;
+                    font-weight: 400 !important;
+                    transition: all .2s;
+                    color: $color-orange;
+            
+                    @media only screen and (max-width: 850px) {
+                        font-size: 1.9rem;
+                    }
+
+                    &:hover {
+                        color: darken($color-orange, 12%);
+                    }
+
+                    .icon {
+                        margin-right: 1rem;
+                        width: 2rem;
+                        height: 2rem;
+                    }
+                }
+            }
+
+            .right {
+                border-left: 1.5px solid $color-grey-2;
+                padding-left: 4rem;
+            
+                @media only screen and (max-width: 850px) {
+                    border: none;
+                    padding: 0;
+                }
+
+                .flex-container {
+                    display: flex;
+                    align-items: center;
+            
+                    @media only screen and (max-width: 850px) {
+                        flex-direction: column;
+                    }
+
+                    .input-group:first-of-type {
+                        margin-right: 2.5rem;
+            
+                        @media only screen and (max-width: 850px) {
+                            margin-right: 0;
+                        }
+                    }
+                }
+
+                .input-group {
+                    position: relative;
+                    
+                    input,
+                    textarea {
+                        display: block;
+                        background-color: #111111;
+                        box-shadow: 0 .3rem 1rem 0 rgba(#000000, .2) inset,
+                        0 .3rem 1rem 0 rgba(#19151F, .5);
+                        border-radius: 8px;
+                        padding: .8rem 2.5rem;
+            
+                        @media only screen and (max-width: 850px) {
+                            padding: 1.1rem 2.5rem;
+                        }
+                    }
+
+                    input {
+                        margin-bottom: 1.75rem;
+                        width: 26rem;
+            
+                        @media only screen and (max-width: 850px) {
+                            width: 40rem;
+                        }
+                    }
+
+                    textarea {
+                        width: 100%;
+                        padding: 1.25rem 2.5rem;
+            
+                        @media only screen and (max-width: 850px) {
+                            width: 40rem;
+                        }
+                    }
+
+                    label {
+                        display: inline-block;
+                        margin-bottom: .8rem;
+                    }
+
+                    .emoji-main-container {
+                        position: absolute;
+                        right: 2rem;
+                        bottom: 1rem;
+                        
+                        .emoji-picker-wrapper {
+                            position: absolute;
+                            right: -1rem;
+                            bottom: 4.25rem;
+                            border-radius: 10px;
+
+                            @media only screen and (max-width: 1000px) {
+                                bottom: 5rem;
+                            }
+
+                            @media only screen and (max-width: 450px) {
+                                right: -2rem;
+                                bottom: 4.5rem;
+                            }
+
+                            &::before {
+                                border-bottom: 10px solid $color-grey-2;
+                                border-left: 9px solid rgba(0, 0, 0, 0);
+                                border-right: 9px solid rgba(0, 0, 0, 0);
+                                transform: rotate(180deg);
+                                content: "";
+                                display: inline-block;
+                                right: 10px;
+                                position: absolute;
+                                bottom: -10px;
+                            }
+                        }
+
+                        .emoji-picker {
+                            width: 295px;
+                            height: 170px;
+                            overflow: auto;
+                            padding: 10px;
+                            padding-top: 0;
+                            background: $color-grey-2;
+                            overflow-x: hidden;
+                            border-radius: 10px;
+
+                            .emoji {
+                                display: inline-block;
+                                background: transparent;
+                                border: none;
+                                outline: none;
+                                border-radius: 50%;
+                                width: 30px;
+                                height: 30px;
+                                padding: 0;
+                                cursor: pointer;
+                                text-align: center;
+                                padding-top: 7px;
+
+                                @media only screen and (max-width: 850px) {
+                                    transform: scale(1.4);
+                                }
+
+                                &:hover {
+                                    background: rgba(255, 255, 255, 0.1);
+                                }
+                            }
+
+                            h5 {
+                                font-family: Montserrat;
+                                margin-bottom: 5px;
+                                font-size: 15px;
+                                margin-top: 10px;
+                            }
+
+                            &::-webkit-scrollbar {
+                                z-index: 2;
+                                width: 5px;
+                            }
+
+                            &::-webkit-scrollbar-track {
+                                box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                                margin: 5px 0;
+                                border-radius: 5px;
+                            }
+
+                            &::-webkit-scrollbar-thumb {
+                                border-radius: 5px;
+                                background-color: #5d5d5d;
+                                outline: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .grid-image {
+        position: absolute;
+        right: 0;
+        top: 13%;
+        width: 24rem;
+            
+        @media only screen and (max-width: 850px) {
+            top: 25%;
+        }
+    }
+}
+
+#notificationWindow {
+    box-shadow: 0px .5rem 5rem 0px rgba(#000000, .4);
+    background-color: $color-grey-2;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    padding: 5.75rem 0 7.25rem;
+    width: 47rem;
+    color: white;
+    position: fixed;
+    left: 50%;
+    top: 0;
+    z-index: 1000;
+    transform: translateX(-50%);
+    transition: all .3s;
+    text-align: center;
+    display: none;
+    opacity: 0;
+
+    .title {
+        font-size: 2.85rem;
+    }
+}
+</style>
