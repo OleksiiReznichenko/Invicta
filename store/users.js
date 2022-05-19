@@ -1,9 +1,49 @@
 export const state = () => ({
     users: [
         {
+            id: 'warrenjs',
+            username: 'warrenjs',
+            email: 'warrenjs@gmail.com',
+            password: '654321',
+            avatar: '/projects/Invicta/avatar.png',
+            balance: '5.00',
+            shoppingNumber: 11,
+            registrationDate: 'Jul 09, 2021',
+            selledAmount: 10,
+            workingPlaces: [
+                {
+                    name: 'Figma',
+                    image: '/projects/Invicta/figma.png'
+                },
+                {
+                    name: 'Yandex',
+                    image: '/projects/Invicta/yandex.png'
+                },
+            ],
+            following: 10,
+            followers: 23,
+            rank: 'super seller',
+            bio: `
+            I love, I hate, I'm losing my mind. It's 
+            'cause I'm in the loony bin I love, I hate, 
+            I'm losing my mind It's 'cause, 'cause,
+            cause I'm crazy
+            `,
+            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            discordId: '',
+            telegramUsername: 'aleksys228',
+            achievements: {
+                achievementHeart: true,
+                achievementComment: true,
+                achievementLike: true,
+            },
+        },
+        {
             id: 'mikhailjr',
-            firstName: 'Mikhail',
             username: 'mikhailjr',
+            email: 'mikhail@gmail.com',
+            password: '654321',
+            balance: '1.00',
             avatar: '/projects/Invicta/avatar5.png',
             registrationDate: 'Jul 09, 2021',
             selledAmount: 10,
@@ -41,8 +81,10 @@ export const state = () => ({
         },
         {
             id: 'antoniojr',
-            firstName: 'Antonio',
             username: 'antoniojr',
+            email: 'antoniojr@gmail.com',
+            password: '654321',
+            balance: '12.00',
             avatar: '/projects/Invicta/avatar2.png',
             registrationDate: 'Sep 12, 2021',
             selledAmount: 13,
@@ -77,8 +119,10 @@ export const state = () => ({
         },
         {
             id: 'alexjr',
-            firstName: 'Alex',
             username: 'alexjr',
+            email: 'alex@gmail.com',
+            password: '654321',
+            balance: '123.00',
             avatar: '/projects/Invicta/avatar3.png',
             registrationDate: 'May 1, 2021',
             selledAmount: 20,
@@ -113,8 +157,10 @@ export const state = () => ({
         },
         {
             id: 'johnjr',
-            firstName: 'John',
             username: 'johnjr',
+            email: 'john@gmail.com',
+            password: '654321',
+            balance: '43.00',
             avatar: '/projects/Invicta/avatar4.png',
             registrationDate: 'Jan 21, 2021',
             selledAmount: 14,
@@ -149,8 +195,10 @@ export const state = () => ({
         },
         {
             id: 'donaldmaen',
-            firstName: 'Donald',
             username: 'donaldmaen',
+            email: 'donald@gmail.com',
+            password: '654321',
+            balance: '33.00',
             avatar: '/projects/Invicta/avatar.png',
             registrationDate: 'Jul 19, 2021',
             selledAmount: 9,
@@ -184,98 +232,6 @@ export const state = () => ({
             isFollowedByYou: true,
         },
     ],
-    leaderboard: [
-        {
-            id: 'mikhailjr',
-            firstName: 'Mikhail',
-            username: 'mikhailjr',
-            avatar: '/projects/Invicta/avatar5.png',
-            registrationDate: 'Jul 09, 2021',
-            selledAmount: 10,
-            workingPlaces: [
-                {
-                    name: 'Figma',
-                    image: '/projects/Invicta/figma.png'
-                },
-                {
-                    name: 'Yandex',
-                    image: '/projects/Invicta/yandex.png'
-                },
-            ]
-        },
-        {
-            id: 'antoniojr',
-            firstName: 'Antonio',
-            username: 'antoniojr',
-            avatar: '/projects/Invicta/avatar2.png',
-            registrationDate: 'Sep 12, 2021',
-            selledAmount: 13,
-            workingPlaces: [
-                {
-                    name: 'Figma',
-                    image: '/projects/Invicta/figma.png'
-                },
-                {
-                    name: 'Yandex',
-                    image: '/projects/Invicta/yandex.png'
-                },
-            ]
-        },
-        {
-            id: 'alexjr',
-            firstName: 'Alex',
-            username: 'alexjr',
-            avatar: '/projects/Invicta/avatar3.png',
-            registrationDate: 'May 1, 2021',
-            selledAmount: 20,
-            workingPlaces: [
-                {
-                    name: 'Figma',
-                    image: '/projects/Invicta/figma.png'
-                },
-                {
-                    name: 'Yandex',
-                    image: '/projects/Invicta/yandex.png'
-                },
-            ]
-        },
-        {
-            id: 'johnjr',
-            firstName: 'John',
-            username: 'johnjr',
-            avatar: '/projects/Invicta/avatar4.png',
-            registrationDate: 'Jan 21, 2021',
-            selledAmount: 14,
-            workingPlaces: [
-                {
-                    name: 'Figma',
-                    image: '/projects/Invicta/figma.png'
-                },
-                {
-                    name: 'Yandex',
-                    image: '/projects/Invicta/yandex.png'
-                },
-            ]
-        },
-        {
-            id: 'donaldmaen',
-            firstName: 'Donald',
-            username: 'donaldmaen',
-            avatar: '/projects/Invicta/avatar.png',
-            registrationDate: 'Jul 19, 2021',
-            selledAmount: 9,
-            workingPlaces: [
-                {
-                    name: 'Figma',
-                    image: '/projects/Invicta/figma.png'
-                },
-                {
-                    name: 'Yandex',
-                    image: '/projects/Invicta/yandex.png'
-                },
-            ]
-        },
-    ]
 })
 
 export const mutations = {
@@ -293,4 +249,68 @@ export const mutations = {
         user.followers -= 1;
         user.isFollowedByYou = false;
     },
+    addUser(state, {username, email, password}) {
+        const dateObj = new Date();
+        const year = dateObj.getFullYear();
+        const monthNumber = dateObj.getMonth();
+        const day = dateObj.getDate();
+
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ]
+
+        const month = months[monthNumber];
+
+        const date = `${month} ${day}, ${year}`;
+
+        state.users.push({
+            id: username,
+            username: username,
+            email: email,
+            password: password,
+            avatar: '/projects/Invicta/avatar.png',
+            registrationDate: date,
+            selledAmount: 0,
+            workingPlaces: [
+                {
+                    name: 'Figma',
+                    image: '/projects/Invicta/figma.png'
+                },
+                {
+                    name: 'Yandex',
+                    image: '/projects/Invicta/yandex.png'
+                },
+            ],
+            following: 0,
+            followers: 0,
+            rank: 'beginner',
+            bio: `
+            I love, I hate, I'm losing my mind. It's 
+            'cause I'm in the loony bin I love, I hate, 
+            I'm losing my mind It's 'cause, 'cause,
+            cause I'm crazy
+            `,
+            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            discordId: '',
+            telegramUsername: '',
+            achievements: {
+                achievementHeart: false,
+                achievementComment: false,
+                achievementLike: false,
+            },
+        })
+
+        console.log(state.users)
+    }
 }

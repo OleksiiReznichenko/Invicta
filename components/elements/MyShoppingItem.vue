@@ -2,9 +2,9 @@
     <nuxt-link :to="'/myShopping/' + id" class="shopping-item">
         <div class="desktop left">
             <div class="number">#{{number}}</div>
-            <img :src="image" alt="Shopping item image" class="image">
+            <img :src="product.photo" alt="Shopping item image" class="image">
             <div class="info">
-                <h4 class="name">{{name}}</h4>
+                <h4 class="name">{{product.name}}</h4>
                 <div class="bottom-container">
                     <span :class="{'border-text-green': isValidated, 'border-text-red': !isValidated}" class="status">{{status}}</span>
                     <span class="id">{{id}}</span>
@@ -13,10 +13,10 @@
         </div>
         <nuxt-link class="desktop shopping-item-link" :to="'/myShopping/' + id">watch order</nuxt-link>
 
-        <img :src="image" alt="Order image" class="mobile image">
+        <img :src="product.photo" alt="Order image" class="mobile image">
         <div class="mobile info">
             <div class="title-container">
-                <h4 class="order-title">{{name}}</h4>
+                <h4 class="order-title">{{product.name}}</h4>
             </div>
             <div class="bottom-container id-status-container">
                 <span :class="{'border-text-green': isValidated, 'border-text-red': !isValidated}" class="status">{{status}}</span>
@@ -29,7 +29,22 @@
 
 <script>
 export default {
-    props: ['name', 'image', 'status', 'id', 'number', 'isValidated']
+    props: ['productId', 'status', 'id', 'number', 'isValidated'],
+    created () {
+        // PRODUCTS OBJECT
+        const productsObject = this.$store.state.products.products;
+
+        // CONVERT PRODUCTS OBJECT TO ARRAY
+        const productsObjectToArray = Object.entries(productsObject);
+
+        // FIND PRODUCT IN PRODUCTS ARRAY
+        productsObjectToArray.forEach(([key, value]) => {
+            if (this.product) return;
+            this.product = value.find(product => {
+                return product.id === this.productId;
+            })
+        })
+    },
 }
 </script>
 

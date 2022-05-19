@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Navigation/>
+    <Navigation style="display: none"/>
     <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
     
     <div class="error-content">
@@ -89,6 +89,19 @@ export default {
     height: 100vh !important;
     overflow: hidden !important;
     position: relative !important;
+    
+    margin-top: -11rem;
+
+    @media only screen and (max-width: 850px) {
+        margin-top: -15rem;
+    }
+}
+
+.corner-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
 }
 
 .info {

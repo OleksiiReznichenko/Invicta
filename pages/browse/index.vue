@@ -1,125 +1,128 @@
 <template>
-    <div class="browse-page section section-page">
-        <div class="content">
-            <div ref="pageSequence" class="page-sequence">
-                <nuxt-link to="/">Main</nuxt-link>
-                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                <span>Browse</span>
-            </div>
-            <div class="order-sort-container">
-                <h2 class="title">Browse</h2>
-                <div @click="sortPrice" class="order-sort-button">
-                    <span ref="sortPriceText">first {{sortPriceTextComp}}</span>
-                    <img ref="sortPriceArrow" src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+    <div class="root">
+        <img ref="cornerLight" src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
+        <div class="browse-page section section-page">
+            <div class="content">
+                <div ref="pageSequence" class="page-sequence">
+                    <nuxt-link to="/">Main</nuxt-link>
+                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                    <span>Browse</span>
                 </div>
-            </div>
-            <div class="main-content">
-                <div class="product-filtration">
-                    <div class="product-types-container">
-                        <h4 class="title">Product type</h4>
-                        <ul @click="typeFiltration" class="types-list">
-                            <li class="product-type">
-                                <span>Giftcards</span>
-                                <div class="indicator"></div>
-                            </li>
-                            <li class="product-type">
-                                <span>Accounts</span>
-                                <div class="indicator"></div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="product-categories-container">
-                        <ul @click="categoryFiltration" class="categories-list">
-                            <li id="all" class="product-category active">
-                                <span>All</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="technology" class="product-category">
-                                <span>Technology</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="beauty" class="product-category">
-                                <span>Beauty</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="food" class="product-category">
-                                <span>Food</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="clothes" class="product-category">
-                                <span>Clothes</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="gaming" class="product-category">
-                                <span>Gaming</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="streaming" class="product-category">
-                                <span>Streaming</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="entertainment" class="product-category">
-                                <span>Entertainment</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="travel" class="product-category">
-                                <span>Travel</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="shopping" class="product-category">
-                                <span>Shopping</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                            <li id="wellness" class="product-category">
-                                <span>Wellness</span>
-                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            </li>
-                        </ul>
+                <div class="order-sort-container">
+                    <h2 class="title">Browse</h2>
+                    <div @click="sortPrice" class="order-sort-button">
+                        <span ref="sortPriceText">first {{sortPriceTextComp}}</span>
+                        <img ref="sortPriceArrow" src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                     </div>
                 </div>
+                <div class="main-content">
+                    <div class="product-filtration">
+                        <div class="product-types-container">
+                            <h4 class="title">Product type</h4>
+                            <ul @click="typeFiltration" class="types-list">
+                                <li class="product-type">
+                                    <span>Giftcards</span>
+                                    <div class="indicator"></div>
+                                </li>
+                                <li class="product-type">
+                                    <span>Accounts</span>
+                                    <div class="indicator"></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-categories-container">
+                            <ul @click="categoryFiltration" class="categories-list">
+                                <li id="all" class="product-category active">
+                                    <span>All</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="technology" class="product-category">
+                                    <span>Technology</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="beauty" class="product-category">
+                                    <span>Beauty</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="food" class="product-category">
+                                    <span>Food</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="clothes" class="product-category">
+                                    <span>Clothes</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="gaming" class="product-category">
+                                    <span>Gaming</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="streaming" class="product-category">
+                                    <span>Streaming</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="entertainment" class="product-category">
+                                    <span>Entertainment</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="travel" class="product-category">
+                                    <span>Travel</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="shopping" class="product-category">
+                                    <span>Shopping</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                                <li id="wellness" class="product-category">
+                                    <span>Wellness</span>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <div class="products-container">
-                    <div ref="noProduct" class="no-products">
-                        <h4 class="title">No products were found by your request</h4>
-                        <div class="line"></div>
-                    </div>
-                    <div class="products-list">
-                        <ProductCard 
-                            v-for="card in filteredProducts"
-                            :key="card.id + Math.random()"
-                            :id="card.id"
-                            :name="card.name"
-                            :photo="card.photo"
-                            :price="card.price"
-                            :oldPrice="card.oldPrice"
-                            :amountInStock="card.amountInStock"
-                        />
-                    </div>
-                    <div ref="productsPagination" class="products-pagination">
-                        <div ref="prevButton" @click="prevProductsPageButton" class="prev-button">
-                            <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                            <span>prev</span>
+                    <div class="products-container">
+                        <div ref="noProduct" class="no-products">
+                            <h4 class="title">No products were found by your request</h4>
+                            <div class="line"></div>
                         </div>
-                        <div class="page-numbers">
-                            <span @click="pagination" class="page-number page-number--first">1</span>
-                            <span class="dots dots--first">...</span>
-                            <span @click="pagination" class="page-number page-number--central page-number--central--left">2</span>
-                            <span @click="pagination" class="page-number page-number--central page-number--central--central">3</span>
-                            <span @click="pagination" class="page-number page-number--central page-number--central--right">4</span>
-                            <span class="dots dots--last">...</span>
-                            <span @click="pagination" ref="lastPageNumber" class="page-number page-number--last">10</span>
+                        <div class="products-list">
+                            <ProductCard 
+                                v-for="card in filteredProducts"
+                                :key="card.id + Math.random()"
+                                :id="card.id"
+                                :name="card.name"
+                                :photo="card.photo"
+                                :price="card.price"
+                                :oldPrice="card.oldPrice"
+                                :amountInStock="card.amountInStock"
+                            />
                         </div>
-                        <div ref="nextButton" @click="nextProductsPageButton" class="next-button">
-                            <span ref="nextButtonSpanLoad" class="span-load">Load more</span>
-                            <span class="span-next">next</span>
-                            <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                        <div ref="productsPagination" class="products-pagination">
+                            <div ref="prevButton" @click="prevProductsPageButton" class="prev-button">
+                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                <span>prev</span>
+                            </div>
+                            <div class="page-numbers">
+                                <span @click="pagination" class="page-number page-number--first">1</span>
+                                <span class="dots dots--first">...</span>
+                                <span @click="pagination" class="page-number page-number--central page-number--central--left">2</span>
+                                <span @click="pagination" class="page-number page-number--central page-number--central--central">3</span>
+                                <span @click="pagination" class="page-number page-number--central page-number--central--right">4</span>
+                                <span class="dots dots--last">...</span>
+                                <span @click="pagination" ref="lastPageNumber" class="page-number page-number--last">10</span>
+                            </div>
+                            <div ref="nextButton" @click="nextProductsPageButton" class="next-button">
+                                <span ref="nextButtonSpanLoad" class="span-load">Load more</span>
+                                <span class="span-next">next</span>
+                                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <Footer />
         </div>
-
-        <Footer />
     </div>
 </template>
 

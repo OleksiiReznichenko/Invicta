@@ -1,5 +1,6 @@
 <template>
     <div class="index-page">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <HeaderIndex />
         <main>
             <DiscountBlock />

@@ -1,10 +1,13 @@
 export const state = () => ({
     isLoggedIn: true,
+    isOpenNofication: false,
+    notificationWindow: '',
+    // user: {}
     user: {
         id: 'warrenjs',
-        firstName: 'Wade',
-        lastName: 'Warren',
         username: 'warrenjs',
+        email: 'warrenjs@gmail.com',
+        password: '654321',
         avatar: '/projects/Invicta/avatar.png',
         balance: '5.00',
         shoppingNumber: 11,
@@ -43,19 +46,22 @@ export const state = () => ({
 
 export const mutations = {
     isLoggedInToFalse(state) {
+        state.user = {};
         state.isLoggedIn = false;
     },
-    isLoggedInToTrue(state) {
+    isLoggedInToTrue(state, {loggedInUser}) {
+        state.user = loggedInUser;
+        state.user.isMyProfile = true;
         state.isLoggedIn = true;
     },
     editProfileUsername(state, {value}) {
         state.user.username = value;
     },
-    editProfileFirstName(state, {value}) {
-        state.user.firstName = value;
+    editProfileEmail(state, {value}) {
+        state.user.email = value;
     },
-    editProfileLastName(state, {value}) {
-        state.user.lastName = value;
+    editProfilePassword(state, {value}) {
+        state.user.password = value;
     },
     editProfileTelegramUsername(state, {value}) {
         state.user.telegramusername = value;
@@ -72,12 +78,21 @@ export const mutations = {
     unSubscribe(state) {
         state.user.following -= 1;
     },
+    isOpenNoficationToFalse(state) {
+        state.isOpenNofication = false;
+    },
+    isOpenNoficationToTrue(state) {
+        state.isOpenNofication = true;
+    },
+    getNotificationWindow(state, {value}) {
+        state.notificationWindow = value;
+    },
 }
 
 export const actions = {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // NAVIGATION DROPDOWN FUNCTIONAL
-    dropdownFunctional(state, payload) {
+    dropdownFunctional(context, payload) {
         payload.dropdownOpener.addEventListener('click', () => {
             if (!payload.dropdown.classList.contains('opened')) {
                 payload.dropdown.classList.add('opened');
@@ -152,6 +167,38 @@ export const actions = {
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // SHOW NOTIFICATION WINDOW
+    showNotificationWindow(context, {notificationWindow, text, isBad}) {
+                // console.log(context.state.isOpenNofication)
+        if (context.state.isOpenNofication || !context.state.notificationWindow) return;
+        context.commit('isOpenNoficationToTrue');
+
+        context.state.notificationWindow.textContent = text;
+
+        if (isBad) {
+            context.state.notificationWindow.classList.remove('notification-good');
+            context.state.notificationWindow.classList.add('notification-bad');
+        } else {
+            context.state.notificationWindow.classList.remove('notification-bad');
+            context.state.notificationWindow.classList.add('notification-good');
+        }
+
+        context.state.notificationWindow.style.display = 'block';
+        setTimeout(() => {
+            context.state.notificationWindow.style.opacity = 1;
+        }, 10);
+
+        setTimeout(() => {
+            context.state.notificationWindow.style.opacity = 0;
+            setTimeout(() => {
+                context.state.notificationWindow.style.display = 'none';
+
+                context.commit('isOpenNoficationToFalse');
+            }, 200);
+        }, 1500);
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // SLIDE UP FUNCTION
     slideUp(state, {target, duration = 500}) {
         target.style.transitionProperty = 'height, margin, padding';
@@ -181,7 +228,7 @@ export const actions = {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // SLIDE DOWN FUNCTION
-    slideDown(state, {target, duration = 500}) {
+    slideDown(context, {target, duration = 500}) {
         target.style.removeProperty('display');
         let display = window.getComputedStyle(target).display;
         if (display === 'none') display = 'block';
@@ -213,11 +260,11 @@ export const actions = {
     
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TOGGLE SLIDES
-    slideToggle(state, {target, duration = 500}) {
+    slideToggle(context, {target, duration = 500}) {
         if (window.getComputedStyle(target).display === 'none') {
-            return state.dispatch('slideDown', {target, duration});
+            return context.dispatch('slideDown', {target, duration});
         } else {
-            return state.dispatch('slideUp', {target, duration});
+            return context.dispatch('slideUp', {target, duration});
         }
     },
 }

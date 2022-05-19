@@ -1,7 +1,8 @@
 <template>
     <div class="layout">
         <!-- <Preloader /> -->
-        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
+        <div ref="notificationWindow" id="notificationWindow"></div>
+        <!-- <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light"> -->
         <Navigation/>
         <nuxt class="on-top" />
     </div>
@@ -31,11 +32,14 @@ export default {
     mounted () {
         // DOM
         this.dropdownOpener = document.getElementById('dropdown-opener');
+        this.notificationWindow = document.getElementById('notificationWindow');
         this.dropdown = document.getElementById('dropdown');
         this.nav = document.querySelector('.nav');
         this.navLeft = document.querySelector('.nav__left');
         this.navRight = document.querySelector('.nav__right');
         this.closeNavBtn = document.querySelector('.close-nav-btn');
+
+        this.$store.commit('getNotificationWindow', {value: this.notificationWindow});
 
         // INIT NAVIGATION DROPDOWN
         this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
@@ -56,10 +60,6 @@ export default {
                     this.dropdown = document.getElementById('dropdown');
                     this.closeNavBtn = document.querySelector('.close-nav-btn');
                     this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
-                    
-                    // if (window.outerWidth > 600) {
-                    //     this.nav.style.width = '90%';
-                    // }
                     
                     this.nav.style.position = 'absolute';
                     this.navLeft.style.transform = 'translate(0)';
@@ -86,6 +86,13 @@ export default {
 </style>
 
 <style lang='scss'>
+.corner-light {
+  position: absolute;
+  top: -15rem;
+  left: 0;
+//   max-width: 100%;
+}
+
 .btn {
     border-radius: 8px;
     overflow: hidden;
@@ -99,9 +106,7 @@ export default {
         top: 0;
         left: 0;
         z-index: 20;
-        // width: 100%;
-        // height: 100%;
-        border-radius: 4px;
+        border-radius: 4.5px;
         width: calc(100% - 3px);
         height: calc(100% - 3px);
         top: 1.5px; bottom: 1.5px;
@@ -112,9 +117,6 @@ export default {
     span {
         position: relative;
         z-index: 30;
-        // display: block;
-        // width: 100%;
-        // height: 100%;
     }
 }
 
@@ -150,13 +152,8 @@ export default {
 
 .btn-transparent {
     border: 1px solid transparent;
-    // background-color: #111111;
     background-clip: padding-box;
     border-radius: 8px;
-
-    // .background {
-    //     background-color: #111111;
-    // }
 
     &::before {
         content: '';
@@ -275,10 +272,6 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
-            
-    // @media only screen and (max-width: 850px) {
-    //     margin-bottom: 20px;
-    // }
 }
     
 .page-sequence a {
@@ -298,6 +291,12 @@ export default {
     transform: rotate(-90deg);
     margin: 0 1rem;
     width: 1.25rem;
+}
+
+.page-title {
+    font-size: 4.5rem;
+    margin-top: -.5rem;
+    margin-bottom: 3rem;
 }
 
 
@@ -338,4 +337,198 @@ export default {
         }
     }
 }
+
+
+.form-page {
+    // footer {
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 50%;
+    //     transform: translateX(-50%);
+    //     width: 100%;
+    // }
+
+    .form-image {
+        position: absolute;
+        bottom: 0;
+        right: 0%;
+        height: 100%;
+    }
+
+    .main-content {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+    }
+
+    .form-container {
+        background: $color-grey-dark;
+        box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
+        border-radius: 15px;
+        padding: 4rem;
+        margin-top: 4rem;
+        position: relative;
+    
+        @media only screen and (max-width: 850px) {
+            padding: 5rem;
+        }
+    
+        @media only screen and (max-width: 500px) {
+            padding: 5rem 4rem;
+        }
+    
+        @media only screen and (max-width: 400px) {
+            padding: 5rem 3rem;
+        }
+
+        .flex-container {
+            display: flex;
+            align-items: center;
+    
+            @media only screen and (max-width: 850px) {
+                flex-direction: column;
+            }
+
+            .input-group:first-of-type {
+                margin-right: 2.5rem;
+    
+                @media only screen and (max-width: 850px) {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .btn-transparent {
+            .background {
+                background-color: $color-grey-dark;
+            }
+        }
+
+        .btn {
+            margin-top: 1rem;
+            font-weight: 500 !important;
+        }
+
+        .input-left-content {
+            position: absolute;
+            right: 3rem;
+            bottom: 1rem;
+        }
+
+        .input-group-login {
+            input {
+                &::placeholder {
+                    color: white !important;
+                }
+            }
+        }
+
+        .input-group {
+            position: relative;
+                    
+            input,
+            textarea {
+                display: block;
+                background-color: #111111;
+                box-shadow: 0 .3rem 1rem 0 rgba(#000000, .2) inset,
+                0 .3rem 1rem 0 rgba(#19151F, .5);
+                border-radius: 8px;
+                padding: 1rem 2.5rem;
+                margin-bottom: 1.75rem;
+    
+                @media only screen and (max-width: 850px) {
+                    padding: 1.1rem 2.5rem;
+                    margin-bottom: 2.5rem;
+                }
+            }
+
+            input {
+                width: 24rem;
+    
+                @media only screen and (max-width: 850px) {
+                    width: 40rem !important;
+                }
+    
+                @media only screen and (max-width: 450px) {
+                    width: 38rem !important;
+                }
+    
+                // @media only screen and (max-width: 400px) {
+                //     width: 35rem !important;
+                // }
+            }
+
+            textarea {
+                width: 100%;
+                padding: 1.25rem 2.5rem;
+    
+                @media only screen and (max-width: 850px) {
+                    width: 40rem !important;
+                }
+            }
+
+            .full-width {
+                width: 100% !important;
+            }
+
+            label {
+                display: inline-block;
+                margin-bottom: .8rem;
+    
+                @media only screen and (max-width: 850px) {
+                    margin-bottom: 1.1rem;
+                }
+            }
+        }
+
+        .btn-small {
+            padding: .75rem 3.5rem;
+        }
+
+        .btn-medium {
+            padding: 1.4rem 3.5rem;
+        }
+
+        .btn-big {
+            padding: 1.4rem 6rem;
+        }
+    }
+}
+
+#notificationWindow {
+    box-shadow: 0px .5rem 5rem 0px rgba(#000000, .4);
+    background-color: $color-grey-2;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    padding: 5.75rem 0 7.25rem;
+    width: 47rem;
+    color: white;
+    position: fixed;
+    left: 50%;
+    top: 0;
+    z-index: 10000;
+    transform: translateX(-50%);
+    transition: all .3s;
+    text-align: center;
+    display: none;
+    opacity: 0;
+    font-family: Rowdies;
+    font-weight: 700 !important;
+    font-size: 2.85rem;
+
+    .title {
+        font-size: 2.85rem;
+    }
+}
+
+.notification-good {
+    background-color: #005306 !important;
+}
+
+.notification-bad {
+    background-color: #531600 !important;
+}
+
 </style>

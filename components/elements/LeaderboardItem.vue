@@ -5,8 +5,7 @@
             <img :src="avatar" alt="User avatar" class="avatar">
             <div class="info">
                 <div class="top-container">
-                    <h4 class="name">{{name}}</h4>
-                    <span class="username">@{{username}}</span>
+                    <h4 class="username">@{{username}}</h4>
                 </div>
                 <div class="bottom-container">
                     <div v-for="item in workingPlaces" :key="item.name" class="working-place">
@@ -26,7 +25,7 @@
 
 <script>
 export default {
-    props: ['id', 'name', 'username', 'avatar', 'registrationDate', 'selledAmount', 'workingPlaces', 'number']
+    props: ['id', 'username', 'avatar', 'registrationDate', 'selledAmount', 'workingPlaces', 'number']
 }
 </script>
 
@@ -119,7 +118,7 @@ export default {
                 color: $color-text-grey;
                 margin-bottom: .75rem;
 
-                .name {
+                .username {
                     font-weight: 600 !important;
                     font-size: 2rem;
                     margin-right: 1rem;

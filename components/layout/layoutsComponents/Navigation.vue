@@ -28,14 +28,23 @@
           />
         </div>
 
-        <div
+        <!-- <div
           v-if="!isPhone && !isLoggedIn"
           key="nav-login-link"
           @click="isLoggedInToTrue"
           class="btn btn-gradient"
         >
         <span>Login</span>
-        </div>
+        </div> -->
+
+        <nuxt-link
+        to="/login"
+          v-if="!isPhone && !isLoggedIn"
+          key="nav-login-link"
+          class="btn btn-gradient"
+        >
+        <span>Login</span>
+        </nuxt-link>
         <div
           v-if="!isPhone && !isLoggedIn"
           class="profile"
@@ -71,7 +80,7 @@
               alt="Avatar"
               class="user__icon"
             />
-            <div class="user__name">{{$store.state.user.firstName}} {{$store.state.user.lastName}}</div>
+            <div class="user__name">{{$store.state.user.username}}</div>
           </div>
           <NavDropdown />
         </div>
@@ -196,7 +205,7 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // LOG IN
         isLoggedInToTrue() {
-            this.$store.commit('isLoggedInToTrue');
+            // this.$store.commit('isLoggedInToTrue');
             this.$router.push('/');
         },
 

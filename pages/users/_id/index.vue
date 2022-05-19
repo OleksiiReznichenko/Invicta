@@ -1,5 +1,6 @@
 <template>
     <div class="profile-page">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <HeaderProfile :userObject='userSelected' />
         <main>
             <CustomBanner />

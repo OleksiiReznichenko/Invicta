@@ -1,133 +1,138 @@
 <template>
-    <div class="order-page section section-page">
-        <div class="content">
-            <div class="page-sequence">
-                <nuxt-link to="/">Main</nuxt-link>
-                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                <nuxt-link to="/orders">My orders</nuxt-link>
-                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                <span>{{order.name}}</span>
-            </div>
-            <div class="main-content">
-                <div class="left">
-                    <div class="grey-container order-container">
-                        <img :src="order.image" alt="order image" class="image">
-                        <div class="info">
-                            <h3 class="name">{{order.name}}</h3>
-                            <div class="date-id-container desktop">
-                                <span class="id">order {{order.id}}</span>
-                                <span class="date">{{order.date}}</span>
-                            </div>
-                            <div class="status-price-container">
-                                <div :class="{'border-text-green': isConfirmed, 'border-text-red': !isConfirmed}" class="status">{{order.status}}</div>
-                                <div class="price">${{order.price}}</div>
-                            </div>
-                            <div class="date-id-container mobile">
-                                <span class="id">order {{order.id}}</span>
-                                <span class="date">{{order.date}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grey-container chat">
-                        <div class="top-container">
-                            <h3 v-if="order.chat.messages.length == 0" class="no-messages">No messages yet</h3>
-                            <div v-if="order.chat.messages.length > 0" class="messages">
-                                <ChatMessage 
-                                v-for="message in order.chat.messages"
-                                :key="message.id"
-                                :person='message.person === "me" ? user : order.buyer'
-                                :isMe='message.person === "me"'
-                                :text='message.text'
-                                :date='message.date'
-                                />
-                            </div>
-                        </div>
-                        <div class="input-container">
-                            <EmojiPicker class="emoji-main-container" @emoji="onEmoji">
-                                <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" 
-                                    @click.stop="clickEvent">
-                                    <button class="emoji-btn" type="button">
-                                        <img src="@/assets/svg/emojiButton.svg" alt="Emoji button" class="emoji-icon">
-                                    </button>
+    <div class="root">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
+        <div class="order-page section section-page">
+            <div class="content">
+                <div class="page-sequence">
+                    <nuxt-link to="/">Main</nuxt-link>
+                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                    <nuxt-link to="/orders">My orders</nuxt-link>
+                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                    <span>{{product.name}}</span>
+                </div>
+                <div class="main-content">
+                    <div class="left">
+                        <div class="grey-container order-container">
+                            <nuxt-link :to="'/browse/' + product.id">
+                                <img :src="product.photo" alt="Product photo" class="image">
+                            </nuxt-link>
+                            <div class="info">
+                                <h3 class="name">{{product.name}}</h3>
+                                <div class="date-id-container desktop">
+                                    <span class="id">order {{order.id}}</span>
+                                    <span class="date">{{order.date}}</span>
                                 </div>
-                                <div class="emoji-picker-wrapper" slot="emoji-picker" slot-scope="{ emojis, insert }">
-                                    <div class="emoji-picker">
-                                        <div v-for="(emojiGroup, category) in emojis" :key="category">
-                                            <h5>{{ category }}</h5>
-                                            <div>
-                                                <span class="emoji"
-                                                    v-for="(emoji, emojiName) in emojiGroup"
-                                                    :key="emojiName"
-                                                    @click="insert(emoji)"
-                                                    :title="emojiName"
-                                                >{{ emoji }}</span>
+                                <div class="status-price-container">
+                                    <div :class="{'border-text-green': isConfirmed, 'border-text-red': !isConfirmed}" class="status">{{order.status}}</div>
+                                    <div class="price">${{product.price}}</div>
+                                </div>
+                                <div class="date-id-container mobile">
+                                    <span class="id">order {{order.id}}</span>
+                                    <span class="date">{{order.date}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grey-container chat">
+                            <div class="top-container">
+                                <h3 v-if="order.chat.messages.length == 0" class="no-messages">No messages yet</h3>
+                                <div v-if="order.chat.messages.length > 0" class="messages">
+                                    <ChatMessage 
+                                    v-for="message in order.chat.messages"
+                                    :key="message.id"
+                                    :person='message.person === "me" ? user : order.buyer'
+                                    :isMe='message.person === "me"'
+                                    :text='message.text'
+                                    :date='message.date'
+                                    />
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <EmojiPicker class="emoji-main-container" @emoji="onEmoji">
+                                    <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" 
+                                        @click.stop="clickEvent">
+                                        <button class="emoji-btn" type="button">
+                                            <img src="@/assets/svg/emojiButton.svg" alt="Emoji button" class="emoji-icon">
+                                        </button>
+                                    </div>
+                                    <div class="emoji-picker-wrapper" slot="emoji-picker" slot-scope="{ emojis, insert }">
+                                        <div class="emoji-picker">
+                                            <div v-for="(emojiGroup, category) in emojis" :key="category">
+                                                <h5>{{ category }}</h5>
+                                                <div>
+                                                    <span class="emoji"
+                                                        v-for="(emoji, emojiName) in emojiGroup"
+                                                        :key="emojiName"
+                                                        @click="insert(emoji)"
+                                                        :title="emojiName"
+                                                    >{{ emoji }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                </EmojiPicker>
+                                <textarea @keypress.enter="sendMessage" @input="autoGrow" v-model="newMessage" :maxlength="maxMessageLength" ref="messageInput" name="message" id="messageInput" cols="30" rows="1" wrap="soft" placeholder="Write a message"></textarea>
+                                <button @click="sendMessage" class="send-button">Send</button>
+                            </div>
+                            <div @click="toggleEvent" v-if="order.chat.notifications.length > 0" class="toggle-container notifications">
+                                <div class="title-container">
+                                    <div class="title-container__left">
+                                        <div class="icon-container">
+                                            <img src="@/assets/svg/comment.svg" alt="Icon" class="icon">
+                                        </div>
+                                        <span class="title">Show notifications</span>
+                                    </div>
+                                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                                 </div>
-                            </EmojiPicker>
-                            <textarea @keypress.enter="sendMessage" @input="autoGrow" v-model="newMessage" :maxlength="maxMessageLength" ref="messageInput" name="message" id="messageInput" cols="30" rows="1" wrap="soft" placeholder="Write a message"></textarea>
-                            <button @click="sendMessage" class="send-button">Send</button>
+                                <div class="notifications-list description-container">
+                                    <ChatNotification 
+                                    v-for="notification in order.chat.notifications"
+                                    :key="notification.id"
+                                    :text='notification.text'
+                                    :date='notification.date'
+                                    />
+                                </div>
+                            </div>
                         </div>
-                        <div @click="toggleEvent" v-if="order.chat.notifications.length > 0" class="toggle-container notifications">
+                    </div>
+                    <div class="right">
+                        <div class="grey-container users-container">
+                            <nuxt-link :to="'/users/' + user.id" class="user buyer">
+                                <div class="info">
+                                    <span>Seller</span>
+                                    <h4 class="user-name">Me</h4>
+                                </div>
+                                <img :src="user.avatar" alt="User photo" class="user-photo">
+                            </nuxt-link>
+                            <nuxt-link :to="'/users/' + order.buyer.id" class="user buyer">
+                                <div class="info">
+                                    <span>Buyer</span>
+                                    <h4 class="user-name">{{order.buyer.username}}</h4>
+                                </div>
+                                <img :src="order.buyer.avatar" alt="User photo" class="user-photo">
+                            </nuxt-link>
+                        </div>
+                        <div @click="toggleEvent" class="toggle-container grey-container help-container">
                             <div class="title-container">
                                 <div class="title-container__left">
-                                    <div class="icon-container">
-                                        <img src="@/assets/svg/comment.svg" alt="Icon" class="icon">
-                                    </div>
-                                    <span class="title">Show notifications</span>
+                                    <img src="@/assets/svg/shield.svg" alt="Icon" class="icon">
+                                    <span>Help</span>
                                 </div>
                                 <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                             </div>
-                            <div class="notifications-list description-container">
-                                <ChatNotification 
-                                v-for="notification in order.chat.notifications"
-                                :key="notification.id"
-                                :text='notification.text'
-                                :date='notification.date'
-                                />
+                            <div class="description-container">
+                                <p class="description">
+                                    If the terms of the deal have not been fulfilled, let us know.
+                                </p>
+                                <a class="support-link" href="#">Write to support</a>
                             </div>
                         </div>
+                        <button @click="validateEvent" :class="{'confirmed': isConfirmed}" class="confirm-button">{{buttonContent}}</button>
                     </div>
-                </div>
-                <div class="right">
-                    <div class="grey-container users-container">
-                        <nuxt-link :to="'/users/' + user.id" class="user buyer">
-                            <div class="info">
-                                <span>Seller</span>
-                                <h4 class="user-name">Me</h4>
-                            </div>
-                            <img :src="user.avatar" alt="User photo" class="user-photo">
-                        </nuxt-link>
-                        <nuxt-link :to="'/users/' + order.buyer.id" class="user buyer">
-                            <div class="info">
-                                <span>Buyer</span>
-                                <h4 class="user-name">{{order.buyer.firstName}} <br> {{order.buyer.lastName}}</h4>
-                            </div>
-                            <img :src="order.buyer.avatar" alt="User photo" class="user-photo">
-                        </nuxt-link>
-                    </div>
-                    <div @click="toggleEvent" class="toggle-container grey-container help-container">
-                        <div class="title-container">
-                            <div class="title-container__left">
-                                <img src="@/assets/svg/shield.svg" alt="Icon" class="icon">
-                                <span>Help</span>
-                            </div>
-                            <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                        </div>
-                        <div class="description-container">
-                            <p class="description">
-                                If the terms of the deal have not been fulfilled, let us know.
-                            </p>
-                            <a class="support-link" href="#">Write to support</a>
-                        </div>
-                    </div>
-                    <button @click="validateEvent" :class="{'confirmed': isConfirmed}" class="confirm-button">{{buttonContent}}</button>
                 </div>
             </div>
-        </div>
 
-        <Footer />
+            <Footer />
+        </div>
     </div>
 </template>
 
@@ -311,6 +316,21 @@ export default {
         this.order = ordersArray.find(el => {
             if (this.order || el.id !== this.$route.params.id) return;
             return el;
+        })
+
+        
+        // PRODUCTS OBJECT
+        const productsObject = this.$store.state.products.products;
+
+        // CONVERT PRODUCTS OBJECT TO ARRAY
+        const productsObjectToArray = Object.entries(productsObject);
+
+        // FIND PRODUCT IN PRODUCTS ARRAY
+        productsObjectToArray.forEach(([key, value]) => {
+            if (this.product) return;
+            this.product = value.find(product => {
+                return product.id === this.order.productId;
+            })
         })
     },
 }

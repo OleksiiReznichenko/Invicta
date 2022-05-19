@@ -1,5 +1,6 @@
 <template>
-  <div class="relative-container">
+    <div class="relative-container">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="terms-page section">
             <div class="content">
                 <div class="page-sequence">
@@ -87,12 +88,6 @@ export default {
         min-height: 70vh;
         position: relative;
         z-index: 100;
-
-        .page-title {
-            font-size: 4.5rem;
-            margin-top: -.5rem;
-            margin-bottom: 3rem;
-        }
     }
 
     .grid-image {

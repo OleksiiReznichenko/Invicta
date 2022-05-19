@@ -2,19 +2,19 @@
     <nuxt-link :to="'/orders/' + id" class="order-item">
         <div class="desktop left">
             <div class="cell image-container">
-                <img :src="image" alt="order item image" class="image">
+                <img :src="product.photo" alt="order item image" class="image">
                 <span class="order-id">{{id}}</span>
             </div>
-            <span class="cell order-title">{{name}}</span>
+            <span class="cell order-title">{{product.name}}</span>
             <span class="cell order-amount">{{itemsAmount}}</span>
             <span class="cell order-time">{{time}}</span>
         </div>
         <nuxt-link class="desktop order-item-link" :to="'/orders/' + id">watch order</nuxt-link>
 
-        <img :src="image" alt="Order image" class="mobile image">
+        <img :src="product.photo" alt="Order image" class="mobile image">
         <div class="mobile info">
             <div class="title-container">
-                <span class="order-title">{{name}}</span>
+                <span class="order-title">{{product.name}}</span>
                 <span class="order-amount">({{itemsAmount}})</span>
             </div>
             <div class="id-time-container">
@@ -28,7 +28,22 @@
 
 <script>
 export default {
-    props: ['id', 'name', 'image', 'itemsAmount', 'time']
+    props: ['id', 'productId', 'itemsAmount', 'time'],
+    created () {
+        // PRODUCTS OBJECT
+        const productsObject = this.$store.state.products.products;
+
+        // CONVERT PRODUCTS OBJECT TO ARRAY
+        const productsObjectToArray = Object.entries(productsObject);
+
+        // FIND PRODUCT IN PRODUCTS ARRAY
+        productsObjectToArray.forEach(([key, value]) => {
+            if (this.product) return;
+            this.product = value.find(product => {
+                return product.id === this.productId;
+            })
+        })
+    },
 }
 </script>
 

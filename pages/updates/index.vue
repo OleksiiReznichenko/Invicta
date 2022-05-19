@@ -1,5 +1,6 @@
 <template>
     <div class="relative-container">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="updates-page section section-page">
             <div class="content">
                 <div class="page-sequence">
@@ -83,12 +84,6 @@ export default {
 
         @media only screen and (max-width: 600px) {
             width: 100%;
-        }
-
-        .page-title {
-            font-size: 4.5rem;
-            margin-top: -.5rem;
-            margin-bottom: 3rem;
         }
     }
 

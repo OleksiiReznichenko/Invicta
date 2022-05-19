@@ -307,15 +307,8 @@ h1, h2, h3 {
 
 
 .on-top {
-    position: relative;
-    z-index: 2000;
-}
-
-.corner-light {
-  position: absolute;
-  top: 0;
-  left: 0;
-  max-width: 100%;
+  position: relative;
+  z-index: 2000;
 }
 
 

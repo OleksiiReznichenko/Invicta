@@ -24,7 +24,7 @@
                     class="user__icon"
                 />
                 <div class="close-dropdown user__info">
-                    <div class="close-dropdown user__name">{{user.firstName}} {{user.lastName}}</div>
+                    <div class="close-dropdown user__name">{{user.username}}</div>
                     <div class="close-dropdown user__balance">${{user.balance}} balance</div>
                 </div>
             </nuxt-link>
@@ -56,12 +56,13 @@
                 <span class="user__name">No user</span>
             </nuxt-link>
 
-            <div @click="isLoggedInToTrue" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></div>
+            <!-- <div @click="isLoggedInToTrue" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></div> -->
+            <nuxt-link to="/login" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></nuxt-link>
             
             <div v-if="isLoggedIn" key="buttonsDropdown" class="buttons">
-                <nuxt-link to="/login" class="btn btn-blue"><span>Deposit</span></nuxt-link>
-                <nuxt-link to="/login" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
-                <nuxt-link to="/login" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
+                <nuxt-link to="/deposit" class="btn btn-blue"><span>Deposit</span></nuxt-link>
+                <nuxt-link to="/withdraw" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
+                <nuxt-link to="/register" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
             </div>
 
             <div v-if="isLoggedIn" key="line-3" class="line"></div>

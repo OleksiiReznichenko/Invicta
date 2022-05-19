@@ -1,8 +1,6 @@
 <template>
     <div class="edit-profile-page">
-        <div ref="notificationWindow" id="notificationWindow">
-            <h3 ref="notificationWindowTitle" class="title">Changes saved succefully</h3>
-        </div>
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="relative-container">
             <div class="content">
                 <div class="section page-sequence">
@@ -34,8 +32,8 @@
                         </div>
                         <div class="flex-container">
                             <div class="input-group">
-                                <label for="firstname">Firstname</label>
-                                <input v-model="firstName" type="text" id="firstname" placeholder="Mikhail">
+                                <label for="email">Email</label>
+                                <input v-model="email" type="email" id="email" placeholder="E-mail">
                             </div>
                             <div class="input-group">
                                 <label for="discordUserId">Discord user ID</label>
@@ -44,12 +42,12 @@
                         </div>
                         <div class="flex-container">
                             <div class="input-group">
-                                <label for="lastname">Lastname</label>
-                                <input v-model="lastName" type="text" id="lastname" placeholder="Djorgio">
+                                <label for="password">Password</label>
+                                <input v-model="password" type="password" id="password" placeholder="Password">
                             </div>
                             <div class="input-group">
-                                <label for="twitterUsername">Twitter Username</label>
-                                <input v-model="twitterUsername" type="text" id="twitterUsername" placeholder="mikhailjr">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input v-model="confirmPassword" type="password" id="confirmPassword" placeholder="Confirm password">
                             </div>
                         </div>
                         <div class="input-group">
@@ -109,14 +107,14 @@ export default {
     data() {
         return {
             isOpenNofication: false,
-            isInvalidUsername: false,
+            isUsernameTaken: false,
             maxBioLength: 220,
             username: '',
-            firstName: '',
-            lastName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
             telegramUsername: '',
             discordUserId: '',
-            twitterUsername: '',
             bio: '',
         }
     },
@@ -168,99 +166,114 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // EDIT PROFILE EVENT
         editProfileEvent() {
-            this.isInvalidUsername = false;
+            this.isUsernameTaken = false;
 
             // IF USERNAME IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
             if (!this.username) {
-                this.$refs.notificationWindowTitle.textContent = 'Username can\'be empty';
-                this.showNotificationWindow();
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'Username can\'be empty', 
+                    isBad: true
+                });
                 return;
             }
 
-            // IF FIRSTNAME IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
-            if (!this.firstName) {
-                this.$refs.notificationWindowTitle.textContent = 'First name can\'be empty';
-                this.showNotificationWindow();
+            // IF EMAIL IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (!this.email) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'Email can\'be empty', 
+                    isBad: true
+                });
                 return;
             }
 
-            // IF LASTNAME IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
-            if (!this.lastName) {
-                this.$refs.notificationWindowTitle.textContent = 'Last name can\'be empty';
-                this.showNotificationWindow();
+            // IF PASSWORD IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (!this.password) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'Password can\'be empty', 
+                    isBad: true
+                });
+                return;
+            }
+
+            // IF PASSWORD AND CONFIRM PASSWORD ARE NO THE SAME - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (this.password !== this.confirmPassword) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'The password and confirm password must be the same', 
+                    isBad: true
+                });
                 return;
             }
 
             // CHECK IF USERNAME IS TAKEN
             this.$store.state.users.users.forEach(el => {
                 if (this.username === el.username) {
-                    this.isInvalidUsername = true;
+                    this.isUsernameTaken = true;
+                }
+
+                if (this.email === el.email) {
+                    this.isEmailTaken = true;
                 }
             })
 
             // IF USERNAME IS TAKEN - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
-            if (this.isInvalidUsername) {
-                this.$refs.notificationWindowTitle.textContent = 'This Username is taken';
-                this.showNotificationWindow();
+            if (this.isUsernameTaken) {
+                // this.$refs.notificationWindowTitle.textContent = 'This Username is taken';
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'This Username is taken', 
+                    isBad: true
+                });
+                return;
+            }
+
+            // IF EMAIL IS TAKEN - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (this.isEmailTaken) {
+                // this.$refs.notificationWindowTitle.textContent = 'This Username is taken';
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'This Email is taken', 
+                    isBad: true
+                });
                 return;
             }
 
             // IF THERE ARE NO CHANGES - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
             if (
                 this.validateValue(this.username) === this.validateValue(this.user.username) &&
-                this.validateValue(this.firstName) === this.validateValue(this.user.firstName) &&
-                this.validateValue(this.lastName) === this.validateValue(this.user.lastName) &&
                 this.validateValue(this.telegramUsername) === this.validateValue(this.user.telegramUsername) &&
                 this.validateValue(this.discordUserId) === this.validateValue(this.user.discordUserId) &&
-                this.validateValue(this.twitterUsername) === this.validateValue(this.user.twitterUsername) &&
-                this.validateValue(this.bio) === this.validateValue(this.user.bio)
+                this.validateValue(this.bio) === this.validateValue(this.user.bio) &&
+                this.email === this.user.email &&
+                this.password === this.user.password
             ) {
-                this.$refs.notificationWindowTitle.textContent = 'No changes';
-                this.showNotificationWindow();
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'No changes', 
+                    isBad: true
+                });
                 return;
             }
 
             // IF THERE ARE CHANGES - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
-            this.$refs.notificationWindowTitle.textContent = 'Changes are succefully saved';
-            this.showNotificationWindow();
+            this.$store.dispatch('showNotificationWindow', {
+                text: 'Changes are succefully saved', 
+                isBad: false
+            });
 
             // SAVE CHANGES
             this.$store.commit('editProfileUsername', {value: this.validateValue(this.username)});
-            this.$store.commit('editProfileFirstName', {value: this.validateValue(this.firstName)});
-            this.$store.commit('editProfileLastName', {value: this.validateValue(this.lastName)});
+            this.$store.commit('editProfileEmail', {value: this.validateValue(this.email)});
+            this.$store.commit('editProfilePassword', {value: this.validateValue(this.password)});
             this.$store.commit('editProfileTelegramUsername', {value: this.validateValue(this.telegramUsername)});
             this.$store.commit('editProfileDiscordUserId', {value: this.validateValue(this.discordUserId)});
             this.$store.commit('editProfileBio', {value: this.validateValue(this.bio)});
-        },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // SHOW NOTIFICATION WINDOW
-        showNotificationWindow() {
-            if (this.isOpenNofication) return;
-            this.isOpenNofication = true;
-            this.$refs.notificationWindow.style.display = 'block';
-            setTimeout(() => {
-                this.$refs.notificationWindow.style.opacity = 1;
-            }, 10);
-
-            setTimeout(() => {
-                this.$refs.notificationWindow.style.opacity = 0;
-                setTimeout(() => {
-                    this.$refs.notificationWindow.style.display = 'none';
-
-                    this.isOpenNofication = false;
-                }, 200);
-            }, 1000);
         },
     },
     mounted () {
         // ASSIGN INITIAL INPUTS VALUES TO CURRENT PROFILE VALUES AND REMOVE EXCESSIVE WHITE SPACES
         this.username = this.validateValue(this.user.username);
-        this.firstName = this.validateValue(this.user.firstName);
-        this.lastName = this.validateValue(this.user.lastName);
+        this.email = this.validateValue(this.user.email);
+        this.password = this.validateValue(this.user.password);
+        this.confirmPassword = this.validateValue(this.user.password);
         this.telegramUsername = this.validateValue(this.user.telegramUsername);
         this.discordUserId = this.validateValue(this.user.discordUserId);
-        this.twitterUsername = this.validateValue(this.user.twitterUsername);
         this.bio = this.validateValue(this.user.bio);
     },
 }
@@ -308,12 +321,6 @@ export default {
 
         .save-margin-bottom {
             margin-bottom: 10rem;
-        }
-
-        .page-title {
-            font-size: 4.5rem;
-            margin-top: -.5rem;
-            margin-bottom: 3rem;
         }
 
         .page-sequence,
@@ -573,29 +580,6 @@ export default {
         @media only screen and (max-width: 850px) {
             top: 25%;
         }
-    }
-}
-
-#notificationWindow {
-    box-shadow: 0px .5rem 5rem 0px rgba(#000000, .4);
-    background-color: $color-grey-2;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
-    padding: 5.75rem 0 7.25rem;
-    width: 47rem;
-    color: white;
-    position: fixed;
-    left: 50%;
-    top: 0;
-    z-index: 1000;
-    transform: translateX(-50%);
-    transition: all .3s;
-    text-align: center;
-    display: none;
-    opacity: 0;
-
-    .title {
-        font-size: 2.85rem;
     }
 }
 </style>

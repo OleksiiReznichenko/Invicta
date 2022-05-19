@@ -100,12 +100,12 @@
                                     </div>
                                     <span>Share profile</span>
                                 </li>
-                                <li class="item">
+                                <nuxt-link to="/reportUser" class="item">
                                     <div class="icon-container">
                                         <img src="@/assets/svg/report.svg" alt="Report" class="icon">
                                     </div>
                                     <span>Report</span>
-                                </li>
+                                </nuxt-link>
                             </ul>
                         </div>
                     </div>
@@ -355,6 +355,7 @@ export default {
                     transition: all .2s;
                     border-radius: 1.2rem;
                     position: relative;
+                    font-size: 1.6rem !important;
                 }
             }
         }

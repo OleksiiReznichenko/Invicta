@@ -76,7 +76,11 @@ footer {
     margin: 0 auto;
     margin-top: 12rem !important;
 
-    @media only screen and (min-width: 600px) and (max-width: 1000px) {
+    @media only screen and (min-width: 850px) and (max-width: 1000px) {
+        width: 100% !important;
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 850px) {
         width: 90% !important;
     }
 

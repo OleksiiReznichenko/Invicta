@@ -18,7 +18,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'PG',
@@ -37,7 +38,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'Dole',
@@ -56,7 +58,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'Dell',
@@ -75,7 +78,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'M',
@@ -94,7 +98,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'Dole',
@@ -113,7 +118,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'MacDonalds',
@@ -132,7 +138,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-10 days`
+                eta: `7-10 days`,
+                sellerId: 'alexjr',
             },
 
             
@@ -153,7 +160,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'M',
@@ -172,7 +180,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'Dole',
@@ -191,7 +200,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'Dole',
@@ -210,7 +220,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'MacDonalds',
@@ -229,7 +240,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-10 days`
+                eta: `7-10 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'Dell',
@@ -248,7 +260,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'M',
@@ -267,7 +280,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'MacDonalds',
@@ -286,7 +300,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-10 days`
+                eta: `7-10 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'Ozon',
@@ -305,7 +320,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-14 days`
+                eta: `7-14 days`,
+                sellerId: 'alexjr',
             },
         ],
 
@@ -327,7 +343,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId PG',
@@ -346,7 +363,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId Dole',
@@ -365,7 +383,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId Dell',
@@ -384,7 +403,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId NikeUk',
@@ -403,7 +423,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId PG',
@@ -422,7 +443,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId Dole',
@@ -441,7 +463,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId Dell',
@@ -460,7 +483,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId NikeUk',
@@ -479,7 +503,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId PG',
@@ -498,7 +523,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId Dole',
@@ -517,7 +543,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'alexjr',
             },
             {
                 id: 'AccId Dell',
@@ -536,7 +563,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'alexjr',
             },
 
 
@@ -980,7 +1008,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId PG',
@@ -999,7 +1028,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dole',
@@ -1018,7 +1048,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dell',
@@ -1037,7 +1068,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId NikeUk',
@@ -1056,7 +1088,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId PG',
@@ -1075,7 +1108,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dole',
@@ -1094,7 +1128,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dell',
@@ -1113,7 +1148,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId NikeUk',
@@ -1132,7 +1168,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId PG',
@@ -1151,7 +1188,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dole',
@@ -1170,7 +1208,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dell',
@@ -1189,7 +1228,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId NikeUk',
@@ -1208,7 +1248,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId PG',
@@ -1227,7 +1268,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dole',
@@ -1246,7 +1288,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dell',
@@ -1265,7 +1308,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId NikeUk',
@@ -1284,7 +1328,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId PG',
@@ -1303,7 +1348,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dole',
@@ -1322,7 +1368,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dell',
@@ -1341,7 +1388,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId NikeUk',
@@ -1360,7 +1408,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `7-12 days`
+                eta: `7-12 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId PG',
@@ -1379,7 +1428,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `8-14 days`
+                eta: `8-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dole',
@@ -1398,7 +1448,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `5-14 days`
+                eta: `5-14 days`,
+                sellerId: 'antoniojr',
             },
             {
                 id: 'AccId Dell',
@@ -1417,7 +1468,8 @@ export const state = () => ({
                     Safe - storable - friendly. Get up to 20% bonuses for your purchase
                 `,
                 warranty: `Can only be used online or in stores`,
-                eta: `14-21 days`
+                eta: `14-21 days`,
+                sellerId: 'antoniojr',
             },  
         ]
     }

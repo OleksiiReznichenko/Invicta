@@ -1,49 +1,52 @@
 <template>
-    <div class="invicta-ads-page section">
-        <div class="content">
-            <div class="page-sequence">
-                <nuxt-link to="/">Main</nuxt-link>
-                <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                <span>Invicta.ads</span>
-            </div>
-            <div class="page-title-container">
-                <h1 class="page-title">Invicta.ads</h1>
-                <button class="btn btn-gradient create-campaign-button"><span>Create new campaign</span></button>
-            </div>
-            <div @click="toggleEvent" class="main-content">
-                <div class="campaigns-container campaigns-active-container">
-                    <h2 class="title">Active</h2>
-                    <h3 v-if="campaignsActive.length == 0" class="no-campaigns">You have no active campaigns</h3>
-                    <div v-if="campaignsActive.length > 0" class="campaigns-active">
-                        <InvictaAdsCampaign
-                        v-for="campaign in campaignsActive"
-                        :key="campaign.id"
-                        :id='campaign.id'
-                        :type='campaign.type'
-                        :customName='campaign.customName'
-                        :name='campaign.name'
-                        :itemsAmount='campaign.itemsAmount'
-                        />
+    <div class="root">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
+        <div class="invicta-ads-page section">
+            <div class="content">
+                <div class="page-sequence">
+                    <nuxt-link to="/">Main</nuxt-link>
+                    <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                    <span>Invicta.ads</span>
+                </div>
+                <div class="page-title-container">
+                    <h1 class="page-title">Invicta.ads</h1>
+                    <button class="btn btn-gradient create-campaign-button"><span>Create new campaign</span></button>
+                </div>
+                <div @click="toggleEvent" class="main-content">
+                    <div class="campaigns-container campaigns-active-container">
+                        <h2 class="title">Active</h2>
+                        <h3 v-if="campaignsActive.length == 0" class="no-campaigns">You have no active campaigns</h3>
+                        <div v-if="campaignsActive.length > 0" class="campaigns-active">
+                            <InvictaAdsCampaign
+                            v-for="campaign in campaignsActive"
+                            :key="campaign.id"
+                            :id='campaign.id'
+                            :type='campaign.type'
+                            :customName='campaign.customName'
+                            :name='campaign.name'
+                            :itemsAmount='campaign.itemsAmount'
+                            />
+                        </div>
+                    </div>
+                    <div class="campaigns-container campaigns-archived-container">
+                        <h2 class="title">Archived</h2>
+                        <h3 v-if="campaignsArchived.length == 0" class="no-campaigns">You have no archived campaigns</h3>
+                        <div v-if="campaignsArchived.length > 0" class="campaigns-archived">
+                            <InvictaAdsCampaign
+                            v-for="campaign in campaignsArchived"
+                            :key="campaign.id"
+                            :id='campaign.id'
+                            :customName='campaign.customName'
+                            :name='campaign.name'
+                            :itemsAmount='campaign.itemsAmount'
+                            />
+                        </div>
                     </div>
                 </div>
-                <div class="campaigns-container campaigns-archived-container">
-                    <h2 class="title">Archived</h2>
-                    <h3 v-if="campaignsArchived.length == 0" class="no-campaigns">You have no archived campaigns</h3>
-                    <div v-if="campaignsArchived.length > 0" class="campaigns-archived">
-                        <InvictaAdsCampaign
-                        v-for="campaign in campaignsArchived"
-                        :key="campaign.id"
-                        :id='campaign.id'
-                        :customName='campaign.customName'
-                        :name='campaign.name'
-                        :itemsAmount='campaign.itemsAmount'
-                        />
-                    </div>
-                </div>
             </div>
-        </div>
 
-        <Footer />
+            <Footer />
+        </div>
     </div>
 </template>
 
@@ -116,7 +119,7 @@ export default {
         this.archivedCampaigns = this.$store.state.campaigns.campaigns.archived.map(el => {
             return el
         });
-    },
+    }
 }
 </script>
 
@@ -142,9 +145,7 @@ export default {
         .page-title-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-top: -.5rem;
-            margin-bottom: 3.5rem;
+            align-items: flex-start;
 
             @media only screen and (max-width: 500px) {
                 flex-direction: column;
@@ -152,9 +153,8 @@ export default {
                 align-items: flex-start;
             }
 
-
             .page-title {
-                font-size: 4.5rem;
+                margin-bottom: 4rem;
             }
 
             .create-campaign-button {

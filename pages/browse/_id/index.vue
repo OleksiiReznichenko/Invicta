@@ -1,5 +1,6 @@
 <template>
     <div class="relative-container">
+        <img ref="cornerLight" src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="product-page section section-page">
             <div class="content">
                 <div class="page-sequence">
@@ -15,11 +16,11 @@
                         <div class="product-name-container">
                             <h1 class="product-name">{{product.name}}</h1>
                             <div class="product-buttons">
-                                <nuxt-link to="/report" class="product-button" id="report-button">
+                                <nuxt-link to="/reportProduct" class="product-button" id="report-button">
                                     <img src="@/assets/svg/report.svg" alt="Report" class="product-button-icon">
                                 </nuxt-link>
                                 <div @click="shareEvent" class="product-button" id="shareButton">
-                                    <img src="@/assets/svg/share.svg" alt="Share" class="product-button-icon">
+                                    <img src="@/assets/svg/upload.svg" alt="Share" class="product-button-icon">
                                 </div>
                             </div>
                             <div id="shareDropdown">
@@ -98,9 +99,11 @@
                     </div>
                     <div class="payment-form">
                         <div class="user-info">
-                            <img src="@/static/avatar2.png" alt="Avatar" class="user-avatar">
+                            <nuxt-link :to="'/users/' + seller.id">
+                                <img :src="seller.avatar" alt="Avatar" class="user-avatar">
+                            </nuxt-link>
                             <div class="user-right">
-                                <p class="user-text">Purchasing from <span class="user-name">NotLuna</span> <span v-if="product.oldPrice" class="percent">at {{percentOfPrice}}%</span></p>
+                                <p class="user-text">Purchasing from <nuxt-link :to="'/users/' + seller.id" class="user-name">{{seller.username}}</nuxt-link> <span v-if="product.oldPrice" class="percent">at {{percentOfPrice}}%</span></p>
                                 <span class="cards-amount">£ of cards</span>
                             </div>
                         </div>
@@ -144,7 +147,8 @@ export default {
     data() {
         return {
             copyLinkIndicator: true,
-            url: ''
+            url: '',
+            sellerFound: {}
         }
     },
     computed: {
@@ -164,6 +168,12 @@ export default {
         // PAGE URL
         urlComp() {
             return this.url;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER SELLER
+        seller() {
+            return this.sellerFound;
         },
     },
 
@@ -245,6 +255,12 @@ export default {
         if (this.product.oldPrice) {
             this.discount = Math.round(100 - this.product.price / this.product.oldPrice * 100);
         }
+        
+        this.sellerFound = this.$store.state.users.users.find(el => {
+            if (el.id === this.product.sellerId) {
+                return el;
+            }
+        })
     },
 
     mounted () {
@@ -626,6 +642,7 @@ footer {
 
                             .user-name {
                                 color: $color-primary;
+                                font-weight: 600 !important;
                             }
                         }
 

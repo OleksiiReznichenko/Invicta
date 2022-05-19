@@ -1,5 +1,6 @@
 <template>
   <div class="relative-container">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="leaderboard-page section section-page">
             <div class="content">
                 <div class="page-sequence">
@@ -13,7 +14,6 @@
                     v-for="(user, i) in leaderboardUsers"
                     :key="user.id"
                     :id='user.id'
-                    :name='user.firstName'
                     :username='user.username'
                     :avatar='user.avatar'
                     :registrationDate='user.registrationDate'
@@ -65,7 +65,7 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // GET BASE ARRAY
     created () {
-        this.baseArray = this.$store.state.users.leaderboard.map(el => {
+        this.baseArray = this.$store.state.leaderboard.leaderboard.map(el => {
             return el
         });
     },
@@ -88,12 +88,6 @@ export default {
 
         @media only screen and (max-width: 600px) {
             width: 100%;
-        }
-
-        .page-title {
-            font-size: 4.5rem;
-            margin-top: -.5rem;
-            margin-bottom: 3rem;
         }
     }
 

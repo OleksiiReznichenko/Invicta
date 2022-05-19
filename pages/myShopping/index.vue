@@ -1,5 +1,6 @@
 <template>
     <div class="relative-container">
+        <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="my-shopping-page section section-page">
             <div class="content">
                 <div class="page-sequence">
@@ -16,8 +17,7 @@
                     v-for="(item, i) in shoppingItems"
                     :key="item.id"
                     :id='item.id'
-                    :name='item.name'
-                    :image='item.image'
+                    :productId='item.productId'
                     :status='item.status'
                     :isValidated='item.isValidated'
                     :number='i + 1'
@@ -65,12 +65,6 @@ export default {
 
         @media only screen and (max-width: 600px) {
             width: 100%;
-        }
-
-        .page-title {
-            font-size: 4.5rem;
-            margin-top: -.5rem;
-            margin-bottom: 3rem;
         }
         
         .no-items {
