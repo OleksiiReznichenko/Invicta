@@ -110,7 +110,7 @@ export default {
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // GET BASE ARRAY
+    // GET BASE ARRAYS
     created () {
         this.activeCampaigns = this.$store.state.campaigns.campaigns.active.map(el => {
             return el
@@ -131,15 +131,6 @@ export default {
         min-height: 70vh;
         position: relative;
         z-index: 100;
-
-        // @media only screen and (max-width: 850px) {
-        //     width: 66%;
-        //     margin: 0 auto;
-        // }
-
-        // @media only screen and (max-width: 600px) {
-        //     width: 100%;
-        // }
 
 
         .page-title-container {

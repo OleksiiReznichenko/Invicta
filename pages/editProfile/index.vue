@@ -6,14 +6,16 @@
                 <div class="section page-sequence">
                     <nuxt-link to="/">Main</nuxt-link>
                     <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                    <nuxt-link :to="'/users/' + user.id">Profile</nuxt-link>
+                    <nuxt-link :to="'/users/' + userUsername">Profile</nuxt-link>
                     <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                     <span>Edit profile</span>
                 </div>
                 <h1 class="section page-title">Edit profile</h1>
                 <div class="section edit-form">
                     <div class="left">
-                        <img :src="user.avatar" alt="Avatar" class="avatar">
+                        <div class="avatar-container">
+                            <img :src="user.avatar" alt="Avatar" class="avatar">
+                        </div>
                         <button class="change-button">
                             <img src="@/assets/svg/editSquareIcon.svg" alt="Icon" class="icon">
                             <span class="span-change">change</span>
@@ -23,31 +25,36 @@
                         <div class="flex-container">
                             <div class="input-group">
                                 <label for="username">Username</label>
-                                <input v-model="username" type="text" id="username" placeholder="mikhailjr">
+                                <input @keypress.enter="editProfileEvent" v-model="username" type="text" id="username" placeholder="mikhailjr">
                             </div>
                             <div class="input-group">
                                 <label for="telegramUsername">Telegram username</label>
-                                <input v-model="telegramUsername" type="text" id="telegramUsername" placeholder="mikhailjr">
+                                <input @keypress.enter="editProfileEvent" v-model="telegramUsername" type="text" id="telegramUsername" placeholder="mikhailjr">
                             </div>
                         </div>
                         <div class="flex-container">
                             <div class="input-group">
                                 <label for="email">Email</label>
-                                <input v-model="email" type="email" id="email" placeholder="E-mail">
+                                <input @keypress.enter="editProfileEvent" v-model="email" type="email" id="email" placeholder="E-mail">
                             </div>
                             <div class="input-group">
                                 <label for="discordUserId">Discord user ID</label>
-                                <input v-model="discordUserId" type="text" id="discordUserId" placeholder="352656">
+                                <input @keypress.enter="editProfileEvent" v-model="discordUserId" type="text" id="discordUserId" placeholder="352656">
                             </div>
                         </div>
                         <div class="flex-container">
                             <div class="input-group">
                                 <label for="password">Password</label>
-                                <input v-model="password" type="password" id="password" placeholder="Password">
+                                <div class="input-container">
+                                    <input ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6">
+                                    <button @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
+                                        <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
+                                    </button>
+                                </div>
                             </div>
                             <div class="input-group">
                                 <label for="confirmPassword">Confirm Password</label>
-                                <input v-model="confirmPassword" type="password" id="confirmPassword" placeholder="Confirm password">
+                                <input v-model="confirmPassword" type="password" class="password-input" id="confirmPassword" placeholder="Confirm password" minlength="6">
                             </div>
                         </div>
                         <div class="input-group">
@@ -94,16 +101,21 @@
 </template>
 
 <script>
+// import AvatarCropper from 'vue-avatar-cropper';
 import EmojiPicker from 'vue-emoji-picker';
 import CustomBanner from '@/components/layout/Profile/CustomBanner';
 import DiscountProductsCustom from '@/components/layout/Profile/DiscountProductsCustom';
 
 export default {
+    middleware: ['notLoggedIn'],
+    
     components: {
         CustomBanner,
         DiscountProductsCustom,
         EmojiPicker,
+        // AvatarCropper,
     },
+
     data() {
         return {
             isOpenNofication: false,
@@ -118,11 +130,24 @@ export default {
             bio: '',
         }
     },
+
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // USER
         user() {
-            return this.$store.state.user;
+            console.log('Changed')
+            return this.$store.state.users.users.find(el => {
+                if (el.id === this.$store.state.user.id) {
+                    return el;
+                }
+            })
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER
+        userUsername() {
+            console.log('Changed')
+            return this.user.username;
         },
     },
     methods: {
@@ -167,6 +192,25 @@ export default {
         // EDIT PROFILE EVENT
         editProfileEvent() {
             this.isUsernameTaken = false;
+            let initialUsername = this.user.username;
+            let initialEmail = this.user.email;
+            let user = {};
+
+            // IF THERE ARE NO CHANGES - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
+            if (
+                this.validateValue(this.username) === this.validateValue(this.user.username) &&
+                this.validateValue(this.telegramUsername) === this.validateValue(this.user.telegramUsername) &&
+                this.validateValue(this.discordUserId) === this.validateValue(this.user.discordUserId) &&
+                this.validateValue(this.bio) === this.validateValue(this.user.bio) &&
+                this.email === this.user.email &&
+                this.password === this.user.password
+            ) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'No changes', 
+                    isBad: true
+                });
+                return;
+            }
 
             // IF USERNAME IS EMPTY - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
             if (!this.username) {
@@ -206,8 +250,13 @@ export default {
 
             // CHECK IF USERNAME IS TAKEN
             this.$store.state.users.users.forEach(el => {
+                // if (el.username === initialUsername) {
+                //     user = el;
+                // }
+
                 if (this.username === el.username) {
                     this.isUsernameTaken = true;
+                    
                 }
 
                 if (this.email === el.email) {
@@ -216,8 +265,7 @@ export default {
             })
 
             // IF USERNAME IS TAKEN - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
-            if (this.isUsernameTaken) {
-                // this.$refs.notificationWindowTitle.textContent = 'This Username is taken';
+            if (this.isUsernameTaken && this.validateValue(this.username) !== initialUsername) {
                 this.$store.dispatch('showNotificationWindow', {
                     text: 'This Username is taken', 
                     isBad: true
@@ -226,26 +274,9 @@ export default {
             }
 
             // IF EMAIL IS TAKEN - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
-            if (this.isEmailTaken) {
-                // this.$refs.notificationWindowTitle.textContent = 'This Username is taken';
+            if (this.isEmailTaken && this.validateValue(this.email) !== initialEmail) {
                 this.$store.dispatch('showNotificationWindow', {
                     text: 'This Email is taken', 
-                    isBad: true
-                });
-                return;
-            }
-
-            // IF THERE ARE NO CHANGES - CHANGE NOFICATION WINDOW TEXT AND SHOW IT
-            if (
-                this.validateValue(this.username) === this.validateValue(this.user.username) &&
-                this.validateValue(this.telegramUsername) === this.validateValue(this.user.telegramUsername) &&
-                this.validateValue(this.discordUserId) === this.validateValue(this.user.discordUserId) &&
-                this.validateValue(this.bio) === this.validateValue(this.user.bio) &&
-                this.email === this.user.email &&
-                this.password === this.user.password
-            ) {
-                this.$store.dispatch('showNotificationWindow', {
-                    text: 'No changes', 
                     isBad: true
                 });
                 return;
@@ -258,23 +289,50 @@ export default {
             });
 
             // SAVE CHANGES
-            this.$store.commit('editProfileUsername', {value: this.validateValue(this.username)});
-            this.$store.commit('editProfileEmail', {value: this.validateValue(this.email)});
-            this.$store.commit('editProfilePassword', {value: this.validateValue(this.password)});
-            this.$store.commit('editProfileTelegramUsername', {value: this.validateValue(this.telegramUsername)});
-            this.$store.commit('editProfileDiscordUserId', {value: this.validateValue(this.discordUserId)});
-            this.$store.commit('editProfileBio', {value: this.validateValue(this.bio)});
+            this.$store.commit('users/changeUserInfo', {
+                id: this.user.id,
+                newEmail: this.validateValue(this.email),
+                newPassword: this.password,
+                newUsername: this.validateValue(this.username),
+                newTelegramUsername: this.validateValue(this.telegramUsername),
+                newDiscordUserId: this.validateValue(this.discordUserId),
+                newBio: this.validateValue(this.bio)
+            });
+            
+            this.$store.commit('editProfile', {user: this.user});
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //SHOW HIDE PASSWORD
+        togglePasswordVisibility() {
+            if (this.$refs.passwordInput.type === "password") {
+                this.$refs.passwordInput.type = "text";
+            } else {
+                this.$refs.passwordInput.type = "password";
+            }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ASSIGN INITIAL INPUTS VALUES TO CURRENT PROFILE VALUES AND REMOVE EXCESSIVE WHITE SPACES
+        assignInputValues() {
+            this.username = this.validateValue(this.user.username);
+            this.email = this.validateValue(this.user.email);
+            this.password = this.user.password;
+            this.confirmPassword = this.user.password;
+            this.telegramUsername = this.validateValue(this.user.telegramUsername);
+            this.discordUserId = this.validateValue(this.user.discordUserId);
+            this.bio = this.validateValue(this.user.bio);
+        }
+    },
+    watch: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER OBJECT CHANGES - CHANGE VALUES
+        user() {
+            this.assignInputValues();
+        }
     },
     mounted () {
-        // ASSIGN INITIAL INPUTS VALUES TO CURRENT PROFILE VALUES AND REMOVE EXCESSIVE WHITE SPACES
-        this.username = this.validateValue(this.user.username);
-        this.email = this.validateValue(this.user.email);
-        this.password = this.validateValue(this.user.password);
-        this.confirmPassword = this.validateValue(this.user.password);
-        this.telegramUsername = this.validateValue(this.user.telegramUsername);
-        this.discordUserId = this.validateValue(this.user.discordUserId);
-        this.bio = this.validateValue(this.user.bio);
+        this.assignInputValues();
     },
 }
 </script>
@@ -372,15 +430,42 @@ export default {
                     margin-bottom: 4rem;
                 }
 
-                .avatar {
+                .avatar-container {
+                    position: relative;
+                    cursor: pointer;
+                    border-radius: 100%;
+                    transition: all .2s;
                     width: 14.5rem;
                     height: 14.5rem;
-                    border-radius: 100%;
+                    overflow: hidden;
                     margin-bottom: 1.5rem;
             
                     @media only screen and (max-width: 850px) {
                         margin-bottom: 0;
                         margin-right: 2.5rem;
+                    }
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 150%;
+                        height: 150%;
+                        opacity: 0;
+                        transition: all .2s;
+                        background: url(@/assets/svg/avatar-upload-hover.svg) no-repeat center, rgba(0, 0, 0, 0.7);
+                    }
+
+                    &:hover::before {
+                        opacity: 1;
+                    }
+
+                    .avatar {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 100%;
                     }
                 }
 
@@ -436,6 +521,24 @@ export default {
                     }
                 }
 
+                .input-container {
+                    position: relative;
+                }
+
+                .eye-container {
+                    position: absolute;
+                    right: 2rem;
+                    width: 1.75rem;
+                    min-width: 16px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                .eye-icon {
+                    width: 100%;
+                    margin-bottom: -2px;
+                }
+
                 .input-group {
                     position: relative;
                     
@@ -451,6 +554,10 @@ export default {
                         @media only screen and (max-width: 850px) {
                             padding: 1.1rem 2.5rem;
                         }
+                    }
+
+                    .password-input {
+                        padding-right: 5.5rem;
                     }
 
                     input {

@@ -41,7 +41,6 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/core-components.js',
-    // {src: '~/plugin  s/three.js', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -49,7 +48,9 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    'cookie-universal-nuxt',
+    'nuxt-uid-module',
   ],
 
   styleResources: {
@@ -61,6 +62,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    ['cookie-universal-nuxt', {ssr: true, target: 'server'}],
+    'nuxt-uid-module',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -78,13 +81,14 @@ export default {
   },
 
   router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        path: '*',
-        // component: resolve(__dirname, 'projects/sikuria/pages/index.vue')
-        component: resolve(__dirname, '~/pages/index.vue')
-      })
-    },
+    // extendRoutes(routes, resolve) {
+    //   routes.push({
+    //     path: '*',
+    //     // component: resolve(__dirname, 'projects/sikuria/pages/index.vue')
+    //     component: resolve(__dirname, '~/pages/index.vue')
+    //   })
+    // },
+    middleware: ['isPageExist', 'checkLogin'],
     base: '/projects/Invicta/',
     linkActiveClass: 'active-link'
   },

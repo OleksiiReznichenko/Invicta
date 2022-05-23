@@ -5,7 +5,7 @@
         </nuxt-link>
         <div class="message-content">
             <div class="name-date-container">
-                <nuxt-link :to="'/users/' + person.id" v-if="!isMe" key="seller" class="name">{{person.firstName}} {{person.lastName}}</nuxt-link>
+                <nuxt-link :to="'/users/' + person.id" v-if="!isMe" key="seller" class="name">{{person.username}}</nuxt-link>
                 <nuxt-link :to="'/users/' + person.id" v-if="isMe" key="me" class="name">Me</nuxt-link>
                 <span class="date">{{date}}</span>
             </div>

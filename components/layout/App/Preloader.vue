@@ -16,14 +16,20 @@ export default {
         }
     },
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // PRELOADER PERCENT
         percentComp() {
             return this.percent;
         }
     },
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // LIMIT MAXIMAL PERCENT TO 100% AND VANISH PRELOADER ON 100%
         addToPercent() {
             if (this.percent >= 100) {
                 this.$refs.preloader.style.opacity = 0;
+
+                // ADD 1 PERCENT EVERY 500 MS
                 setTimeout(() => {
                     this.$refs.preloader.style.display = 'none';
                 }, 500);
@@ -35,7 +41,6 @@ export default {
         }
     },
     mounted () {
-
         this.addToPercent();
     },
 }

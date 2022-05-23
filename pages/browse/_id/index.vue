@@ -99,20 +99,38 @@
                     </div>
                     <div class="payment-form">
                         <div class="user-info">
-                            <nuxt-link :to="'/users/' + seller.id">
+                            <nuxt-link :to="'/users/' + seller.username">
                                 <img :src="seller.avatar" alt="Avatar" class="user-avatar">
                             </nuxt-link>
                             <div class="user-right">
-                                <p class="user-text">Purchasing from <nuxt-link :to="'/users/' + seller.id" class="user-name">{{seller.username}}</nuxt-link> <span v-if="product.oldPrice" class="percent">at {{percentOfPrice}}%</span></p>
+                                <p class="user-text">Purchasing from <nuxt-link :to="'/users/' + seller.username" class="user-name">{{seller.username}}</nuxt-link> <span v-if="product.oldPrice" class="percent">at {{percentOfPrice}}%</span></p>
                                 <span class="cards-amount">£ of cards</span>
                             </div>
                         </div>
-                        <form action="#" class="form">
-                            <input type="text" id="selectCards" placeholder="Select the cards">
-                            <input type="text" id="paymentMethods" placeholder="Payment Methods">
+                        <form @submit.prevent action="#" class="form">
+                            <div class="select">
+                                <input ref="cardsDropdownOpener" id="cardsDropdownOpener" @click="toggleCardsDropdown" v-model="cards" class="full-width" type="text" placeholder="Select the cards" readonly>
+                                <img ref="cardsDropdownArrow" id="cardsDropdownArrow" src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                <div ref="cardsSelectionDropdown" id="cardsSelectionDropdown" class="options">
+                                    <div @click="selectCardsOption('Card 1')" class="option">Card 1</div>
+                                    <div @click="selectCardsOption('Card 2')" class="option">Card 2</div>
+                                    <div @click="selectCardsOption('Card 3')" class="option">Card 3</div>
+                                    <div @click="selectCardsOption('Card 4')" class="option">Card 4</div>
+                                </div>
+                            </div>
+                            <div class="select">
+                                <input ref="paymentsDropdownOpener" id="paymentsDropdownOpener" @click="togglePaymentsDropdown" v-model="paymentMethod" class="full-width" type="text" placeholder="Payment Methods" readonly>
+                                <img ref="paymentsDropdownArrow" id="paymentsDropdownArrow" src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                <div ref="paymentsSelectionDropdown" id="paymentsSelectionDropdown" class="options">
+                                    <div @click="selectPaymentsOption('Payment method 1')" class="option">Payment method 1</div>
+                                    <div @click="selectPaymentsOption('Payment method 2')" class="option">Payment method 2</div>
+                                    <div @click="selectPaymentsOption('Payment method 3')" class="option">Payment method 3</div>
+                                    <div @click="selectPaymentsOption('Payment method 4')" class="option">Payment method 4</div>
+                                </div>
+                            </div>
                             <div class="button-price-container">
-                                <!-- <nuxt-link to="/login" class="login-button btn btn-gradient"><span>Buy</span></nuxt-link> -->
-                                <nuxt-link to="/login" class="login-button btn btn-gradient"><span>Buy</span></nuxt-link>
+                                <nuxt-link v-if="!isLoggedIn" to="/login" class="login-button btn btn-gradient"><span>Buy</span></nuxt-link>
+                                <button v-if="isLoggedIn" @click="buy" @submit="buy" class="login-button btn btn-gradient"><span>Buy</span></button>
                                 <div class="prices">
                                     <h3 class="new-price">${{product.price}}</h3>
                                     <span v-if="product.oldPrice" class="old-price">${{product.oldPrice}}</span>
@@ -144,14 +162,41 @@
 
 <script>
 export default {
+    middleware: ['isProductExist'],
     data() {
         return {
+            paymentMethod: '',
+            cards: '',
             copyLinkIndicator: true,
             url: '',
             sellerFound: {}
         }
     },
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY USER
+        user() {
+            return this.$store.state.user;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY SHOPPING ITEMS ARRAY
+        shoppingItems() {
+            let myShoppingItemsArray = [];
+            this.$store.state.users.users.find(el => {
+                if (el.id === this.user.id) {
+                    myShoppingItemsArray = el.shoppingItems;
+                }
+            })
+            return myShoppingItemsArray;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS LOGGED IN
+        isLoggedIn() {
+            return this.$store.state.isLoggedIn;
+        },
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // DISCOUNT
         discountComp() {
@@ -177,9 +222,139 @@ export default {
         },
     },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // IF SELLER ID CHANGES = CHANGE SELLER
+    watch: {
+        'product.sellerId'() {
+            this.sellerFound = this.$store.state.users.users.find(el => {
+                if (el.id === this.product.sellerId) {
+                    return el;
+                }
+            })
+        }
+    },
+
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // COPY BUTTON EVENT
+        // BUY 
+        buy() {
+            // IF CARDS DROPDOWN VALUE IS NOT SELECTED - SHOW ERROR
+            if (!this.cardsDropdownOpener.value) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'You need to select cards', 
+                    isBad: true
+                });
+                return;
+            }
+            
+            // IF PAYMENT DROPDOWN VALUE IS NOT SELECTED - SHOW ERROR
+            if (!this.paymentsDropdownOpener.value) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'You need to select payment method', 
+                    isBad: true
+                });
+                return;
+            }
+            
+            // IF YOU TRY TO BUY YOUR PRODUCT - SHOW ERROR
+            if (this.product.sellerId === this.user.id) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'You can\'t buy product from yourself', 
+                    isBad: true
+                });
+                return;
+            }
+
+            let alreadyAdded = false;
+
+            // CHECK IF PRODUCT IS ALREADY ADDED TO SHOPPING LIST
+            this.shoppingItems.find(el => {
+                if (el.productId === this.product.id) {
+                    alreadyAdded = true;
+                }
+            })
+            
+            // IF PRODUCT IS ALREADY ADDED TO SHOPPING LIST - SHOW ERROR
+            if (alreadyAdded) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'This product is already in your shopping items', 
+                    isBad: true
+                });
+                return;
+            }
+
+            // ON SUCCES - SHOW SUCCESS WINDOW
+            this.$store.dispatch('showNotificationWindow', {
+                text: 'This product has been added to your shopping list', 
+                isBad: false
+            });
+
+            // SHOPPING ITEM AND ORDER OBJECT
+            const orderShoppingItemObject = {
+                id: (this.$_uid * Date.now()).toString(),
+                productId: this.product.id,
+                buyerId: this.user.id,
+                sellerId: this.product.sellerId,
+                date: this.getDate(),
+                isValidated: false,
+                isConfirmed: false,
+                itemsAmount: 1,
+                status: 'waiting',
+                chat: {
+                    messages: [],
+                    notifications: [
+                        {
+                            id: 'notification1',
+                            text: 'This dicussion started',
+                            date: this.getDate()
+                        },
+                    ]
+                }
+            }
+
+
+            // ADD SHOPPING ITEM AND ORDER
+            this.$store.commit('users/addShoppingItem', {
+                item: orderShoppingItemObject
+            });
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET CURRENT DATE
+        getDate() {
+            const dateObj = new Date();
+            const monthNumber = dateObj.getMonth();
+            const day = dateObj.getDate();
+            const hours = dateObj.getHours();
+            const minutes = dateObj.getMinutes();
+            let minutesFormatted = minutes;
+
+            if (minutes < 10) {
+                minutesFormatted = '0' + minutes;
+            }
+
+            const months = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+            ]
+
+            const month = months[monthNumber];
+
+            return `${day} ${month}, ${hours}:${minutesFormatted}`;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // COPY BUTTON EVENT
         copyLink(text) {
             if (!this.copyLinkIndicator) return;
             this.copyLinkIndicator = false;
@@ -231,7 +406,59 @@ export default {
                     }, 200);
                 }
             }
-        }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CARDS SELECTION DROPDOWN
+        toggleCardsDropdown() {
+            if (!this.cardsSelectionDropdown.classList.contains('opened')) {
+                this.cardsSelectionDropdown.classList.add('opened');
+                this.cardsSelectionDropdown.style.display = 'block';
+                this.cardsDropdownArrow.style.transform = 'rotate(-180deg)';
+                setTimeout(() => {
+                    this.cardsSelectionDropdown.style.opacity = 1;
+                }, 10);
+            } else {
+                this.cardsSelectionDropdown.style.opacity = 0;
+                this.cardsDropdownArrow.style.transform = 'rotate(0deg)';
+                setTimeout(() => {
+                    this.cardsSelectionDropdown.style.display = 'none';
+                    this.cardsSelectionDropdown.classList.remove('opened');
+                }, 200);
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // PAYMENTS SELECTION DROPDOWN
+        togglePaymentsDropdown() {
+            if (!this.paymentsSelectionDropdown.classList.contains('opened')) {
+                this.paymentsSelectionDropdown.classList.add('opened');
+                this.paymentsSelectionDropdown.style.display = 'block';
+                this.paymentsDropdownArrow.style.transform = 'rotate(-180deg)';
+                setTimeout(() => {
+                    this.paymentsSelectionDropdown.style.opacity = 1;
+                }, 10);
+            } else {
+                this.paymentsSelectionDropdown.style.opacity = 0;
+                this.paymentsDropdownArrow.style.transform = 'rotate(0deg)';
+                setTimeout(() => {
+                    this.paymentsSelectionDropdown.style.display = 'none';
+                    this.paymentsSelectionDropdown.classList.remove('opened');
+                }, 200);
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SELECTION CARDS OPTION FUNCTIONAL
+        selectCardsOption(option) {
+            this.cardsDropdownOpener.value = option;
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SELECTION PAYMENTS OPTION FUNCTIONAL
+        selectPaymentsOption(option) {
+            this.paymentsDropdownOpener.value = option;
+        },
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -256,6 +483,7 @@ export default {
             this.discount = Math.round(100 - this.product.price / this.product.oldPrice * 100);
         }
         
+        // FIND SELLER BY HIS ID
         this.sellerFound = this.$store.state.users.users.find(el => {
             if (el.id === this.product.sellerId) {
                 return el;
@@ -267,7 +495,15 @@ export default {
         // DOM
         this.linkCopiedNotification = document.getElementById('linkCopiedNotification');
         this.shareDropdown = document.getElementById('shareDropdown');
-        const shareButton = document.getElementById('shareButton');
+        this.shareButton = document.getElementById('shareButton');
+        
+        this.cardsSelectionDropdown = document.getElementById('cardsSelectionDropdown');
+        this.cardsDropdownArrow = document.getElementById('cardsDropdownArrow');
+        this.cardsDropdownOpener = document.getElementById('cardsDropdownOpener');
+        
+        this.paymentsSelectionDropdown = document.getElementById('paymentsSelectionDropdown');
+        this.paymentsDropdownArrow = document.getElementById('paymentsDropdownArrow');
+        this.paymentsDropdownOpener = document.getElementById('paymentsDropdownOpener');
 
         // TAKE PAGE URL
         this.url = window.location.href;
@@ -275,7 +511,7 @@ export default {
         // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
         window.addEventListener('click', (e) => {
             const isClickInsideElement = this.shareDropdown.contains(e.target);
-            const isClickInsideElement2 = shareButton.contains(e.target);
+            const isClickInsideElement2 = this.shareButton.contains(e.target);
 
 
             if (!isClickInsideElement && !isClickInsideElement2 && this.shareDropdown.classList.contains('opened')) {
@@ -283,6 +519,28 @@ export default {
                 setTimeout(() => {
                     this.shareDropdown.style.display = 'none';
                     this.shareDropdown.classList.remove('opened');
+                }, 200);
+            }
+
+            const dropdownCardsOpener = this.cardsDropdownOpener.contains(e.target);
+            const dropdownPaymentsOpener = this.paymentsDropdownOpener.contains(e.target);
+
+
+            if (!dropdownCardsOpener && this.cardsSelectionDropdown.classList.contains('opened')) {
+                this.cardsSelectionDropdown.style.opacity = 0;
+                this.cardsDropdownArrow.style.transform = 'rotate(0deg)';
+                setTimeout(() => {
+                    this.cardsSelectionDropdown.style.display = 'none';
+                    this.cardsSelectionDropdown.classList.remove('opened');
+                }, 200);
+            }
+
+            if (!dropdownPaymentsOpener && this.paymentsSelectionDropdown.classList.contains('opened')) {
+                this.paymentsSelectionDropdown.style.opacity = 0;
+                this.paymentsDropdownArrow.style.transform = 'rotate(0deg)';
+                setTimeout(() => {
+                    this.paymentsSelectionDropdown.style.display = 'none';
+                    this.paymentsSelectionDropdown.classList.remove('opened');
                 }, 200);
             }
         });
@@ -653,6 +911,10 @@ footer {
                 }
 
                 form {
+
+                    .select:not(:last-of-type) {
+                        margin-bottom: 1.25rem;
+                    }
 
                     input {
                         font-family: Montserrat;

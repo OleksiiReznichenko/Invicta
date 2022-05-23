@@ -8,48 +8,55 @@
                     <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                     <span>Report ID</span>
                 </div>
-                <!-- <div class="main-content"> -->
 
-                    <h1 class="page-title">Report ID</h1>
-                    <div class="report-info">
-                        <span class="border-text-red report-status">open report</span>
-                        <span class="report-id">PR0SW1JB4ZVB</span>
-                    </div>
+                <h1 class="page-title">Report ID</h1>
+                <div class="report-info">
+                    <span class="border-text-red report-status">open report</span>
+                    <span class="report-id">PR0SW1JB4ZVB</span>
+                </div>
 
-                    <div class="form-container">
-                        <form action="#" class="form">
+                <div class="form-container">
+                    <form @submit.prevent action="#" class="form">
+                        <div class="input-group">
+                            <label for="category">Category</label>
+                            <input class="full-width" v-model="category" type="text" id="category" placeholder="e. g. «Xbox Giftcards»" required>
+                        </div>
+                        <div class="flex-container">
                             <div class="input-group">
-                                <label for="category">Category</label>
-                                <input class="full-width" v-model="category" type="text" id="category" placeholder="e. g. «Xbox Giftcards»" required>
-                            </div>
-                            <div class="flex-container">
-                                <div class="input-group">
-                                    <label for="reporter">reporter</label>
-                                    <input v-model="reporter" type="text" id="reporter" placeholder="Mar 24, 2022 08:32:00" required>
-                                </div>
-                                <div class="input-group">
-                                    <label for="seller">Seller</label>
-                                    <input v-model="seller" type="text" id="seller" placeholder="bc1wefwefdsfs2312312" required>
-                                </div>
+                                <label for="reporter">reporter</label>
+                                <input v-model="reporter" type="text" id="reporter" placeholder="Mar 24, 2022 08:32:00" required>
                             </div>
                             <div class="input-group">
-                                <label for="cards">Cards</label>
-                                <input class="full-width" v-model="cards" type="text" id="cards" placeholder="e. g. «Xbox Giftcards»" required>
+                                <label for="seller">Seller</label>
+                                <input v-model="seller" type="text" id="seller" placeholder="bc1wefwefdsfs2312312" required>
                             </div>
-                            <button type="submit" class="btn btn-gradient btn-medium"><span>Report</span></button>
-                        </form>
-                        <img src="@/assets/img/report.png" alt="Report" class="form-image">
-                    </div>
-                <!-- </div> -->
+                        </div>
+                        <div class="input-group">
+                            <label for="cards">Cards</label>
+                            <input class="full-width" v-model="cards" type="text" id="cards" placeholder="e. g. «Xbox Giftcards»" required>
+                        </div>
+                        <button type="submit" class="btn btn-gradient btn-medium"><span>Report</span></button>
+                    </form>
+                    <img src="@/assets/img/report.png" alt="Report" class="form-image">
+                </div>
             </div>
 
-            <Footer />
         </div>
     </div>
 </template>
 
 <script>
 export default {
+    middleware: ['notLoggedIn'],
+
+    data() {
+        return {
+            category: '',
+            reporter: '',
+            seller: '',
+            cards: '',
+        }
+    },
 }
 </script>
 
@@ -60,14 +67,18 @@ export default {
 }
 
 .report-id-page {
-    // min-height: 80vh;
-    min-height: 95vh;
-    height: 100%;
+    min-height: calc(100vh - 11rem);
+            
+    @media only screen and (max-width: 1000px) {
+        margin-bottom: 5rem;
+    }
+            
+    @media only screen and (max-width: 850px) {
+        min-height: calc(100vh - 15rem);
+    }
 
 
     .content {
-        min-height: 70vh;
-        // min-height: 90vh;
         position: relative;
         z-index: 100;
             
@@ -140,7 +151,6 @@ export default {
             }
 
             .user-rank {
-                // padding: .3rem 1.2rem;
                 padding: 5px 15px;
                 margin-right: 1rem;
                 color: $color-orange;
@@ -171,10 +181,6 @@ export default {
 
         .form {
             width: fit-content;
-            
-            // @media only screen and (max-width: 850px) {
-            //     margin: 0 auto;
-            // }
         }
     }
 }

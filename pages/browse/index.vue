@@ -807,7 +807,6 @@ export default {
 
 
         // RESIZE
-        
         let prevWidth = window.outerWidth;
 
         window.addEventListener('resize', () => {
@@ -1190,10 +1189,6 @@ export default {
 
                         .dots--first {
                             display: none;
-                        }
-
-                        .dots {
-
                         }
                     }
 

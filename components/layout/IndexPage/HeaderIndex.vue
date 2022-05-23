@@ -25,66 +25,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export default {
     mounted () {
-        // let check = true;
-
-        // const header = document.querySelector('.header');
-        // const main = document.querySelector('.main');
-
-        // const observerOptions = {
-        //     root: null,
-        //     rootMargin: "0px",
-        //     threshold: 1,
-        // };
-
-        // const observerOptions2 = {
-        //     root: null,
-        //     rootMargin: "0px",
-        //     threshold: 1,
-        // };
-
-
-        // const observerCallback = (entries) => {
-        //     entries.forEach((entry) => {
-        //         console.log(entry, 'header')
-        //         // if (!entry.isIntersecting && (window.outerWidth > 600 && window.outerHeight > 520 || window.outerWidth > 1000)) return;
-        //         if (!entry.isIntersecting) return;
-
-        //             if (check === false) {
-        //                 console.log('HEADER', true);
-        //                 check = true;
-        //                 requestAnimationFrame( animate );
-        //             }
-        //     });
-        // }
-
-        // const observerCallback2 = (entries) => {
-        //     entries.forEach((entry) => {
-        //         console.log(entry, 'main')
-        //         // if (!entry.isIntersecting && (window.outerWidth > 600 && window.outerHeight > 520 || window.outerWidth > 1000)) return;
-        //         if (!entry.isIntersecting) return;
-
-        //             if (check === true) {
-        //                 console.log('MAIN', false);
-        //                 check = false;
-        //             }
-        //     });
-        // }
-
-        // const observer = new IntersectionObserver(
-        //     observerCallback,
-        //     observerOptions
-        // );
-
-        // const observer2 = new IntersectionObserver(
-        //     observerCallback2,
-        //     observerOptions2
-        // );
-
-        // observer.observe(header);
-        // observer2.observe(main);
-
-
-
         // VARIABLES
         let cardsModel;
         let mixer;
@@ -164,17 +104,8 @@ export default {
                 mixer.clipAction(clip).play();
             })
 
-            animate();
-
-            // if (window.outerWidth > 1000) {
-            //     const canvas = document.querySelector('.cards-scene canvas');
-
-            //     document.querySelector('.header').addEventListener('mousemove', (e) => {
-            //         cardsModel.position.x = -(e.clientX - window.innerWidth / 2) / 200;
-            //         cardsModel.position.y = -(e.clientY - window.innerHeight / 2) / 200;
-            //         cardsModel.position.z = -(e.clientX - window.innerWidth / 2) / 1000;
-            //     });
-            // }
+            renderer.render( scene, camera );
+            // animate();
         });
 
 
@@ -182,7 +113,6 @@ export default {
         const clock = new THREE.Clock();
 
         function animate() {
-            // if (!check) return;
             const delta = clock.getDelta();
             
             if ( mixer ) mixer.update( delta );
@@ -192,7 +122,6 @@ export default {
             requestAnimationFrame( animate );
 
         }
-        
 
         // RESIZE
         function onWindowResize() {
@@ -206,14 +135,6 @@ export default {
         }
 
         window.addEventListener('resize', onWindowResize);
-
-        // const parallax = (mouse, resistance, el) => {
-        //     el.style.transform = `translateX(${-(mouse.clientX - window.innerWidth / 2) / resistance})`
-        //     // this.$gsap.to(el, {duration: .2,
-        //     //     x: -((mouse.clientX - window.innerWidth / 2) / resistance),
-        //     //     // y: -((mouse.clientY - window.innerHeight / 2) / resistance)
-        //     // })
-        // };
     },
 }
 </script>

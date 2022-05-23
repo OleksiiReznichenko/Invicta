@@ -21,6 +21,8 @@
 export default {
     props: ['image', 'name', 'inStock', 'country', 'price', 'oldPrice', 'id'],
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CALCULATE DISCOUNT BASED ON OLD PRICE
         discount() {
             if (this.oldPrice) {
                 return Math.round(100 - this.price / this.oldPrice * 100);
@@ -29,6 +31,8 @@ export default {
     },
 
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE SEARCH CONTAINER AND GO TO THIS PRODUCT PAGE
         closeSearch() {
             this.searchResultsContainer.style.transition = 'all .2s';
 
@@ -44,6 +48,7 @@ export default {
     },
 
     mounted () {
+        // DOM
         this.searchResultsContainer = document.querySelector('.search-results-container');
         this.searchInput = document.getElementById('searchInput');
     },

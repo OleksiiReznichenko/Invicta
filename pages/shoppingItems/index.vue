@@ -35,15 +35,28 @@
 import MyShoppingItem from '@/components/elements/MyShoppingItem';
 
 export default {
+    middleware: ['notLoggedIn'],
     components: {
         MyShoppingItem,
     },
 
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // MY SOPPING ITEMS ARRAY
+        // MY USER
+        user() {
+            return this.$store.state.user;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FIND MY SHOPPING ITEMS ARRAY
         shoppingItems() {
-            return this.$store.state.myShoppingItems.myShoppingItems;
+            let myShoppingItemsArray = [];
+            this.$store.state.users.users.find(el => {
+                if (el.id === this.user.id) {
+                    myShoppingItemsArray = el.shoppingItems;
+                }
+            })
+            return myShoppingItemsArray;
         }
     },
 }

@@ -1,91 +1,98 @@
 export const state = () => ({
-    isLoggedIn: true,
+    isLoggedIn: false,
     isOpenNofication: false,
     notificationWindow: '',
-    // user: {}
-    user: {
-        id: 'warrenjs',
-        username: 'warrenjs',
-        email: 'warrenjs@gmail.com',
-        password: '654321',
-        avatar: '/projects/Invicta/avatar.png',
-        balance: '5.00',
-        shoppingNumber: 11,
-        registrationDate: 'Jul 09, 2021',
-        selledAmount: 10,
-        workingPlaces: [
-            {
-                name: 'Figma',
-                image: '/projects/Invicta/figma.png'
-            },
-            {
-                name: 'Yandex',
-                image: '/projects/Invicta/yandex.png'
-            },
-        ],
-        following: 10,
-        followers: 23,
-        rank: 'super seller',
-        bio: `
-        I love, I hate, I'm losing my mind. It's 
-        'cause I'm in the loony bin I love, I hate, 
-        I'm losing my mind It's 'cause, 'cause,
-        cause I'm crazy
-        `,
-        backgroundImage: '/projects/Invicta/backProfileImage.png',
-        discordId: '',
-        telegramUsername: 'aleksys228',
-        achievements: {
-            achievementHeart: true,
-            achievementComment: true,
-            achievementLike: true,
-        },
-        isMyProfile: true,
-    }
+    forgotPasswordEmail: '',
+    forgotPasswordConfirmationCode: '',
+    user: {}
 })
 
 export const mutations = {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // LOG OUT
     isLoggedInToFalse(state) {
+        // delete state.user.isMyProfile;
         state.user = {};
         state.isLoggedIn = false;
     },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // LOG IN
     isLoggedInToTrue(state, {loggedInUser}) {
         state.user = loggedInUser;
-        state.user.isMyProfile = true;
+        // state.user.isMyProfile = true;
         state.isLoggedIn = true;
     },
-    editProfileUsername(state, {value}) {
-        state.user.username = value;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // EDIT USER PROFILE
+    editProfile(state, {user}) {
+        state.user = user;
+        // state.user.isMyProfile = true;
     },
-    editProfileEmail(state, {value}) {
-        state.user.email = value;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE USER BALANCE
+    changeBalance(state, {value}) {
+        state.user.balance = value;
     },
-    editProfilePassword(state, {value}) {
-        state.user.password = value;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD SHOPPING ITEM
+    addShoppingItem(state, {shoppingItem}) {
+        state.user.shoppingItems.push(shoppingItem);
     },
-    editProfileTelegramUsername(state, {value}) {
-        state.user.telegramusername = value;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD SHOPPING ITEM CHAT MESSAGE
+    addShoppingItemChatMessage(state, {itemId, message}) {
+        state.user.shoppingItems.find(el => {
+            if (el.id === itemId) {
+                el.chat.messages.push(message);
+            }
+        })
     },
-    editProfileDiscordUserId(state, {value}) {
-        state.user.discordUserId = value;
-    },
-    editProfileBio(state, {value}) {
-        state.user.bio = value;
-    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // SUBSCRIBE
     subscribe(state) {
         state.user.following += 1;
     },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // UNSUBSCRIBE
     unSubscribe(state) {
         state.user.following -= 1;
     },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CLOSE NOTIFICATION
     isOpenNoficationToFalse(state) {
         state.isOpenNofication = false;
     },
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // OPEN NOTIFICATION
     isOpenNoficationToTrue(state) {
         state.isOpenNofication = true;
     },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // SET NOTIFICATION WINDOW
     getNotificationWindow(state, {value}) {
         state.notificationWindow = value;
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // SET FORGOT PASSWORD EMAIL
+    setForgotPasswordEmail(state, {value}) {
+        state.forgotPasswordEmail = value;
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // SER FORGOT PASSWORD CONFIRMATION CODE
+    setForgotPasswordConfirmationCode(state, {value}) {
+        state.forgotPasswordConfirmationCode = value;
     },
 }
 
@@ -111,7 +118,6 @@ export const actions = {
                     payload.nav.style.position = 'fixed';
                 }
             } else {
-                // if (window.outerWidth < 850) return;
                 payload.dropdown.style.opacity = 0;
                 setTimeout(() => {
                     payload.dropdown.style.display = 'none';
@@ -168,8 +174,7 @@ export const actions = {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // SHOW NOTIFICATION WINDOW
-    showNotificationWindow(context, {notificationWindow, text, isBad}) {
-                // console.log(context.state.isOpenNofication)
+    showNotificationWindow(context, {text, isBad}) {
         if (context.state.isOpenNofication || !context.state.notificationWindow) return;
         context.commit('isOpenNoficationToTrue');
 
@@ -202,28 +207,28 @@ export const actions = {
     // SLIDE UP FUNCTION
     slideUp(state, {target, duration = 500}) {
         target.style.transitionProperty = 'height, margin, padding';
-            target.style.transitionDuration = duration + 'ms';
-            target.style.boxSizing = 'border-box';
-            target.style.height = target.offsetHeight + 'px';
-            target.offsetHeight;
-            target.style.overflow = 'hidden';
-            target.style.height = 0;
-            target.style.paddingTop = 0;
-            target.style.paddingBottom = 0;
-            target.style.marginTop = 0;
-            target.style.marginBottom = 0;
+        target.style.transitionDuration = duration + 'ms';
+        target.style.boxSizing = 'border-box';
+        target.style.height = target.offsetHeight + 'px';
+        target.offsetHeight;
+        target.style.overflow = 'hidden';
+        target.style.height = 0;
+        target.style.paddingTop = 0;
+        target.style.paddingBottom = 0;
+        target.style.marginTop = 0;
+        target.style.marginBottom = 0;
 
-            window.setTimeout( () => {
-                target.style.display = 'none';
-                target.style.removeProperty('height');
-                target.style.removeProperty('padding-top');
-                target.style.removeProperty('padding-bottom');
-                target.style.removeProperty('margin-top');
-                target.style.removeProperty('margin-bottom');
-                target.style.removeProperty('overflow');
-                target.style.removeProperty('transition-duration');
-                target.style.removeProperty('transition-property');
-            }, duration);
+        window.setTimeout( () => {
+            target.style.display = 'none';
+            target.style.removeProperty('height');
+            target.style.removeProperty('padding-top');
+            target.style.removeProperty('padding-bottom');
+            target.style.removeProperty('margin-top');
+            target.style.removeProperty('margin-bottom');
+            target.style.removeProperty('overflow');
+            target.style.removeProperty('transition-duration');
+            target.style.removeProperty('transition-property');
+        }, duration);
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

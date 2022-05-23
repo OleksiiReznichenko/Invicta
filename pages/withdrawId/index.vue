@@ -8,59 +8,57 @@
                     <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                     <span>Withdraw ID</span>
                 </div>
-                <!-- <div class="main-content"> -->
-                    <h1 class="page-title">Withdraw ID</h1>
-                    <div class="withdraw-info withdraw-info-mobile">
-                        <h2 class="withdraw-id">PR0SW1JB4ZVB</h2>
-                        <span class="withdraw-status">success</span>
-                    </div>
-                    <div class="withdraw-info">
-                        <span class="border-text-green withdraw-status desktop">success</span>
-                        <span class="border-text-green amount-in-wallet">ammount in central wallet: $304.26</span>
-                        <span class="withdraw-id desktop">PR0SW1JB4ZVB</span>
-                    </div>
+                <h1 class="page-title">Withdraw ID</h1>
+                <div class="withdraw-info withdraw-info-mobile">
+                    <h2 class="withdraw-id">PR0SW1JB4ZVB</h2>
+                    <span class="withdraw-status">success</span>
+                </div>
+                <div class="withdraw-info">
+                    <span class="border-text-green withdraw-status desktop">success</span>
+                    <span class="border-text-green amount-in-wallet">ammount in central wallet: $304.26</span>
+                    <span class="withdraw-id desktop">PR0SW1JB4ZVB</span>
+                </div>
 
-                    <div class="form-container">
-                        <form action="#" class="form">
-                        <div class="user-info">
-                            <span class="border-text-red user-rank">admin</span>
-                            <span class="user-rank-text">User rank</span>
-                        </div>
-                            <div class="input-group">
-                                <label for="ammount">Ammount</label>
-                                <input class="full-width" v-model="ammount" type="text" id="ammount" placeholder="$304.26 (0.006843324999 BTC)" required>
-                            </div>
-                            <div class="flex-container">
-                                <div class="input-group">
-                                    <label for="time">Time</label>
-                                    <input v-model="time" type="text" id="time" placeholder="Mar 24, 2022 08:32:00" required>
-                                </div>
-                                <div class="input-group">
-                                    <label for="btcAddress">BTC address</label>
-                                    <input v-model="btcAddress" type="text" id="btcAddress" placeholder="bc1wefwefdsfs2312312" required>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-gradient btn-medium"><span>Withdraw</span></button>
-                        </form>
-                        <img src="@/assets/img/pigWithdrawId.png" alt="Pig" class="form-image">
+                <div class="form-container">
+                    <form @submit.prevent action="#" class="form">
+                    <div class="user-info">
+                        <span class="border-text-red user-rank">admin</span>
+                        <span class="user-rank-text">User rank</span>
                     </div>
-                <!-- </div> -->
+                        <div class="input-group">
+                            <label for="ammount">Ammount</label>
+                            <input class="full-width" v-model="ammount" type="text" id="ammount" placeholder="$304.26 (0.006843324999 BTC)" required>
+                        </div>
+                        <div class="flex-container">
+                            <div class="input-group">
+                                <label for="time">Time</label>
+                                <input v-model="time" type="text" id="time" placeholder="Mar 24, 2022 08:32:00" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="btcAddress">BTC address</label>
+                                <input v-model="btcAddress" type="text" id="btcAddress" placeholder="bc1wefwefdsfs2312312" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-gradient btn-medium"><span>Withdraw</span></button>
+                    </form>
+                    <img src="@/assets/img/pigWithdrawId.png" alt="Pig" class="form-image">
+                </div>
             </div>
 
-            <Footer />
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    mounted () {
-        document.body.classList.add('no-corner-light');
+    middleware: ['notLoggedIn'],
+    
+    data() {
+        return {
+            time: '',
+            btcAddress: '',
+        }
     },
-    beforeRouteLeave(to, from, next) {
-        document.body.classList.remove('no-corner-light');
-        next();
-    }
 }
 </script>
 
@@ -71,14 +69,18 @@ export default {
 }
 
 .withdraw-id-page {
-    // min-height: 80vh;
-    min-height: 95vh;
-    height: 100%;
+    min-height: calc(100vh - 11rem);
+            
+    @media only screen and (max-width: 1000px) {
+        margin-bottom: 5rem;
+    }
+            
+    @media only screen and (max-width: 850px) {
+        min-height: calc(100vh - 15rem);
+    }
 
 
     .content {
-        min-height: 70vh;
-        // min-height: 90vh;
         position: relative;
         z-index: 100;
             

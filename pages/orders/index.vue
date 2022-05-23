@@ -15,13 +15,13 @@
                             <span class="order-id">Order ID</span>
                             <span class="order-title">Product Title</span>
                             <span class="order-amount">Amount</span>
-                            <span class="order-time">Time</span>
+                            <span class="order-date">Date</span>
                         </div>
                         <div class="right">
                             <div class="search-container">
-                                <input v-if="orders.length > 0" ref="searchInput" v-model="searchValue"
+                                <input v-if="orders && orders.length > 0" ref="searchInput" v-model="searchValue"
                                 type="search" id="searchInput" placeholder="Search" />
-                                <img v-if="orders.length > 0"
+                                <img v-if="orders && orders.length > 0"
                                     src="@/assets/svg/searchIcon.svg"
                                     alt="Search icon"
                                     class="search-icon"
@@ -29,20 +29,20 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="ordersFiltered.length == 0 && orders.length > 0" class="no-orders">
+                    <div v-if="ordersFiltered.length == 0 && orders && orders.length > 0" class="no-orders">
                         No orders were found
                     </div>
-                    <div v-if="orders.length == 0" class="no-orders">
+                    <div v-if="!orders || orders.length == 0" class="no-orders">
                         No orders yet
                     </div>
-                    <div v-if="orders.length > 0" ref="orders" class="orders">
+                    <div v-if="orders && orders.length > 0" ref="orders" class="orders">
                         <OrderItem
                         v-for="order in ordersFiltered"
                         :key="order.id"
                         :id='order.id'
                         :productId='order.productId'
                         :itemsAmount='order.itemsAmount'
-                        :time='order.time'
+                        :date='order.date'
                         />
                     </div>
                 </div>
@@ -58,6 +58,8 @@
 import OrderItem from '@/components/elements/OrderItem';
 
 export default {
+    middleware: ['notLoggedIn'],
+
     components: {
         OrderItem,
     },
@@ -79,27 +81,38 @@ export default {
 
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // MY ORDERS ARRAY
+        // MY USER
+        user() {
+            return this.$store.state.user;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FIND MY ORDERS ARRAY
         orders() {
-            return this.$store.state.orders.myOrders;
+            let myOrdersArray = [];
+            this.$store.state.users.users.forEach(el => {
+                console.log(el.id, this.user.id)
+                if (el.id === this.user.id) {
+                    myOrdersArray = el.orders;
+                }
+            })
+            return myOrdersArray;
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // ARRAY OF FILTERED ORDERS ON NAME SEARCH
         ordersFiltered() {
-            let orders = this.orders;
-
             if (this.searchValueValidated) {
-                const filteredOrders = orders.filter(order => {
+                const filteredOrders = this.orders.filter(order => {
                     return order.name.toLowerCase().includes(this.searchValueValidated);
                 })
 
                 return filteredOrders;
-            } else {
-                return orders;
             }
+            return this.orders;
         },
     },
+    
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REMOVE EXCESSIVE WHITE SPACES IN VALUE AND CONVERT TO LOWERCASE
@@ -151,6 +164,7 @@ export default {
                 padding: 2.5rem 2.5rem;
                 margin-bottom: 2rem;
                 text-align: center;
+                white-space: nowrap;
 
                 @media only screen and (max-width: 850px) {
                     font-family: Rowdies;

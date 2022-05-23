@@ -7,7 +7,7 @@
             </div>
             <span class="cell order-title">{{product.name}}</span>
             <span class="cell order-amount">{{itemsAmount}}</span>
-            <span class="cell order-time">{{time}}</span>
+            <span class="cell order-time">{{date}}</span>
         </div>
         <nuxt-link class="desktop order-item-link" :to="'/orders/' + id">watch order</nuxt-link>
 
@@ -19,7 +19,7 @@
             </div>
             <div class="id-time-container">
                 <span class="order-id">{{id}}</span>
-                <span class="order-time">{{time}}</span>
+                <span class="order-time">{{date}}</span>
             </div>
             <nuxt-link class="mobile order-item-link" :to="'/orders/' + id">watch order</nuxt-link>
         </div>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    props: ['id', 'productId', 'itemsAmount', 'time'],
+    props: ['id', 'productId', 'itemsAmount', 'date'],
     created () {
         // PRODUCTS OBJECT
         const productsObject = this.$store.state.products.products;

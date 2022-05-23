@@ -25,7 +25,7 @@
                 />
                 <div class="close-dropdown user__info">
                     <div class="close-dropdown user__name">{{user.username}}</div>
-                    <div class="close-dropdown user__balance">${{user.balance}} balance</div>
+                    <div class="close-dropdown user__balance">${{balance}} balance</div>
                 </div>
             </nuxt-link>
 
@@ -44,8 +44,8 @@
                 <li v-if="isLoggedIn" key="ads">
                     <nuxt-link to="/InvictaAds">Invicta.ads</nuxt-link>
                 </li>
-                <li v-if="isLoggedIn" key="myShopping">
-                    <nuxt-link to="/myShopping">My shopping <span class="shopping-number">({{shoppingItemsAmount}})</span></nuxt-link>
+                <li v-if="isLoggedIn" key="shoppingItems">
+                    <nuxt-link to="/shoppingItems">My shopping <span class="span-red">({{shoppingItemsAmount}})</span></nuxt-link>
                 </li>
             </ul>
 
@@ -56,7 +56,6 @@
                 <span class="user__name">No user</span>
             </nuxt-link>
 
-            <!-- <div @click="isLoggedInToTrue" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></div> -->
             <nuxt-link to="/login" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></nuxt-link>
             
             <div v-if="isLoggedIn" key="buttonsDropdown" class="buttons">
@@ -71,7 +70,7 @@
                 <li>
                     <nuxt-link class="link-flex" to="/orders">
                         <img src="@/assets/svg/notification.svg" alt="Notification" class="link-icon">
-                        <span>My orders</span>
+                        <span>My orders <span class="span-red">({{ordersAmount}})</span></span>
                     </nuxt-link>
                 </li>
                 <li class="logout" @click="isLoggedInToFalse">
@@ -97,29 +96,67 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
         user() {
-            return this.$store.state.user;
+            const usersFound = this.$store.state.users.users.find(el => {
+                if (el.id === this.$store.state.user.id) {
+                    return el;
+                }
+            })
+
+            if (usersFound) {
+                return usersFound;
+            } else {
+                return this.$store.state.user;
+            }
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY SHOPPING ITEMS AMOUNT
         shoppingItemsAmount() {
-            if (this.$store.state.myShoppingItems.myShoppingItems.length > 0) {
-                return this.$store.state.myShoppingItems.myShoppingItems.length;
+            let myShoppingItemsArray = [];
+            this.$store.state.users.users.find(el => {
+                if (el.id === this.user?.id) {
+                    myShoppingItemsArray = el.shoppingItems;
+                }
+            })
+            if (myShoppingItemsArray?.length > 0) {
+                return myShoppingItemsArray.length;
             } else {
                 return 0;
             }
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY ORDERS AMOUNT
+        ordersAmount() {
+            let myOrdersArray = [];
+            this.$store.state.users.users.find(el => {
+                if (el.id === this.user.id) {
+                    myOrdersArray = el.orders;
+                }
+            })
+            if (myOrdersArray?.length > 0) {
+                return myOrdersArray.length;
+            } else {
+                return 0;
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY USER BALANCE
+        balance() {
+            return this.user.balance?.toFixed(2);
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // IS LOGGED IN
         isLoggedIn() {
-            return this.$store.state.isLoggedIn
+            return this.$store.state.isLoggedIn;
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // IS PHONE VERSION
         isPhone() {
-            return this.isPhoneInitial
+            return this.isPhoneInitial;
         }
     },
 
@@ -135,13 +172,8 @@ export default {
         // LOG OUT
         isLoggedInToFalse() {
             this.$store.commit('isLoggedInToFalse');
-            this.$router.push('/');
-        },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // LOG IN
-        isLoggedInToTrue() {
-            this.$store.commit('isLoggedInToTrue');
+            this.$cookies.removeAll();
+            localStorage.clear();
             this.$router.push('/');
         },
 
@@ -170,6 +202,7 @@ export default {
             }
         },
     },
+
     mounted () {
         // DOM
         this.nav = document.querySelector('.nav');
@@ -385,7 +418,7 @@ export default {
         margin-right: 1rem;
     }
 
-    .shopping-number {
+    .span-red {
         color: $color-orange;
     }
 }

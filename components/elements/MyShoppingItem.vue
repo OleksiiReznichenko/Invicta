@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link :to="'/myShopping/' + id" class="shopping-item">
+    <nuxt-link :to="'/shoppingItems/' + id" class="shopping-item">
         <div class="desktop left">
             <div class="number">#{{number}}</div>
             <img :src="product.photo" alt="Shopping item image" class="image">
@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <nuxt-link class="desktop shopping-item-link" :to="'/myShopping/' + id">watch order</nuxt-link>
+        <nuxt-link class="desktop shopping-item-link" :to="'/shoppingItems/' + id">watch order</nuxt-link>
 
         <img :src="product.photo" alt="Order image" class="mobile image">
         <div class="mobile info">
@@ -22,7 +22,7 @@
                 <span :class="{'border-text-green': isValidated, 'border-text-red': !isValidated}" class="status">{{status}}</span>
                 <span class="id">{{id}}</span>
             </div>
-            <nuxt-link class="mobile shopping-item-link" :to="'/myShopping/' + id">watch order</nuxt-link>
+            <nuxt-link class="mobile shopping-item-link" :to="'/shoppingItems/' + id">watch order</nuxt-link>
         </div>
     </nuxt-link>
 </template>

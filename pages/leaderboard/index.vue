@@ -13,7 +13,6 @@
                     <LeaderboardItem
                     v-for="(user, i) in leaderboardUsers"
                     :key="user.id"
-                    :id='user.id'
                     :username='user.username'
                     :avatar='user.avatar'
                     :registrationDate='user.registrationDate'
@@ -40,9 +39,12 @@ export default {
 
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // SORTED LEADERBOARD USERS ARRAY
+        // GET LEADERBOARD USERS ARRAY AND SORT IT BY SELLED AMOUNT
         leaderboardUsers() {
-            const sortedArray = this.baseArray.sort(this.fromHigherAmount);
+            const baseArray = this.$store.state.leaderboard.leaderboard.map(leaderboardUser => {
+                return leaderboardUser;
+            });
+            const sortedArray = baseArray.sort(this.fromHigherAmount);
             return sortedArray;
         }
     },
@@ -62,12 +64,11 @@ export default {
             return 0;
         },
     },
+    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // GET BASE ARRAY
     created () {
-        this.baseArray = this.$store.state.leaderboard.leaderboard.map(el => {
-            return el
-        });
+        this.$store.dispatch('leaderboard/loadLeaderboardUsers');
     },
 }
 </script>

@@ -15,18 +15,22 @@
                             Please login before purchasing cards! This helps us better protect you in the event of a scam
                         </p>
                         <div class="input-group input-group-login">
-                            <input ref="emailInput" v-model="email" type="text" id="email" placeholder="E-mail" required>
+                            <input ref="emailInput" v-model="email" type="email" id="email" placeholder="E-mail" required>
                             <img src="@/assets/svg/user.svg" alt="User" class="user-icon input-left-content">
                         </div>
                         <div class="input-group input-group-login">
-                            <input ref="passwordInput" v-model="password" type="password" id="password" placeholder="Password" minlength="6" required>
-                            <img src="@/assets/svg/eye.svg" alt="User" class="eye-icon input-left-content">
+                            <input @keypress.enter="login" ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6" required>
+                            <div @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
+                                <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
+                            </div>
                         </div>
                         <div class="flex-container-normal">
                             <div class="checkbox-container">
-
+                                <input ref="rememberMeInput" type="checkbox" id="checkbox" value="yes">
+                                <img src="@/assets/svg/checkMark2.svg" alt="Check mark" class="check-mark">
+                                <label for="checkbox">Remember me</label>
                             </div>
-                            <nuxt-link to="/forgotPassword" class="forgot-password">Forgot password?</nuxt-link>
+                            <nuxt-link to="/setEmail" class="forgot-password">Forgot password?</nuxt-link>
                         </div>
                         <div class="buttons">
                             <button @click="login" @submit="login" type="submit" class="btn btn-gradient btn-big"><span>Sign in</span></button>
@@ -38,19 +42,21 @@
             </div>
 
             <img src="@/assets/img/gridLogin.png" alt="Grid" class="grid-image form-image">
-            <!-- <Footer /> -->
         </div>
     </div>
 </template>
 
 <script>
 export default {
+    middleware: ['loggedIn'],
+
     data() {
         return {
             email: '',
             password: '',
         }
     },
+
     methods: {
         login(e) {
             let isEveryInputValid = true;
@@ -58,14 +64,17 @@ export default {
             let isPasswordCorrect = false;
             let correctUser = {};
 
+            // CHECK IF EVERY INPUT IS VALID
             this.inputs.forEach(input => {
                 if (!input.checkValidity()) {
                     isEveryInputValid = false;
                 }
             })
 
+            // IF NOT EVERY INPUT IS VALID - STOP
             if (!isEveryInputValid) return;
 
+            // CHECK IF USER EMAIL IS CORRECT AND IF PASSWORD IS CORRECT
             this.users.forEach(user => {
                 if (user.email === this.email) {
                     isEmailCorrect = true;
@@ -77,15 +86,17 @@ export default {
                 }
             })
 
+            // IF USER EMAIL IS NOT CORRECT - SHOW ERORR
             if (!isEmailCorrect) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'This email is incorrect', 
+                    text: 'There is no account with that email', 
                     isBad: true
                 });
                 this.$refs.emailInput.focus();
                 return;
             }
 
+            // IF USER PASSWORD IS NOT CORRECT - SHOW ERORR
             if (!isPasswordCorrect) {
                 this.$store.dispatch('showNotificationWindow', {
                     text: 'This password is incorrect', 
@@ -95,16 +106,53 @@ export default {
                 return;
             }
 
-            console.log(correctUser);
-            
+            // IF REMEMBER ME IS CLICKED - SAVE USER COOKIE FOR 14 DAYS
+            // IF REMEMBER ME IS NOT CLICKED - SAVE USER COOKIE FOR 1 DAY
+            if (this.$refs.rememberMeInput?.checked) {
+                this.$cookies.set('isLoggedIn', true, {
+                    path: '/',
+                    maxAge: 60 * 60 * 24 * 14
+                });
+                this.$cookies.set('loggedInUser', JSON.stringify(correctUser), {
+                    path: '/',
+                    maxAge: 60 * 60 * 24 * 14
+                });
+            } else {
+                this.$cookies.set('isLoggedIn', true, {
+                    path: '/',
+                    maxAge: 60 * 60 * 24
+                });
+                this.$cookies.set('loggedInUser', JSON.stringify(correctUser), {
+                    path: '/',
+                    maxAge: 60 * 60 * 24
+                });
+            }
+
+            // LOG IN EVENT
             this.$store.commit('isLoggedInToTrue', {loggedInUser: correctUser});
+
+            // REDIRECT TO MAIN PAGE
             this.$router.push('/');
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SHOW & HIDE PASSWORD ON EYE CLICK
+        togglePasswordVisibility() {
+            if (this.$refs.passwordInput.type === "password") {
+                this.$refs.passwordInput.type = "text";
+            } else {
+                this.$refs.passwordInput.type = "password";
+            }
         }
     },
+
     created () {
+        // GET BASE ARRAY
         this.users = this.$store.state.users.users;
     },
+
     mounted () {
+        // DOM
         this.inputs = Array.from(document.querySelectorAll('input'));
     },
 }
@@ -112,19 +160,18 @@ export default {
 
 <style lang="scss" scoped>
 .login-page {
-    // min-height: 80vh;
-    min-height: 95vh;
-    height: 100%;
+    min-height: calc(100vh - 11rem);
+            
+    @media only screen and (max-width: 850px) {
+        min-height: calc(100vh - 15rem);
+    }
 
     .grid-image {
         height: auto !important;
         width: 30rem !important;
     }
 
-
     .content {
-        min-height: 70vh;
-        // min-height: 90vh;
         position: relative;
         z-index: 100;
             
@@ -147,11 +194,43 @@ export default {
             justify-content: space-between;
         }
 
-        .checkout-container {
+        .checkbox-container {
             display: flex;
             align-items: center;
+            position: relative;
 
+            #checkbox {
+                cursor: pointer;
+                appearance: none;
+                width: 1.5rem !important;
+                height: 1.5rem !important;
+                border-radius: .4rem;
+                border: 1.5px solid white;
+                transition: all .2s;
+            }
 
+            #checkbox:checked + .check-mark {
+                opacity: 1;
+            }
+
+            label {
+                cursor: pointer;
+                color: $color-text-grey;
+                font-size: 1.4rem;
+                display: inline-block;
+                margin-left: 1rem;
+                user-select: none;
+            }
+
+            .check-mark {
+                width: 1.65rem;
+                position: absolute;
+                top: 0;
+                left: -.5px;
+                z-index: 100;
+                transition: all .2s;
+                opacity: 0;
+            }
         }
 
         .forgot-password {
@@ -178,12 +257,14 @@ export default {
             width: 1.5rem;
         }
 
-        .message-icon {
+        .eye-container {
+            cursor: pointer;
             width: 1.75rem;
         }
 
         .eye-icon {
-            width: 1.75rem;
+            width: 100%;
+            margin-bottom: -2px;
         }
 
         .buttons {

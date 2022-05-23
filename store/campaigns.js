@@ -36,6 +36,8 @@ export const state = () => ({
 })
 
 export const mutations = {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE CAMPAIGN NAME
     changeCustomName(state, {id, type, newName}) {
         const item = state.campaigns[type]?.find(el => {
             return el.id === id;

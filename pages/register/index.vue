@@ -17,11 +17,13 @@
                         </div>
                         <div class="input-group input-group-login">
                             <input ref="emailInput" v-model="email" type="email" id="email" placeholder="E-mail" required>
-                            <img src="@/assets/svg/message.svg" alt="User" class="message-icon input-left-content">
+                            <img src="@/assets/svg/message.svg" alt="Email" class="message-icon input-left-content">
                         </div>
                         <div class="input-group input-group-login">
-                            <input ref="passwordInput" v-model="password" type="password" id="password" placeholder="Password" minlength="6" required>
-                            <img src="@/assets/svg/eye.svg" alt="User" class="eye-icon input-left-content">
+                            <input ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6" required>
+                            <button @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
+                                <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
+                            </button>
                         </div>
                         <div class="input-group input-group-login">
                             <input ref="confirmPasswordInput" v-model="confirmPassword" type="password" id="confirmPassword" placeholder="Confirm password" minlength="6" required>
@@ -36,36 +38,40 @@
             </div>
 
             <img src="@/assets/img/gridRegister.png" alt="Grid" class="grid-image form-image">
-            <!-- <Footer /> -->
         </div>
     </div>
 </template>
 
 <script>
 export default {
+    middleware: ['loggedIn'],
+
     data() {
         return {
             username: '',
             email: '',
             password: '',
             confirmPassword: '',
-            // isEveryInputValid: true,
         }
     },
+
     methods: {
         register(e) {
             let isEveryInputValid = true;
             let isUsernameTaken = false;
             let isEmailTaken = false;
 
+            // CHECK IF EVERY INPUT IS VALID
             this.inputs.forEach(input => {
                 if (!input.checkValidity()) {
                     isEveryInputValid = false;
                 }
             })
 
+            // IF NOT EVERY INPUT IS VALID - STOP
             if (!isEveryInputValid) return;
 
+            // IF USER EMAIL CONTAINS WHITE SPACE - SHOW ERROR
             if (this.username.includes(' ')) {
                 this.$store.dispatch('showNotificationWindow', {
                     text: 'Username can\'t contain white space', 
@@ -75,6 +81,7 @@ export default {
                 return;
             }
 
+            // CHECK IF USERNAME AND USER EMAIL ARE TAKEN
             this.users.forEach(user => {
                 if (user.username === this.username) {
                     isUsernameTaken = true;
@@ -85,6 +92,7 @@ export default {
                 }
             })
 
+            // IF USERNAME IS TAKEN - SHOW ERROR
             if (isUsernameTaken) {
                 this.$store.dispatch('showNotificationWindow', {
                     text: 'This username is taken', 
@@ -94,6 +102,7 @@ export default {
                 return;
             }
 
+            // IF USER EMAIL IS TAKEN - SHOW ERROR
             if (isEmailTaken) {
                 this.$store.dispatch('showNotificationWindow', {
                     text: 'This email is taken', 
@@ -103,6 +112,7 @@ export default {
                 return;
             }
             
+            // IF PASSWORD AND CONFIRM PASSWORD ARE NOT THE SAME - SHOW ERROR
             if (this.password !== this.confirmPassword) {
                 this.$store.dispatch('showNotificationWindow', {
                     text: 'The password and confirm password must be the same', 
@@ -112,14 +122,36 @@ export default {
                 return;
             }
             
-            this.$store.commit('users/addUser', {username: this.username, email: this.email, password: this.password});
-            // this.$router.push('/login');
+            // REGISTER USER EVENT
+            this.$store.commit('users/addUser', {
+                id: (this.$_uid * Date.now()).toString(),
+                username: this.username, 
+                email: this.email, 
+                password: this.password,
+            });
+
+            // REGIRECT TO LOGIN
+            this.$router.push('/login');
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SHOW & HIDE PASSWORD ON EYE CLICK
+        togglePasswordVisibility() {
+            if (this.$refs.passwordInput.type === "password") {
+                this.$refs.passwordInput.type = "text";
+            } else {
+                this.$refs.passwordInput.type = "password";
+            }
         }
     },
+
     created () {
+        // GET BASE ARRAY
         this.users = this.$store.state.users.users;
     },
+
     mounted () {
+        // DOM
         this.inputs = Array.from(document.querySelectorAll('input'));
     },
 }
@@ -127,9 +159,11 @@ export default {
 
 <style lang="scss" scoped>
 .register-page {
-    // min-height: 80vh;
-    min-height: 95vh;
-    height: 100%;
+    min-height: calc(100vh - 11rem);
+            
+    @media only screen and (max-width: 850px) {
+        min-height: calc(100vh - 15rem);
+    }
 
     .grid-image {
         height: auto !important;
@@ -138,8 +172,6 @@ export default {
 
 
     .content {
-        min-height: 70vh;
-        // min-height: 90vh;
         position: relative;
         z-index: 100;
             
@@ -173,8 +205,13 @@ export default {
             width: 1.75rem;
         }
 
-        .eye-icon {
+        .eye-container {
             width: 1.75rem;
+        }
+
+        .eye-icon {
+            width: 100%;
+            margin-bottom: -2px;
         }
 
         .buttons {

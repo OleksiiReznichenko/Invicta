@@ -39,8 +39,8 @@
                                     <ChatMessage 
                                     v-for="message in item.chat.messages"
                                     :key="message.id"
-                                    :person='message.person === "me" ? user : seller'
-                                    :isMe='message.person === "me"'
+                                    :person='message.person === "buyer" ? user : seller'
+                                    :isMe='message.person === "buyer"'
                                     :text='message.text'
                                     :date='message.date'
                                     />
@@ -96,14 +96,14 @@
                     </div>
                     <div class="right">
                         <div class="grey-container users-container">
-                            <nuxt-link :to="'/users/' + user.id" class="user buyer">
+                            <nuxt-link :to="'/users/' + user.username" class="user buyer">
                                 <div class="info">
                                     <span>Buyer</span>
                                     <h4 class="user-name">Me</h4>
                                 </div>
                                 <img :src="user.avatar" alt="User photo" class="user-photo">
                             </nuxt-link>
-                            <nuxt-link :to="'/users/' + seller.id" class="user seller">
+                            <nuxt-link :to="'/users/' + seller.username" class="user seller">
                                 <div class="info">
                                     <span>Seller</span>
                                     <h4 class="user-name">{{seller.username}}</h4>
@@ -142,6 +142,7 @@ import ChatMessage from '@/components/elements/Chat/Message';
 import ChatNotification from '@/components/elements/Chat/Notification';
 
 export default {
+    middleware: ['notLoggedIn', 'isShoppingItemExist'],
     components: {
         ChatMessage,
         ChatNotification,
@@ -161,6 +162,18 @@ export default {
         // MY USER
         user() {
             return this.$store.state.user;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY SHOPPING ITEMS ARRAY
+        shoppingItems() {
+            let myShoppingItemsArray = [];
+            this.$store.state.users.users.find(el => {
+                if (el.id === this.user.id) {
+                    myShoppingItemsArray = el.shoppingItems;
+                }
+            })
+            return myShoppingItemsArray;
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -220,9 +233,24 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CHANGE NOT VALIDATED TO VALIDATED
         validateEvent(e) {
+            // IF THIS ITEM IS ALREADY VALIDATED - STOP
             if (this.isValidated) return;
-            this.$store.commit('myShoppingItems/statusToValidated', {id: this.item.id});
-            this.$store.commit('myShoppingItems/isValidatedToTrue', {id: this.item.id});
+            
+            // SET STATUS TO VALIDATED
+            this.$store.commit('users/statusToValidated', {item: this.item});
+
+            // NOTIFICATION OBJECT
+            const notificationObject = {
+                id: 'notification1',
+                text: 'The buyer validated order fulfilment',
+                date: this.getDate()
+            };
+
+            // SEND NOTIFICATION
+            this.$store.commit('users/addNotification', {
+                item: this.item, 
+                notification: notificationObject
+            });
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -296,18 +324,24 @@ export default {
         // SEND MESSAGE EVENT
         sendMessage(e) {
             e.preventDefault();
+
             this.validateMessageValue();
+            
+            // IF THERE IS NO MESSAGE - STOP
             if (!this.newMessageValidated) return;
 
+            // MESSAGE OBJECT
             this.messageObject = {
-                id: 'messageMe' + Math.random(),
-                person: 'me',
+                id: 'messageBuyer' + (this.$_uid * Date.now()).toString(),
+                person: 'buyer',
                 text: this.newMessageValidated,
                 date: this.getDate()
             }
 
-            this.$store.commit('myShoppingItems/addChatMessage', {id: this.item.id, message: this.messageObject});
+            // SEND MESSAGE
+            this.$store.commit('users/addShoppingItemChatMessage', {item: this.item, message: this.messageObject});
 
+            // RETURN MESSAGE INPUT HEIGHT AND MESSAGE INPUT VALUE TO INITIAL
             this.newMessage = '';
             this.$refs.messageInput.style.height = 'auto';
         }
@@ -317,14 +351,13 @@ export default {
     // FIND AND LOAD THE ITEM
     created () {
         // MY SHOPPING ITEMS ARRAY
-        const myShoppingItemsArray = this.$store.state.myShoppingItems.myShoppingItems;
+        const myShoppingItemsArray = this.shoppingItems;
 
         // FIND ITEM IN MY SHOPPING ITEMS ARRAY
         this.item = myShoppingItemsArray.find(el => {
             if (this.item || el.id !== this.$route.params.id) return;
             return el;
         })
-
         
         // PRODUCTS OBJECT
         const productsObject = this.$store.state.products.products;
@@ -340,6 +373,7 @@ export default {
             })
         })
         
+        // FIND SELLER IN USERS ARRAY
         this.sellerFound = this.$store.state.users.users.find(el => {
             if (el.id === this.product.sellerId) {
                 return el;
@@ -516,6 +550,7 @@ export default {
                         .no-messages {
                             font-weight: 300 !important;
                             font-size: 3rem;
+                            white-space: nowrap;
                             @include abs-center;
                         }
                     }

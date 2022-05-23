@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link :to="'/users/' + id" class="user-item">
+    <nuxt-link :to="'/users/' + username" class="user-item">
         <div class="left">
             <div class="number">#{{number}}</div>
             <img :src="avatar" alt="User avatar" class="avatar">
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    props: ['id', 'username', 'avatar', 'registrationDate', 'selledAmount', 'workingPlaces', 'number']
+    props: ['username', 'avatar', 'registrationDate', 'selledAmount', 'workingPlaces', 'number']
 }
 </script>
 

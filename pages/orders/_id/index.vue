@@ -39,8 +39,8 @@
                                     <ChatMessage 
                                     v-for="message in order.chat.messages"
                                     :key="message.id"
-                                    :person='message.person === "me" ? user : order.buyer'
-                                    :isMe='message.person === "me"'
+                                    :person='message.person === "seller" ? user : buyer'
+                                    :isMe='message.person === "seller"'
                                     :text='message.text'
                                     :date='message.date'
                                     />
@@ -96,19 +96,19 @@
                     </div>
                     <div class="right">
                         <div class="grey-container users-container">
-                            <nuxt-link :to="'/users/' + user.id" class="user buyer">
+                            <nuxt-link :to="'/users/' + user.username" class="user buyer">
                                 <div class="info">
                                     <span>Seller</span>
                                     <h4 class="user-name">Me</h4>
                                 </div>
                                 <img :src="user.avatar" alt="User photo" class="user-photo">
                             </nuxt-link>
-                            <nuxt-link :to="'/users/' + order.buyer.id" class="user buyer">
+                            <nuxt-link :to="'/users/' + buyer.username" class="user buyer">
                                 <div class="info">
                                     <span>Buyer</span>
-                                    <h4 class="user-name">{{order.buyer.username}}</h4>
+                                    <h4 class="user-name">{{buyer.username}}</h4>
                                 </div>
-                                <img :src="order.buyer.avatar" alt="User photo" class="user-photo">
+                                <img :src="buyer.avatar" alt="User photo" class="user-photo">
                             </nuxt-link>
                         </div>
                         <div @click="toggleEvent" class="toggle-container grey-container help-container">
@@ -142,6 +142,8 @@ import ChatMessage from '@/components/elements/Chat/Message';
 import ChatNotification from '@/components/elements/Chat/Notification';
 
 export default {
+    middleware: ['notLoggedIn', 'isOrderExist'],
+
     components: {
         ChatMessage,
         ChatNotification,
@@ -163,9 +165,33 @@ export default {
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FIND MY ORDERS ARRAY
+        orders() {
+            let myOrdersArray = [];
+            this.$store.state.users.users.find(el => {
+                if (el.id === this.user.id) {
+                    myOrdersArray = el.orders;
+                }
+            })
+            return myOrdersArray;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER BUYER
+        buyer() {
+            return this.buyerFound;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // IS CONFIRMED ORDER INDICATOR
         isConfirmed() {
             return this.order.isConfirmed;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS VALIDATED ORDER INDICATOR
+        isValidated() {
+            return this.order.isValidated;
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,9 +239,33 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CHANGE NOT CONFIRMED TO CONFIRMED
         validateEvent(e) {
+            // IF INPUT IS NOT VALIDATED BY BUYER - SHOW ERROR
+            if (!this.isValidated) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'Buyer needs to validate this order first', 
+                    isBad: true
+                });
+                return;
+            }
+
+            // IF THIS ORDER IS ALREADY CONFIRMED - STOP
             if (this.isConfirmed) return;
-            this.$store.commit('orders/statusToConfirmed', {id: this.order.id});
-            this.$store.commit('orders/isConfirmedToTrue', {id: this.order.id});
+            
+            // SET STATUS TO CONFIRMED
+            this.$store.commit('users/statusToConfirmed', {item: this.order});
+
+            // NOTIFICATION OBJECT
+            const notificationObject = {
+                id: 'notification1',
+                text: 'The seller confirmed the order',
+                date: this.getDate()
+            };
+
+            // SEND NOTIFICATION
+            this.$store.commit('users/addNotification', {
+                item: this.order, 
+                notification: notificationObject
+            });
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -289,18 +339,24 @@ export default {
         // SEND MESSAGE EVENT
         sendMessage(e) {
             e.preventDefault();
+
             this.validateMessageValue();
+
+            // IF THERE IS NO MESSAGE - STOP
             if (!this.newMessageValidated) return;
 
+            // MESSAGE OBJECT
             this.messageObject = {
-                id: 'messageMe' + Math.random(),
-                person: 'me',
+                id: 'messageSeller' + (this.$_uid * Date.now()).toString(),
+                person: 'seller',
                 text: this.newMessageValidated,
                 date: this.getDate()
             }
 
-            this.$store.commit('orders/addChatMessage', {id: this.order.id, message: this.messageObject});
+            // SEND MESSAGE
+            this.$store.commit('users/addOrderChatMessage', {item: this.order, message: this.messageObject});
 
+            // RETURN MESSAGE INPUT HEIGHT AND MESSAGE INPUT VALUE TO INITIAL
             this.newMessage = '';
             this.$refs.messageInput.style.height = 'auto';
         }
@@ -310,7 +366,7 @@ export default {
     // FIND AND LOAD THE ORDER
     created () {
         // MY ORDERS ARRAY
-        const ordersArray = this.$store.state.orders.myOrders;
+        const ordersArray = this.orders;
 
         // FIND ORDER IN MY ORDERS ARRAY
         this.order = ordersArray.find(el => {
@@ -331,6 +387,13 @@ export default {
             this.product = value.find(product => {
                 return product.id === this.order.productId;
             })
+        })
+        
+        // FIND BUYER
+        this.buyerFound = this.$store.state.users.users.find(el => {
+            if (el.id === this.order.buyerId) {
+                return el;
+            }
         })
     },
 }
@@ -504,6 +567,7 @@ export default {
                         .no-messages {
                             font-weight: 300 !important;
                             font-size: 3rem;
+                            white-space: nowrap;
                             @include abs-center;
                         }
                     }

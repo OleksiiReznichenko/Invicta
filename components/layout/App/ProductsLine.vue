@@ -19,6 +19,8 @@
 export default {
     props: ['exception'],
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET GIFTCARDS ARRAY AND LIMIT LENGTH TO 4 IF THERE IS AN EXCEPTION IGNORE IT
         cards() {
             const filteredArray = this.$store.state.products.products.giftcards.filter((el, i) => {
                 if (this.exception) {

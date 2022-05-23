@@ -27,7 +27,7 @@ export default {
                 this.closeNavBtn = document.querySelector('.close-nav-btn');
                 this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
             }, 200);
-        }
+        },
     },
     mounted () {
         // DOM
@@ -39,6 +39,7 @@ export default {
         this.navRight = document.querySelector('.nav__right');
         this.closeNavBtn = document.querySelector('.close-nav-btn');
 
+        // INIT NOTIFICATION WINDOW
         this.$store.commit('getNotificationWindow', {value: this.notificationWindow});
 
         // INIT NAVIGATION DROPDOWN
@@ -46,7 +47,6 @@ export default {
 
 
         // RESIZE
-
         let prevWidth = window.outerWidth;
         let prevHeight = window.outerHeight;
 
@@ -90,7 +90,6 @@ export default {
   position: absolute;
   top: -15rem;
   left: 0;
-//   max-width: 100%;
 }
 
 .btn {
@@ -338,15 +337,55 @@ export default {
     }
 }
 
+.select {
+    position: relative;
+    
+    .arrow {
+        position: absolute;
+        right: 2rem;
+        top: 1.5rem;
+        width: 1.5rem;
+        transition: all .2s;
+    
+        @media only screen and (max-width: 850px) {
+            top: 1.75rem;
+        }
+    }
+
+    input {
+        cursor: pointer;
+    }
+
+    .options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        width: 100%;
+        background-color: $color-grey;
+        border-radius: 10px;
+        padding: 2rem 0;
+        box-shadow: 0px 3px 10px rgba(25, 21, 31, 0.5), inset 0px 3px 10px rgba(0, 0, 0, 0.2);
+        transition: all .2s;
+
+        display: none;
+        opacity: 0;
+
+        .option {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all .3s;
+
+            &:hover {
+                background-color: lighten($color-grey, 5%);
+            }
+        }
+    }
+}
+
 
 .form-page {
-    // footer {
-    //     position: absolute;
-    //     bottom: 0;
-    //     left: 50%;
-    //     transform: translateX(-50%);
-    //     width: 100%;
-    // }
 
     .form-image {
         position: absolute;
@@ -425,6 +464,10 @@ export default {
             }
         }
 
+        .password-input {
+            padding-right: 7rem !important;
+        }
+
         .input-group {
             position: relative;
                     
@@ -454,10 +497,6 @@ export default {
                 @media only screen and (max-width: 450px) {
                     width: 38rem !important;
                 }
-    
-                // @media only screen and (max-width: 400px) {
-                //     width: 35rem !important;
-                // }
             }
 
             textarea {

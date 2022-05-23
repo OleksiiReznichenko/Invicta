@@ -15,7 +15,8 @@
                 </p>
                 <div class="buttons">
                     <div class="btn-container btn-gradient-container">
-                        <nuxt-link class="btn btn-gradient" to="/register"><span>Sign up</span></nuxt-link>
+                        <nuxt-link v-if="!isLoggedIn" key="beforeLogin" class="btn btn-gradient" to="/register"><span>Sign up</span></nuxt-link>
+                        <nuxt-link v-if="isLoggedIn" key="afterLogin" class="btn btn-gradient" to="/createProduct"><span>Create product</span></nuxt-link>
                     </div>
                     <div class="btn-container btn-transparent-container">
                         <nuxt-link class="btn btn-transparent" to="/browse"><div class="background"></div><span>Browse</span></nuxt-link>
@@ -27,6 +28,17 @@
     </div>
 </template>
 
+<script>
+export default {
+    computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS LOGGED IN
+        isLoggedIn() {
+            return this.$store.state.isLoggedIn;
+        }
+    },
+}
+</script>
 
 <style lang="scss" scoped>
 .root {

@@ -39,10 +39,12 @@
 export default {
     computed: {
         cards() {
+            // GET GIFTCARDS WITH DISCOUNT
             const filteredArrayDiscount = this.$store.state.products.products.giftcards.filter(el => {
                 return el.oldPrice;
             })
 
+            // LIMIT ARRAY LENGTH TO 6
             const filteredArray = filteredArrayDiscount.filter((el, i) => {
                 return i < 6;
             })

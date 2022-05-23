@@ -1,7 +1,7 @@
 <template>
     <div class="profile-page">
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
-        <HeaderProfile :userObject='userSelected' />
+        <HeaderProfile :userObject='userSelected' :isMyProfile='isMyProfile' />
         <main>
             <CustomBanner />
             <ProductsLine/>
@@ -17,10 +17,18 @@ import CustomBanner from '@/components/layout/Profile/CustomBanner';
 import DiscountProductsCustom from '@/components/layout/Profile/DiscountProductsCustom';
 
 export default {
+    middleware: ['isUserExist'],
+
     components: {
         HeaderProfile,
         CustomBanner,
         DiscountProductsCustom,
+    },
+
+    data() {
+        return {
+            isMyProfile: false
+        }
     },
 
     computed: {
@@ -38,18 +46,20 @@ export default {
      },
      
     created() {
-        if (this.myUser.id === this.$route.params.id) {
-            this.user = this.myUser;
-        } else {
-            // USERS ARRAY
-            const userArray = this.$store.state.users.users;
+        // USERS ARRAY
+        const userArray = this.$store.state.users.users;
 
-            // FIND USER IN USERS ARRAY
-            this.user = userArray.find(el => {
-                if (this.user || el.id !== this.$route.params.id) return;
-                return el;
-            })
-        }
+        // FIND USER IN USERS ARRAY
+        this.user = userArray.find(el => {
+            console.log(el.username, this.$route.params.username)
+            if (this.user || el.username !== this.$route.params.username) return;
+            return el;
+        })
+
+        // IF THIS USER IS ME - SET IS MY PROFILE TO TRUE
+        if (this.myUser.username === this.$route.params.username) {
+            this.isMyProfile = true;
+        } 
     },
 }
 </script>

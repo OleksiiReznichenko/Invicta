@@ -10,9 +10,6 @@
                     </div>
                     <span class="rank">{{user.rank}}</span>
                     <div class="flex-container achievements">
-                        <!-- <div class="achievements-dropdowns">
-                            
-                        </div> -->
                         <button v-if="achievementHeart" @click="dropdownEvent(achievemtHeartDropdown)" class="achievement-button dropdown-opener" id="achievemtHeartDropdownOpener">
                             <img src="@/assets/svg/heart.svg" alt="Icon" class="icon">
                             <div v-if="achievementHeart" class="achievement-dropdown dropdown" id="achievemtHeartDropdown">
@@ -49,14 +46,15 @@
                     {{user.bio}}
                 </p>
                 <div class="flex-container followers-container">
-                    <span>{{user.followers}} Followers</span>
-                    <span>{{user.following}} Following</span>
+                    <span>{{userFollowersAmount}} Followers</span>
+                    <span>{{userFollowingAmount}} Following</span>
                 </div>
                 <p class="date">Member since May 16, 2021</p>
                 <div class="flex-container buttons-container">
-                    <nuxt-link v-if="user.isMyProfile" to="/editProfile" class="btn btn-transparent"><div class="background"></div><span>Edit</span></nuxt-link>
-                    <button v-if="!user.isMyProfile && !user.isFollowedByYou" @click="subscribe" class="btn btn-transparent"><div class="background"></div><span>Follow</span></button>
-                    <button v-if="!user.isMyProfile && user.isFollowedByYou" @click="unSubscribe" class="btn btn-gradient"><span>Unfollow</span></button>
+                    <nuxt-link v-if="!isLoggedIn" to="/login" class="btn btn-transparent"><div class="background"></div><span>Follow</span></nuxt-link>
+                    <nuxt-link v-if="isLoggedIn && isMyProfile" to="/editProfile" class="btn btn-transparent"><div class="background"></div><span>Edit</span></nuxt-link>
+                    <button v-if="isLoggedIn && !isMyProfile && !isFollowedByYou" @click="subscribe" class="btn btn-transparent"><div class="background"></div><span>Follow</span></button>
+                    <button v-if="isLoggedIn && !isMyProfile && isFollowedByYou" @click="unSubscribe" class="btn btn-gradient"><span>Unfollow</span></button>
                     <div class="flex-container other-buttons">
                         <button @click="dropdownEvent(moreDropdown)" href="#" class="button dropdown-opener" id="moreDropdownOpener">
                             <span class="dots">...</span>
@@ -120,24 +118,68 @@
 
 <script>
 export default {
-    props: ['userObject'],
+    props: ['userObject', 'isMyProfile'],
+    
     data() {
         return {
             copyLinkIndicator: true,
             url: '',
-            // discordId: '333252',
             discordLinkBase: 'https://discordapp.com/users/',
             discordLink: '#',
-            // telegramUsername: 'antojse',
             telegramLinkBase: 'https://t.me/',
             telegramLink: '#',
         }
     },
+
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // USER
         user() {
             return this.userObject;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER FOLLOWERS AMOUNT
+        userFollowersAmount() {
+            if (this.userObject.followers?.length > 0) {
+                return this.userObject.followers.length;
+            } else {
+                return 0;
+            }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER FOLLOWING AMOUNT
+        userFollowingAmount() {
+            if (this.userObject.following?.length > 0) {
+                return this.userObject.following.length;
+            } else {
+                return 0;
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS USER FOLLOWED BY ME
+        isFollowedByYou() {
+            let myUser = {};
+            this.$store.state.users.users.find(el => {
+                if (el.id === this.$store.state.user.id) {
+                    myUser = el;
+                }
+            })
+
+
+            return myUser.following?.find(el => {
+                if (el === this.user.id) {
+                    return true;
+                }
+            })
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IS LOGGED IN
+        isLoggedIn() {
+            return this.$store.state.isLoggedIn;
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,9 +206,10 @@ export default {
             return this.user.achievements.achievementLike;
         },
     },
+
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // COPY BUTTON EVENT
+        // COPY LINK EVENT
         copyLink(text) {
             if (!this.copyLinkIndicator) return;
             this.copyLinkIndicator = false;
@@ -239,17 +282,18 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SUBSCRIBE ON USER EVENT
         subscribe() {
-            this.$store.commit('subscribe');
-            this.$store.commit('users/subscribe', {id: this.user.id});
+            // this.$store.commit('subscribe');
+            this.$store.commit('users/subscribe', {myId: this.$store.state.user.id, userId: this.user.id});
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // UNSUBSCRIBE FROM USER EVENT
         unSubscribe() {
-            this.$store.commit('unSubscribe');
-            this.$store.commit('users/unSubscribe', {id: this.user.id});
+            // this.$store.commit('unSubscribe');
+            this.$store.commit('users/unSubscribe', {myId: this.$store.state.user.id, userId: this.user.id});
         },
     },
+
     mounted () {
         // DOM
         this.dropdowns = Array.from(document.getElementsByClassName('dropdown'));
@@ -262,6 +306,7 @@ export default {
         this.achievementCommentDropdown = document.getElementById('achievementCommentDropdown');
         this.achievemtLikeDropdown = document.getElementById('achievemtLikeDropdown');
 
+        // SET INITIAL VALUES BASED ON USER DATA
         this.telegramLink = this.user.telegramUsername ? this.telegramLinkBase + this.user.telegramUsername : '#';
         this.discordLink = this.user.discordId ? this.user.discordLink + this.user.discordId : '#';
 
@@ -269,6 +314,7 @@ export default {
         this.$refs.header.style.backgroundSize = 'cover';
         this.$refs.header.style.backgroundRepeat = 'no-repeat';
 
+        // PREVENT DEFAULT IF LINK IS EMPTY
         if (this.telegramLink === '#') {
             this.$refs.telegramButton.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -288,9 +334,6 @@ export default {
                 e.preventDefault();
             });
         }
-
-        console.log(this.telegramUsername)
-        console.log(this.telegramLink)
 
         // TAKE PAGE URL
         this.url = window.location.href;
@@ -536,39 +579,6 @@ export default {
                             color: $color-text-grey;
                         }
                     }
-
-                    // .achievements-dropdowns {
-
-                    //     .achievement-dropdown:last-of-type {
-                    //         // left: 54.5%;
-                    //         // left: 67%;
-                    //         // right: 1.3rem !important;
-                    //         // left: 70% !important;
-                    //         left: 75% !important;
-                    //         // transform: translateX(-50%) !important;
-
-                    //         // @media only screen and (max-width: 850px) {
-                    //         //     left: 61%;
-                    //         // }
-                    //     }
-
-                    //     .achievement-dropdown:first-of-type {
-                    //         // left: 8.4%;
-                    //         // left: 18% !important;
-                    //         left: 1.3rem !important;
-                    //     }
-
-                    //     .achievement-dropdown:nth-of-type(2) {
-                    //         // left: 32%;
-                    //         // left: 46%;
-                    //         left: 46% !important;
-
-                    //         @media only screen and (max-width: 850px) {
-                    //             left: 35%;
-                    //         }
-                    //     }
-                    // }
-                    
 
                     .achievement-button {
                         background-image: $gradient-pink;

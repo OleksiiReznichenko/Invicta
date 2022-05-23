@@ -15,7 +15,7 @@
 <script>
 import HeaderIndex from '@/components/layout/IndexPage/HeaderIndex';
 import DiscountBlock from '@/components/layout/IndexPage/DiscountBlock';
-import DiscountProducts from '@/components/layout/App/DiscountProducts';
+import DiscountProducts from '@/components/layout/IndexPage/DiscountProducts';
 import Signup from '@/components/layout/IndexPage/Signup';
 
 export default {

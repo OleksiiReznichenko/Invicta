@@ -29,6 +29,8 @@ export default {
     },
     props: ['categoryName', 'categoryItems'],
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CATEGORY ITEMS AMOUNT
         categoryItemsAmount() {
             return this.categoryItems.length 
         }

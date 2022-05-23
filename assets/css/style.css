@@ -10,6 +10,7 @@
 
 .nuxt-link-exact-active {
   color: #9f949f;
+  cursor: default !important;
 }
 
 /* .active-link {
@@ -64,6 +65,7 @@ html,
 body,
 .layout {
   overflow-x: hidden;
+  position: relative;
   /* cursor: url(/CustomCursor1.png), default; */
 }
 

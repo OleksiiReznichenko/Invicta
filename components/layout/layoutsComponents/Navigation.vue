@@ -28,15 +28,6 @@
           />
         </div>
 
-        <!-- <div
-          v-if="!isPhone && !isLoggedIn"
-          key="nav-login-link"
-          @click="isLoggedInToTrue"
-          class="btn btn-gradient"
-        >
-        <span>Login</span>
-        </div> -->
-
         <nuxt-link
         to="/login"
           v-if="!isPhone && !isLoggedIn"
@@ -205,7 +196,6 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // LOG IN
         isLoggedInToTrue() {
-            // this.$store.commit('isLoggedInToTrue');
             this.$router.push('/');
         },
 
@@ -306,7 +296,7 @@ export default {
             }
           }
 
-          // CLOSE SEARCH RESULTS CONTAINER
+          // CLOSE SEARCH RESULTS CONTAINER ON UNFOCUS
           if (!this.$refs.searchResultsContainer) return;
 
           if (this.$refs.searchResultsContainer.classList.contains('opened')) {
