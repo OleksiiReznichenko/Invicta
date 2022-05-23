@@ -1,8 +1,7 @@
 <template>
     <div class="layout">
-        <!-- <Preloader /> -->
+        <Preloader />
         <div ref="notificationWindow" id="notificationWindow"></div>
-        <!-- <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light"> -->
         <Navigation/>
         <nuxt class="on-top" />
     </div>
@@ -17,6 +16,7 @@ export default {
         Navigation,
         Preloader,
     },
+    
     watch: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REINIT NAVIGATION DROPDOWN ON LOG IN & LOG OUT
@@ -29,6 +29,7 @@ export default {
             }, 200);
         },
     },
+
     mounted () {
         // DOM
         this.dropdownOpener = document.getElementById('dropdown-opener');

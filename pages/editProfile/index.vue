@@ -135,7 +135,6 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // USER
         user() {
-            console.log('Changed')
             return this.$store.state.users.users.find(el => {
                 if (el.id === this.$store.state.user.id) {
                     return el;
@@ -146,10 +145,10 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // USER
         userUsername() {
-            console.log('Changed')
             return this.user.username;
         },
     },
+
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // GROW TEXTAREA ON TEXT WRAP
@@ -250,10 +249,6 @@ export default {
 
             // CHECK IF USERNAME IS TAKEN
             this.$store.state.users.users.forEach(el => {
-                // if (el.username === initialUsername) {
-                //     user = el;
-                // }
-
                 if (this.username === el.username) {
                     this.isUsernameTaken = true;
                     
@@ -324,6 +319,7 @@ export default {
             this.bio = this.validateValue(this.user.bio);
         }
     },
+    
     watch: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // USER OBJECT CHANGES - CHANGE VALUES
@@ -331,6 +327,7 @@ export default {
             this.assignInputValues();
         }
     },
+    
     mounted () {
         this.assignInputValues();
     },

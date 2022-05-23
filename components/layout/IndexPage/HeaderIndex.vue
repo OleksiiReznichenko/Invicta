@@ -22,6 +22,7 @@
 <script>
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 export default {
     mounted () {
@@ -90,7 +91,11 @@ export default {
         
 
         // LOAD SETUP
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath('jst/libs/draco/gltf');
+
         const loader = new GLTFLoader();
+        loader.setDRACOLoader(dracoLoader);
         loader.load('/projects/Invicta/cards.glb', (gltf) => {
             cardsModel = gltf.scene;
             scene.add(cardsModel);
@@ -105,7 +110,7 @@ export default {
             })
 
             renderer.render( scene, camera );
-            // animate();
+            animate();
         });
 
 
@@ -120,7 +125,6 @@ export default {
             renderer.render( scene, camera );
 
             requestAnimationFrame( animate );
-
         }
 
         // RESIZE

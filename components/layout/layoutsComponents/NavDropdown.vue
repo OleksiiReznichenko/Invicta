@@ -61,7 +61,7 @@
             <div v-if="isLoggedIn" key="buttonsDropdown" class="buttons">
                 <nuxt-link to="/deposit" class="btn btn-blue"><span>Deposit</span></nuxt-link>
                 <nuxt-link to="/withdraw" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
-                <nuxt-link to="/register" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
+                <nuxt-link to="/dashboard" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
             </div>
 
             <div v-if="isLoggedIn" key="line-3" class="line"></div>
