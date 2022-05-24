@@ -717,6 +717,10 @@ footer {
 
                 &-buttons {
                     display: flex;
+
+                    @media only screen and (max-width: 850px) {
+                        margin-left: 3rem;
+                    }
                 }
 
                 &-button {
@@ -730,6 +734,7 @@ footer {
 
                     @media only screen and (max-width: 850px) {
                         background-color: $color-grey-2;
+                        transform: scale(1.2);
                     }
 
                     &:hover {

@@ -378,6 +378,10 @@ export default {
             border-radius: 6px;
             transition: all .3s;
 
+            @media only screen and (max-width: 850px) {
+                padding: 1.5rem 2.5rem;
+            }
+
             &:hover {
                 background-color: lighten($color-grey, 5%);
             }
@@ -594,7 +598,7 @@ export default {
     position: fixed;
     left: 50%;
     top: 0;
-    z-index: 10000;
+    z-index: 1000000;
     transform: translateX(-50%);
     transition: all .3s;
     text-align: center;
