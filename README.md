@@ -7,14 +7,21 @@
 ### Libraries and Nuxt Modules:
 
 Three js: for work with 3D cards model on the main page;
+
 Sharer js: for sharing with people if device doesn't support navigator share api;
+
 Vue Emoji Picker: for work with emojies in the chat and bio in vue and nuxt;
+
 Cookie Universal Nuxt: for work with cookies for saving logged in state in nuxt;
+
 Nuxt Uid Nuxt: for help to generate random ids in nuxt(not neccesary);
+
 Smooth Scroll: for smooth scroll on website
 
 Also will use:
+
 Chart js: for work with charts in dashboards and invicta ads;
+
 Some library for avatar cropping for changing user avatar;
 
 ## Application data
@@ -43,8 +50,11 @@ in middleware(for redirects) and some libraries initialization is located in sta
 ## Hosting
 
 The nuxt app can be build in three types: single-page app, static html app and server-side-rendering app.
+
 For single-page app you don't need anything special;
+
 For static html app you may need to make some special configuration in build: {} in nuxt.config.js;
+
 For server-server-side app you need special node js host;
 
 Single-page application is worse for SEO;
