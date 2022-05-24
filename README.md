@@ -20,6 +20,7 @@ Nuxt Uid Nuxt: for help to generate random ids in nuxt(not neccesary);
 Smooth Scroll: for smooth scroll on website;
 
 
+
 Also will use:
 
 Chart js: for work with charts in dashboards and invicta ads;
