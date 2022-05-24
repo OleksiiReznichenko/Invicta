@@ -2,9 +2,9 @@
 
 ## Used Technologies
 
-##### This app uses vue nuxt as a basis and scss preprocessor for work with styling and css
+### This app uses vue nuxt as a basis and scss preprocessor for work with styling and css
 
-##### Libraries and Nuxt Modules:
+### Libraries and Nuxt Modules:
 
 Three js: for work with 3D cards model on the main page;
 Sharer js: for sharing with people if device doesn't support navigator share api;
