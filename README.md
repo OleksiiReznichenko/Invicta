@@ -1,69 +1,51 @@
 # invicta
 
-## Build Setup
+## Used Technologies
 
-```bash
-# install dependencies
-$ npm install
+##### This app uses vue nuxt as a basis and scss preprocessor for work with styling and css
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+##### Libraries and Nuxt Modules:
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+Three js: for work with 3D cards model on the main page;
+Sharer js: for sharing with people if device doesn't support navigator share api;
+Vue Emoji Picker: for work with emojies in the chat and bio in vue and nuxt;
+Cookie Universal Nuxt: for work with cookies for saving logged in state in nuxt;
+Nuxt Uid Nuxt: for help to generate random ids in nuxt(not neccesary);
+Smooth Scroll: for smooth scroll on website
 
-# generate static project
-$ npm run generate
-```
+Also will use:
+Chart js: for work with charts in dashboards and invicta ads;
+Some library for avatar cropping for changing user avatar;
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+## Application data
 
-## Special Directories
+Because data on the website will load dynamically from apis and databases I stored all data in global store called vuex modules
+from where I dynamically loaded it. Of course the data from vuex is not asynchronous and you will need to adjust the code it will make the work easier and faster. All this data is in store folder. There are vuex modules for products data, users data, leaderboard data, updates data, terms data, invicta ads campaigns data and index.js file contains reusable functions across the app and work with local user object copy(I will change some logic of this file).
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+## Application responsiveness and adaptiveness
 
-### `assets`
+At the end this website will have full adaptiveness: on phone vertical, on phone horizontal, on tablet vertical, on tablet horizontal, on change of the device orientation, on laptops small and big, on 4k monitors, on IOS, on Windows, on Android. All of that because I used the rem approach for the styling(I used rem as the main unit, not px), and because of big amount of media queries. The break point where desktop design version changes to mobile design version is 850px width. General app styling setup is in assets/css/style.css file,
+scss variables and mixins are in assets/scss folder, the specific component stylings are in .vue files.
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+## Application redirects
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+The middleware contains redirect files for different situations: if user is logged in, if user is not logged in, if page url is exist, if user is exist, if product is exist, if shopping item is exist, if order is exist, if email for forgot password is not added, if confirmation code for forgot password is not added.
 
-### `components`
+## Application images and media
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+Application svg icon files are located in assets/svg folder, img files are located in assets/img, img files and other files that load dymanically are located in static folder.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+## Js code
 
-### `layouts`
+Js code is structurized and have comments. Js code is located in .vue files, in vuex modules (store folder, in index.js and users.js),
+in middleware(for redirects) and some libraries initialization is located in static/libraries.js.
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+## Hosting
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+The nuxt app can be build in three types: single-page app, static html app and server-side-rendering app.
+For single-page app you don't need anything special;
+For static html app you may need to make some special configuration in build: {} in nuxt.config.js;
+For server-server-side app you need special node js host;
 
+Single-page application is worse for SEO;
 
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
