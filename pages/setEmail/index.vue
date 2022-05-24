@@ -134,10 +134,6 @@ export default {
             }
         }
 
-        .user-icon {
-            width: 1.5rem;
-        }
-
         .buttons {
             display: flex;
             align-items: center;

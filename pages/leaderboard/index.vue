@@ -17,7 +17,6 @@
                     :avatar='user.avatar'
                     :registrationDate='user.registrationDate'
                     :selledAmount='user.selledAmount'
-                    :workingPlaces='user.workingPlaces'
                     :number='i + 1'
                     />
                 </div>

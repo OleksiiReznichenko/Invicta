@@ -100,7 +100,13 @@
             <span>Browse</span>
           </nuxt-link>
         </li>
-        <li @click="checkLink" class="item">
+        <li v-if="!isLoggedIn" @click="checkLink" class="item">
+          <nuxt-link class="link" to="/login">
+            <img src="@/assets/svg/user.svg" alt="Profile" class="icon" />
+            <span>Login</span>
+          </nuxt-link>
+        </li>
+        <li v-if="isLoggedIn" @click="checkLink" class="item">
           <nuxt-link class="link" :to="'/users/' + user.id">
             <img src="@/assets/svg/user.svg" alt="Profile" class="icon" />
             <span>Profile</span>
@@ -182,7 +188,7 @@ export default {
     // CHECK MOBILE VERSION
     created() {
         if (process.browser) {
-        this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600;
+          this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
         }
     },
     methods: {
@@ -321,7 +327,7 @@ export default {
       // RESIZE
       window.addEventListener('resize', () => {
         this.dropdown = document.getElementById('dropdown');
-        if (window.outerWidth <= 850 && window.outerHeight > 600) {
+        if (window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600) {
             this.isPhoneInitial = true
         } else {
             this.isPhoneInitial = false
@@ -349,7 +355,8 @@ export default {
   font-size: 1.4rem !important;
   transition: all .3s;
 
-  @media only screen and (max-width: 850px) and (min-height: 600px) {
+  @media only screen and (max-width: 850px) and (min-height: 600px),
+  only screen and (max-width: 600px) {
     justify-content: flex-start;
     top: 5rem;
   }
@@ -379,7 +386,8 @@ export default {
     align-items: center;
     transition: all .3s;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       order: 1;
     }
   }
@@ -389,7 +397,8 @@ export default {
     align-items: center;
     transition: all .3s;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       order: 0;
       width: 40%;
     }
@@ -400,7 +409,8 @@ export default {
     height: 3rem;
     margin-right: 3.5rem;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       margin-right: 0;
       width: 3.5rem;
       height: 3.5rem;
@@ -483,7 +493,8 @@ export default {
       width: 14rem;
     }
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       width: 100%;
       border-radius: 6px;
       overflow: hidden;
@@ -499,7 +510,8 @@ export default {
     width: 1.75rem;
     height: 1.75rem;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       width: 2rem;
       height: 2rem;
     }
@@ -511,7 +523,8 @@ export default {
     color: white;
     font-family: Montserrat;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       padding: 1rem 2rem;
       padding-left: 4rem;
     }

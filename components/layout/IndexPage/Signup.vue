@@ -148,6 +148,11 @@ export default {
                 @media only screen and (max-width: 850px) {
                     font-size: 2rem;
                 }
+            
+                @media only screen and (max-width: 400px) {
+                    padding: 1.25rem 3rem;
+                    white-space: nowrap;
+                }
 
                 &-container {
                     transition: all .3s;

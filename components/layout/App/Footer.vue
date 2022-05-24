@@ -22,7 +22,7 @@
                         <nuxt-link to="/termsOfService">Terms of service</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="/">Support</nuxt-link>
+                        <a href="https://t.me/invictacards" target="_blank">Support</a>
                     </li>
                 </ul>
             </div>

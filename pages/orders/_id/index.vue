@@ -123,7 +123,7 @@
                                 <p class="description">
                                     If the terms of the deal have not been fulfilled, let us know.
                                 </p>
-                                <a class="support-link" href="#">Write to support</a>
+                                <a class="support-link" href="https://t.me/invictacards" target="_blank">Write to support</a>
                             </div>
                         </div>
                         <button @click="validateEvent" :class="{'confirmed': isConfirmed}" class="confirm-button">{{buttonContent}}</button>

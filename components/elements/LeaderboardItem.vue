@@ -4,15 +4,9 @@
             <div class="number">#{{number}}</div>
             <img :src="avatar" alt="User avatar" class="avatar">
             <div class="info">
-                <div class="top-container">
+                <!-- <div class="top-container"> -->
                     <h4 class="username">@{{username}}</h4>
-                </div>
-                <div class="bottom-container">
-                    <div v-for="item in workingPlaces" :key="item.name" class="working-place">
-                        <img :src="item.image" alt="Image">
-                        <span>{{item.name}}</span>
-                    </div>
-                </div>
+                <!-- </div> -->
                 <p class="date">Seller since {{registrationDate}}</p>
             </div>
         </div>
@@ -25,7 +19,7 @@
 
 <script>
 export default {
-    props: ['username', 'avatar', 'registrationDate', 'selledAmount', 'workingPlaces', 'number']
+    props: ['username', 'avatar', 'registrationDate', 'selledAmount', 'number']
 }
 </script>
 
@@ -112,20 +106,13 @@ export default {
                 }
             }
 
-            .top-container {
-                display: flex;
-                align-items: center;
-                color: $color-text-grey;
-                margin-bottom: .75rem;
+            .username {
+                font-weight: 600 !important;
+                font-size: 2rem;
+                margin-right: 1rem;
 
-                .username {
-                    font-weight: 600 !important;
-                    font-size: 2rem;
-                    margin-right: 1rem;
-
-                    @media only screen and (max-width: 850px) {
-                        font-size: 2.3rem;
-                    }
+                @media only screen and (max-width: 850px) {
+                    font-size: 2.3rem;
                 }
             }
 

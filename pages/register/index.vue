@@ -17,13 +17,13 @@
                         </div>
                         <div class="input-group input-group-login">
                             <input ref="emailInput" v-model="email" type="email" id="email" placeholder="E-mail" required>
-                            <img src="@/assets/svg/message.svg" alt="Email" class="message-icon input-left-content">
+                            <img src="@/assets/svg/message.svg" alt="Email" class="email-icon input-left-content">
                         </div>
                         <div class="input-group input-group-login">
                             <input ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6" required>
-                            <button @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
+                            <div @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
                                 <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
-                            </button>
+                            </div>
                         </div>
                         <div class="input-group input-group-login">
                             <input ref="confirmPasswordInput" v-model="confirmPassword" type="password" id="confirmPassword" placeholder="Confirm password" minlength="6" required>
@@ -195,23 +195,6 @@ export default {
             @media only screen and (max-width: 850px) {
                 display: none;
             }
-        }
-
-        .user-icon {
-            width: 1.5rem;
-        }
-
-        .message-icon {
-            width: 1.75rem;
-        }
-
-        .eye-container {
-            width: 1.75rem;
-        }
-
-        .eye-icon {
-            width: 100%;
-            margin-bottom: -2px;
         }
 
         .buttons {

@@ -142,7 +142,7 @@ export default {
         .buttons {
             display: flex;
             align-items: center;
-            margin-top: 3rem;
+            margin-top: 2rem;
             
             .btn {
                 margin-top: 0 !important;
@@ -157,6 +157,10 @@ export default {
                     color: $color-text-grey-dark;
                 }
             }
+        }
+
+        input {
+            margin-bottom: 1rem !important;
         }
 
         input,

@@ -989,7 +989,7 @@ export default {
                                 font-size: 1.9rem;
                                 padding: 1rem 3.5rem;
                                 border-radius: 50px;
-                                background-color: $color-grey-2;
+                                background-color: lighten($color-grey-2, 2%);
                             }
 
                             &:not(:last-of-type) {
@@ -1061,7 +1061,7 @@ export default {
 
                             @media only screen and (max-width: 850px) {
                                 border-bottom: none !important;
-                                background-color: $color-grey-2 !important;
+                                background-color: lighten($color-grey-2, 2%) !important;
                             }
 
                             .arrow {

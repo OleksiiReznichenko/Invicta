@@ -164,7 +164,7 @@ export default {
     // CHECK MOBILE VERSION
     created(){
         if (process.browser){
-            this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600;
+            this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
         }
     },
     methods: {
@@ -209,7 +209,7 @@ export default {
 
         // RESIZE
         window.addEventListener('resize', () => {
-            if (window.outerWidth <= 850 && window.outerHeight > 600) {
+            if (window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600) {
                 this.isPhoneInitial = true;
             } else {
                 this.isPhoneInitial = false;
@@ -235,7 +235,8 @@ export default {
     display: none;
     min-width: 23rem;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
         position: fixed;
         top: 0;
         left: 0;
@@ -248,13 +249,14 @@ export default {
 
     .corner-light-dropdown {
         @media only screen and (min-width: 850px),
-        only screen and (max-width: 850px) and (max-height: 600px) {
+        only screen and (max-width: 850px) and (max-height: 600px) and (min-width: 600px) {
             display: none;
         }
     }
 
     .dropdown__container {
-        @media only screen and (max-width: 850px) and (min-height: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px),
+        only screen and (max-width: 600px) {
             width: 50rem;
 
             @include abs-center;
@@ -269,7 +271,8 @@ export default {
     .logo {
         width: 11rem;
 
-        @media only screen and (max-width: 850px) and (min-height: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px),
+        only screen and (max-width: 600px) {
             display: none;
         }
     }
@@ -281,7 +284,7 @@ export default {
         margin-bottom: 2.5rem;
 
         @media only screen and (min-width: 850px),
-        only screen and (max-width: 850px) and (max-height: 600px) {
+        only screen and (max-width: 850px) and (max-height: 600px) and (min-width: 600px) {
             display: none;
         }
     }
@@ -310,7 +313,8 @@ export default {
         background-color: $color-grey-2;
         margin: 2rem 0;
 
-        @media only screen and (max-width: 850px) and (min-height: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px),
+        only screen and (max-width: 600px) {
             margin: 2.5rem 0;
         }
     }
@@ -320,7 +324,8 @@ export default {
         align-items: center;
         margin-bottom: 2rem;
 
-        @media only screen and (max-width: 850px) and (min-height: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px),
+        only screen and (max-width: 600px) {
             margin-bottom: 2.5rem;
             font-size: 2rem;
         }
@@ -341,7 +346,8 @@ export default {
         padding: .75rem 0;
         text-align: center;
 
-        @media only screen and (max-width: 850px) and (min-height: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px),
+        only screen and (max-width: 600px) {
             padding: 1.5rem 0;
             font-size: 2rem !important;
         }
@@ -358,7 +364,8 @@ export default {
     .buttons {
         margin-top: 2.25rem;
 
-        @media only screen and (max-width: 850px) and (min-height: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px),
+        only screen and (max-width: 600px) {
             margin-top: 3.5rem;
         }
 
@@ -366,7 +373,8 @@ export default {
             transition: all .3s;
             margin-bottom: .75rem;
 
-            @media only screen and (max-width: 850px) and (min-height: 600px) {
+            @media only screen and (max-width: 850px) and (min-height: 600px),
+            only screen and (max-width: 600px) {
                 margin-bottom: 1.25rem;
             }
 
@@ -386,7 +394,8 @@ export default {
         &:not(:last-of-type) {
             margin-bottom: 2.25rem;
 
-            @media only screen and (max-width: 850px) and (min-height: 600px) {
+            @media only screen and (max-width: 850px) and (min-height: 600px),
+            only screen and (max-width: 600px) {
                 margin-bottom: 3.25rem;
             }
         }
@@ -399,7 +408,8 @@ export default {
                 color: darken($color-text-grey, 25%) !important;
             }
 
-            @media only screen and (max-width: 850px) and (min-height: 600px) {
+            @media only screen and (max-width: 850px) and (min-height: 600px),
+            only screen and (max-width: 600px) {
                 font-size: 2rem !important;
             }
         }
@@ -433,7 +443,8 @@ export default {
         overflow: hidden;
         margin: 2rem 0 2.5rem;
 
-        @media only screen and (max-width: 850px) and (min-height: 600px) {
+        @media only screen and (max-width: 850px) and (min-height: 600px),
+        only screen and (max-width: 600px) {
             display: none;
         }
     }

@@ -47,9 +47,9 @@
                                 <label for="password">Password</label>
                                 <div class="input-container">
                                     <input ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6">
-                                    <button @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
+                                    <div @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
                                         <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="input-group">
@@ -424,6 +424,7 @@ export default {
                     padding: 0;
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     margin-bottom: 4rem;
                 }
 
@@ -436,6 +437,7 @@ export default {
                     height: 14.5rem;
                     overflow: hidden;
                     margin-bottom: 1.5rem;
+                    flex-shrink: 0;
             
                     @media only screen and (max-width: 850px) {
                         margin-bottom: 0;
@@ -529,6 +531,14 @@ export default {
                     min-width: 16px;
                     top: 50%;
                     transform: translateY(-50%);
+
+                    @media only screen and (max-width: 850px) {
+                        width: 2.25rem;
+                    }
+
+                    @media only screen and (max-width: 600px) {
+                        width: 2.5rem;
+                    }
                 }
 
                 .eye-icon {

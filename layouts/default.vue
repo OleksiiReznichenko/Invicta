@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <Preloader />
+        <!-- <Preloader /> -->
         <div ref="notificationWindow" id="notificationWindow"></div>
         <Navigation/>
         <nuxt class="on-top" />
@@ -54,8 +54,8 @@ export default {
         window.addEventListener('resize', () => {
             if (prevWidth >= 850 && window.outerWidth < 850 ||
             prevWidth <= 850 && window.outerWidth > 850 ||
-            prevHeight <= 600 && window.outerHeight > 600 ||
-            prevHeight >= 600 && window.outerHeight < 600) {
+            prevHeight <= 600 && window.outerHeight > 600 && window.outerWidth > 600 ||
+            prevHeight >= 600 && window.outerHeight < 600 && window.outerWidth > 600) {
                 setTimeout(() => {
                     this.dropdownOpener = document.getElementById('dropdown-opener');
                     this.dropdown = document.getElementById('dropdown');
@@ -455,6 +455,52 @@ export default {
             position: absolute;
             right: 3rem;
             bottom: 1rem;
+        }
+
+        .user-icon {
+            width: 1.5rem;
+
+            @media only screen and (max-width: 850px) {
+                width: 1.75rem;
+                margin-right: -3px;
+                bottom: 1.1rem;
+            }
+        }
+
+        .email-icon {
+            width: 1.75rem;
+
+            @media only screen and (max-width: 850px) {
+                width: 2rem;
+                margin-right: -3px;
+                bottom: 1.25rem;
+            }
+
+            @media only screen and (max-width: 600px) {
+                width: 2.25rem;
+                margin-right: -5px;
+                bottom: 1.1rem;
+            }
+        }
+
+        .eye-container {
+            cursor: pointer;
+            width: 1.75rem;
+
+            @media only screen and (max-width: 850px) {
+                width: 2.25rem;
+                margin-right: -4px;
+            }
+
+            @media only screen and (max-width: 600px) {
+                width: 2.5rem;
+                margin-right: -.8rem;
+            }
+        }
+
+        .eye-icon {
+            width: 100%;
+            margin-bottom: -2px;
         }
 
         .input-group-login {

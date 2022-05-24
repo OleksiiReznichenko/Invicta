@@ -16,7 +16,7 @@
                         </p>
                         <div class="input-group input-group-login">
                             <input ref="emailInput" v-model="email" type="email" id="email" placeholder="E-mail" required>
-                            <img src="@/assets/svg/user.svg" alt="User" class="user-icon input-left-content">
+                            <img src="@/assets/svg/message.svg" alt="Email" class="email-icon input-left-content">
                         </div>
                         <div class="input-group input-group-login">
                             <input @keypress.enter="login" ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6" required>
@@ -251,20 +251,6 @@ export default {
             @media only screen and (max-width: 850px) {
                 display: none;
             }
-        }
-
-        .user-icon {
-            width: 1.5rem;
-        }
-
-        .eye-container {
-            cursor: pointer;
-            width: 1.75rem;
-        }
-
-        .eye-icon {
-            width: 100%;
-            margin-bottom: -2px;
         }
 
         .buttons {

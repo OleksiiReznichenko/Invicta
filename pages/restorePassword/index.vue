@@ -13,9 +13,9 @@
                     <form @submit.prevent action="#" class="form">
                         <div class="input-group input-group-login">
                             <input ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="New password" minlength="6" required>
-                            <button @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
+                            <div @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
                                 <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
-                            </button>
+                            </div>
                         </div>
                         <div class="input-group input-group-login">
                             <input ref="repeatPasswordInput" v-model="repeatPassword" type="password" id="repeatPassword" placeholder="Repeat password" minlength="6" required>
@@ -138,15 +138,6 @@ export default {
             @media only screen and (max-width: 850px) {
                 display: none;
             }
-        }
-
-        .eye-container {
-            width: 1.75rem;
-        }
-
-        .eye-icon {
-            width: 100%;
-            margin-bottom: -2px;
         }
 
         .buttons {

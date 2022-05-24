@@ -80,12 +80,16 @@ export default {
                 model.position.set(-1, 0, 0);
             }
 
-            if (window.outerWidth < 1000 && window.outerHeight < 520) {
+            if (window.outerWidth < 1000 && window.outerHeight < 520 && window.outerWidth > 600) {
                 model.scale.set(1.85, 1.85, 1.85);
             }
             
             if (window.outerWidth < 700 && window.outerHeight > 600) {
                 model.scale.set(1.1, 1.1, 1.1);
+            }
+            
+            if (window.outerWidth < 600 && window.outerHeight < 600) {
+                model.scale.set(1.3, 1.3, 1.3);
             }
         }
         
@@ -110,7 +114,7 @@ export default {
             })
 
             renderer.render( scene, camera );
-            animate();
+            // animate();
         });
 
 
@@ -161,7 +165,7 @@ header {
         bottom: -20%;
         width: 45rem;
 
-        @media only screen and (max-width: 1000px) and (max-height: 520px),
+        @media only screen and (max-width: 1000px) and (max-height: 600px),
         only screen and (max-width: 1000px) {
             display: none;
         }
@@ -176,11 +180,6 @@ header {
             bottom: 35%;
         }
 
-        @media only screen and (max-width: 1000px) and (max-height: 520px) {
-            width: 50rem;
-            bottom: 8%;
-        }
-
         @media only screen and (max-width: 1000px) and (min-height: 600px) and (min-width: 600px) {
             bottom: 6%;
             left: 50%;
@@ -188,7 +187,12 @@ header {
             text-align: center;
         }
 
-        @media only screen and (max-width: 600px) and (min-height: 600px) {
+        @media only screen and (max-width: 1000px) and (max-height: 600px) and (min-width: 600px) {
+            width: 50rem;
+            bottom: 8%;
+        }
+
+        @media only screen and (max-width: 600px) {
             bottom: 15%;
         }
 
@@ -222,7 +226,7 @@ header {
             line-height: 1.3;
             margin-bottom: 6rem;
 
-            @media only screen and (max-width: 1000px) and (max-height: 520px) {
+            @media only screen and (max-width: 1000px) and (max-height: 600px) and (min-width: 600px) {
                 margin-bottom: 4rem;
 
                 br {
