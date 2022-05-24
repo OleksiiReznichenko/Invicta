@@ -16,7 +16,8 @@ Cookie Universal Nuxt: for work with cookies for saving logged in state in nuxt;
 
 Nuxt Uid Nuxt: for help to generate random ids in nuxt(not neccesary);
 
-Smooth Scroll: for smooth scroll on website
+Smooth Scroll: for smooth scroll on website;
+
 
 Also will use:
 
@@ -56,6 +57,7 @@ For single-page app you don't need anything special;
 For static html app you may need to make some special configuration in build: {} in nuxt.config.js;
 
 For server-server-side app you need special node js host;
+
 
 Single-page application is worse for SEO;
 
