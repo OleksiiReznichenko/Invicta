@@ -5,7 +5,8 @@
             <img :src="avatar" alt="User avatar" class="avatar">
             <div class="info">
                 <!-- <div class="top-container"> -->
-                    <h4 class="username">@{{username}}</h4>
+                    <h4 class="username-big">{{username}}</h4>
+                    <h5 class="username">@{{username}}</h5>
                 <!-- </div> -->
                 <p class="date">Seller since {{registrationDate}}</p>
             </div>
@@ -106,13 +107,27 @@ export default {
                 }
             }
 
-            .username {
+            .username,
+            .username-big {
                 font-weight: 600 !important;
-                font-size: 2rem;
-                margin-right: 1rem;
+            }
+
+            .username {
+                font-size: 1.6rem;
 
                 @media only screen and (max-width: 850px) {
                     font-size: 2.3rem;
+                }
+            }
+
+            .username-big {
+                color: $color-text-grey;
+                font-size: 2rem;
+                margin-bottom: .5rem;
+
+                @media only screen and (max-width: 850px) {
+                    font-size: 2.3rem;
+                    display: none;
                 }
             }
 

@@ -19,7 +19,7 @@
       </div>
       <div class="nav__right">
         <div class="search-container">
-          <input @click="searchFunction " @keyup="searchFunction" ref="searchInput" v-model="searchValue"
+          <input @click="searchFunction" @keyup="searchFunction" ref="searchInput" v-model="searchValue"
           type="search" id="searchInput" placeholder="Search" />
           <img
             src="@/assets/svg/searchIcon.svg"
@@ -67,11 +67,11 @@
         >
           <div class="profile-flex" id="dropdown-opener">
             <img
-              :src="$store.state.user.avatar"
+              :src="user.avatar"
               alt="Avatar"
-              class="user__icon"
+              class="user-avatar"
             />
-            <div class="user__name">{{$store.state.user.username}}</div>
+            <div class="user__name">{{user.username}}</div>
           </div>
           <NavDropdown />
         </div>
@@ -147,7 +147,11 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
         user() {
-            return this.$store.state.user;
+          return this.$store.state.users.users.find(el => {
+              if (el.id === this.$store.state.user.id) {
+                  return el;
+              }
+          })
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -539,10 +543,12 @@ export default {
     align-items: center;
     cursor: pointer;
 
-    .user__icon {
+    .user-avatar {
       margin-right: 1rem;
       width: 3rem !important;
       height: 3rem !important;
+      border-radius: 100%;
+      object-fit: cover;
     }
 
     .user__name {

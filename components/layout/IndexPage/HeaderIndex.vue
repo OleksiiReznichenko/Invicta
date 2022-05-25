@@ -75,7 +75,7 @@ export default {
         // SCAILING
         function cardsModelScailing(model) {
             model.scale.set(1.65, 1.65, 1.65);
-            if (window.outerWidth < 1000 && window.outerHeight > 600) {
+            if (window.outerWidth < 1000 && window.outerHeight > 600 || window.outerWidth < 600) {
                 model.scale.set(1.3, 1.3, 1.3);
                 model.position.set(-1, 0, 0);
             }
@@ -84,12 +84,8 @@ export default {
                 model.scale.set(1.85, 1.85, 1.85);
             }
             
-            if (window.outerWidth < 700 && window.outerHeight > 600) {
+            if (window.outerWidth < 700 && window.outerHeight > 600 || window.outerWidth < 600) {
                 model.scale.set(1.1, 1.1, 1.1);
-            }
-            
-            if (window.outerWidth < 600 && window.outerHeight < 600) {
-                model.scale.set(1.3, 1.3, 1.3);
             }
         }
         
@@ -150,6 +146,10 @@ export default {
 <style lang="scss" scoped>
 header {
     height: 100vh;
+
+    @media only screen and (max-width: 600px) {
+        min-height: 600px;
+    }
 
     .cards-scene {
         position: absolute;

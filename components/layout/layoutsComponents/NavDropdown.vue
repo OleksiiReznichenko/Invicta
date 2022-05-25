@@ -21,7 +21,7 @@
                 <img
                     :src="user.avatar"
                     alt="Avatar"
-                    class="user__icon"
+                    class="user-avatar"
                 />
                 <div class="close-dropdown user__info">
                     <div class="close-dropdown user__name">{{user.username}}</div>
@@ -52,7 +52,7 @@
             <div v-if="!isLoggedIn" key="line-2" class="line"></div>
 
             <nuxt-link v-if="!isLoggedIn" key="userNoLogin" to="/login" class="user">
-                <div class="user__icon profile__icon"><span>N</span></div>
+                <div class="user-avatar profile__icon"><span>N</span></div>
                 <span class="user__name">No user</span>
             </nuxt-link>
 

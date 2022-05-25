@@ -255,12 +255,13 @@ export default {
     }
 }
 
-.user__icon {
+.user-avatar {
     width: 4.5rem;
     height: 4.5rem;
     margin-right: 1.5rem;
     margin-left: 0;
     border-radius: 100%;
+    object-fit: cover;
 
     @media only screen and (max-width: 600px) {
         margin-right: 2.5rem;

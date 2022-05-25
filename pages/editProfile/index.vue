@@ -1,5 +1,16 @@
 <template>
     <div class="edit-profile-page">
+        <div class="crop-container-wrapper">
+            <div class="crop-container">
+                <div class="crop-image-container">
+                    <img ref="cropImage" :src="avatarSrc" alt="" class="crop-image">
+                </div>
+                <div class="buttons">
+                    <button class="button-cancel">Cancel</button>
+                    <button class="button-crop">Crop</button>
+                </div>
+            </div>
+        </div>
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="relative-container">
             <div class="content">
@@ -13,10 +24,11 @@
                 <h1 class="section page-title">Edit profile</h1>
                 <div class="section edit-form">
                     <div class="left">
-                        <div class="avatar-container">
+                        <input @change="fileChanged" ref="imageInput" type="file" accept=".jpg, .jped, .png" id="imageInput">
+                        <div @click="triggerFileSelection" class="avatar-container">
                             <img :src="user.avatar" alt="Avatar" class="avatar">
                         </div>
-                        <button class="change-button">
+                        <button @click="triggerFileSelection" class="change-button">
                             <img src="@/assets/svg/editSquareIcon.svg" alt="Icon" class="icon">
                             <span class="span-change">change</span>
                         </button>
@@ -46,7 +58,7 @@
                             <div class="input-group">
                                 <label for="password">Password</label>
                                 <div class="input-container">
-                                    <input ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6">
+                                    <input @keypress.enter="editProfileEvent" ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6">
                                     <div @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
                                         <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
                                     </div>
@@ -54,12 +66,12 @@
                             </div>
                             <div class="input-group">
                                 <label for="confirmPassword">Confirm Password</label>
-                                <input v-model="confirmPassword" type="password" class="password-input" id="confirmPassword" placeholder="Confirm password" minlength="6">
+                                <input @keypress.enter="editProfileEvent" v-model="confirmPassword" type="password" class="password-input" id="confirmPassword" placeholder="Confirm password" minlength="6">
                             </div>
                         </div>
                         <div class="input-group">
                             <label for="bio">Bio</label>
-                            <textarea @input="autoGrow" v-model="bio" :maxlength="maxBioLength" ref="bioInput" id="bio" name="bio" cols="30" rows="5" wrap="soft" placeholder="Enter your bio"></textarea>
+                            <textarea @keypress.enter.prevent='editProfileEvent' @input="autoGrow" v-model="bio" :maxlength="maxBioLength" ref="bioInput" id="bio" name="bio" cols="30" rows="5" wrap="soft" placeholder="Enter your bio"></textarea>
                             <EmojiPicker class="emoji-main-container" @emoji="onEmoji">
                                 <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" 
                                     @click.stop="clickEvent">
@@ -101,7 +113,7 @@
 </template>
 
 <script>
-// import AvatarCropper from 'vue-avatar-cropper';
+import Cropper from 'cropperjs';
 import EmojiPicker from 'vue-emoji-picker';
 import CustomBanner from '@/components/layout/Profile/CustomBanner';
 import DiscountProductsCustom from '@/components/layout/Profile/DiscountProductsCustom';
@@ -118,6 +130,8 @@ export default {
 
     data() {
         return {
+            selectedAvatarFile: null,
+            avatarSrc: null,
             isOpenNofication: false,
             isUsernameTaken: false,
             maxBioLength: 220,
@@ -150,6 +164,32 @@ export default {
     },
 
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // TRIGGER FILE SELECTION
+        triggerFileSelection() {
+            this.$refs.imageInput.click();
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // EVENT IF FILE IS SELECTED
+        fileChanged(e) {
+            const files = e.target.files || e.dataTransfer.files;
+            if (files.length) {
+                this.selectedAvatarFile = files[0];
+            } else {
+                this.selectedAvatarFile = files;
+            }
+            // console.log(this.selectedAvatarFile);
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // EVENT IF FILE IS CLEARED
+        fileCleared(e) {
+            this.$refs.imageInput.value = null;
+            this.$refs.imageInput.values = [];
+            this.selectedAvatarFile = null;
+        },
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // GROW TEXTAREA ON TEXT WRAP
         autoGrow(e) {
@@ -325,11 +365,57 @@ export default {
         // USER OBJECT CHANGES - CHANGE VALUES
         user() {
             this.assignInputValues();
-        }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SELECTED FILE CHANGES - CHANGE AVATAR SOURCE
+        selectedAvatarFile() {
+            if (this.selectedAvatarFile?.name) {
+                this.fileReader.readAsDataURL(this.selectedAvatarFile);
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FILE SELECTED - CHANGE CROPPER IMAGE SOURCE
+        avatarSrc() {
+            if (this.selectedAvatarFile?.name) {
+                this.cropper.replace(this.avatarSrc);
+            }
+        },
     },
     
     mounted () {
         this.assignInputValues();
+        this.avatarSrc = this.user.avatar;
+
+        // FILE READER
+        this.fileReader = new FileReader();
+
+        // AVATAR CROPPER CONFIG
+        this.cropper = new Cropper(this.$refs.cropImage, {
+            aspectRatio: 1,
+            minCropBoxWidth: 256,
+            minCropBoxHeight: 256,
+            viewMode: 3,
+            dragMode: 'move',
+            background: false,
+            cropBoxMovable: false,
+            cropBoxResizable: false,
+        });
+        
+        this.fileReader.onload = (e) => {
+            // GET NEW AVATAR SOURCE
+            this.avatarSrc = e.target.result;
+
+            // SET NEW USER AVATAR
+            this.$store.commit('users/changeAvatar', {id: this.user.id, newAvatar: this.avatarSrc});
+
+            // IF USER AVATAR CHANGED SUCCESSFULLY - SHOW MESSAGE
+            this.$store.dispatch('showNotificationWindow', {
+                text: 'User avatar changed successfully', 
+                isBad: false
+            });
+        }
     },
 }
 </script>
@@ -350,6 +436,44 @@ export default {
 }
 
 .edit-profile-page {
+
+    .crop-container-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000000;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(black, .5)
+    }
+
+    .crop-container {
+        @include abs-center;
+        background-color: $color-text-grey-dark;
+        box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
+        width: 45rem;
+        border-radius: 10px;
+
+        .crop-image-container {
+            @include flex-center;
+            padding: 3rem;
+
+            .crop-image {
+                
+            }
+        }
+
+        .buttons {
+            
+            .button-cancel {
+
+            }
+
+            .button-crop {
+
+            }
+        }
+    }
 
     .content {
         position: relative;
@@ -428,6 +552,10 @@ export default {
                     margin-bottom: 4rem;
                 }
 
+                #imageInput {
+                    display: none;
+                }
+
                 .avatar-container {
                     position: relative;
                     cursor: pointer;
@@ -465,6 +593,7 @@ export default {
                         width: 100%;
                         height: 100%;
                         border-radius: 100%;
+                        object-fit: cover;
                     }
                 }
 
@@ -525,6 +654,7 @@ export default {
                 }
 
                 .eye-container {
+                    cursor: pointer;
                     position: absolute;
                     right: 2rem;
                     width: 1.75rem;
