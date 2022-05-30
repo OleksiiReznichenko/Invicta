@@ -154,7 +154,6 @@ export default {
             }
         }
 
-        input,
         .info {
             width: 36rem;
     
@@ -166,6 +165,14 @@ export default {
                 width: 38rem !important;
             }
         }
+
+        input {
+            width: 36rem;
+            
+            @media only screen and (max-width: 850px) {
+                width: 100%;
+            }
+        }
         
         .info {
             color: $color-text-grey;
@@ -175,6 +182,10 @@ export default {
 
         .form {
             width: fit-content;
+            
+            @media only screen and (max-width: 850px) {
+                width: 100%;
+            }
         }
     }
 }

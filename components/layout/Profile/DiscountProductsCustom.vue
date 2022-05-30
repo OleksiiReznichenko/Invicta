@@ -1,31 +1,34 @@
 <template>
     <div class="root">
+        <AddNewBanner v-if="pageEdit" banner='sideBanner' class="add-image-component-2" />
         <div class="section heading-container">
             <h4 class="heading">Take it at a discount</h4>
         </div>
         <div class="banner-container banner-mobile">
             <div class="overlay">
-                <button class="btn btn-gradient"><span>Edit banners</span></button>
+                <button @click="openWindow" class="btn btn-gradient"><span>Edit banners</span></button>
             </div>
             <div class="banner">
-                <div class="info">
+                <div v-if="!user.sideBanner" class="info">
                     <h3>Have time <br> to buy</h3>
                     <nuxt-link to="/browse" class="btn btn-white">Go to shop</nuxt-link>
                 </div>
-                <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
+                <img v-if="!user.sideBanner" src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
+                <img v-if="user.sideBanner" key="bannerImageMobile" :src="user.sideBanner" alt="" class="new-banner-image">
             </div>
             <img src="@/assets/img/gridIndexSignup.png" alt="Grid" class="grid-image">
         </div>
         <div class="section discount-products-line">
             <div class="banner banner-desktop">
                 <div class="overlay">
-                    <button class="btn btn-gradient"><span>Edit banners</span></button>
+                    <button @click="openWindow" class="btn btn-gradient"><span>Edit banners</span></button>
                 </div>
-                <div class="info">
+                <div v-if="!user.sideBanner" class="info">
                     <h3>Have time <br> to buy</h3>
                     <nuxt-link to="/browse" class="btn btn-white">Go to shop</nuxt-link>
                 </div>
-                <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
+                <img v-if="!user.sideBanner" src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
+                <img v-if="user.sideBanner" key="bannerImage" :src="user.sideBanner" alt="" class="new-banner-image">
             </div>
             <ProductCard 
                 v-for="card in cards"
@@ -42,7 +45,15 @@
 </template>
 
 <script>
+import AddNewBanner from '@/components/layout/Profile/AddNewBanner';
+
 export default {
+    props: ['pageEdit'],
+
+    components: {
+        AddNewBanner,
+    },
+
     computed: {
         cards() {
             // GET GIFTCARDS WITH DISCOUNT
@@ -56,12 +67,50 @@ export default {
             })
 
             return filteredArray;
-        }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER
+        user() {
+            return this.$store.state.users.users.find(el => {
+                if (el.id === this.$store.state.user.id) {
+                    return el;
+                }
+            })
+        },
+    },
+
+    methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE WINDOW
+        openWindow() {
+            if (this.addImageWindow?.classList.contains('opened')) return;
+            this.addImageWindow.style.display = 'block';
+            this.addImageWindow.classList.add('opened');
+            setTimeout(() => {
+                this.addImageWindow.style.opacity = 1;
+                this.navigationRoot.style.display = 'none';
+            }, 10)
+        },
+    },
+
+    mounted () {
+        this.addImageWindow = document.querySelector('.add-image-component-2');
+        this.navigationRoot = document.querySelector('.navigation-root');
     },
 }
 </script>
 
 <style lang='scss' scoped>
+.new-banner-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
 .edit-class {
 
     ::v-deep {

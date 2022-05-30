@@ -1,28 +1,72 @@
 <template>
     <div class="section custom-banner">
+        <AddNewBanner v-if="pageEdit" banner='topBanner' class="add-image-component" />
         <div class="overlay">
-            <button class="btn btn-gradient"><span>Edit banners</span></button>
+            <button @click="openWindow" class="btn btn-gradient"><span>Edit banners</span></button>
         </div>
-        <div class="info">
+        <div v-if="!user.topBanner" key="info" class="info">
             <h1 class="title">Hot Sale</h1>
             <p class="subheading">Most bought this month "The North Face"</p>
             <nuxt-link to="/browse" class="btn btn-white">Browse products</nuxt-link>
         </div>
-        <img :src="image" alt="" class="image">
+        <img v-if="user.topBanner" key="bannerImage" :src="user.topBanner" alt="" class="new-banner-image">
+        <img v-if="!user.topBanner" key="bannerRightImage" src="@/assets/img/CustomBannerComposition.png" alt="Banner image" class="image">
     </div>
 </template>
 
 <script>
+import AddNewBanner from '@/components/layout/Profile/AddNewBanner';
+
 export default {
-    data() {
-        return {
-            image: '/projects/Invicta/CustomBannerComposition.png'
-        }
+    props: ['pageEdit'],
+
+    components: {
+        AddNewBanner,
+    },
+
+    computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER
+        user() {
+            return this.$store.state.users.users.find(el => {
+                if (el.id === this.$store.state.user.id) {
+                    return el;
+                }
+            })
+        },
+    },
+
+    methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE WINDOW
+        openWindow() {
+            if (this.addImageWindow?.classList.contains('opened')) return;
+            this.addImageWindow.style.display = 'block';
+            this.addImageWindow.classList.add('opened');
+            setTimeout(() => {
+                this.addImageWindow.style.opacity = 1;
+                this.navigationRoot.style.display = 'none';
+            }, 10)
+        },
+    },
+
+    mounted () {
+        this.addImageWindow = document.querySelector('.add-image-component');
+        this.navigationRoot = document.querySelector('.navigation-root');
     },
 }
 </script>
 
 <style lang="scss" scoped>
+.new-banner-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
 .custom-banner {
     background-color: $color-pink;
     border-radius: 10px;
@@ -32,6 +76,7 @@ export default {
     justify-content: space-between;
     margin-bottom: 5rem;
     white-space: nowrap;
+    min-height: 23rem;
 
     @media only screen and (max-width: 850px) {
         width: 66%;

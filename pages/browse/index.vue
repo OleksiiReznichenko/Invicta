@@ -1127,6 +1127,8 @@ export default {
 
 
             .products-container {
+                width: 100%;
+                
                 .no-products {
                     width: 45rem;
                     display: none;

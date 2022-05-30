@@ -52,6 +52,7 @@ export default {
             width: 4rem;
             height: 4rem;
             border-radius: 100%;
+            object-fit: cover;
         }
     }
 

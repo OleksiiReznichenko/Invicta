@@ -3,9 +3,9 @@
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <HeaderProfile :userObject='userSelected' :isMyProfile='isMyProfile' />
         <main>
-            <CustomBanner />
-            <ProductsLine/>
-            <DiscountProductsCustom/>
+            <CustomBanner :pageEdit='false' />
+            <ProductsLine />
+            <DiscountProductsCustom :pageEdit='false' />
         </main>
         <Footer class="section" />
     </div>
@@ -51,7 +51,6 @@ export default {
 
         // FIND USER IN USERS ARRAY
         this.user = userArray.find(el => {
-            console.log(el.username, this.$route.params.username)
             if (this.user || el.username !== this.$route.params.username) return;
             return el;
         })

@@ -522,6 +522,10 @@ export default {
 
         .input-group {
             position: relative;
+    
+            @media only screen and (max-width: 850px) {
+                width: 100%;
+            }
                     
             input,
             textarea {
@@ -543,21 +547,22 @@ export default {
                 width: 24rem;
     
                 @media only screen and (max-width: 850px) {
-                    width: 40rem !important;
+                    // width: 40rem !important;
+                    width: 100% !important;
                 }
     
-                @media only screen and (max-width: 450px) {
-                    width: 38rem !important;
-                }
+                // @media only screen and (max-width: 450px) {
+                //     width: 38rem !important;
+                // }
             }
 
             textarea {
                 width: 100%;
                 padding: 1.25rem 2.5rem;
     
-                @media only screen and (max-width: 850px) {
-                    width: 40rem !important;
-                }
+                // @media only screen and (max-width: 850px) {
+                //     width: 40rem !important;
+                // }
             }
 
             .full-width {
@@ -593,7 +598,7 @@ export default {
     background-color: $color-grey-2;
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
-    padding: 5.75rem 0 7.25rem;
+    padding: 5.75rem 2rem 7.25rem;
     width: 47rem;
     color: white;
     position: fixed;

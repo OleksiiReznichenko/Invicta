@@ -29,6 +29,8 @@ export const state = () => ({
             },
             shoppingItems: [],
             orders: [],
+            topBanner: null,
+            sideBanner: null,
         },
         {
             id: 'mikhailjr',
@@ -58,6 +60,8 @@ export const state = () => ({
             },
             shoppingItems: [],
             orders: [],
+            topBanner: null,
+            sideBanner: null,
         },
         {
             id: 'antoniojr',
@@ -87,6 +91,8 @@ export const state = () => ({
             },
             shoppingItems: [],
             orders: [],
+            topBanner: null,
+            sideBanner: null,
         },
         {
             id: 'alexjr',
@@ -116,6 +122,8 @@ export const state = () => ({
             },
             shoppingItems: [],
             orders: [],
+            topBanner: null,
+            sideBanner: null,
         },
         {
             id: 'johnjr',
@@ -145,6 +153,8 @@ export const state = () => ({
             },
             shoppingItems: [],
             orders: [],
+            topBanner: null,
+            sideBanner: null,
         },
         {
             id: 'donaldmaen',
@@ -174,6 +184,8 @@ export const state = () => ({
             },
             shoppingItems: [],
             orders: [],
+            topBanner: null,
+            sideBanner: null,
         },
     ],
 })
@@ -396,6 +408,30 @@ export const mutations = {
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE TOP BANNER
+    changeTopBanner(state, {id, newBanner}) {
+        const user = state.users.find(el => {
+            if (el.id === id) {
+                return el;
+            }
+        })
+
+        user.topBanner = newBanner;
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE SIDE BANNER
+    changeSideBanner(state, {id, newBanner}) {
+        const user = state.users.find(el => {
+            if (el.id === id) {
+                return el;
+            }
+        })
+
+        user.sideBanner = newBanner;
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ADD USER
     addUser(state, {id, username, email, password}) {
         const dateObj = new Date();
@@ -450,6 +486,8 @@ export const mutations = {
             },
             shoppingItems: [],
             orders: [],
+            topBanner: null,
+            sideBanner: null,
         })
     }
 }

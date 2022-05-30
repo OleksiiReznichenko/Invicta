@@ -1,3 +1,5 @@
+@import 'cropperjs/dist/cropper.css';
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
@@ -345,4 +347,70 @@ only screen and (max-width: 600px) {
   .cards-scene canvas {
     top: -14%;
   }
+}
+
+
+.cropper-crop-box,
+.cropper-view-box {
+  width: 14.5rem !important;
+  height: 14.5rem !important;
+  border-radius: 100% !important;
+}
+
+.cropper-view-box img {
+  /* position: absolute;
+  top: 50% !important;
+  left: 50% !important; */
+  /* transform: translate(-50%, -50%) !important; */
+}
+
+.cropper-view-box {
+  border: 1px solid black;
+}
+
+.cropper-line,
+.cropper-point {
+  display: none;
+}
+
+.cropper-container {
+  max-width: 55rem !important;
+  max-height: 35rem !important;
+  min-width: 50rem !important;
+  min-height: 30rem !important;
+  width: fit-content !important;
+}
+
+@media only screen and (max-width: 500px) {
+  .cropper-container {
+    min-width: 43rem !important;
+    min-height: 30rem !important;
+  }
+}
+
+.cropper-wrap-box {
+  overflow: hidden;
+  width: 100% !important;
+  min-width: 45rem !important;
+  min-height: 30rem !important;
+}
+
+.cropper-crop-box {
+  position: absolute;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.cropper-canvas img {
+  /* transform: translateX(-50%) !important; */
+  /* min-width: 45rem !important;
+  min-height: 30rem !important; */
+  /* width: 100% !important; */
+  /* height: 100% !important; */
+}
+
+.cropper-canvas img {
+  display: block !important;
+  width: 100% !important;
 }

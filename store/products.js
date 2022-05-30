@@ -67,7 +67,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -149,7 +149,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -249,7 +249,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -392,7 +392,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -472,7 +472,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -552,7 +552,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -640,7 +640,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -720,7 +720,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -800,7 +800,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -880,7 +880,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -960,7 +960,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -1040,7 +1040,7 @@ export const state = () => ({
                 category: 'technology',
                 name: 'Account Dell',
                 price: 199.99,
-                oldPrice: undefined,
+                oldPrice: null,
                 photo: '/projects/Invicta/products/dell.jpg',
                 photoBig: '/projects/Invicta/products/dellBig.jpg',
                 discount: '',
@@ -1057,3 +1057,15 @@ export const state = () => ({
         ]
     }
 })
+
+export const mutations = {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD NEW PRODUCT
+    createNewProduct(state, {newProduct}) {
+        if (newProduct.type === 'giftcard') {
+            state.products.giftcards.push(newProduct);
+        } else if (newProduct.type === 'account') {
+            state.products.accounts.push(newProduct);
+        }
+    },
+}

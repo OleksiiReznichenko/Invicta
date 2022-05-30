@@ -219,18 +219,18 @@ export default {
 
         input {
             width: 36rem;
-    
+            
             @media only screen and (max-width: 850px) {
-                width: 40rem !important;
-            }
-
-            @media only screen and (max-width: 450px) {
-                width: 38rem !important;
+                width: 100%;
             }
         }
 
         .form {
             width: fit-content;
+            
+            @media only screen and (max-width: 850px) {
+                width: 100%;
+            }
         }
     }
 }

@@ -179,6 +179,10 @@ export default {
         .form,
         .form-container {
             width: fit-content;
+            
+            @media only screen and (max-width: 850px) {
+                width: 100%;
+            }
         }
 
         .form-container {

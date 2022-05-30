@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div class="navigation-root root">
     <nav class="section nav">
       <div class="nav__left">
         <nuxt-link class="link-logo" to="/">

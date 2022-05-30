@@ -9,33 +9,39 @@
                     <span>Report ID</span>
                 </div>
 
-                <h1 class="page-title">Report ID</h1>
-                <div class="report-info">
+                <span class="report-status">Opened report</span>
+                <h1 class="page-title">PR0SW1JB4ZVB</h1>
+                <!-- <div class="report-info">
                     <span class="border-text-red report-status">open report</span>
                     <span class="report-id">PR0SW1JB4ZVB</span>
-                </div>
+                </div> -->
 
                 <div class="form-container">
                     <form @submit.prevent action="#" class="form">
                         <div class="input-group">
                             <label for="category">Category</label>
-                            <input class="full-width" v-model="category" type="text" id="category" placeholder="e. g. «Xbox Giftcards»" required>
+                            <input class="full-width" v-model="category" type="text" id="category" placeholder="e. g. «Xbox Giftcards»" readonly>
                         </div>
                         <div class="flex-container">
                             <div class="input-group">
-                                <label for="reporter">reporter</label>
-                                <input v-model="reporter" type="text" id="reporter" placeholder="Mar 24, 2022 08:32:00" required>
+                                <label for="reporter">Reporter</label>
+                                <input v-model="reporter" type="text" id="reporter" placeholder="Mar 24, 2022 08:32:00" readonly>
                             </div>
                             <div class="input-group">
                                 <label for="seller">Seller</label>
-                                <input v-model="seller" type="text" id="seller" placeholder="bc1wefwefdsfs2312312" required>
+                                <input v-model="seller" type="text" id="seller" placeholder="bc1wefwefdsfs2312312" readonly>
                             </div>
                         </div>
                         <div class="input-group">
                             <label for="cards">Cards</label>
-                            <input class="full-width" v-model="cards" type="text" id="cards" placeholder="e. g. «Xbox Giftcards»" required>
+                            <input class="full-width" v-model="cards" type="text" id="cards" placeholder="e. g. «Xbox Giftcards»" readonly>
                         </div>
-                        <button type="submit" class="btn btn-gradient btn-medium"><span>Report</span></button>
+                        <div class="input-group textarea-group">
+                            <label for="description">Description</label>
+                            <textarea v-model="description" ref="descriptionInput" class="input-validate" id="description" name="description" cols="30" rows="3" wrap="soft" placeholder="Enter your description" readonly></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gradient btn-medium"><span>Close Report</span></button>
+                        <button type="submit" class="btn btn-transparent btn-medium"><div class="background"></div><span>Back to dashboard</span></button>
                     </form>
                     <img src="@/assets/img/report.png" alt="Report" class="form-image">
                 </div>
@@ -55,6 +61,7 @@ export default {
             reporter: '',
             seller: '',
             cards: '',
+            description: '',
         }
     },
 }
@@ -67,14 +74,16 @@ export default {
 }
 
 .report-id-page {
-    min-height: calc(100vh - 11rem);
+    // min-height: calc(100vh - 11rem);
+    // min-height: 75rem;
+    margin-bottom: 5rem;
             
-    @media only screen and (max-width: 1000px) {
-        margin-bottom: 5rem;
-    }
+    // @media only screen and (max-width: 1000px) {
+    //     margin-bottom: 5rem;
+    // }
             
     @media only screen and (max-width: 850px) {
-        min-height: calc(100vh - 15rem);
+        margin-bottom: 15rem;
     }
 
 
@@ -94,80 +103,38 @@ export default {
         .page-title {
             margin-bottom: 1.75rem;
         }
-
-        .report-info-mobile {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-
-            @media only screen and (min-width: 850px) {
-                display: none;
-            }
-        
-            .report-status {
-                padding: 0;
-                color: $color-green;
-            }
-
-            .report-id {
-                font-size: 2.4rem;
-                color: white;
-                margin-right: 2rem;
-            }
-        }
-
-        .report-info {
-            .desktop {
-                @media only screen and (max-width: 850px) {
-                    display: none;
-                }
-            }
-        }
         
         .report-status {
-            padding: 1rem 5rem;
-            margin-right: 1rem;
-        }
-        
-        .amount-in-wallet {
-            padding: 1rem 3rem;
-            margin-right: 1rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: $color-green;
         }
 
-        .report-id {
-            color: $color-text-grey;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid $color-grey-2;
-            padding-bottom: 1.75rem;
-            margin-bottom: 1.75rem;
-            
-            @media only screen and (max-width: 850px) {
-                padding-bottom: 2.25rem;
-                margin-bottom: 2.25rem;
+        .btn {
+            .background {
+                background-color: $color-grey-dark;
             }
 
-            .user-rank {
-                padding: 5px 15px;
-                margin-right: 1rem;
-                color: $color-orange;
+            @media only screen and (max-width: 400px) {
+                padding: 1.4rem 2.5rem;
             }
+        }
+
+        .btn-gradient {
+            margin-right: 1.5rem;
         }
 
         .form-image {
-            height: 120%;
-            right: -4%;
+            height: 100%;
+            right: -6%;
             
             @media only screen and (max-width: 1100px) {
-                height: 110%;
+                height: 90%;
             }
             
             @media only screen and (max-width: 950px) {
-                right: -13%;
-                height: 105%;
+                right: -10%;
+                height: 95%;
             }
             
             @media only screen and (max-width: 850px) {
@@ -181,6 +148,10 @@ export default {
 
         .form {
             width: fit-content;
+            
+            @media only screen and (max-width: 850px) {
+                width: 100%;
+            }
         }
     }
 }

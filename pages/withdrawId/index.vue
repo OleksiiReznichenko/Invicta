@@ -39,7 +39,7 @@
                                 <input v-model="btcAddress" type="text" id="btcAddress" placeholder="bc1wefwefdsfs2312312" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-gradient btn-medium"><span>Withdraw</span></button>
+                        <button type="submit" class="btn btn-gradient btn-medium"><span>Back to dashboard</span></button>
                     </form>
                     <img src="@/assets/img/pigWithdrawId.png" alt="Pig" class="form-image">
                 </div>
@@ -69,16 +69,11 @@ export default {
 }
 
 .withdraw-id-page {
-    min-height: calc(100vh - 11rem);
-            
-    @media only screen and (max-width: 1000px) {
-        margin-bottom: 5rem;
-    }
+    margin-bottom: 5rem;
             
     @media only screen and (max-width: 850px) {
-        min-height: calc(100vh - 15rem);
+        margin-bottom: 15rem;
     }
-
 
     .content {
         position: relative;
@@ -177,6 +172,10 @@ export default {
 
         .form {
             width: fit-content;
+            
+            @media only screen and (max-width: 850px) {
+                width: 100%;
+            }
         }
     }
 }

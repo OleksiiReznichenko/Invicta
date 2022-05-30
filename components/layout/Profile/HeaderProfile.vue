@@ -515,6 +515,7 @@ export default {
                 height: 11rem;
                 border-radius: 100%;
                 margin-right: 2rem;
+                object-fit: cover;
             }
 
             .avatar-info {

@@ -1,12 +1,12 @@
 <template>
-    <div class="product-card">
+    <nuxt-link class="product-card" :to="'/browse/' + this.id">
         <div class="overlay"></div>
         <div class="header">
             <div class="top-rect"></div>
-            <img :src="photo" alt="Ozon" class="product-image">
+            <img :src="photo" alt="Image" class="product-image">
             <div class="container">
                 <div class="item items-in-stock">{{amountInStock}} {{itemsTextComp}}</div>
-                <div v-if="oldPrice" class="item discount">save {{discountComp}}%</div>
+                <div v-if="discountComp" class="item discount">save {{discountComp}}%</div>
             </div>
         </div>
         <div class="info">
@@ -16,50 +16,58 @@
                     <h3 class="new-price">${{price}}</h3>
                     <span v-if="oldPrice" class="old-price">${{oldPrice}}</span>
                 </div>
-                <nuxt-link class="btn" :to="'/browse/' + this.id">+Add</nuxt-link>
+                <nuxt-link v-if="!createProductPage" class="btn" :to="'/browse/' + this.id">+Add</nuxt-link>
+                <button v-if="createProductPage" class="btn">+Add</button>
             </div>
         </div>
-    </div>
+    </nuxt-link>
 </template>
 
 <script>
 export default {
-    props: ['name', 'photo', 'price', 'oldPrice', 'amountInStock', 'id'],
+    props: ['name', 'photo', 'price', 'oldPrice', 'amountInStock', 'id', 'createProductPage'],
     data() {
         return {
             discount: 0,
-            itemsText: 'items'
         }
     },
 
     computed: {
         discountComp() {
-            return this.discount
+            if (this.oldPrice && this.price < this.oldPrice) {
+                this.discount = Math.round(100 - this.price / this.oldPrice * 100);
+                if (this.discount > 99) {
+                    this.discount = 99;
+                }
+                return this.discount;
+            } else {
+                return null;
+            }
         },
         itemsTextComp() {
-            return this.itemsText
+            if (this.amountInStock == 1) {
+                return 'item';
+            } else {
+                return 'items';
+            }
         },
-    },
-
-    mounted () {
-        if (this.oldPrice) {
-            this.discount = Math.round(100 - this.price / this.oldPrice * 100);
-        }
-
-        if (this.amountInStock == 1) {
-            this.itemsText = 'item'
-        }
     },
 }
 </script>
 
 <style lang='scss' scoped>
 .product-card {
+    display: block;
     background-color: $color-grey;
     border-radius: 8px;
     padding: 1rem 0 3.4rem;
     position: relative;
     overflow: hidden;
+    transition: all .3s;
+
+    &:hover {
+        background-color: lighten($color-grey, 4%);
+    }
 
     .overlay {
         display: none;
@@ -81,11 +89,17 @@ export default {
         .product-image {
             display: block;
             width: 85%;
+            height: 12rem;
             margin: 0 auto;
             border-radius: 1rem;
+            object-fit: cover;
 
             @media only screen and (max-width: 1300px) {
                 border-radius: 10px;
+            }
+
+            @media only screen and (max-width: 850px) {
+                height: 16rem;
             }
         }
 
