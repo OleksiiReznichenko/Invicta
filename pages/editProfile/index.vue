@@ -102,8 +102,8 @@
                 <button @click="editProfileEvent" class="btn btn-gradient save-button save-margin-bottom"><span>Save changes</span></button>
 
                 <h1 class="section page-title">Profile banners</h1>
-                <CustomBanner :pageEdit='true' class="edit-class" />
-                <DiscountProductsCustom :pageEdit='true' class="edit-class" />
+                <UserCustomBanner :pageEdit='true' class="edit-class" />
+                <UserDiscountProducts :baseArray='productsBase' :pageEdit='true' class="edit-class" />
             </div>
             <img src="@/assets/img/gridEditProfile.png" alt="Grid" class="grid-image">
 
@@ -115,15 +115,15 @@
 <script>
 import Cropper from 'cropperjs';
 import EmojiPicker from 'vue-emoji-picker';
-import CustomBanner from '@/components/layout/Profile/CustomBanner';
-import DiscountProductsCustom from '@/components/layout/Profile/DiscountProductsCustom';
+import UserCustomBanner from '@/components/layout/Profile/UserCustomBanner';
+import UserDiscountProducts from '@/components/layout/Profile/UserDiscountProducts';
 
 export default {
     middleware: ['notLoggedIn'],
     
     components: {
-        CustomBanner,
-        DiscountProductsCustom,
+        UserCustomBanner,
+        UserDiscountProducts,
         EmojiPicker,
         // AvatarCropper,
     },
@@ -160,6 +160,12 @@ export default {
         // USER
         userUsername() {
             return this.user.username;
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER PRODUCTS
+        productsBase() {
+            return this.user.products;
         },
     },
 

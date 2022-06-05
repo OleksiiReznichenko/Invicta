@@ -16,16 +16,41 @@
 
 <script>
 export default {
+    props: ['baseArray'],
+
+    data() {
+        return {
+            category: 'all',
+            filteredArray: []
+        }
+    },
+
     mounted () {
+        this.categoriesList = document.querySelector('.categories-list');
         this.categories = Array.from(document.querySelectorAll('.category'));
+        this.$emit('getFilteredArray', this.baseArray);
+
+        this.$store.dispatch('checkOverflowX', {el: this.categoriesList});
 
         // SELECT STATS CATEGORY
         this.$refs.categoriesList.addEventListener('click', (e) => {
             if (e.target.classList.contains('category')) {
                 this.categories.forEach(el => {
                     el.classList.remove('active');
-                })
+                });
                 e.target.classList.add('active');
+                this.category = e.target.textContent.toLowerCase();
+
+                if (this.category === 'all') {
+                    this.filteredArray = this.baseArray;
+                } else {
+                    this.filteredArray = this.baseArray.filter(el => {
+                        if (el.category === this.category) {
+                            return el;
+                        }
+                    })
+                }
+                this.$emit('getFilteredArray', this.filteredArray);
             }
         })
     },
@@ -37,17 +62,32 @@ export default {
     display: flex;
     align-items: center;
     margin: 2rem auto 3.5rem;
-    // width: 100%;
-    overflow-x: scroll;
     -webkit-mask-image: linear-gradient(90deg,#000,#000 70%,rgba(255, 255, 255, 0));
     mask-image: linear-gradient(90deg,#000,#000 70%,rgba(255, 255, 255, 0));
+    padding-bottom: 1rem;
 
     @media only screen and (max-width: 850px) and (min-width: 600px) {
         width: 66%;
     }
 
+    @media only screen and (max-width: 850px) {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
     &::-webkit-scrollbar {
-        display: none;
+        height: 6px;
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: rgba($color-grey, .5);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 17px;
+        background-color: lighten($color-grey-2, 15%);
     }
 
     .active {

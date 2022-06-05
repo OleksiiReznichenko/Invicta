@@ -31,15 +31,25 @@
                 <img v-if="user.sideBanner" key="bannerImage" :src="user.sideBanner" alt="" class="new-banner-image">
             </div>
             <ProductCard 
-                v-for="card in cards"
-                :key="card.id"
-                :id="card.id"
-                :name="card.name"
-                :photo="card.photo"
-                :price="card.price"
-                :oldPrice="card.oldPrice"
-                :amountInStock="card.amountInStock"
+                v-for="product in products"
+                :key="product.id"
+                :id="product.id"
+                :name="product.name"
+                :photo="product.photo"
+                :price="product.price"
+                :oldPrice="product.oldPrice"
+                :amountInStock="product.amountInStock"
             />
+            <!-- <ProductCard 
+                v-for="product in products"
+                :key="product.id"
+                :id="product.id"
+                :name="product.name"
+                :photo="product.photo"
+                :price="product.price"
+                :oldPrice="product.oldPrice"
+                :amountInStock="product.amountInStock"
+            /> -->
         </div>
     </div>
 </template>
@@ -48,16 +58,16 @@
 import AddNewBanner from '@/components/layout/Profile/AddNewBanner';
 
 export default {
-    props: ['pageEdit'],
+    props: ['pageEdit', 'baseArray'],
 
     components: {
         AddNewBanner,
     },
 
     computed: {
-        cards() {
-            // GET GIFTCARDS WITH DISCOUNT
-            const filteredArrayDiscount = this.$store.state.products.products.giftcards.filter(el => {
+        products() {
+            // GET PRODUCTS WITH DISCOUNT
+            const filteredArrayDiscount = this.baseArray.filter(el => {
                 return el.oldPrice;
             })
 
@@ -199,6 +209,7 @@ export default {
         overflow: hidden;
         padding-top: 5rem;
         z-index: 100;
+        min-height: 60rem;
 
         @media only screen and (max-width: 850px) {
             width: 45%;

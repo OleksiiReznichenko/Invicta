@@ -32,20 +32,24 @@
                 />
                 <div class="center-container">
                     <h2 class="title">Category</h2>
-                    <div class="flex-container">
+                    <div class="categories-admin-stats-container">
                         <div ref="categories" class="categories">
                             <div class="category">All</div>
                             <div v-for="category in stats.categories" :key="category" class="category">
                                 <p>{{category}}</p>
-                                <button v-if="categoryEditingMode" class="button-delete-category">Delete</button>
+                                <button class="button-delete-category">
+                                    <img src="@/assets/svg/closeIcon.svg" alt="Close" class="close-icon">
+                                </button>
                             </div>
-                            <button v-if="!categoryEditingMode" @click="openEditingMode" ref="editCategoryButton" class="edit-category">Edit</button>
+                        </div>
+                        <div class="categories-controls">
                             <div v-if="categoryEditingMode" class="input-group">
                                 <label for="categoryInput">Add new category</label>
                                 <input @keypress.enter='addNewCategory' v-model="newCategory" ref="categoryInput" type="text" id="categoryInput" class="category-input" placeholder="Enter category">
                                 <button @click="addNewCategory" class="add-category-button">Add</button>
                                 <button @click="cancelEditingMode" class="cancel-category-button">Cancel</button>
                             </div>
+                            <button v-if="!categoryEditingMode" @click="openEditingMode" ref="addCategoryButton" class="btn btn-transparent add-category"><div class="background"></div><span class="button-span">Add category</span></button>
                         </div>
                         <div class="admin-stats">
                             <div class="stat-item">
@@ -378,9 +382,12 @@ export default {
         this.periodDropdownOpener = document.getElementById('periodDropdownOpener');
         
         this.categories = document.querySelector('.categories');
+        this.categoriesControls = document.querySelector('.categories-controls');
         this.shopCategories = Array.from(document.querySelectorAll('.shop-category'));
 
         this.period = this.stats.period.charAt(0).toUpperCase() + this.stats.period.slice(1);
+
+        this.$store.dispatch('checkOverflowX', {el: this.categories});
 
         // DELETE CATEGORY
         this.$refs.categories.addEventListener('click', (e) => {
@@ -388,6 +395,7 @@ export default {
                 const parent = e.target?.closest('.category');
                 const category = parent?.querySelector('p').textContent;
                 this.$store.commit('adminDashboard/deleteCategory', {value: category});
+                this.$store.dispatch('checkOverflowX', {el: this.categories});
             }
         })
 
@@ -422,9 +430,13 @@ export default {
                 }, 200);
             }
             const categories = this.categories.contains(e.target);
+            const categoriesControls = this.categoriesControls.contains(e.target);
 
             if (!categories && 
-            !e.target.classList.contains('edit-category') && 
+            !categoriesControls &&
+            !e.target.classList.contains('add-category') && 
+            !e.target.classList.contains('background') && 
+            !e.target.classList.contains('button-span') && 
             !e.target.classList.contains('button-delete-category') && 
             this.categoryEditingMode) {
                 this.categoryEditingMode = false;
@@ -479,7 +491,7 @@ export default {
 
         .center-container {
             @media only screen and (max-width: 850px) {
-                width: fit-content;
+                width: 100%;
                 margin: 0 auto;
             }
         }
@@ -487,7 +499,7 @@ export default {
         .title {
             font-size: 4.75rem;
             margin-bottom: 3rem;
-            margin-top: 6rem;
+            margin-top: 7rem;
         }
 
         .flex-container {
@@ -499,72 +511,37 @@ export default {
             }
         }
 
-        .categories {
-            background-color: $color-grey-dark;
-            border-radius: 10px;
-            box-shadow: 0 .5rem 5rem rgba(black, .4);
-            width: 18rem;
-            padding: 1rem 1rem 4rem;
-            text-align: center;
-            margin-right: 5rem;
+        .categories-controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2.5rem;
+            margin-bottom: 7rem;
 
-            @media only screen and (max-width: 850px) {
-                width: 30rem;
-                margin-bottom: 4rem;
-                font-size: 1.8rem;
-                width: 100%;
-            }
-
-            .category {
-                padding: 1.5rem .75rem .7rem;
-                color: $color-text-grey;
-                border-bottom: 1px solid $color-grey-2;
-                text-align: left;
-
-                @media only screen and (max-width: 850px) {
-                    padding: 2rem 1.25rem 1rem;
-                }
-            }
-
-            .edit-category {
-                font-weight: 600 !important;
+            .add-category {
+                font-weight: 500 !important;
                 font-size: 1.7rem;
-                color: $color-primary;
-                margin-top: 1.5rem;
-                transition: all .3s;
-
-                &:hover {
-                    color: lighten($color-primary, 5%);
-                }
+                padding: .75rem 2.5rem;
+                justify-self: flex-end;
 
                 @media only screen and (max-width: 850px) {
                     font-size: 2.2rem;
                 }
-            }
 
-            .button-delete-category {
-                background-color: #840f0f;
-                border-radius: 10px;
-                font-weight: 500 !important;
-                padding: .35rem 1.25rem;
-                margin-top: 5px;
-                transition: all .3s;
-                
-                &:hover {
-                    background-color: darken(#840f0f, 7%);
+                .background {
+                    background-color: #111;
                 }
             }
 
             .input-group {
-                text-align: left;
-                margin-top: 2rem;
+                text-align: center;
+                margin: 0 auto;
 
                 label {
                     font-weight: 500 !important;
                     display: inline-block;
                     margin-bottom: 6px;
                     margin-left: 5px;
-                    font-size: 1.4rem;
+                    font-size: 1.7rem;
         
                     @media only screen and (max-width: 850px) {
                         font-size: 1.7rem;
@@ -573,26 +550,28 @@ export default {
 
                 input {
                     display: block;
-                    background-color: #111111;
+                    background-color: $color-grey;
                     box-shadow: 0 .3rem 1rem 0 rgba(#000000, .2) inset,
                     0 .3rem 1rem 0 rgba(#19151F, .5);
                     border-radius: 8px;
                     padding: .8rem 1.5rem;
-                    width: 100%;
+                    width: 25rem;
         
                     @media only screen and (max-width: 850px) {
                         padding: 1.1rem 2.5rem;
-                        width: 35rem;
+                        width: 30rem;
                     }
                 }
 
                 button {
+                    font-size: 1.6rem;
                     background-color: $color-primary;
                     border-radius: 20px;
                     font-weight: 500 !important;
                     padding: .35rem 1.25rem;
-                    margin-top: 5px;
+                    margin-top: 8px;
                     transition: all .3s;
+                    border: 1px solid $color-primary;
                 
                     &:hover {
                         background-color: darken($color-primary, 7%);
@@ -612,6 +591,68 @@ export default {
                         background-color: white;
                         color: black;
                     }
+                }
+            }
+        }
+
+        .categories {
+            background-color: $color-grey-dark;
+            border-radius: 10px;
+            box-shadow: 0 .5rem 5rem rgba(black, .4);
+            // width: 18rem;
+            padding: 2.5rem;
+            text-align: center;
+            display: flex;
+
+            @media only screen and (max-width: 850px) {
+                overflow-x: scroll;
+
+                // &::-webkit-scrollbar {
+                //     display: none;
+                // }
+            }
+
+            &::-webkit-scrollbar {
+                height: 6px;
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color: rgba($color-grey, 1);
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 17px;
+                background-color: lighten($color-grey-2, 15%);
+            }
+
+            // @media only screen and (max-width: 850px) {
+            //     width: 30rem;
+            //     margin-bottom: 4rem;
+            //     font-size: 1.8rem;
+            //     width: 100%;
+            // }
+
+            .category {
+                font-weight: 500 !important;
+                padding: .75rem 1.85rem;
+                background-color: #1C1B25;
+                border-radius: 40px;
+                display: flex;
+                align-items: center;
+
+                &:not(:last-of-type) {
+                    margin-right: 1.25rem;
+                }
+            }
+
+            .button-delete-category {
+                margin-left: 1rem;
+                margin-bottom: -4px;
+                
+                .close-icon {
+                    width: 18px;
+                    height: 18px;
                 }
             }
         }

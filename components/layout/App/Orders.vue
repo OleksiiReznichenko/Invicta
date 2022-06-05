@@ -27,8 +27,8 @@
         </div>
         <div v-if="orders && orders.length > 0" ref="orders" class="orders">
             <OrderItem
-            v-for="order in filteredOrders"
-            :key="order.id"
+            v-for="(order, i) in filteredOrders"
+            :key="i"
             :id='order.id'
             :productTitle='order.productTitle'
             :productPhoto='order.productPhoto'
@@ -36,14 +36,23 @@
             :date='order.date'
             />
         </div>
-        <!-- <div v-if="orders.length > 9" class="pagination"> -->
+        <!-- <div v-if="orders.length > 10" class="pagination"> -->
         <div class="pagination">
-            <span class="showing-amount">Showing {{startText}} to {{endText}} of {{totalItems}} entries</span>
+            <!-- <span class="showing-amount">Showing {{startText}} to {{endText}} of {{totalItems}} entries</span> -->
+            <div class="page-numbers">
+                <span @click="paginationFunc" class="page-number page-number--first">1</span>
+                <span class="dots dots--first">...</span>
+                <span @click="paginationFunc" class="page-number page-number--central page-number--central--left">2</span>
+                <span @click="paginationFunc" class="page-number page-number--central page-number--central--central">3</span>
+                <span @click="paginationFunc" class="page-number page-number--central page-number--central--right">4</span>
+                <span class="dots dots--last">...</span>
+                <span @click="paginationFunc" ref="lastPageNumber" class="page-number page-number--last">10</span>
+            </div>
             <div class="buttons">
                 <!-- <button v-if="sliceStart !== 0" @click="prev" class="button-prev">Previous</button>
                 <button v-if="sliceEnd <= orders.length" @click="next" class="button-next">Next</button> -->
-                <button @click="prev" class="button-prev">Previous</button>
-                <button @click="next" class="button-next">Next</button>
+                <button @click="prev" ref="prevButton" class="button-prev">Previous</button>
+                <button @click="next" ref="nextButton" class="button-next">Next</button>
             </div>
         </div>
     </div>
@@ -63,11 +72,12 @@ export default {
         return {
             searchValue: '',
             searchValueValidated: '',
-            totalItems: 0,
+            finalArray: [],
             sliceStart: 0,
-            sliceEnd: 9,
-            startText: 0,
-            endText: 9,
+            sliceEnd: 10,
+            amountOfItemsInPage: 10,
+            productsPages: 1,
+            currentProductsPage: 1
         }
     },
 
@@ -75,7 +85,7 @@ export default {
         filteredOrders() {
             if (this.searchValueValidated) {
                 this.finalArray = this.orders.filter(el => {
-                    if (el.productTitle.toLowerCase().includes(this.searchValueValidated)) {
+                    if (el.productTitle.toLowerCase().includes(this.searchValueValidated) || el.id.toLowerCase().includes(this.searchValueValidated)) {
                         return el;
                     }
                 });
@@ -83,11 +93,8 @@ export default {
                 this.finalArray = this.orders;
             }
 
-            this.totalItems = this.finalArray.length;
-
-            if (this.sliceEnd >= this.finalArray.length) {
-                this.endText = this.finalArray.length;
-            }
+            // CALC PAGES AMOUNT
+            this.productsPages = Math.ceil(this.finalArray.length / this.amountOfItemsInPage);
 
             // LIMIT AMOUNT OF PRODUCTS ON PAGE
             return this.finalArray.slice(this.sliceStart, this.sliceEnd);
@@ -99,11 +106,12 @@ export default {
         // VALIDATE SEARCH VALUE ON TYPING
         searchValue() {
             this.validateSearchValue();
-                
-            this.sliceStart = 0;
-            this.sliceEnd = 9;
-            this.startText = this.sliceStart;
-            this.endText = this.sliceEnd;
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // REINIT PAGINATION ON ARRAY CHANGE
+        'finalArray.length'() {
+            this.paginationInit();
         }
     },
     
@@ -131,33 +139,366 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PREV BUTTON FUNCTIONAL
         prev() {
-            if (this.sliceStart === 0) return;
-            this.sliceStart -= 9;
-            this.sliceEnd -= 9;
-            this.startText = this.sliceStart;
-            this.endText = this.sliceEnd;
+            if (this.sliceStart !== 0) {
+                // SHOW PREV BUTTON IF IT WAS HIDDEN
+                if (this.$refs.prevButton.classList.contains('disabled-button')) {
+                    this.$refs.prevButton.classList.remove('disabled-button');
+                }
+                
+                // SHOW NEXT BUTTON IF IT WAS HIDDEN
+                if (this.$refs.nextButton.classList.contains('disabled-button')) {
+                    this.$refs.nextButton.classList.remove('disabled-button');
+                }
+
+                // UPDATE SLICE START & SLICE END VALUE AND CURRENT PAGE NUMBER
+                this.sliceStart -= this.amountOfItemsInPage;
+                this.sliceEnd -= this.amountOfItemsInPage;
+                this.currentProductsPage -= 1;
+
+                // HIDE PREV BUTTON ON THE FIRST PAGE
+                if (this.sliceStart === 0) {
+                    this.$refs.prevButton.classList.add('disabled-button');
+                }
+            }
+                
+            this.paginationOnButtons();
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // NEXT BUTTON FUNCTIONAL
         next() {
-            if (this.sliceEnd >= this.finalArray?.length || this.totalItems === 0) return;
-            this.sliceStart += 9;
-            this.sliceEnd += 9;
-            this.startText = this.sliceStart;
-            this.endText = this.sliceEnd;
+            // MAXIMAL AMOUNT OF PRODUCTS FOR ALL PAGES
+            const maxProductsItems = this.productsPages * this.amountOfItemsInPage;
 
-            if (this.sliceEnd >= this.finalArray.length) {
-                this.endText = this.finalArray.length;
+            if (maxProductsItems !== this.sliceEnd) {
+                // SHOW NEXT BUTTON IF IT WAS HIDDEN
+                if (this.$refs.nextButton.classList.contains('disabled-button')) {
+                    this.$refs.nextButton.classList.remove('disabled-button');
+                }
+
+                // SHOW PREV BUTTON IF IT WAS HIDDEN
+                if (this.$refs.prevButton.classList.contains('disabled-button')) {
+                    this.$refs.prevButton.classList.remove('disabled-button');
+                }
+                
+                // IF NOT MOBILE UPDATE SLICE START VALUE
+                this.sliceStart += this.amountOfItemsInPage;
+                
+                // UPDATE SLICE END VALUE AND CURRENT PAGE NUMBER
+                this.sliceEnd += this.amountOfItemsInPage;
+                this.currentProductsPage += 1;
+
+                if (this.currentProductsPage === this.productsPages) {
+                    this.$refs.nextButton.classList.add('disabled-button');
+                }
+            }
+                
+            this.paginationOnButtons();
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // PAGINATION FUNCTIONAL WHEN USE PREV & NEXT BUTTONS
+        paginationOnButtons() {
+            // REMOVE ACTIVE CLASSES FROM PREVIOUS PAGINATION BUTTONS
+            this.pageNumbers.forEach(el => {
+                el.classList.remove('active-page-number');
+            })
+
+            // FIND NEW ACTIVE PAGINATION BUTTON
+            const activeButton = this.pageNumbers.find(el => {
+                return el.textContent == this.currentProductsPage;
+            })
+
+            if (!activeButton) return;
+
+            // ADD ACTIVE CLASS TO NEW PAGINATION BUTTON
+            activeButton.classList.add('active-page-number');
+
+            // CHECK IF BUTTON IN CENTER FROM LEFT SIDE IS CLICKED AND IF THE NUMBER BEFORE THIS PAGE NUMBER
+            // IS NOT THE FIRST PAGINATIONO BUTTON NUMBER
+            if (activeButton.classList.contains('page-number--central--left') && this.currentProductsPage - 1 > 1) {
+                // REMOVE ACTIVE CLASS FROM NEW PAGINATION BUTTON
+                activeButton.classList.remove('active-page-number');
+
+                // INDICATOR FOR CHECKING IF ACTIVE PAGINATION BUTTON WAS FOUND
+                let indicator = false;
+
+                // ADD ACTIVE CLASS TO THE BUTTON AFTER NEW PAGINATION BUTTON
+                this.pageNumbersCentral.forEach(el => {
+                    el.textContent = +el.textContent - 1;
+                    if (+activeButton.textContent + 1 == el.textContent && !indicator) {
+                        el.classList.add('active-page-number');
+                        indicator = true;
+                    }
+                })
+
+                // UPDATE CURRENT PAGE NUMBER + 1
+                this.currentProductsPage = +activeButton.textContent + 1;
+
+                // CHECK IF THE NUMBER OF BUTTON BEFORE THE OLD BUTTON IS IS NOT THE FIRST PAGINATION BUTTON NUMBER
+                // IF SO HIDE FIRST PAGINATION DOTS AND IN ANY CASE SHOW LAST PAGINATION DOTS
+                if (this.currentProductsPage - 2 === 1) {
+                    this.pageDotsLast.style.display = 'inline-block';
+                    this.pageDotsFirst.style.display = 'none';
+                } else {
+                    this.pageDotsLast.style.display = 'inline-block';
+                }
+            }
+
+            // CHECK IF BUTTON IN CENTER FROM RIGHT SIDE IS CLICKED AND IF THE NUMBER AFTER THIS PAGE NUMBER
+            // IS NOT THE LAST PAGINATIONO BUTTON NUMBER
+            if (activeButton.classList.contains('page-number--central--right') && this.currentProductsPage + 1 < this.productsPages) {
+                // REMOVE ACTIVE CLASS FROM NEW PAGINATION BUTTON
+                activeButton.classList.remove('active-page-number');
+
+                // INDICATOR FOR CHECKING IF ACTIVE PAGINATION BUTTON WAS FOUND
+                let indicator = false;
+
+                // ADD ACTIVE CLASS TO THE BUTTON BEFORE NEW PAGINATION BUTTON
+                this.pageNumbersCentral.forEach(el => {
+                    el.textContent = +el.textContent + 1;
+                    if (activeButton.textContent == el.textContent && !indicator) {
+                        el.classList.add('active-page-number');
+                        indicator = true;
+                    }
+                })
+
+                // UPDATE CURRENT PAGE NUMBER - 1
+                this.currentProductsPage = +activeButton.textContent - 1;
+
+                // CHECK IF THE NUMBER OF BUTTON AFTER THE OLD BUTTON IS IS NOT THE LAST PAGINATION BUTTON NUMBER
+                // IF SO HIDE LAST PAGINATION DOTS AND IN ANY CASE SHOW FIRST PAGINATION DOTS
+                if (this.currentProductsPage + 2 === this.productsPages) {
+                    this.pageDotsFirst.style.display = 'inline-block';
+                    this.pageDotsLast.style.display = 'none';
+                } else {
+                    this.pageDotsFirst.style.display = 'inline-block';
+                }
             }
         },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // PAGINATION FUNCTIONAL
+        paginationFunc(e) {
+            // REMOVE ACTIVE CLASSES FROM PREVIOUS PAGINATION BUTTONS
+            this.pageNumbers.forEach(el => {
+                el.classList.remove('active-page-number');
+            })
+
+            // ADD ACTIVE CLASS TO CLICKED PAGINATION BUTTON
+            e.target.classList.add('active-page-number');
+
+            // UPDATE CURRENT PAGE NUMBER
+            this.currentProductsPage = +e.target.textContent;
+
+            // CHECK IF BUTTON IN CENTER FROM LEFT SIDE IS CLICKED AND IF THE NUMBER BEFORE THIS PAGE NUMBER
+            // IS NOT THE FIRST PAGINATIONO BUTTON NUMBER
+            if (e.target.classList.contains('page-number--central--left') && this.currentProductsPage - 1 > 1) {
+                // REMOVE ACTIVE CLASS TO CLICKED PAGINATION BUTTON
+                e.target.classList.remove('active-page-number');
+
+                // INDICATOR FOR CHECKING IF ACTIVE PAGINATION BUTTON WAS FOUND
+                let indicator = false;
+
+                // ADD ACTIVE CLASS TO THE BUTTON AFTER CLICKED PAGINATION BUTTON
+                this.pageNumbersCentral.forEach(el => {
+                    el.textContent = +el.textContent - 1;
+                    if (+e.target.textContent + 1 == el.textContent && !indicator) {
+                        el.classList.add('active-page-number');
+                        indicator = true;
+                    }
+                })
+
+                // UPDATE CURRENT PAGE NUMBER + 1
+                this.currentProductsPage = +e.target.textContent + 1;
+
+                // CHECK IF THE NUMBER OF BUTTON BEFORE THE OLD BUTTON IS IS NOT THE FIRST PAGINATION BUTTON NUMBER
+                // IF SO HIDE FIRST PAGINATION DOTS AND IN ANY CASE SHOW LAST PAGINATION DOTS
+                if (this.currentProductsPage - 2 === 1) {
+                    this.pageDotsLast.style.display = 'inline-block';
+                    this.pageDotsFirst.style.display = 'none';
+                } else {
+                    this.pageDotsLast.style.display = 'inline-block';
+                }
+            }
+
+            // CHECK IF BUTTON IN CENTER FROM RIGHT SIDE IS CLICKED AND IF THE NUMBER AFTER THIS PAGE NUMBER
+            // IS NOT THE LAST PAGINATIONO BUTTON NUMBER
+            if (e.target.classList.contains('page-number--central--right') && this.currentProductsPage + 1 < this.productsPages) {
+                // REMOVE ACTIVE CLASS TO CLICKED PAGINATION BUTTON
+                e.target.classList.remove('active-page-number');
+
+                // INDICATOR FOR CHECKING IF ACTIVE PAGINATION BUTTON WAS FOUND
+                let indicator = false;
+
+                // ADD ACTIVE CLASS TO THE BUTTON BEFORE CLICKED PAGINATION BUTTON
+                this.pageNumbersCentral.forEach(el => {
+                    el.textContent = +el.textContent + 1;
+                    if (e.target.textContent == el.textContent && !indicator) {
+                        el.classList.add('active-page-number');
+                        indicator = true;
+                    }
+                })
+
+                // UPDATE CURRENT PAGE NUMBER = 1
+                this.currentProductsPage = +e.target.textContent - 1;
+
+                // CHECK IF THE NUMBER OF BUTTON AFTER THE OLD BUTTON IS IS NOT THE LAST PAGINATION BUTTON NUMBER
+                // IF SO HIDE LAST PAGINATION DOTS AND IN ANY CASE SHOW FIRST PAGINATION DOTS
+                if (this.currentProductsPage + 2 === this.productsPages) {
+                    this.pageDotsFirst.style.display = 'inline-block';
+                    this.pageDotsLast.style.display = 'none';
+                } else {
+                    this.pageDotsFirst.style.display = 'inline-block';
+                }
+            }
+
+            // CHECK IF CLICKED PAGINATION BUTTON IS THE FIRST BUTTON AND AMOUNT OF PAGES
+            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW 
+            // LAST PAGINATION DOTS & HIDE FIRST PAGINATION DOTS
+            if (e.target.classList.contains('page-number--first') && this.productsPages >= 6) {
+                this.pageDotsLast.style.display = 'inline-block';
+                this.pageDotsFirst.style.display = 'none';
+                this.pageNumberCentralLeft.textContent = 2;
+                this.pageNumberCentralCentral.textContent = 3;
+                this.pageNumberCentralRight.textContent = 4;
+            }
+
+            // CHECK IF CLICKED PAGINATION BUTTON IS THE LAST BUTTON AND AMOUNT OF PAGES
+            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW 
+            // FIRST PAGINATION DOTS & HIDE LAST PAGINATION DOTS
+            if (e.target.classList.contains('page-number--last') && this.productsPages >= 6) {
+                this.pageDotsFirst.style.display = 'inline-block';
+                this.pageDotsLast.style.display = 'none';
+                this.pageNumberCentralLeft.textContent = this.productsPages - 3;
+                this.pageNumberCentralCentral.textContent =this.productsPages - 2;
+                this.pageNumberCentralRight.textContent = this.productsPages - 1;
+            }
+
+            // UPDATE SLICE START & SLICE END
+            this.sliceStart = (this.currentProductsPage - 1) * this.amountOfItemsInPage;
+            this.sliceEnd = this.currentProductsPage * this.amountOfItemsInPage;
+
+            // HIDE & SHOW PREV BUTTON
+            if (this.sliceStart === 0) {
+                this.$refs.prevButton.classList.add('disabled-button');
+            } else {
+                if (this.$refs.prevButton.classList.contains('disabled-button')) {
+                    this.$refs.prevButton.classList.remove('disabled-button');
+                }
+            }
+
+            // HIDE & SHOW NEXT BUTTON
+            if (this.productsPages * this.amountOfItemsInPage === this.sliceEnd) {
+                this.$refs.nextButton.classList.add('disabled-button');
+            } else {
+                if (this.$refs.nextButton.classList.contains('disabled-button')) {
+                    this.$refs.nextButton.classList.remove('disabled-button');
+                }
+            }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // INIT OF PAGINATION
+        paginationInit() {
+            // REMOVE ACTIVE CLASSES FROM PREVIOUS PAGINATION BUTTONS
+            this.pageNumbers.forEach(el => {
+                el.classList.remove('active-page-number');
+            })
+            // ADD ACTIVE CLASS TO FIRST PAGINATION BUTTON
+            this.pageNumberFirst.classList.add('active-page-number');
+
+            // HIDE FIRST PAGINATION DOTS
+            this.pageDotsFirst.style.display = 'none';
+
+
+            // CHECK PRODUCTS PAGES AMOUNT & SHOW AND HIDE PAGINATION BUTTONS BASED ON THIS
+            if (this.productsPages < 6) {
+                this.pageDotsLast.style.display = 'none';
+            } else {
+                this.pageDotsLast.style.display = 'inline-block';
+            }
+
+            if (this.productsPages < 5) {
+                this.pageNumberCentralRight.style.display = 'none';
+            } else {
+                this.pageNumberCentralRight.style.display = 'inline-block';
+            }
+
+            if (this.productsPages < 4) {
+                this.pageNumberCentralCentral.style.display = 'none';
+            } else {
+                this.pageNumberCentralCentral.style.display = 'inline-block';
+            }
+
+            if (this.productsPages < 3) {
+                this.pageNumberCentralLeft.style.display = 'none';
+            } else {
+                this.pageNumberCentralLeft.style.display = 'inline-block';
+            }
+
+            // REINIT ARRAYS BASED ON PAGINATION BUTTONS STYLE DISPLAY (CHECK HIDDEN OR NOT)
+            this.pageNumbers = Array.from(document.querySelectorAll('.page-number')).filter(el => {
+                return el.style.display !== 'none';
+            })
+            this.pageNumbersCentral = Array.from(document.querySelectorAll('.page-number--central')).filter(el => {
+                return el.style.display !== 'none';
+            });
+
+            // REINIT PAGINATION BUTTONS NUMBERS
+            this.pageNumberCentralLeft.textContent = 2;
+            this.pageNumberCentralCentral.textContent = 3;
+            this.pageNumberCentralRight.textContent = 4;
+            this.pageNumberLast.textContent = this.productsPages;
+            
+            // REINIT BASIC VARIABLES
+            this.sliceStart = 0;
+            this.sliceEnd = 10;
+            this.currentProductsPage = 1;
+
+            // SHOW & HIDE PAGINATION BASED ON AMOUNT OF PRODUCTS
+            if (this.finalArray.length > 0) {
+                // IF FILTRATION WAS APPLIED
+                if (this.finalArray.length <= this.amountOfItemsInPage) {
+                    this.pagination.style.display = 'none';
+                } else {
+                    this.pagination.style.display = 'flex';
+                }
+            } else {
+                // IF NO FILTRATION WAS APPLIED
+                if (this.finalArray.length <= this.amountOfItemsInPage) {
+                    this.pagination.style.display = 'none';
+                } else {
+                    this.pagination.style.display = 'flex';
+                }
+            }
+
+            // HIDE PREV BUTTON
+            if (!this.$refs.prevButton.classList.contains('disabled-button')) {
+                this.$refs.prevButton.classList.add('disabled-button');
+            }
+
+            // SHOW NEXT BUTTON IF IT WAS HIDDEN
+            if (this.$refs.nextButton.classList.contains('disabled-button')) {
+                this.$refs.nextButton.classList.remove('disabled-button');
+            }
+        }
     },
 
     mounted () {
-        if (this.orders?.length === 0) {
-            this.sliceEnd = 0;
-            this.endText = this.sliceEnd;
-        }
+        // DOM
+        this.pageNumbers = Array.from(document.querySelectorAll('.page-number'));
+        this.pageNumbersCentral = Array.from(document.querySelectorAll('.page-number--central'));
+        this.pageNumberFirst = document.querySelector('.page-number--first');
+        this.pageNumberCentralLeft = document.querySelector('.page-number--central--left');
+        this.pageNumberCentralCentral = document.querySelector('.page-number--central--central');
+        this.pageNumberCentralRight = document.querySelector('.page-number--central--right');
+        this.pageNumberLast = document.querySelector('.page-number--last');
+        this.pageDotsFirst = document.querySelector('.dots--first');
+        this.pageDotsLast = document.querySelector('.dots--last');
+        this.pagination = document.querySelector('.pagination');
+
+        this.paginationInit();
     },
 }
 </script>
@@ -171,20 +512,57 @@ export default {
         align-items: center;
         justify-content: space-between;
         margin-top: 2rem;
+        user-select: none;
 
         @media only screen and (max-width: 850px) {
             flex-direction: column;
             justify-content: center;
         }
+            
+        .disabled-button {
+            cursor: default !important;
+            pointer-events: none !important;
+            opacity: .7 !important;
+        }
 
-        .showing-amount {
-            color: $color-orange;
-            font-weight: 600 !important;
+        // .showing-amount {
+        //     color: $color-orange;
+        //     font-weight: 600 !important;
+
+        //     @media only screen and (max-width: 850px) {
+        //         display: inline-block;
+        //         margin-bottom: 1.5rem;
+        //         font-size: 1.8rem;
+        //     }
+        // }
+
+        .page-numbers {
+            display: flex;
 
             @media only screen and (max-width: 850px) {
-                display: inline-block;
-                margin-bottom: 1.5rem;
-                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .active-page-number {
+                background-color: $color-grey-2;
+            }
+
+            * {
+                padding: .5rem 1.25rem;
+                border-radius: 5px;
+                user-select: none;
+            }
+
+            .page-number {
+                cursor: pointer;
+
+                @media only screen and (max-width: 850px) {
+                    font-size: 2rem;
+                }
+            }
+
+            .dots--first {
+                display: none;
             }
         }
 

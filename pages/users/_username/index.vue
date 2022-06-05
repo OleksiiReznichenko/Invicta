@@ -3,10 +3,10 @@
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <HeaderProfile :userObject='userSelected' :isMyProfile='isMyProfile' />
         <main>
-            <CustomBanner :pageEdit='false' />
-            <Categories />
-            <ProductsLine />
-            <DiscountProductsCustom :pageEdit='false' />
+            <UserCustomBanner :pageEdit='false' />
+            <Categories :baseArray='productsBase' @getFilteredArray="getFilteredArray($event)" />
+            <UserProducts :products='products' :baseArrayLength='productsBase.length' :isMyProfile='isMyProfile' />
+            <UserDiscountProducts :baseArray='products' :pageEdit='false' />
         </main>
         <Footer class="section" />
     </div>
@@ -14,23 +14,26 @@
 
 <script>
 import HeaderProfile from '@/components/layout/Profile/HeaderProfile';
-import CustomBanner from '@/components/layout/Profile/CustomBanner';
+import UserCustomBanner from '@/components/layout/Profile/UserCustomBanner';
 import Categories from '@/components/layout/Profile/Categories';
-import DiscountProductsCustom from '@/components/layout/Profile/DiscountProductsCustom';
+import UserProducts from '@/components/layout/Profile/UserProducts';
+import UserDiscountProducts from '@/components/layout/Profile/UserDiscountProducts';
 
 export default {
     middleware: ['isUserExist'],
 
     components: {
         HeaderProfile,
-        CustomBanner,
+        UserCustomBanner,
         Categories,
-        DiscountProductsCustom,
+        UserProducts,
+        UserDiscountProducts,
     },
 
     data() {
         return {
-            isMyProfile: false
+            isMyProfile: false,
+            filteredArray: [],
         }
     },
 
@@ -45,7 +48,27 @@ export default {
         // SELECTED USER
         userSelected() {
             return this.user;
-        }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER PRODUCTS
+        productsBase() {
+            return this.user.products;
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER PRODUCTS FILTERED
+        products() {
+            return this.filteredArray;
+        },
+     },
+
+     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET FILTERED ARRAY
+        getFilteredArray(array) {
+            this.filteredArray = array;
+        },
      },
      
     created() {

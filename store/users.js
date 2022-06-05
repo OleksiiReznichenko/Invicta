@@ -58,6 +58,88 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            products: [
+                {
+                    id: 'NikeUk',
+                    type: 'giftcard',
+                    category: 'clothes',
+                    name: 'Nike UK',
+                    price: 254.99,
+                    oldPrice: 299.99,
+                    photo: '/projects/Invicta/products/nikeUK.jpg',
+                    photoBig: '/projects/Invicta/products/nikeUKBig.jpg',
+                    discount: '',
+                    amountInStock: 1,
+                    country: 'UK',
+                    description: `
+                        Nike giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `7-12 days`,
+                    sellerId: 'antoniojr',
+                },
+                {
+                    id: 'PG',
+                    type: 'giftcard',
+                    category: 'shopping',
+                    name: 'P&G',
+                    price: 240.99,
+                    oldPrice: 309.99,
+                    photo: '/projects/Invicta/products/pg.jpg',
+                    photoBig: '/projects/Invicta/products/pgBig.jpg',
+                    discount: '',
+                    amountInStock: 2,
+                    country: 'USA',
+                    description: `
+                        P&G giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `8-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dole',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dole',
+                    price: 134.99,
+                    oldPrice: 159.99,
+                    photo: '/projects/Invicta/products/dole.jpg',
+                    photoBig: '/projects/Invicta/products/doleBig.jpg',
+                    discount: '',
+                    amountInStock: 20,
+                    country: 'USA',
+                    description: `
+                        Dole giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `5-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dell',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dell',
+                    price: 199.99,
+                    oldPrice: null,
+                    photo: '/projects/Invicta/products/dell.jpg',
+                    photoBig: '/projects/Invicta/products/dellBig.jpg',
+                    discount: '',
+                    amountInStock: 5,
+                    country: 'USA',
+                    description: `
+                        Dell giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `14-21 days`,
+                    sellerId: 'alexjr',
+                },
+            ]
         },
         {
             id: 'mikhailjr',
@@ -116,6 +198,88 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            products: [
+                {
+                    id: 'NikeUk',
+                    type: 'giftcard',
+                    category: 'clothes',
+                    name: 'Nike UK',
+                    price: 254.99,
+                    oldPrice: 299.99,
+                    photo: '/projects/Invicta/products/nikeUK.jpg',
+                    photoBig: '/projects/Invicta/products/nikeUKBig.jpg',
+                    discount: '',
+                    amountInStock: 1,
+                    country: 'UK',
+                    description: `
+                        Nike giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `7-12 days`,
+                    sellerId: 'antoniojr',
+                },
+                {
+                    id: 'PG',
+                    type: 'giftcard',
+                    category: 'shopping',
+                    name: 'P&G',
+                    price: 240.99,
+                    oldPrice: 309.99,
+                    photo: '/projects/Invicta/products/pg.jpg',
+                    photoBig: '/projects/Invicta/products/pgBig.jpg',
+                    discount: '',
+                    amountInStock: 2,
+                    country: 'USA',
+                    description: `
+                        P&G giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `8-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dole',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dole',
+                    price: 134.99,
+                    oldPrice: 159.99,
+                    photo: '/projects/Invicta/products/dole.jpg',
+                    photoBig: '/projects/Invicta/products/doleBig.jpg',
+                    discount: '',
+                    amountInStock: 20,
+                    country: 'USA',
+                    description: `
+                        Dole giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `5-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dell',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dell',
+                    price: 199.99,
+                    oldPrice: null,
+                    photo: '/projects/Invicta/products/dell.jpg',
+                    photoBig: '/projects/Invicta/products/dellBig.jpg',
+                    discount: '',
+                    amountInStock: 5,
+                    country: 'USA',
+                    description: `
+                        Dell giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `14-21 days`,
+                    sellerId: 'alexjr',
+                },
+            ]
         },
         {
             id: 'antoniojr',
@@ -172,561 +336,2299 @@ export const state = () => ({
             },
             shoppingItems: [],
             orders: [
-                // {
-                //     id: '1112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '13r31112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1132312',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '13r31112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1132312',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '13r31112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1132312',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '13r31112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1132312',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Nike UK',
-                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '13r31112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1132312',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '13r31112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1132312',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '13r31112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1132312',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '13r31112',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
-                // {
-                //     id: '1132312',
-                //     productId: 'AccId Dell',
-                //     productTitle: 'Account Dell',
-                //     productPhoto: '/projects/Invicta/products/dell.jpg',
-                //     buyerId: 'alexjr',
-                //     sellerId: 'antoniojr',
-                //     date: 'Today',
-                //     isValidated: false,
-                //     isConfirmed: false,
-                //     itemsAmount: 1,
-                //     status: 'waiting',
-                //     chat: {
-                //         messages: [],
-                //         notifications: [
-                //             {
-                //                 id: 'notification1',
-                //                 text: 'This dicussion started',
-                //                 date: 'Today'
-                //             },
-                //         ]
-                //     }
-                // },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Nike UK',
+                    productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '13r31112',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
+                {
+                    id: '1132312',
+                    productId: 'AccId Dell',
+                    productTitle: 'Account Dell',
+                    productPhoto: '/projects/Invicta/products/dell.jpg',
+                    buyerId: 'alexjr',
+                    sellerId: 'antoniojr',
+                    date: 'Today',
+                    isValidated: false,
+                    isConfirmed: false,
+                    itemsAmount: 1,
+                    status: 'waiting',
+                    chat: {
+                        messages: [],
+                        notifications: [
+                            {
+                                id: 'notification1',
+                                text: 'This dicussion started',
+                                date: 'Today'
+                            },
+                        ]
+                    }
+                },
             ],
             topBanner: null,
             sideBanner: null,
+            products: [
+                {
+                    id: 'NikeUk',
+                    type: 'giftcard',
+                    category: 'clothes',
+                    name: 'Nike UK',
+                    price: 254.99,
+                    oldPrice: 299.99,
+                    photo: '/projects/Invicta/products/nikeUK.jpg',
+                    photoBig: '/projects/Invicta/products/nikeUKBig.jpg',
+                    discount: '',
+                    amountInStock: 1,
+                    country: 'UK',
+                    description: `
+                        Nike giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `7-12 days`,
+                    sellerId: 'antoniojr',
+                },
+                {
+                    id: 'PG',
+                    type: 'giftcard',
+                    category: 'shopping',
+                    name: 'P&G',
+                    price: 240.99,
+                    oldPrice: 309.99,
+                    photo: '/projects/Invicta/products/pg.jpg',
+                    photoBig: '/projects/Invicta/products/pgBig.jpg',
+                    discount: '',
+                    amountInStock: 2,
+                    country: 'USA',
+                    description: `
+                        P&G giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `8-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dole',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dole',
+                    price: 134.99,
+                    oldPrice: 159.99,
+                    photo: '/projects/Invicta/products/dole.jpg',
+                    photoBig: '/projects/Invicta/products/doleBig.jpg',
+                    discount: '',
+                    amountInStock: 20,
+                    country: 'USA',
+                    description: `
+                        Dole giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `5-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dell',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dell',
+                    price: 199.99,
+                    oldPrice: null,
+                    photo: '/projects/Invicta/products/dell.jpg',
+                    photoBig: '/projects/Invicta/products/dellBig.jpg',
+                    discount: '',
+                    amountInStock: 5,
+                    country: 'USA',
+                    description: `
+                        Dell giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `14-21 days`,
+                    sellerId: 'alexjr',
+                },
+            ]
         },
         {
             id: 'alexjr',
@@ -785,6 +2687,88 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            products: [
+                {
+                    id: 'NikeUk',
+                    type: 'giftcard',
+                    category: 'clothes',
+                    name: 'Nike UK',
+                    price: 254.99,
+                    oldPrice: 299.99,
+                    photo: '/projects/Invicta/products/nikeUK.jpg',
+                    photoBig: '/projects/Invicta/products/nikeUKBig.jpg',
+                    discount: '',
+                    amountInStock: 1,
+                    country: 'UK',
+                    description: `
+                        Nike giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `7-12 days`,
+                    sellerId: 'antoniojr',
+                },
+                {
+                    id: 'PG',
+                    type: 'giftcard',
+                    category: 'shopping',
+                    name: 'P&G',
+                    price: 240.99,
+                    oldPrice: 309.99,
+                    photo: '/projects/Invicta/products/pg.jpg',
+                    photoBig: '/projects/Invicta/products/pgBig.jpg',
+                    discount: '',
+                    amountInStock: 2,
+                    country: 'USA',
+                    description: `
+                        P&G giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `8-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dole',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dole',
+                    price: 134.99,
+                    oldPrice: 159.99,
+                    photo: '/projects/Invicta/products/dole.jpg',
+                    photoBig: '/projects/Invicta/products/doleBig.jpg',
+                    discount: '',
+                    amountInStock: 20,
+                    country: 'USA',
+                    description: `
+                        Dole giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `5-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dell',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dell',
+                    price: 199.99,
+                    oldPrice: null,
+                    photo: '/projects/Invicta/products/dell.jpg',
+                    photoBig: '/projects/Invicta/products/dellBig.jpg',
+                    discount: '',
+                    amountInStock: 5,
+                    country: 'USA',
+                    description: `
+                        Dell giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `14-21 days`,
+                    sellerId: 'alexjr',
+                },
+            ]
         },
         {
             id: 'johnjr',
@@ -843,6 +2827,88 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            products: [
+                {
+                    id: 'NikeUk',
+                    type: 'giftcard',
+                    category: 'clothes',
+                    name: 'Nike UK',
+                    price: 254.99,
+                    oldPrice: 299.99,
+                    photo: '/projects/Invicta/products/nikeUK.jpg',
+                    photoBig: '/projects/Invicta/products/nikeUKBig.jpg',
+                    discount: '',
+                    amountInStock: 1,
+                    country: 'UK',
+                    description: `
+                        Nike giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `7-12 days`,
+                    sellerId: 'antoniojr',
+                },
+                {
+                    id: 'PG',
+                    type: 'giftcard',
+                    category: 'shopping',
+                    name: 'P&G',
+                    price: 240.99,
+                    oldPrice: 309.99,
+                    photo: '/projects/Invicta/products/pg.jpg',
+                    photoBig: '/projects/Invicta/products/pgBig.jpg',
+                    discount: '',
+                    amountInStock: 2,
+                    country: 'USA',
+                    description: `
+                        P&G giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `8-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dole',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dole',
+                    price: 134.99,
+                    oldPrice: 159.99,
+                    photo: '/projects/Invicta/products/dole.jpg',
+                    photoBig: '/projects/Invicta/products/doleBig.jpg',
+                    discount: '',
+                    amountInStock: 20,
+                    country: 'USA',
+                    description: `
+                        Dole giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `5-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dell',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dell',
+                    price: 199.99,
+                    oldPrice: null,
+                    photo: '/projects/Invicta/products/dell.jpg',
+                    photoBig: '/projects/Invicta/products/dellBig.jpg',
+                    discount: '',
+                    amountInStock: 5,
+                    country: 'USA',
+                    description: `
+                        Dell giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `14-21 days`,
+                    sellerId: 'alexjr',
+                },
+            ]
         },
         {
             id: 'donaldmaen',
@@ -901,6 +2967,88 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            products: [
+                {
+                    id: 'NikeUk',
+                    type: 'giftcard',
+                    category: 'clothes',
+                    name: 'Nike UK',
+                    price: 254.99,
+                    oldPrice: 299.99,
+                    photo: '/projects/Invicta/products/nikeUK.jpg',
+                    photoBig: '/projects/Invicta/products/nikeUKBig.jpg',
+                    discount: '',
+                    amountInStock: 1,
+                    country: 'UK',
+                    description: `
+                        Nike giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `7-12 days`,
+                    sellerId: 'antoniojr',
+                },
+                {
+                    id: 'PG',
+                    type: 'giftcard',
+                    category: 'shopping',
+                    name: 'P&G',
+                    price: 240.99,
+                    oldPrice: 309.99,
+                    photo: '/projects/Invicta/products/pg.jpg',
+                    photoBig: '/projects/Invicta/products/pgBig.jpg',
+                    discount: '',
+                    amountInStock: 2,
+                    country: 'USA',
+                    description: `
+                        P&G giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `8-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dole',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dole',
+                    price: 134.99,
+                    oldPrice: 159.99,
+                    photo: '/projects/Invicta/products/dole.jpg',
+                    photoBig: '/projects/Invicta/products/doleBig.jpg',
+                    discount: '',
+                    amountInStock: 20,
+                    country: 'USA',
+                    description: `
+                        Dole giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `5-14 days`,
+                    sellerId: 'alexjr',
+                },
+                {
+                    id: 'Dell',
+                    type: 'giftcard',
+                    category: 'technology',
+                    name: 'Dell',
+                    price: 199.99,
+                    oldPrice: null,
+                    photo: '/projects/Invicta/products/dell.jpg',
+                    photoBig: '/projects/Invicta/products/dellBig.jpg',
+                    discount: '',
+                    amountInStock: 5,
+                    country: 'USA',
+                    description: `
+                        Dell giftcards (with pin) Can only be used online or in store.
+                        Safe - storable - friendly. Get up to 20% bonuses for your purchase
+                    `,
+                    warranty: `Can only be used online or in stores`,
+                    eta: `14-21 days`,
+                    sellerId: 'alexjr',
+                },
+            ]
         },
     ],
 })
@@ -1250,6 +3398,7 @@ export const mutations = {
             orders: [],
             topBanner: null,
             sideBanner: null,
+            products: []
         })
     }
 }

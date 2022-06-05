@@ -147,6 +147,20 @@ export const actions = {
             }
         });
     },
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHECK IF PRODUCT IS OVERFLOWING
+    checkOverflowX(context, {el}) {
+        const isOverflowingX = el.clientWidth < el.scrollWidth;
+        
+        if (isOverflowingX) {
+            el.style.overflowX = 'scroll';
+        } else {
+            el.style.overflowX = 'visible';
+        }
+        
+        return isOverflowingX;
+    },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // SHOW NOTIFICATION WINDOW
