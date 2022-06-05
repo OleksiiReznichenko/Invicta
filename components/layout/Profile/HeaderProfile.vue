@@ -1,5 +1,23 @@
 <template>
     <div ref="header" class="header section">
+        <button v-if="isLoggedIn && isMyProfile" @click="openWindow" ref="editBannerButton" class="edit-banner-button">
+            <img src="@/assets/svg/editProfileBanner.svg" alt="Icon" class="icon">
+        </button>
+        <AddNewBanner v-if="isLoggedIn && isMyProfile" banner='profileBanner' class="change-banner-component" />
+        <div ref="referralWindow" id="referralWindow" class="referral-window-wrapper">
+            <div class="referral-window">
+                <div class="title-container">
+                    <h3 class="title">Referral Program</h3>
+                    <button @click="closeReferralWindow" class="close-button">
+                        <img src="@/assets/svg/closeIcon.svg" alt="Close" class="close-icon">
+                    </button>
+                </div>
+                <p>
+                    Earn 4% on each deposit from users you refer! Send the following link to new users so you can start earning today!
+                </p>
+                <input ref="referralLink" id="referralLink" v-model="referralLink" type="text" placeholder="Referral link" readonly>
+            </div>
+        </div>
         <div class="content">
             <div class="top-content">
                 <img :src="user.avatar" alt="Avatar" class="avatar">
@@ -92,18 +110,24 @@
                                             </div>
                                         </ul>
                                     </div>
+                                <nuxt-link v-if="isLoggedIn && !isMyProfile" to="/reportUser" class="item">
+                                    <div class="icon-container">
+                                        <img src="@/assets/svg/report.svg" alt="Report" class="icon">
+                                    </div>
+                                    <span>Report</span>
+                                </nuxt-link>
                                 <li @click="shareEvent(shareDropdown)" class="item dropdown-opener" id="shareDropdownOpener">
                                     <div class="icon-container">
                                         <img src="@/assets/svg/upload.svg" alt="Share" class="icon">
                                     </div>
                                     <span>Share profile</span>
                                 </li>
-                                <nuxt-link to="/reportUser" class="item">
+                                <li v-if="isMyProfile" @click="openReferralWindow" class="item referral-window-opener" id="referralWindowOpener">
                                     <div class="icon-container">
-                                        <img src="@/assets/svg/report.svg" alt="Report" class="icon">
+                                        <img src="@/assets/svg/wallet.svg" alt="Earn" class="icon">
                                     </div>
-                                    <span>Report</span>
-                                </nuxt-link>
+                                    <span>Earn money</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -117,8 +141,14 @@
 </template>
 
 <script>
+import AddNewBanner from '@/components/layout/Profile/AddNewBanner';
+
 export default {
     props: ['userObject', 'isMyProfile'],
+
+    components: {
+        AddNewBanner,
+    },
     
     data() {
         return {
@@ -128,6 +158,7 @@ export default {
             discordLink: '#',
             telegramLinkBase: 'https://t.me/',
             telegramLink: '#',
+            referralLink: null,
         }
     },
 
@@ -292,6 +323,50 @@ export default {
             // this.$store.commit('unSubscribe');
             this.$store.commit('users/unSubscribe', {myId: this.$store.state.user.id, userId: this.user.id});
         },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE WINDOW
+        openWindow() {
+            if (this.changeBannerComponent?.classList.contains('opened')) return;
+            this.changeBannerComponent.style.display = 'block';
+            this.changeBannerComponent.classList.add('opened');
+            setTimeout(() => {
+                this.changeBannerComponent.style.opacity = 1;
+                this.navigationRoot.style.display = 'none';
+            }, 10)
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // OPEN REFERRAL WINDOW
+        openReferralWindow() {
+            if (this.$refs.referralWindow?.classList.contains('opened')) return;
+            this.$refs.referralWindow.style.display = 'block';
+            this.$refs.referralWindow.classList.add('opened');
+            setTimeout(() => {
+                this.$refs.referralWindow.style.opacity = 1;
+                this.navigationRoot.style.display = 'none';
+            }, 10)
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE REFERRAL WINDOW
+        closeReferralWindow() {
+            if (!this.$refs.referralWindow?.classList.contains('opened')) return;
+            this.$refs.referralWindow.style.opacity = 0;
+            this.navigationRoot.style.display = 'block';
+            setTimeout(() => {
+                this.$refs.referralWindow.style.display = 'none';
+                this.$refs.referralWindow.classList.remove('opened');
+            }, 200)
+        },
+    },
+
+    watch: {
+        'user.profileBanner'() {
+            this.$refs.header.style.background = `url(${this.user.profileBanner})`;
+            this.$refs.header.style.backgroundSize = 'cover';
+            this.$refs.header.style.backgroundRepeat = 'no-repeat';
+        }
     },
 
     mounted () {
@@ -305,12 +380,15 @@ export default {
         this.achievemtHeartDropdown = document.getElementById('achievemtHeartDropdown');
         this.achievementCommentDropdown = document.getElementById('achievementCommentDropdown');
         this.achievemtLikeDropdown = document.getElementById('achievemtLikeDropdown');
+        this.navigationRoot = document.querySelector('.navigation-root');
+        this.changeBannerComponent = document.querySelector('.change-banner-component');
 
         // SET INITIAL VALUES BASED ON USER DATA
         this.telegramLink = this.user.telegramUsername ? this.telegramLinkBase + this.user.telegramUsername : '#';
         this.discordLink = this.user.discordId ? this.user.discordLink + this.user.discordId : '#';
+        this.referralLink = this.user.referralLink;
 
-        this.$refs.header.style.background = `url(${this.user.backgroundImage})`;
+        this.$refs.header.style.background = `url(${this.user.profileBanner})`;
         this.$refs.header.style.backgroundSize = 'cover';
         this.$refs.header.style.backgroundRepeat = 'no-repeat';
 
@@ -337,6 +415,12 @@ export default {
 
         // TAKE PAGE URL
         this.url = window.location.href;
+
+        this.$refs.referralWindow.addEventListener('click', (e) => {
+            if (e.target.classList.contains('referral-window-wrapper')) {
+                this.closeReferralWindow();
+            }
+        })
 
         // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
         window.addEventListener('click', (e) => {
@@ -367,6 +451,108 @@ export default {
         height: 100vh;
         min-height: 600px;
         margin-bottom: 5rem;
+    }
+
+    .referral-window-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000000;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(black, .5);
+        backdrop-filter: blur(5px);
+        transition: all .2s;
+        display: none;
+        opacity: 0;
+    }
+
+    .referral-window {
+        @include abs-center;
+        background-color: $color-grey-dark;
+        box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
+        padding: 4.25rem;
+        border-radius: 15px;
+        width: 65rem;
+    
+        @media only screen and (max-width: 600px) {
+            width: 90%;
+        }
+
+        .title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+
+            .title {
+                font-size: 2.75rem;
+            }
+
+            .close-button {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+            }
+        }
+
+        p {
+            color: $color-text-grey;
+            width: 85%;
+            margin-bottom: 2.25rem;
+    
+            @media only screen and (max-width: 600px) {
+                width: 90%;
+            }
+        }
+
+        input {
+            display: block;
+            background-color: #111111;
+            box-shadow: 0 .3rem 1rem 0 rgba(#000000, .2) inset,
+            0 .3rem 1rem 0 rgba(#19151F, .5);
+            border-radius: 8px;
+            padding: 1.2rem 2.5rem;
+            width: 70%;
+
+            @media only screen and (max-width: 850px) {
+                padding: 1.5rem 2.5rem;
+                width: 80%;
+            }
+
+            @media only screen and (max-width: 550px) {
+                width: 90%;
+            }
+
+            @media only screen and (max-width: 500px) {
+                width: 100%;
+                font-size: 1.6rem;
+            }
+        }
+    }
+
+    .edit-banner-button {
+        position: absolute;
+        top: 3.5rem;
+        right: 3.5rem;
+        width: 4.75rem;
+        height: 4.75rem;
+        background-color: $color-grey-dark;
+        border-radius: 100%;
+        transition: all .3s;
+        @include flex-center;
+
+        &:hover {
+            background-color: lighten($color-grey-dark, 10%);
+        }
+    
+        @media only screen and (max-width: 850px) {
+            top: 11rem;
+        }
+
+        .icon {
+            width: 2.25rem;
+        }
     }
 
     .content {
@@ -587,7 +773,6 @@ export default {
                         height: 2.75rem !important;
                         border-radius: 100%;
                         margin-right: 1rem;
-                        @include flex-center;
                         position: relative;
 
                         @media only screen and (max-width: 850px) {
@@ -596,8 +781,9 @@ export default {
                         }
 
                         .icon {
-                            width: 1.5rem !important;
-                            height: 1.5rem !important;
+                            width: 1.6rem !important;
+                            height: 1.6rem !important;
+                            @include abs-center;
                         }
                     }
                 }

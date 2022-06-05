@@ -47,18 +47,32 @@
           <NavDropdown />
         </div>
 
-        <nuxt-link
-          v-if="!isPhone && isLoggedIn"
-          key="nav-login-link"
-          to="/orders"
-          class="link-notification"
-        >
-          <img
-            src="@/assets/svg/notification.svg"
-            alt="Notification"
-            class="link-icon"
-          />
-        </nuxt-link>
+        <div class="notifications-container" id="notifications-opener-parent">
+          <button ref="notificationsButton" @click="toggleNotificationsDropdown" class="link-notification" id="notifications-opener">
+            <img
+              src="@/assets/svg/notification.svg"
+              alt="Notification"
+              class="link-icon"
+            />
+          </button>
+          <div class="notifications-dropdown" id="notifications-dropdown">
+            <div @click="checkLink" class="top-notifications top">
+              <h4 class="title-notifications title">Notifications</h4>
+              <nuxt-link class="link" to="/dashboard">Dashboard</nuxt-link>
+            </div>
+            <div @click="closeNotificationsDropdown" class="notifications-list">
+              <Notification
+              v-for="(notification, i) in notificationsArray"
+              :key="i"
+              :productId='notification.productId'
+              :image='notification.image'
+              :title='notification.title'
+              :text='notification.text'
+              :date='notification.date'
+              />
+            </div>
+            </div>
+        </div>
         <div
           v-if="!isPhone && isLoggedIn"
           class="profile"
@@ -128,11 +142,13 @@
 <script>
 import NavDropdown from '@/components/layout/layoutsComponents/NavDropdown';
 import SearchCategory from '@/components/layout/layoutsComponents/SearchCategory';
+import Notification from '@/components/layout/layoutsComponents/Notification';
 
 export default {
     components: {
         NavDropdown,
         SearchCategory,
+        Notification,
     },
 
     data() {
@@ -149,7 +165,7 @@ export default {
         user() {
           return this.$store.state.users.users.find(el => {
               if (el.id === this.$store.state.user.id) {
-                  return el;
+                return el;
               }
           })
         },
@@ -164,6 +180,18 @@ export default {
         // IS PHONE VERSION
         isPhone() {
           return this.isPhoneInitial
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // NOTIFICATIONS ARRAY
+        notificationsArray() {
+          return this.$store.state.navigationNotifications.notifications;
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // PRODCUTS ARRAY
+        products() {
+          return this.$store.state.products.products;
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -195,6 +223,7 @@ export default {
           this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
         }
     },
+    
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // LOG OUT
@@ -266,6 +295,52 @@ export default {
                     this.nav.style.width = '90%';
                 }
             }
+            
+            if (target == 'a') {
+                this.closeNotificationsDropdown();
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // TOGGLE NOTIFICATIONS DROPDOWN
+        toggleNotificationsDropdown() {
+            if (!this.notificationsDropdown.classList.contains('opened')) {
+                this.notificationsDropdown.classList.add('opened');
+                this.notificationsDropdown.style.display = 'block';
+                setTimeout(() => {
+                    this.notificationsDropdown.style.opacity = 1;
+                }, 10);
+            } else {
+                this.notificationsDropdown.style.opacity = 0;
+                setTimeout(() => {
+                    this.notificationsDropdown.style.display = 'none';
+                    this.notificationsDropdown.classList.remove('opened');
+                }, 200);
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE NOTIFICATIONS DROPDOWN
+        closeNotificationsDropdown() {
+            if (this.notificationsDropdown.classList.contains('opened')) {
+              this.notificationsDropdown.style.opacity = 0;
+              setTimeout(() => {
+                  this.notificationsDropdown.style.display = 'none';
+                  this.notificationsDropdown.classList.remove('opened');
+              }, 200);
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE NOTIFICATIONS DROPDOWN
+        closeNotificationsDropdown() {
+            if (this.notificationsDropdown.classList.contains('opened')) {
+              this.notificationsDropdown.style.opacity = 0;
+              setTimeout(() => {
+                  this.notificationsDropdown.style.display = 'none';
+                  this.notificationsDropdown.classList.remove('opened');
+              }, 200);
+            }
         },
     },
 
@@ -293,6 +368,8 @@ export default {
       this.navRight = document.querySelector('.nav__right');
       this.nav = document.querySelector('.nav');
       this.dropdown = document.getElementById('dropdown');
+      this.notificationsDropdown = document.getElementById('notifications-dropdown');
+      this.notificationsDropdownOpener = document.getElementById('notifications-opener');
 
       // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
       window.addEventListener('click', (e) => {
@@ -324,7 +401,21 @@ export default {
                     this.$refs.searchResultsContainer.classList.remove('opened');
                 }, 200);
             }
-          }          
+          }
+
+          if (this.notificationsDropdown.classList.contains('opened')) {
+            const isClickInsideElement = this.notificationsDropdown.contains(e.target);
+            const isClickInsideElement2 = this.notificationsDropdownOpener.contains(e.target);
+
+            if (!isClickInsideElement && 
+            !isClickInsideElement2 && 
+            !e.target.classList.contains('notifications-dropdown') &&
+            !e.target.classList.contains('top-notifications') &&
+            !e.target.classList.contains('title-notifications')) {
+                
+              this.closeNotificationsDropdown();
+            }
+          }
       });
 
 
@@ -332,9 +423,9 @@ export default {
       window.addEventListener('resize', () => {
         this.dropdown = document.getElementById('dropdown');
         if (window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600) {
-            this.isPhoneInitial = true
+            this.isPhoneInitial = true;
         } else {
-            this.isPhoneInitial = false
+            this.isPhoneInitial = false;
         }
       });
     },
@@ -349,7 +440,7 @@ export default {
 
 .nav {
   position: absolute;
-  top: 2rem;
+  top: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -436,6 +527,60 @@ export default {
 
     &:hover {
       color: darken($color-text-grey, 10%);
+    }
+  }
+
+  .notifications-container {
+    position: relative;
+
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
+      position: absolute;
+      top: .8rem;
+      // right: -140%;
+      right: 0%;
+    }
+  }
+
+  #notifications-dropdown {
+    background-color: $color-grey-dark;
+    box-shadow: 0 .5rem 5rem rgba(black, .4);
+    border-radius: 15px;
+    padding: 2.5rem 0;
+    position: absolute;
+    top: 115%;
+    right: 2rem;
+    transition: all .2s;
+    display: none;
+    opacity: 0;
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      margin-bottom: 1.5rem;
+
+      .title {
+        font-weight: 500 !important;
+        font-size: 1.6rem;
+        margin-right: 5rem;
+      }
+
+      .link {
+        font-weight: 700 !important;
+        font-size: 1.5rem;
+        margin-bottom: -4px;
+        background: $gradient-primary;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all .3s;
+
+        &:hover {
+          opacity: .8;
+        }
+      }
     }
   }
 
@@ -559,8 +704,16 @@ export default {
   .link-icon {
     width: 2rem;
     height: 2rem;
+    min-width: 17px;
+    min-height: 17px;
     margin-right: 2.5rem;
     @include abs-center;
+
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
+      width: 3.25rem;
+      height: 3.25rem;
+      margin-right: 0;
+    }
   }
 
   .link-notification {
@@ -568,6 +721,13 @@ export default {
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 2.5rem;
+    cursor: pointer;
+
+    @media only screen and (max-width: 850px) and (min-height: 600px) {
+      width: 3.75rem;
+      height: 3.75rem;
+      margin-right: 0;
+    }
   }
 }
 

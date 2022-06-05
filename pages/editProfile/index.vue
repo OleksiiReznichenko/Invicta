@@ -104,7 +104,6 @@
                 <h1 class="section page-title">Profile banners</h1>
                 <CustomBanner :pageEdit='true' class="edit-class" />
                 <DiscountProductsCustom :pageEdit='true' class="edit-class" />
-                <button @click="editProfileEvent" class="btn btn-gradient save-button"><span>Save changes</span></button>
             </div>
             <img src="@/assets/img/gridEditProfile.png" alt="Grid" class="grid-image">
 
@@ -180,7 +179,6 @@ export default {
             } else {
                 this.selectedAvatarFile = files;
             }
-            // console.log(this.selectedAvatarFile);
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

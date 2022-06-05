@@ -92,14 +92,10 @@ export default {
             height: 12rem;
             margin: 0 auto;
             border-radius: 1rem;
-            object-fit: cover;
+            // object-fit: cover;
 
             @media only screen and (max-width: 1300px) {
                 border-radius: 10px;
-            }
-
-            @media only screen and (max-width: 850px) {
-                height: 16rem;
             }
         }
 

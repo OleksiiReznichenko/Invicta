@@ -49,6 +49,12 @@ export default {
                 return this.user.topBanner;
             } else if (this.banner === 'sideBanner') {
                 return this.user.sideBanner;
+            } else if (this.banner === 'profileBanner') {
+                if (this.user.profileBanner === '/projects/Invicta/backProfileImage.png') {
+                    return null;
+                } else {
+                    return this.user.profileBanner;
+                }
             }
         },
     },
@@ -78,6 +84,8 @@ export default {
                 this.$store.commit('users/changeTopBanner', {id: this.user.id, newBanner: null});
             } else if (this.banner === 'sideBanner') {
                 this.$store.commit('users/changeSideBanner', {id: this.user.id, newBanner: null});
+            } else if (this.banner === 'profileBanner') {
+                this.$store.commit('users/changeProfileBanner', {id: this.user.id, newBanner: '/projects/Invicta/backProfileImage.png'});
             }
 
             this.$store.dispatch('showNotificationWindow', {
@@ -140,6 +148,8 @@ export default {
                 this.$store.commit('users/changeTopBanner', {id: this.user.id, newBanner: this.bannerSrc});
             } else if (this.banner === 'sideBanner') {
                 this.$store.commit('users/changeSideBanner', {id: this.user.id, newBanner: this.bannerSrc});
+            } else if (this.banner === 'profileBanner') {
+                this.$store.commit('users/changeProfileBanner', {id: this.user.id, newBanner: this.bannerSrc});
             }
 
             // IF YOUR BANNER IMAGE CHANGED SUCCESSFULLY - SHOW MESSAGE

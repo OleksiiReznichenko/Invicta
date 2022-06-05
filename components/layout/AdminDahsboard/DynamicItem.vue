@@ -1,39 +1,39 @@
 <template>
-    <nuxt-link :to="'/orders/' + id" class="order-item">
+    <div class="item-item">
         <div class="desktop left">
             <div class="cell image-container">
-                <img :src="productPhoto" alt="order item image" class="image">
-                <span class="order-id">{{id}}</span>
+                <img :src="itemPhoto" alt="item item image" class="image">
+                <span class="item-id">{{id}}</span>
             </div>
-            <span class="cell order-title">{{productTitle}}</span>
+            <span class="cell item-title">{{itemTitle}}</span>
             <span class="cell order-amount">{{itemsAmount}}</span>
             <span class="cell order-time">{{date}}</span>
         </div>
-        <nuxt-link class="desktop order-item-link" :to="'/orders/' + id">watch order</nuxt-link>
+        <nuxt-link class="desktop order-item-link" :to="'/adminDashboard/' + id">watch item</nuxt-link>
 
-        <img :src="productPhoto" alt="Order image" class="mobile image">
+        <img :src="itemPhoto" alt="Order image" class="mobile image">
         <div class="mobile info">
             <div class="title-container">
-                <span class="order-title">{{productTitle}}</span>
+                <span class="order-title">{{itemTitle}}</span>
                 <span class="order-amount">({{itemsAmount}})</span>
             </div>
             <div class="id-time-container">
-                <span class="order-id">{{id}}</span>
-                <span class="order-time">{{date}}</span>
+                <span class="item-id">{{id}}</span>
+                <span class="item-time">{{date}}</span>
             </div>
-            <nuxt-link class="mobile order-item-link" :to="'/orders/' + id">watch order</nuxt-link>
+            <nuxt-link class="mobile item-item-link" :to="'/adminDashboard/' + id">watch item</nuxt-link>
         </div>
-    </nuxt-link>
+    </div>
 </template>
 
 <script>
 export default {
-    props: ['id', 'productTitle', 'productPhoto', 'itemsAmount', 'date'],
+    props: ['id', 'itemTitle', 'itemPhoto', 'itemsAmount', 'date'],
 }
 </script>
 
 <style lang="scss" scoped>
-.order-item {
+.item-item {
     width: 100%;
     display: flex;
     align-items: center;
@@ -78,14 +78,14 @@ export default {
         color: $color-text-grey;
     }
 
-    .order-title {
+    .item-title {
         @media only screen and (max-width: 850px) {
             font-weight: 700 !important;
             font-size: 2.2rem;
         }
     }
 
-    .order-amount {
+    .item-amount {
         @media only screen and (max-width: 850px) {
             font-weight: 700 !important;
             color: $color-orange;
@@ -93,7 +93,7 @@ export default {
         }
     }
 
-    .order-id {
+    .item-id {
         @media only screen and (max-width: 850px) {
             padding-right: .75rem;
         }
@@ -114,7 +114,7 @@ export default {
         }
     }
 
-    .order-item-link {
+    .item-item-link {
         background-color: $color-primary;
         border-radius: 7px;
         padding: .65rem 5.5rem;
@@ -148,7 +148,7 @@ export default {
             align-items: center;
         }
 
-        .order-title,
+        .item-title,
         .image-container {
             width: 30%;
         }

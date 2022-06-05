@@ -4,6 +4,7 @@
         <HeaderProfile :userObject='userSelected' :isMyProfile='isMyProfile' />
         <main>
             <CustomBanner :pageEdit='false' />
+            <Categories />
             <ProductsLine />
             <DiscountProductsCustom :pageEdit='false' />
         </main>
@@ -14,6 +15,7 @@
 <script>
 import HeaderProfile from '@/components/layout/Profile/HeaderProfile';
 import CustomBanner from '@/components/layout/Profile/CustomBanner';
+import Categories from '@/components/layout/Profile/Categories';
 import DiscountProductsCustom from '@/components/layout/Profile/DiscountProductsCustom';
 
 export default {
@@ -22,6 +24,7 @@ export default {
     components: {
         HeaderProfile,
         CustomBanner,
+        Categories,
         DiscountProductsCustom,
     },
 

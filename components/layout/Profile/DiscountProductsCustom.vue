@@ -6,7 +6,7 @@
         </div>
         <div class="banner-container banner-mobile">
             <div class="overlay">
-                <button @click="openWindow" class="btn btn-gradient"><span>Edit banners</span></button>
+                <button @click="openWindow" class="btn btn-gradient"><span>Edit banner</span></button>
             </div>
             <div class="banner">
                 <div v-if="!user.sideBanner" class="info">
@@ -21,7 +21,7 @@
         <div class="section discount-products-line">
             <div class="banner banner-desktop">
                 <div class="overlay">
-                    <button @click="openWindow" class="btn btn-gradient"><span>Edit banners</span></button>
+                    <button @click="openWindow" class="btn btn-gradient"><span>Edit banner</span></button>
                 </div>
                 <div v-if="!user.sideBanner" class="info">
                     <h3>Have time <br> to buy</h3>
@@ -115,6 +115,8 @@ export default {
 
     ::v-deep {
         .product-card {
+            pointer-events: none;
+
             .overlay {
                 display: block !important;
                 position: absolute;

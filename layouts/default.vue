@@ -9,7 +9,7 @@
 
 <script>
 import Navigation from '@/components/layout/layoutsComponents/Navigation';
-import Preloader from '@/components/layout/App/Preloader';
+import Preloader from '@/components/layout/layoutsComponents/Preloader';
 
 export default {
     components: {
@@ -61,10 +61,6 @@ export default {
                     this.dropdown = document.getElementById('dropdown');
                     this.closeNavBtn = document.querySelector('.close-nav-btn');
                     this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
-                    
-                    this.nav.style.position = 'absolute';
-                    this.navLeft.style.transform = 'translate(0)';
-                    this.navRight.style.transform = 'translate(0)';
                 }, 200);
             }
             prevWidth = window.outerWidth;
@@ -87,6 +83,19 @@ export default {
 </style>
 
 <style lang='scss'>
+.navigation-to-fit {
+    
+    @media only screen and (max-width: 850px) and (min-width: 600px) and (min-height: 600px) {
+        width: 50rem !important;
+        position: fixed !important;
+    }
+    
+    @media only screen and (max-width: 600px) {
+        width: 44rem !important;
+        position: fixed !important;
+    }
+}
+
 .corner-light {
   position: absolute;
   top: -15rem;

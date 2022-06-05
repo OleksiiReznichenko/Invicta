@@ -5,6 +5,7 @@ export const state = () => ({
             username: 'warrenjs',
             email: 'warrenjs@gmail.com',
             password: '654321',
+            isAdmin: false,
             avatar: '/projects/Invicta/avatar.png',
             balance: 5,
             shoppingNumber: 11,
@@ -19,13 +20,39 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            profileBanner: '/projects/Invicta/backProfileImage.png',
             discordId: '',
             telegramUsername: 'aleksys228',
+            referralLink: 'https://invicta.cards/register/6632f60f652',
             achievements: {
                 achievementHeart: true,
                 achievementComment: true,
                 achievementLike: true,
+            },
+            dashboard: {
+                sales: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                revenue: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                usersReferred: 4,
+                earnedFromReferredUsers: 1,
+                period: 'all time',
+                chartData: {
+                    weekly: [10, 0, 5, 10, 15, 9, 8],
+                    monthly: [5, 2, 22, 10],
+                    yearly: [13, 4, 15, 8, 1, 3],
+                    allTime: [10, 0, 5, 5, 2, 22, 10],
+                }
             },
             shoppingItems: [],
             orders: [],
@@ -37,6 +64,7 @@ export const state = () => ({
             username: 'mikhailjr',
             email: 'mikhail@gmail.com',
             password: '654321',
+            isAdmin: false,
             balance: 12,
             avatar: '/projects/Invicta/avatar5.png',
             registrationDate: 'Jul 09, 2021',
@@ -50,13 +78,39 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            profileBanner: '/projects/Invicta/backProfileImage.png',
             discordId: '',
             telegramUsername: '',
+            referralLink: 'https://invicta.cards/register/6632f60f652',
             achievements: {
                 achievementHeart: false,
                 achievementComment: false,
                 achievementLike: false,
+            },
+            dashboard: {
+                sales: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                revenue: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                usersReferred: 4,
+                earnedFromReferredUsers: 1,
+                period: 'all time',
+                chartData: {
+                    weekly: [10, 0, 5, 10, 15, 9, 8],
+                    monthly: [5, 2, 22, 10],
+                    yearly: [13, 4, 15, 8, 1, 3],
+                    allTime: [10, 0, 5, 5, 2, 22, 10],
+                }
             },
             shoppingItems: [],
             orders: [],
@@ -68,8 +122,9 @@ export const state = () => ({
             username: 'antoniojr',
             email: 'antoniojr@gmail.com',
             password: '654321',
+            isAdmin: true,
             balance: 12,
-            avatar: '/projects/Invicta/avatar2.png',
+            avatar: '/projects/Invicta/defaultUserAvatar.jpg',
             registrationDate: 'Sep 12, 2021',
             selledAmount: 13,
             following: [],
@@ -81,16 +136,595 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            profileBanner: '/projects/Invicta/backProfileImage.png',
             discordId: '',
             telegramUsername: '',
+            referralLink: 'https://invicta.cards/register/6632f60f652',
             achievements: {
                 achievementHeart: true,
                 achievementComment: true,
                 achievementLike: true,
             },
+            dashboard: {
+                sales: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                revenue: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                usersReferred: 4,
+                earnedFromReferredUsers: 1,
+                period: 'all time',
+                chartData: {
+                    weekly: [10, 0, 5, 10, 15, 9, 8],
+                    monthly: [5, 2, 22, 10],
+                    yearly: [13, 4, 15, 8, 1, 3],
+                    allTime: [10, 0, 5, 5, 2, 22, 10],
+                }
+            },
             shoppingItems: [],
-            orders: [],
+            orders: [
+                // {
+                //     id: '1112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '13r31112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1132312',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '13r31112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1132312',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '13r31112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1132312',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '13r31112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1132312',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Nike UK',
+                //     productPhoto: '/projects/Invicta/products/nikeUK.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '13r31112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1132312',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '13r31112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1132312',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '13r31112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1132312',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '13r31112',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+                // {
+                //     id: '1132312',
+                //     productId: 'AccId Dell',
+                //     productTitle: 'Account Dell',
+                //     productPhoto: '/projects/Invicta/products/dell.jpg',
+                //     buyerId: 'alexjr',
+                //     sellerId: 'antoniojr',
+                //     date: 'Today',
+                //     isValidated: false,
+                //     isConfirmed: false,
+                //     itemsAmount: 1,
+                //     status: 'waiting',
+                //     chat: {
+                //         messages: [],
+                //         notifications: [
+                //             {
+                //                 id: 'notification1',
+                //                 text: 'This dicussion started',
+                //                 date: 'Today'
+                //             },
+                //         ]
+                //     }
+                // },
+            ],
             topBanner: null,
             sideBanner: null,
         },
@@ -99,6 +733,7 @@ export const state = () => ({
             username: 'alexjr',
             email: 'alex@gmail.com',
             password: '654321',
+            isAdmin: true,
             balance: 123,
             avatar: '/projects/Invicta/avatar3.png',
             registrationDate: 'May 1, 2021',
@@ -112,13 +747,39 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            profileBanner: '/projects/Invicta/backProfileImage.png',
             discordId: '',
             telegramUsername: '',
+            referralLink: 'https://invicta.cards/register/6632f60f652',
             achievements: {
                 achievementHeart: true,
                 achievementComment: false,
                 achievementLike: true,
+            },
+            dashboard: {
+                sales: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                revenue: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                usersReferred: 4,
+                earnedFromReferredUsers: 1,
+                period: 'all time',
+                chartData: {
+                    weekly: [10, 0, 5, 10, 15, 9, 8],
+                    monthly: [5, 2, 22, 10],
+                    yearly: [13, 4, 15, 8, 1, 3],
+                    allTime: [10, 0, 5, 5, 2, 22, 10],
+                }
             },
             shoppingItems: [],
             orders: [],
@@ -130,6 +791,7 @@ export const state = () => ({
             username: 'johnjr',
             email: 'john@gmail.com',
             password: '654321',
+            isAdmin: false,
             balance: 43,
             avatar: '/projects/Invicta/avatar4.png',
             registrationDate: 'Jan 21, 2021',
@@ -143,13 +805,39 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            profileBanner: '/projects/Invicta/backProfileImage.png',
             discordId: '',
             telegramUsername: '',
+            referralLink: 'https://invicta.cards/register/6632f60f652',
             achievements: {
                 achievementHeart: true,
                 achievementComment: false,
                 achievementLike: false,
+            },
+            dashboard: {
+                sales: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                revenue: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                usersReferred: 4,
+                earnedFromReferredUsers: 1,
+                period: 'all time',
+                chartData: {
+                    weekly: [10, 0, 5, 10, 15, 9, 8],
+                    monthly: [5, 2, 22, 10],
+                    yearly: [13, 4, 15, 8, 1, 3],
+                    allTime: [10, 0, 5, 5, 2, 22, 10],
+                }
             },
             shoppingItems: [],
             orders: [],
@@ -161,6 +849,7 @@ export const state = () => ({
             username: 'donaldmaen',
             email: 'donald@gmail.com',
             password: '654321',
+            isAdmin: false,
             balance: 33,
             avatar: '/projects/Invicta/avatar.png',
             registrationDate: 'Jul 19, 2021',
@@ -174,13 +863,39 @@ export const state = () => ({
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            profileBanner: '/projects/Invicta/backProfileImage.png',
             discordId: '',
             telegramUsername: '',
+            referralLink: 'https://invicta.cards/register/6632f60f652',
             achievements: {
                 achievementHeart: false,
                 achievementComment: false,
                 achievementLike: true,
+            },
+            dashboard: {
+                sales: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                revenue: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                usersReferred: 4,
+                earnedFromReferredUsers: 1,
+                period: 'all time',
+                chartData: {
+                    weekly: [10, 0, 5, 10, 15, 9, 8],
+                    monthly: [5, 2, 22, 10],
+                    yearly: [13, 4, 15, 8, 1, 3],
+                    allTime: [10, 0, 5, 5, 2, 22, 10],
+                }
             },
             shoppingItems: [],
             orders: [],
@@ -229,6 +944,15 @@ export const mutations = {
                 arr.splice(i, 1);
             }
         })
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE USER DASHBOARD PERIOD
+    changePeriod(state, {value, id}) {
+        const user = state.users.find(el => {
+            return el.id === id;
+        })
+        user.dashboard.period = value;
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -432,6 +1156,18 @@ export const mutations = {
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE PROFILE BANNER
+    changeProfileBanner(state, {id, newBanner}) {
+        const user = state.users.find(el => {
+            if (el.id === id) {
+                return el;
+            }
+        })
+
+        user.profileBanner = newBanner;
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ADD USER
     addUser(state, {id, username, email, password}) {
         const dateObj = new Date();
@@ -464,7 +1200,7 @@ export const mutations = {
             email: email,
             password: password,
             balance: 0,
-            avatar: '/projects/Invicta/avatar.png',
+            avatar: '/projects/Invicta/defaultUserAvatar.jpg',
             registrationDate: date,
             selledAmount: 0,
             following: [],
@@ -476,13 +1212,39 @@ export const mutations = {
             I'm losing my mind It's 'cause, 'cause,
             cause I'm crazy
             `,
-            backgroundImage: '/projects/Invicta/backProfileImage.png',
+            profileBanner: '/projects/Invicta/backProfileImage.png',
             discordId: '',
             telegramUsername: '',
+            referralLink: 'https://invicta.cards/register/6632f60f652',
             achievements: {
                 achievementHeart: false,
                 achievementComment: false,
                 achievementLike: false,
+            },
+            dashboard: {
+                sales: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                revenue: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                usersReferred: 4,
+                earnedFromReferredUsers: 1,
+                period: 'all time',
+                chartData: {
+                    weekly: [10, 0, 5, 10, 15, 9, 8],
+                    monthly: [5, 2, 22, 10],
+                    yearly: [13, 4, 15, 8, 1, 3],
+                    allTime: [10, 0, 5, 5, 2, 22, 10],
+                }
             },
             shoppingItems: [],
             orders: [],

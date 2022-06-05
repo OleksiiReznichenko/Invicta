@@ -108,15 +108,7 @@ export const actions = {
                     payload.dropdown.style.opacity = 1;
                 }, 10);
 
-                if (window.outerWidth < 850 && window.outerWidth > 550 && window.outerHeight > 600) {
-                    payload.nav.style.width = '50rem';
-                    payload.nav.style.position = 'fixed';
-                }
-
-                if (window.outerWidth <= 550) {
-                    payload.nav.style.width = '44rem';
-                    payload.nav.style.position = 'fixed';
-                }
+                payload.nav.classList.add('navigation-to-fit');
             } else {
                 payload.dropdown.style.opacity = 0;
                 setTimeout(() => {
@@ -124,15 +116,7 @@ export const actions = {
                     payload.dropdown.classList.remove('opened');
                 }, 200);
 
-                if (window.outerWidth < 850 && window.outerHeight > 600) {
-                    payload.nav.style.position = 'absolute';
-                    payload.nav.style.width = '66%';
-                }
-
-                if (window.outerWidth < 600) {
-                    payload.nav.style.position = 'absolute';
-                    payload.nav.style.width = '90%';
-                }
+                payload.nav.classList.remove('navigation-to-fit');
             }
         })
 
@@ -144,16 +128,8 @@ export const actions = {
                 payload.dropdown.style.display = 'none';
                 payload.dropdown.classList.remove('opened');
             }, 200);
-
-            if (window.outerWidth < 850) {
-                payload.nav.style.position = 'absolute';
-                payload.nav.style.width = '66%';
-            }
-
-            if (window.outerWidth < 600) {
-                payload.nav.style.position = 'absolute';
-                payload.nav.style.width = '90%';
-            }
+                
+            payload.nav.classList.remove('navigation-to-fit');
         })
 
         window.addEventListener('click', (e) => {

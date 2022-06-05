@@ -2,7 +2,7 @@
     <div class="section custom-banner">
         <AddNewBanner v-if="pageEdit" banner='topBanner' class="add-image-component" />
         <div class="overlay">
-            <button @click="openWindow" class="btn btn-gradient"><span>Edit banners</span></button>
+            <button @click="openWindow" class="btn btn-gradient"><span>Edit banner</span></button>
         </div>
         <div v-if="!user.topBanner" key="info" class="info">
             <h1 class="title">Hot Sale</h1>

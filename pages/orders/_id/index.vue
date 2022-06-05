@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="status-price-container">
                                     <div :class="{'border-text-green': isConfirmed, 'border-text-red': !isConfirmed}" class="status">{{order.status}}</div>
-                                    <div class="price">${{product.price}}</div>
+                                    <div class="price">${{item.price}}</div>
                                 </div>
                                 <div class="date-id-container mobile">
                                     <span class="id">order {{order.id}}</span>

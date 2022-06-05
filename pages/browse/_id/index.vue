@@ -108,7 +108,10 @@
                             </div>
                         </div>
                         <form @submit.prevent action="#" class="form">
-                            <div class="select">
+                            <div class="input-group">
+                                <input ref="amountInput" id="amountInput" v-model="amountToBuy" class="full-width" type="number" placeholder="Amount">
+                            </div>
+                            <div v-if="product.type === 'giftcard'" class="select">
                                 <input ref="cardsDropdownOpener" id="cardsDropdownOpener" @click="toggleCardsDropdown" v-model="cards" class="full-width" type="text" placeholder="Select the cards" readonly>
                                 <img ref="cardsDropdownArrow" id="cardsDropdownArrow" src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                                 <div ref="cardsSelectionDropdown" id="cardsSelectionDropdown" class="options">
@@ -116,6 +119,16 @@
                                     <div @click="selectCardsOption('Card 2')" class="option">Card 2</div>
                                     <div @click="selectCardsOption('Card 3')" class="option">Card 3</div>
                                     <div @click="selectCardsOption('Card 4')" class="option">Card 4</div>
+                                </div>
+                            </div>
+                            <div v-if="product.type === 'account'" class="select">
+                                <input ref="accountsDropdownOpener" id="accountsDropdownOpener" @click="toggleAccountsDropdown" v-model="accounts" class="full-width" type="text" placeholder="Select the accounts" readonly>
+                                <img ref="accountsDropdownArrow" id="accountsDropdownArrow" src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
+                                <div ref="accountsSelectionDropdown" id="accountsSelectionDropdown" class="options">
+                                    <div @click="selectAccountsOption('Account 1')" class="option">Account 1</div>
+                                    <div @click="selectAccountsOption('Account 2')" class="option">Account 2</div>
+                                    <div @click="selectAccountsOption('Account 3')" class="option">Account 3</div>
+                                    <div @click="selectAccountsOption('Account 4')" class="option">Account 4</div>
                                 </div>
                             </div>
                             <div class="select">
@@ -132,8 +145,8 @@
                                 <nuxt-link v-if="!isLoggedIn" to="/login" class="login-button btn btn-gradient"><span>Buy</span></nuxt-link>
                                 <button v-if="isLoggedIn" @click="buy" @submit="buy" class="login-button btn btn-gradient"><span>Buy</span></button>
                                 <div class="prices">
-                                    <h3 class="new-price">${{product.price}}</h3>
-                                    <span v-if="product.oldPrice" class="old-price">${{product.oldPrice}}</span>
+                                    <span v-if="product.oldPrice" class="old-price">${{oldPrice}}</span>
+                                    <h3 class="new-price">${{price}}</h3>
                                 </div>
                             </div>
                         </form>
@@ -167,9 +180,11 @@ export default {
         return {
             paymentMethod: '',
             cards: '',
+            accounts: '',
             copyLinkIndicator: true,
             url: '',
-            sellerFound: {}
+            sellerFound: {},
+            amountToBuy: 1
         }
     },
     computed: {
@@ -220,6 +235,26 @@ export default {
         seller() {
             return this.sellerFound;
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // PRICE
+        price() {
+            if (this.amountToBuy > 1) {
+                return (this.product.price * this.amountToBuy).toFixed(2);
+            } else {
+                return this.product.price;
+            }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // OLD PRICE
+        oldPrice() {
+            if (this.amountToBuy > 1) {
+                return (this.product.oldPrice * this.amountToBuy).toFixed(2);
+            } else {
+                return this.product.oldPrice;
+            }
+        },
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -238,13 +273,53 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // BUY 
         buy() {
-            // IF CARDS DROPDOWN VALUE IS NOT SELECTED - SHOW ERROR
-            if (!this.cardsDropdownOpener.value) {
+            // IF AMOUNT IS LESS THAN 1 - SHOW ERROR
+            if (this.$refs.amountInput.value < 1) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'You need to select cards', 
+                    text: 'You can\'t buy less than 1 item', 
                     isBad: true
                 });
                 return;
+            }
+            
+            // IF AMOUNT IS MORE THAN AMOUNT OF ITEMS IN STOCK - SHOW ERROR
+            if (this.$refs.amountInput.value > this.product.amountInStock) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'You can\'t buy more items than there are in stock', 
+                    isBad: true
+                });
+                return;
+            }
+
+            // IF AMOUNT IS DECIMAL - SHOW ERROR
+            if (this.$refs.amountInput.value.includes('.')) {
+                this.$store.dispatch('showNotificationWindow', {
+                    text: 'The amount can\'t be a decimal', 
+                    isBad: true
+                });
+                return;
+            }
+
+            if (this.product.type === 'giftcard') {
+                // IF CARDS DROPDOWN VALUE IS NOT SELECTED - SHOW ERROR
+                if (!this.cardsDropdownOpener.value) {
+                    this.$store.dispatch('showNotificationWindow', {
+                        text: 'You need to select cards', 
+                        isBad: true
+                    });
+                    return;
+                }
+            }
+
+            if (this.product.type === 'account') {
+                // IF ACCOUNTS DROPDOWN VALUE IS NOT SELECTED - SHOW ERROR
+                if (!this.accountsDropdownOpener.value) {
+                    this.$store.dispatch('showNotificationWindow', {
+                        text: 'You need to select accounts', 
+                        isBad: true
+                    });
+                    return;
+                }
             }
             
             // IF PAYMENT DROPDOWN VALUE IS NOT SELECTED - SHOW ERROR
@@ -293,6 +368,9 @@ export default {
             const orderShoppingItemObject = {
                 id: (this.$_uid * Date.now()).toString(),
                 productId: this.product.id,
+                productTitle: this.product.name,
+                productPhoto: this.product.photo,
+                price: this.amountToBuy * this.product.price,
                 buyerId: this.user.id,
                 sellerId: this.product.sellerId,
                 date: this.getDate(),
@@ -449,6 +527,26 @@ export default {
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // PAYMENTS SELECTION DROPDOWN
+        toggleAccountsDropdown() {
+            if (!this.accountsSelectionDropdown.classList.contains('opened')) {
+                this.accountsSelectionDropdown.classList.add('opened');
+                this.accountsSelectionDropdown.style.display = 'block';
+                this.accountsDropdownArrow.style.transform = 'rotate(-180deg)';
+                setTimeout(() => {
+                    this.accountsSelectionDropdown.style.opacity = 1;
+                }, 10);
+            } else {
+                this.accountsSelectionDropdown.style.opacity = 0;
+                this.accountsDropdownArrow.style.transform = 'rotate(0deg)';
+                setTimeout(() => {
+                    this.accountsSelectionDropdown.style.display = 'none';
+                    this.accountsSelectionDropdown.classList.remove('opened');
+                }, 200);
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SELECTION CARDS OPTION FUNCTIONAL
         selectCardsOption(option) {
             this.cardsDropdownOpener.value = option;
@@ -458,6 +556,12 @@ export default {
         // SELECTION PAYMENTS OPTION FUNCTIONAL
         selectPaymentsOption(option) {
             this.paymentsDropdownOpener.value = option;
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SELECTION PAYMENTS OPTION FUNCTIONAL
+        selectAccountsOption(option) {
+            this.accountsDropdownOpener.value = option;
         },
     },
 
@@ -497,13 +601,21 @@ export default {
         this.shareDropdown = document.getElementById('shareDropdown');
         this.shareButton = document.getElementById('shareButton');
         
-        this.cardsSelectionDropdown = document.getElementById('cardsSelectionDropdown');
-        this.cardsDropdownArrow = document.getElementById('cardsDropdownArrow');
-        this.cardsDropdownOpener = document.getElementById('cardsDropdownOpener');
-        
         this.paymentsSelectionDropdown = document.getElementById('paymentsSelectionDropdown');
         this.paymentsDropdownArrow = document.getElementById('paymentsDropdownArrow');
         this.paymentsDropdownOpener = document.getElementById('paymentsDropdownOpener');
+        
+        if (this.product.type === 'giftcard') {
+            this.cardsSelectionDropdown = document.getElementById('cardsSelectionDropdown');
+            this.cardsDropdownArrow = document.getElementById('cardsDropdownArrow');
+            this.cardsDropdownOpener = document.getElementById('cardsDropdownOpener');
+        }
+        
+        if (this.product.type === 'account') {
+            this.accountsSelectionDropdown = document.getElementById('accountsSelectionDropdown');
+            this.accountsDropdownArrow = document.getElementById('accountsDropdownArrow');
+            this.accountsDropdownOpener = document.getElementById('accountsDropdownOpener');
+        }
 
         // TAKE PAGE URL
         this.url = window.location.href;
@@ -522,19 +634,8 @@ export default {
                 }, 200);
             }
 
-            const dropdownCardsOpener = this.cardsDropdownOpener.contains(e.target);
             const dropdownPaymentsOpener = this.paymentsDropdownOpener.contains(e.target);
-
-
-            if (!dropdownCardsOpener && this.cardsSelectionDropdown.classList.contains('opened')) {
-                this.cardsSelectionDropdown.style.opacity = 0;
-                this.cardsDropdownArrow.style.transform = 'rotate(0deg)';
-                setTimeout(() => {
-                    this.cardsSelectionDropdown.style.display = 'none';
-                    this.cardsSelectionDropdown.classList.remove('opened');
-                }, 200);
-            }
-
+            
             if (!dropdownPaymentsOpener && this.paymentsSelectionDropdown.classList.contains('opened')) {
                 this.paymentsSelectionDropdown.style.opacity = 0;
                 this.paymentsDropdownArrow.style.transform = 'rotate(0deg)';
@@ -542,6 +643,32 @@ export default {
                     this.paymentsSelectionDropdown.style.display = 'none';
                     this.paymentsSelectionDropdown.classList.remove('opened');
                 }, 200);
+            }
+
+            if (this.product.type === 'giftcard') {
+                const dropdownCardsOpener = this.cardsDropdownOpener.contains(e.target);
+
+                if (!dropdownCardsOpener && this.cardsSelectionDropdown.classList.contains('opened')) {
+                    this.cardsSelectionDropdown.style.opacity = 0;
+                    this.cardsDropdownArrow.style.transform = 'rotate(0deg)';
+                    setTimeout(() => {
+                        this.cardsSelectionDropdown.style.display = 'none';
+                        this.cardsSelectionDropdown.classList.remove('opened');
+                    }, 200);
+                }
+            }
+
+            if (this.product.type === 'account') {
+                const dropdownAccountsOpener = this.accountsDropdownOpener.contains(e.target);
+
+                if (!dropdownAccountsOpener && this.accountsSelectionDropdown.classList.contains('opened')) {
+                    this.accountsSelectionDropdown.style.opacity = 0;
+                    this.accountsDropdownArrow.style.transform = 'rotate(0deg)';
+                    setTimeout(() => {
+                        this.accountsSelectionDropdown.style.display = 'none';
+                        this.accountsSelectionDropdown.classList.remove('opened');
+                    }, 200);
+                }
             }
         });
     },
@@ -882,6 +1009,10 @@ footer {
                     margin-top: 1.5rem;
                 }
 
+                .input-group {
+                    margin-bottom: 1.25rem;
+                }
+
                 .user-info {
                     display: flex;
                     align-items: center;
@@ -955,10 +1086,12 @@ footer {
                         .prices {
                             display: flex;
                             align-items: center;
+                            flex-direction: column;
 
                             .old-price {
                                 color: $color-text-grey-dark;
-                                font-size: 1.4rem;
+                                // font-size: 1.4rem;
+                                font-size: 1.6rem;
                                 text-decoration: line-through;
 
                                 @media only screen and (max-width: 850px) {

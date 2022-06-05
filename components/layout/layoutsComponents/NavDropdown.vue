@@ -6,10 +6,7 @@
             <div class="heading-container">
                 <h2>More</h2>
                 <div class="close-nav-btn">
-                    <svg class="close-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path class="close-icon__path" d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path class="close-icon__path" d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="@/assets/svg/closeIcon.svg" alt="Close" class="close-icon">
                 </div>
             </div>
 
@@ -62,6 +59,7 @@
                 <nuxt-link to="/deposit" class="btn btn-blue"><span>Deposit</span></nuxt-link>
                 <nuxt-link to="/withdraw" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
                 <nuxt-link to="/dashboard" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
+                <nuxt-link v-if="user.isAdmin" to="/adminDashboard" class="btn btn-pink"><span>Admin Dashboard</span></nuxt-link>
             </div>
 
             <div v-if="isLoggedIn" key="line-3" class="line"></div>
