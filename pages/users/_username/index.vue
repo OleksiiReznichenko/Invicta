@@ -3,10 +3,10 @@
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <HeaderProfile :userObject='userSelected' :isMyProfile='isMyProfile' />
         <main>
-            <UserCustomBanner :pageEdit='false' />
+            <UserCustomBanner :user='userSelected' :pageEdit='false' />
             <Categories :baseArray='productsBase' @getFilteredArray="getFilteredArray($event)" />
             <UserProducts :products='products' :baseArrayLength='productsBase.length' :isMyProfile='isMyProfile' />
-            <UserDiscountProducts :baseArray='products' :pageEdit='false' />
+            <UserDiscountProducts :user='userSelected' :baseArray='products' :pageEdit='false' />
         </main>
         <Footer class="section" />
     </div>
@@ -34,6 +34,7 @@ export default {
         return {
             isMyProfile: false,
             filteredArray: [],
+            user: {}
         }
     },
 
@@ -77,12 +78,12 @@ export default {
 
         // FIND USER IN USERS ARRAY
         this.user = userArray.find(el => {
-            if (this.user || el.username !== this.$route.params.username) return;
-            return el;
+            // if (this.user || el.username !== this.$route.params.username) return;
+            return el.username === this.$route.params.username;
         })
 
         // IF THIS USER IS ME - SET IS MY PROFILE TO TRUE
-        if (this.myUser.username === this.$route.params.username) {
+        if (this.myUser.id === this.user.id) {
             this.isMyProfile = true;
         } 
     },

@@ -188,15 +188,7 @@ export default {
                     this.$refs.dropdown.classList.remove('opened');
                 }, 200)
 
-                if (window.outerWidth < 850 && window.outerHeight > 600) {
-                    this.nav.style.position = 'absolute';
-                    this.nav.style.width = '66%';
-                }
-
-                if (window.outerWidth < 600) {
-                    this.nav.style.position = 'absolute';
-                    this.nav.style.width = '90%';
-                }
+                this.nav.classList.remove('navigation-to-fit');
             }
         },
     },
@@ -239,6 +231,7 @@ export default {
         top: 0;
         left: 0;
         height: 100vh;
+        min-height: var(--app-height);
         width: 100%;
         z-index: 9000;
         padding-top: 10rem;
@@ -258,7 +251,12 @@ export default {
             width: 50rem;
 
             @include abs-center;
-            top: 48% !important;
+            // top: 48% !important;
+            top: 45% !important;
+        }
+        
+        @media only screen and (max-width: 850px) and (max-height: 730px) {
+            top: 42% !important;
         }
         
         @media only screen and (max-width: 550px) {
@@ -280,6 +278,10 @@ export default {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2.5rem;
+        
+        @media only screen and (max-width: 850px) and (max-height: 730px) {
+            margin-bottom: 1rem;
+        }
 
         @media only screen and (min-width: 850px),
         only screen and (max-width: 850px) and (max-height: 600px) and (min-width: 600px) {
@@ -314,6 +316,10 @@ export default {
         @media only screen and (max-width: 850px) and (min-height: 600px),
         only screen and (max-width: 600px) {
             margin: 2.5rem 0;
+        }
+        
+        @media only screen and (max-width: 850px) and (max-height: 730px) {
+            margin: 1.75rem;
         }
     }
 
@@ -366,6 +372,10 @@ export default {
         only screen and (max-width: 600px) {
             margin-top: 3.5rem;
         }
+        
+        @media only screen and (max-width: 850px) and (max-height: 730px) {
+            margin-top: 2.5rem;
+        }
 
         .btn {
             transition: all .3s;
@@ -395,6 +405,10 @@ export default {
             @media only screen and (max-width: 850px) and (min-height: 600px),
             only screen and (max-width: 600px) {
                 margin-bottom: 3.25rem;
+            }
+        
+            @media only screen and (max-width: 850px) and (max-height: 730px) {
+                margin-bottom: 2.5rem;
             }
         }
 

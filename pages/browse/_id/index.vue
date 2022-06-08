@@ -16,7 +16,7 @@
                         <div class="product-name-container">
                             <h1 class="product-name">{{product.name}}</h1>
                             <div class="product-buttons">
-                                <nuxt-link to="/reportProduct" class="product-button" id="report-button">
+                                <nuxt-link :to="'/reportProduct/' + product.id" class="product-button" id="report-button">
                                     <img src="@/assets/svg/report.svg" alt="Report" class="product-button-icon">
                                 </nuxt-link>
                                 <div @click="shareEvent" class="product-button" id="shareButton">
@@ -568,18 +568,14 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // FIND AND LOAD THE PRODUCT
     created () {
-        // PRODUCTS OBJECT
-        const productsObject = this.$store.state.products.products;
-
-        // CONVERT PRODUCTS OBJECT TO ARRAY
-        const productsObjectToArray = Object.entries(productsObject);
+        // PRODUCTS ARRAY
+        const productsArray = this.$store.state.products.products;
 
         // FIND PRODUCT IN PRODUCTS ARRAY
-        productsObjectToArray.forEach(([key, value]) => {
-            if (this.product) return;
-            this.product = value.find(product => {
-                return product.id === this.$route.params.id;
-            })
+        this.product = productsArray.find((product) => {
+            if (product.id === this.$route.params.id) {
+                return product;
+            }
         })
 
         // CHECK IF PRODUCT HAS OLD PRICE IF SO CALCULATE DISCOUNT

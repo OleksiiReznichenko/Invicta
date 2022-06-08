@@ -22,7 +22,7 @@
 <script>
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+// import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 export default {
     mounted () {
@@ -91,11 +91,11 @@ export default {
         
 
         // LOAD SETUP
-        const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath('jst/libs/draco/gltf');
+        // const dracoLoader = new DRACOLoader();
+        // dracoLoader.setDecoderPath('jst/libs/draco/gltf');
 
         const loader = new GLTFLoader();
-        loader.setDRACOLoader(dracoLoader);
+        // loader.setDRACOLoader(dracoLoader);
         loader.load('/projects/Invicta/cards.glb', (gltf) => {
             cardsModel = gltf.scene;
             scene.add(cardsModel);
@@ -109,8 +109,8 @@ export default {
                 mixer.clipAction(clip).play();
             })
 
-            renderer.render( scene, camera );
-            // animate();
+            // renderer.render( scene, camera );
+            animate();
         });
 
 
@@ -146,6 +146,7 @@ export default {
 <style lang="scss" scoped>
 header {
     height: 100vh;
+    min-height: -webkit-fill-available;
 
     @media only screen and (max-width: 600px) {
         min-height: 600px;

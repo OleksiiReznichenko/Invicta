@@ -18,14 +18,41 @@
         </ul>
       </div>
       <div class="nav__right">
-        <div class="search-container">
-          <input @click="searchFunction" @keyup="searchFunction" ref="searchInput" v-model="searchValue"
+        <div ref="searchContainer" class="search-container">
+          <input @focus="focusSearch" @blur="unfocusSearch" @click="searchFunction" @keyup="searchFunction" ref="searchInput" v-model="searchValue"
           type="search" id="searchInput" placeholder="Search" />
           <img
             src="@/assets/svg/searchIcon.svg"
             alt="Search icon"
             class="search-icon"
           />
+        </div>
+
+        <div class="notifications-container" id="notifications-opener-parent">
+          <button ref="notificationsButton" @click="toggleNotificationsDropdown" class="link-notification" id="notifications-opener">
+            <img
+              src="@/assets/svg/notification.svg"
+              alt="Notification"
+              class="link-icon"
+            />
+          </button>
+          <div class="notifications-dropdown" id="notifications-dropdown">
+            <div @click="checkLink" class="top-notifications top">
+              <h4 class="title-notifications title">Notifications</h4>
+              <nuxt-link v-if="isLoggedIn" class="link" to="/dashboard">Dashboard</nuxt-link>
+            </div>
+            <div @click="closeNotificationsDropdown" class="notifications-list">
+              <Notification
+              v-for="(notification, i) in notificationsArray"
+              :key="i"
+              :productId='notification.productId'
+              :image='notification.image'
+              :title='notification.title'
+              :text='notification.text'
+              :date='notification.date'
+              />
+            </div>
+            </div>
         </div>
 
         <nuxt-link
@@ -46,33 +73,6 @@
 
           <NavDropdown />
         </div>
-
-        <div class="notifications-container" id="notifications-opener-parent">
-          <button ref="notificationsButton" @click="toggleNotificationsDropdown" class="link-notification" id="notifications-opener">
-            <img
-              src="@/assets/svg/notification.svg"
-              alt="Notification"
-              class="link-icon"
-            />
-          </button>
-          <div class="notifications-dropdown" id="notifications-dropdown">
-            <div @click="checkLink" class="top-notifications top">
-              <h4 class="title-notifications title">Notifications</h4>
-              <nuxt-link class="link" to="/dashboard">Dashboard</nuxt-link>
-            </div>
-            <div @click="closeNotificationsDropdown" class="notifications-list">
-              <Notification
-              v-for="(notification, i) in notificationsArray"
-              :key="i"
-              :productId='notification.productId'
-              :image='notification.image'
-              :title='notification.title'
-              :text='notification.text'
-              :date='notification.date'
-              />
-            </div>
-            </div>
-        </div>
         <div
           v-if="!isPhone && isLoggedIn"
           class="profile"
@@ -92,8 +92,8 @@
       </div>
 
       <div ref="searchResultsContainer" class="search-results-container">
-        <SearchCategory v-for="(category, i) in productsFiltered"
-         :key="category.toString() + Math.random()" 
+        <SearchCategory v-for="(category, i) in productsObject"
+         :key="i" 
          :categoryName='i'
          :categoryItems='category'
          />
@@ -197,22 +197,36 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // ARRAY OF FILTERED PRODUCTS ON NAME SEARCH
         productsFiltered() {
-          let productsObject = this.$store.state.products.products;
+        // PRODUCTS ARRAY
+          const productsArray = this.$store.state.products.products;
 
-          const productsObjectToArray = Object.entries(productsObject);
-
-          const productsObjectToArrayFiltered = productsObjectToArray.map(([key, value]) => {
-            let filteredValue = value.filter(product => {
+        // PRODUCTS ARRAY FILTERED BY NAME
+          const productsArrayFiltered = productsArray.filter((product) => {
               return product.name.toLowerCase().includes(this.searchValueValidated);
-            })
-
-
-            return [key, filteredValue]
           })
 
-          const productsObjectFiltered = Object.fromEntries(productsObjectToArrayFiltered);
+          return productsArrayFiltered;
+        },
 
-          return productsObjectFiltered;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ARRAY CONVERTED TO OBJECT BY TYPES
+        productsObject() {
+          // ACCOUNTS ARRAY
+          const accounts = this.productsFiltered.filter((product) => {
+              return product.type === 'account';
+          })
+
+          // GIFTCARDS ARRAY
+          const giftcards = this.productsFiltered.filter((product) => {
+              return product.type === 'giftcard';
+          })
+
+          const productsObject = {
+            Giftcards: giftcards,
+            Accounts: accounts
+          }
+
+          return productsObject;
         },
     },
 
@@ -285,15 +299,7 @@ export default {
                     this.dropdown.classList.remove('opened');
                 }, 200)
 
-                if (window.outerWidth < 850 && window.outerHeight > 600) {
-                    this.nav.style.position = 'absolute';
-                    this.nav.style.width = '66%';
-                }
-
-                if (window.outerWidth < 600) {
-                    this.nav.style.position = 'absolute';
-                    this.nav.style.width = '90%';
-                }
+                this.nav.classList.remove('navigation-to-fit');
             }
             
             if (target == 'a') {
@@ -342,6 +348,20 @@ export default {
               }, 200);
             }
         },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FOCUS SEARCH EVENT
+        focusSearch() {
+            if (window.outerWidth <= 850 && window.outerHeight > 600 && window.outerWidth > 600 || window.outerWidth < 600) {
+              this.nav.classList.add('focused-search');
+            }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // UNFOCUS SEARCH EVENT
+        unfocusSearch() {
+            this.nav.classList.remove('focused-search');
+        },
     },
 
     watch: {
@@ -373,16 +393,6 @@ export default {
 
       // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
       window.addEventListener('click', (e) => {
-          // CHANGE SEARCH INPUT AND LOGO POSITIONS BACK ON MOBILE
-          if (window.outerWidth > 850 && window.outerHeight > 600) {
-            const isClickInsideElement = this.navRight.contains(e.target);
-
-            if (!isClickInsideElement) {
-              this.navLeft.style.transform = 'translate(0)';
-              this.navRight.style.transform = 'translate(0)';
-            }
-          }
-
           // CLOSE SEARCH RESULTS CONTAINER ON UNFOCUS
           if (!this.$refs.searchResultsContainer) return;
 
@@ -422,7 +432,7 @@ export default {
       // RESIZE
       window.addEventListener('resize', () => {
         this.dropdown = document.getElementById('dropdown');
-        if (window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600) {
+        if (window.outerWidth <= 850 && window.outerHeight > 600 && window.outerWidth > 600 || window.outerWidth < 600) {
             this.isPhoneInitial = true;
         } else {
             this.isPhoneInitial = false;
@@ -436,6 +446,33 @@ export default {
 .root {
   width: 100%;
   overflow: hidden;
+}
+
+.focused-search {
+  .nav__right {
+    width: 100% !important;
+    background-color: $color-grey;
+    box-shadow: 0px .5rem 5rem 0px rgba(#000000, .4);
+    padding-left: 1rem;
+    border-radius: 6px;
+    margin-right: 2rem;
+  }
+
+  .nav__left {
+    display: none;
+  }
+
+  .notifications-container {
+    display: none;
+  }
+
+  .search-icon {
+    left: 1rem !important;
+  }
+
+  .search-container {
+    margin-right: 0 !important;
+  }
 }
 
 .nav {
@@ -472,7 +509,7 @@ export default {
     width: 80% !important;
   }
 
-  @media only screen and (max-width: 850px) and (min-height: 600px) and (max-height: 700px) {
+  @media only screen and (max-width: 850px) and (min-height: 600px) and (max-height: 700px) and (min-width: 600px) {
     top: 2.5rem;
   }
 
@@ -533,7 +570,8 @@ export default {
   .notifications-container {
     position: relative;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       position: absolute;
       top: .8rem;
       // right: -140%;
@@ -552,6 +590,7 @@ export default {
     transition: all .2s;
     display: none;
     opacity: 0;
+    min-width: 28rem;
 
     .top {
       display: flex;
@@ -592,7 +631,7 @@ export default {
     width: 100%;
     padding: 2.5rem;
     background-color: $color-grey-dark;
-    border-radius: 30px;
+    box-shadow: 0px .5rem 5rem 0px rgba(#000000, .4);    border-radius: 30px;
     grid-row-gap: 3rem;
     max-height: 70vh;
     overflow-x: hidden;
@@ -646,7 +685,6 @@ export default {
     only screen and (max-width: 600px) {
       width: 100%;
       border-radius: 6px;
-      overflow: hidden;
       margin-right: 3rem;
     }
   }
@@ -655,9 +693,10 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 0;
     width: 1.75rem;
     height: 1.75rem;
+
+    left: .5rem;
 
     @media only screen and (max-width: 850px) and (min-height: 600px),
     only screen and (max-width: 600px) {
@@ -675,6 +714,7 @@ export default {
     @media only screen and (max-width: 850px) and (min-height: 600px),
     only screen and (max-width: 600px) {
       padding: 1rem 2rem;
+      padding-right: 1rem;
       padding-left: 4rem;
     }
 
@@ -709,7 +749,8 @@ export default {
     margin-right: 2.5rem;
     @include abs-center;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       width: 3.25rem;
       height: 3.25rem;
       margin-right: 0;
@@ -723,7 +764,8 @@ export default {
     margin-right: 2.5rem;
     cursor: pointer;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
       width: 3.75rem;
       height: 3.75rem;
       margin-right: 0;

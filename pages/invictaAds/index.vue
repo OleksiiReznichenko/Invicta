@@ -149,7 +149,7 @@ export default {
             }
 
             .create-campaign-button {
-                padding: .75rem 4rem;
+                padding: 1rem 4rem;
                 border-radius: 6px !important;
                 font-weight: 500 !important;
 

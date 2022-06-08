@@ -18,7 +18,7 @@
 import AddNewBanner from '@/components/layout/Profile/AddNewBanner';
 
 export default {
-    props: ['pageEdit'],
+    props: ['pageEdit', 'user'],
 
     components: {
         AddNewBanner,
@@ -27,13 +27,14 @@ export default {
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // USER
-        user() {
-            return this.$store.state.users.users.find(el => {
-                if (el.id === this.$store.state.user.id) {
-                    return el;
-                }
-            })
-        },
+        // user() {
+            // return this.userObject;
+            // return this.$store.state.users.users.find(el => {
+            //     if (el.id === this.$store.state.user.id) {
+            //         return el;
+            //     }
+            // })
+        // },
     },
 
     methods: {

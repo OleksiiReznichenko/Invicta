@@ -27,7 +27,9 @@ export default {
     components: {
         SearchItem,
     },
+
     props: ['categoryName', 'categoryItems'],
+    
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CATEGORY ITEMS AMOUNT
@@ -73,8 +75,8 @@ export default {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-auto-columns: 1fr;
-        grid-column-gap: 3rem;
-        grid-row-gap: 2rem;
+        grid-column-gap: 2rem;
+        grid-row-gap: 1rem;
 
         @media only screen and (max-width: 1050px) {
             grid-template-columns: repeat(2, 1fr);

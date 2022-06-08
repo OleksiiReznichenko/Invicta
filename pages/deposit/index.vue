@@ -51,7 +51,7 @@ export default {
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
-        user() {
+        myUser() {
             return this.$store.state.user; 
         },
     },
@@ -75,10 +75,62 @@ export default {
 
 
             // CHANGE BALANCE
-            this.$store.commit('changeBalance', {value: newBalance});
             this.$store.commit('users/changeBalance', {value: newBalance, id: this.user.id});
+
+            const depositObject = {
+                id: (this.$_uid * Date.now()).toString(),
+                userId: this.user.id,
+                amount: this.total,
+                btcAddress: this.btcAddress,
+                time: this.getDate(),
+                status: 'pending'
+            }
+
+            this.$store.commit('adminDashboard/addDeposit', {newDeposit: depositObject});
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET DATE
+        getDate() {
+            const dateObj = new Date();
+            const year = dateObj.getFullYear();
+            const monthNumber = dateObj.getMonth();
+            const day = dateObj.getDate();
+            const hours = dateObj.getHours();
+            const minutes = dateObj.getMinutes();
+            let minutesFormatted = minutes;
+
+            if (minutes < 10) {
+                minutesFormatted = '0' + minutes;
+            }
+
+            const months = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+            ]
+
+            const month = months[monthNumber];
+            
+            return `${day} ${month} ${year}, ${hours}:${minutesFormatted}`;
         }
     },
+
+    created () {
+        this.user = this.$store.state.users.users.find(el => {
+            return el.id === this.myUser.id;
+        })
+    },
+
     mounted () {
         // DOM
         this.inputs = Array.from(document.querySelectorAll('input'));

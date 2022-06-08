@@ -76,7 +76,7 @@ export const state = () => ({
         {
             orderId: 'eFDFIVREINFFKFD10',
             transactionId: 'RTXCKMCDFFFD221',
-            status: 'closed'
+            status: 'opened'
         },
         {
             orderId: '13r23fFIVREINFFKFD10',
@@ -86,25 +86,22 @@ export const state = () => ({
     ],
     transactions: [
         {
-            sellerUsername: 'antoniojr',
-            sellerId: 'antoniojr',
             id: 'PR0MJKL2M91H',
+            sellerId: 'antoniojr',
             productTitle: 'Nike UK',
             amount: 25,
             timestamp: 'Apr 04, 2022'
         },
         {
-            sellerUsername: 'antoniojr',
-            sellerId: 'antoniojr',
             id: 'EWF09PR0MJKL2M91H',
+            sellerId: 'antoniojr',
             productTitle: 'Nike UK',
             amount: 15,
             timestamp: 'Apr 04, 2022'
         },
         {
-            sellerUsername: 'antoniojr',
-            sellerId: 'antoniojr',
             id: 'feEFGEPR0MJKL2M91H',
+            sellerId: 'antoniojr',
             productTitle: 'Nike UK',
             amount: 33,
             timestamp: 'Apr 04, 2022'
@@ -113,81 +110,171 @@ export const state = () => ({
     reports: [
         {
             id: 'FE21PR0MJKL2M91H',
-            category: 'misinformation'
+            category: 'Misinformation',
+            description: 'Bad quality',
+            cards: 'Nike UK',
+            reporterId: 'antoniojr',
+            sellerId: 'johnjr',
+            status: 'closed',
         },
         {
             id: 'PR0MJKL2M91H',
-            category: 'misinformation'
+            category: 'Misinformation',
+            description: 'Bad quality',
+            cards: null,
+            reporterId: 'antoniojr',
+            sellerId: 'johnjr',
+            status: 'closed',
         },
         {
             id: 'GLKNPR0MJKL2M91H',
-            category: 'misinformation'
+            category: 'Misinformation',
+            description: '',
+            cards: null,
+            reporterId: 'antoniojr',
+            sellerId: 'johnjr',
+            status: 'opened',
         },
     ],
     deposits: [
         {
-            user: 'antoniojr',
             id: 'feEFGEPR0MJKL2M91H',
+            userId: 'antoniojr',
             amount: 30,
+            btcAddress: 'bc1wefwefdsfs2312312',
             time: 'Apr 04, 2022 16:06:08',
-            status: 'completed'
+            status: 'denied'
         },
         {
-            user: 'antoniojr',
             id: 'GGEWR0MJKL2MGWH',
+            userId: 'antoniojr',
             amount: 100,
+            btcAddress: 'bc1wefwefdsfs2312312',
             time: 'Apr 04, 2022 16:06:08',
-            status: 'completed'
+            status: 'pending'
         },
         {
-            user: 'antoniojr',
             id: 'fGTKKJNJ0MJKdFL2M91H',
+            userId: 'antoniojr',
             amount: 42,
+            btcAddress: 'bc1wefwefdsfs2312312',
             time: 'Apr 04, 2022 16:06:08',
             status: 'completed'
         },
     ],
     withdrawals: [
         {
-            user: 'antoniojr',
             id: 'feEFGEPR0MJKL2M91H',
-            status: 'completed'
+            userId: 'antoniojr',
+            amount: 42,
+            btcAddress: 'bc1wefwefdsfs2312312',
+            time: 'Apr 04, 2022 16:06:08',
+            status: 'denied'
         },
         {
-            user: 'antoniojr',
             id: 'GGEWR0MJKL2MGWH',
-            status: 'completed'
+            userId: 'antoniojr',
+            amount: 82,
+            btcAddress: 'bc1wefwefdsfs2312312',
+            time: 'Apr 04, 2022 16:06:08',
+            status: 'pending'
         },
         {
-            user: 'antoniojr',
             id: 'fGTKKJNJ0MJKdFL2M91H',
+            userId: 'antoniojr',
+            amount: 102,
+            btcAddress: 'bc1wefwefdsfs2312312',
+            time: 'Apr 04, 2022 16:06:08',
             status: 'completed'
         },
     ],
     applications: [
         {
             id: 'APZR6CP41RSZ',
-            username: 'antoniojr',
+            userId: 'antoniojr',
+            why: 'Melting Pot Giftcards',
+            pastExperience: 'I have made some sales on nulled.to, @KingJon can vouch for me!',
+            lookingToSell: 'I would start selling Melting Pot Giftcards at a low rate, i would also consider selling Grimaldi Pizza Giftcards.',
             status: 'accepted'
         },
         {
             id: 'GGEWR0MJKL2MGWH',
-            username: 'antoniojr',
-            status: 'accepted'
+            userId: 'antoniojr',
+            why: 'Melting Pot Giftcards',
+            pastExperience: 'I have made some sales on nulled.to, @KingJon can vouch for me!',
+            lookingToSell: 'I would start selling Melting Pot Giftcards at a low rate, i would also consider selling Grimaldi Pizza Giftcards.',
+            status: 'pending'
         },
         {
             id: 'feEFGEPR0MJKL2M91H',
-            username: 'antoniojr',
-            status: 'accepted'
+            userId: 'antoniojr',
+            why: 'Melting Pot Giftcards',
+            pastExperience: 'I have made some sales on nulled.to, @KingJon can vouch for me!',
+            lookingToSell: 'I would start selling Melting Pot Giftcards at a low rate, i would also consider selling Grimaldi Pizza Giftcards.',
+            status: 'denied'
         },
     ]
 })
 
 export const mutations = {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD REPORT
+    addReport(state, {newReport}) {
+        state.reports.push(newReport);
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD WITHDRAWAL
+    addWithdrawal(state, {newWithdrawal}) {
+        state.withdrawals.push(newWithdrawal);
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD DEPOSIT
+    addDeposit(state, {newDeposit}) {
+        state.deposits.push(newDeposit);
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD INTERVENTION REQUEST
+    addInterventionRequest(state, {newInterventionRequest}) {
+        state.interventionRequests.push(newInterventionRequest);
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD TRANSACTION
+    addTransaction(state, {newTransaction}) {
+        state.transactions.push(newTransaction);
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD APPLICATION
+    addApplication(state, {newApplication}) {
+        state.applications.push(newApplication);
+    },
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CHANGE ADMIN DASHBOARD PERIOD
     changePeriod(state, {value}) {
         state.period = value;
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE REPORT STATUS
+    changeReportStatus(state, {id, newStatus}) {
+        const report = state.reports.find(el => {
+            return el.id === id;
+        })
+        report.status = newStatus;
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE APPLICATION STATUS
+    changeApplicationStatus(state, {id, newStatus}) {
+        const application = state.applications.find(el => {
+            return el.id === id;
+        })
+        application.status = newStatus;
     },
     
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -199,7 +286,7 @@ export const mutations = {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // DELETE CATEGORY
     deleteCategory(state, {value}) {
-        let index = state.categories.findIndex(el => {
+        const index = state.categories.findIndex(el => {
             if (el === value) {
                 return true;
             }

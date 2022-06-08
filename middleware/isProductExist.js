@@ -2,20 +2,14 @@ export default function ({ store, route, redirect }) {
     // IS PRODUCT EXIST INDICATOR
     let productFound = false;
 
-    // PRODUCTS OBJECT
-    const productsObject = store.state.products.products;
-
-    // CONVERT PRODUCTS OBJECT TO ARRAY
-    const productsObjectToArray = Object.entries(productsObject);
+    // PRODUCTS ARRAY
+    const productsArray = store.state.products.products;
 
     // FIND PRODUCT IN PRODUCTS ARRAY
-    productsObjectToArray.forEach(([key, value]) => {
-        if (productFound) return;
-        value.find(el => {
-            if (el.id === route.params.id) {
-                productFound = true;
-            }
-        })
+    productFound = productsArray.find((product) => {
+        if (product.id === route.params.id) {
+            return product;
+        }
     })
 
     // IF PRODUCT DOESN'T EXIST REDIRECT TO BROWSE PAGE

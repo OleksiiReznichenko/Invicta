@@ -243,6 +243,7 @@ export default {
                 width: 100%;
                 color: white;
                 margin-bottom: 3rem;
+                border: 1px solid $color-grey-2;
 
                 &:not(:last-of-type) {
                     margin-bottom: 1.25rem;

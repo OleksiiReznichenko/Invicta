@@ -2,6 +2,19 @@
     <div class="root">
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="admin-dashboard-page section section-page">
+            <div @click="closeWindowOnWrapper" ref="addCategoryWindow" class="add-category-window-wrapper">
+                <div class="add-category-window">
+                    <h2 class="title">Add new <br>category</h2>
+                    <div class="input-group">
+                        <label for="categoryInput">Category</label>
+                        <input @keypress.enter='addNewCategory' v-model="newCategory" ref="categoryInput" type="text" id="categoryInput" class="category-input" placeholder="Enter category">
+                        <div class="buttons">
+                            <button @click="addNewCategory" class="btn btn-gradient"><span>Add</span></button>
+                            <button @click="closeWindow" class="btn btn-transparent"><div class="background"></div><span>Cancel</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="content">
                 <div class="page-sequence">
                     <nuxt-link to="/">Main</nuxt-link>
@@ -43,13 +56,7 @@
                             </div>
                         </div>
                         <div class="categories-controls">
-                            <div v-if="categoryEditingMode" class="input-group">
-                                <label for="categoryInput">Add new category</label>
-                                <input @keypress.enter='addNewCategory' v-model="newCategory" ref="categoryInput" type="text" id="categoryInput" class="category-input" placeholder="Enter category">
-                                <button @click="addNewCategory" class="add-category-button">Add</button>
-                                <button @click="cancelEditingMode" class="cancel-category-button">Cancel</button>
-                            </div>
-                            <button v-if="!categoryEditingMode" @click="openEditingMode" ref="addCategoryButton" class="btn btn-transparent add-category"><div class="background"></div><span class="button-span">Add category</span></button>
+                            <button v-if="!categoryEditingMode" @click="openWindow" ref="addCategoryButton" class="btn btn-transparent add-category"><div class="background"></div><span class="button-span">Add category</span></button>
                         </div>
                         <div class="admin-stats">
                             <div class="stat-item">
@@ -103,24 +110,20 @@
                 <div class="shop-stats">
                     <h2 ref="shopStatsTitle" class="title">Users</h2>
                     <div ref="shopStatsList" class="shop-stats-list">
-                        <div class="shop-category">Intervensions</div>
+                        <div class="shop-category">Interventions</div>
                         <div class="active shop-category">Users</div>
                         <div class="shop-category">Products</div>
-                        <div class="shop-category">Transitions</div>
+                        <div class="shop-category">Transactions</div>
                         <div class="shop-category">Reports</div>
                         <div class="shop-category">Deposits</div>
                         <div class="shop-category">Withdrawals</div>
                         <div class="shop-category">Balance Tool</div>
                         <div class="shop-category">Applications</div>
                     </div>
-                    <component :componentType="componentType" :is="currentComponent"></component>
+                    <component :componentTypeBase="componentType" :is="currentComponent"></component>
                 </div>
-                <!-- <div class="orders-section">
-                    <h1 class="page-title">Your orders</h1>
-                    <Orders :orders='orders' />
-                </div> -->
             </div>
-            <!-- <Footer /> -->
+            <Footer />
         </div>
     </div>
 </template>
@@ -159,7 +162,7 @@ export default {
     watch: {
         periodComp() {
             this.getDataByPeriod();
-        }
+        },
     },
 
     computed: {
@@ -334,18 +337,7 @@ export default {
 
             this.$store.commit('adminDashboard/addNewCategory', {value: this.newCategory});
             this.newCategory = '';
-        },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // OPEN CATEGORY EDITING MODE
-        openEditingMode() {
-            this.categoryEditingMode = true;
-        },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // CANCEL CATEGORY EDITING MODE
-        cancelEditingMode() {
-            this.categoryEditingMode = false;
+            this.closeWindow();
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -370,6 +362,37 @@ export default {
                 return firstCapitalValue;
             }
         },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // OPEN ADD CATEGORY WINDOW
+        openWindow() {
+            if (this.$refs.addCategoryWindow.classList.contains('opened')) return;
+                this.$refs.addCategoryWindow.classList.add('opened');
+                this.navigationRoot.style.display = 'none';
+                this.$refs.addCategoryWindow.style.display = 'block';
+                setTimeout(() => {
+                    this.$refs.addCategoryWindow.style.opacity = 1;
+                }, 10);
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE ADD CATEGORY WINDOW
+        closeWindow() {
+            if (!this.$refs.addCategoryWindow.classList.contains('opened')) return;
+                this.navigationRoot.style.display = 'block';
+                this.$refs.addCategoryWindow.style.opacity = 0;
+                setTimeout(() => {
+                    this.$refs.addCategoryWindow.style.display = 'none';
+                    this.$refs.addCategoryWindow.classList.remove('opened');
+                }, 200);
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE ADD CATEGORY WINDOW ON WRAPPER CLICK
+        closeWindowOnWrapper(e) {
+            if (!e.target.classList.contains('add-category-window-wrapper')) return;
+            this.closeWindow();
+        },
     },
 
     created () {
@@ -377,17 +400,23 @@ export default {
     },
 
     mounted () {
+        // DOM
+        this.navigationRoot = document.querySelector('.navigation-root');
         this.periodSelectionDropdown = document.getElementById('periodSelectionDropdown');
         this.periodDropdownArrow = document.getElementById('periodDropdownArrow');
         this.periodDropdownOpener = document.getElementById('periodDropdownOpener');
         
         this.categories = document.querySelector('.categories');
         this.categoriesControls = document.querySelector('.categories-controls');
+        this.shopStatsList = document.querySelector('.shop-stats-list');
         this.shopCategories = Array.from(document.querySelectorAll('.shop-category'));
 
+        // CONVERT FIRST PERIOD LETTER TO CAPITAL
         this.period = this.stats.period.charAt(0).toUpperCase() + this.stats.period.slice(1);
 
-        this.$store.dispatch('checkOverflowX', {el: this.categories});
+        // CHECK IF ELEMENTS ARE OVERFLOWING
+        // this.$store.dispatch('checkOverflowX', {el: this.categories});
+        this.$store.dispatch('checkOverflowX', {el: this.shopStatsList});
 
         // DELETE CATEGORY
         this.$refs.categories.addEventListener('click', (e) => {
@@ -413,7 +442,6 @@ export default {
                     this.currentComponent = 'DynamicComponent';
                 }
                 this.$refs.shopStatsTitle.textContent = e.target.textContent;
-                console.log(this.componentType, this.currentComponent)
             }
         })
 
@@ -448,7 +476,104 @@ export default {
 
 <style lang="scss" scoped>
 .admin-dashboard-page {
-    margin-bottom: 10rem;
+
+    .add-category-window-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000000;
+        width: 100%;
+        height: 100vh;
+        min-height: var(--app-height);
+        background-color: rgba(black, .5);
+        backdrop-filter: blur(5px);
+        transition: all .2s;
+        display: none;
+        opacity: 0;
+    }
+
+    .add-category-window {
+        @include abs-center;
+        background-color: $color-grey-dark;
+        box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        padding: 4rem;
+        width: 40rem;
+
+        .title {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            line-height: 1;
+        }
+
+        .input-group {
+            label {
+                display: inline-block;
+                margin-bottom: .75rem;
+                font-size: 1.5rem;
+            }
+
+            input {
+                font-family: Montserrat;
+                display: block;
+                box-shadow: 0 .3rem 1rem 0 rgba(#000000, .2) inset,
+                0 .3rem 1rem 0 rgba(#19151F, .5);
+                background-color: #111;
+                padding: 1rem 2.25rem;
+                border-radius: 9px;
+                width: 23rem;
+                color: white;
+                margin-bottom: 3rem;
+
+                &::placeholder {
+                    color: $color-text-grey;
+                }
+            }
+        }
+
+        .buttons {
+            display: flex;
+
+            .btn {
+                padding: .75rem 4rem;
+                width: 13rem;
+                font-weight: 500 !important;
+
+                &:hover {
+                    transform: scale(1.05);
+                    border: 1px solid transparent;
+                }
+            }
+
+            .btn-gradient {
+                margin-right: 1rem;
+                border-radius: 6px;
+
+                &:hover::before {
+                    opacity: 1;
+                }
+
+                * {
+                    border-radius: 6px;
+                    opacity: 1 !important;
+                }
+            }
+            
+            .btn-transparent {
+                &:hover::before {
+                    opacity: 0;
+                }
+
+                &:hover::after {
+                    opacity: 1;
+                }
+
+                .background {
+                    background-color: $color-grey-dark;
+                }
+            }
+        }
+    }
     
     .content {
         position: relative;
@@ -477,6 +602,7 @@ export default {
                 width: 100%;
                 color: white;
                 margin-bottom: 3rem;
+                border: 1px solid $color-grey-2;
 
                 &:not(:last-of-type) {
                     margin-bottom: 1.25rem;
@@ -531,68 +657,6 @@ export default {
                     background-color: #111;
                 }
             }
-
-            .input-group {
-                text-align: center;
-                margin: 0 auto;
-
-                label {
-                    font-weight: 500 !important;
-                    display: inline-block;
-                    margin-bottom: 6px;
-                    margin-left: 5px;
-                    font-size: 1.7rem;
-        
-                    @media only screen and (max-width: 850px) {
-                        font-size: 1.7rem;
-                    }
-                }
-
-                input {
-                    display: block;
-                    background-color: $color-grey;
-                    box-shadow: 0 .3rem 1rem 0 rgba(#000000, .2) inset,
-                    0 .3rem 1rem 0 rgba(#19151F, .5);
-                    border-radius: 8px;
-                    padding: .8rem 1.5rem;
-                    width: 25rem;
-        
-                    @media only screen and (max-width: 850px) {
-                        padding: 1.1rem 2.5rem;
-                        width: 30rem;
-                    }
-                }
-
-                button {
-                    font-size: 1.6rem;
-                    background-color: $color-primary;
-                    border-radius: 20px;
-                    font-weight: 500 !important;
-                    padding: .35rem 1.25rem;
-                    margin-top: 8px;
-                    transition: all .3s;
-                    border: 1px solid $color-primary;
-                
-                    &:hover {
-                        background-color: darken($color-primary, 7%);
-                    }
-        
-                    @media only screen and (max-width: 850px) {
-                        padding: .65rem 2.5rem;
-                    }
-                }
-
-                .cancel-category-button {
-                    border: 1px solid white;
-                    background: transparent;
-                    margin-left: 2px;
-                
-                    &:hover {
-                        background-color: white;
-                        color: black;
-                    }
-                }
-            }
         }
 
         .categories {
@@ -603,14 +667,7 @@ export default {
             padding: 2.5rem;
             text-align: center;
             display: flex;
-
-            @media only screen and (max-width: 850px) {
-                overflow-x: scroll;
-
-                // &::-webkit-scrollbar {
-                //     display: none;
-                // }
-            }
+            overflow-x: scroll;
 
             &::-webkit-scrollbar {
                 height: 6px;
@@ -625,13 +682,6 @@ export default {
                 border-radius: 17px;
                 background-color: lighten($color-grey-2, 15%);
             }
-
-            // @media only screen and (max-width: 850px) {
-            //     width: 30rem;
-            //     margin-bottom: 4rem;
-            //     font-size: 1.8rem;
-            //     width: 100%;
-            // }
 
             .category {
                 font-weight: 500 !important;
@@ -759,12 +809,31 @@ export default {
                 align-items: center;
                 margin: 2rem 0 3.5rem;
                 width: 100%;
-                overflow-x: scroll;
+                padding-bottom: 1rem;
                 // -webkit-mask-image: linear-gradient(90deg,#000,#000 70%,rgba(255, 255, 255, 0));
                 // mask-image: linear-gradient(90deg,#000,#000 70%,rgba(255, 255, 255, 0));
 
+                    // overflow-x: scroll;
+                @media only screen and (max-width: 850px) {
+                    overflow-x: scroll !important;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
                 &::-webkit-scrollbar {
-                    display: none;
+                    height: 6px;
+                    width: 6px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: rgba($color-grey-dark, 1);
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 17px;
+                    background-color: lighten($color-grey, 15%);
                 }
 
                 .active {
@@ -776,6 +845,7 @@ export default {
                     padding: .5rem 1.5rem;
                     border-radius: 50px;
                     transition: all .3s;
+                    white-space: nowrap;
 
                     &:not(:last-of-type) {
                         margin-right: .75rem;

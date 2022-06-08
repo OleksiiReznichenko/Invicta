@@ -40,7 +40,7 @@ export default {
     computed: {
         cards() {
             // GET GIFTCARDS WITH DISCOUNT
-            const filteredArrayDiscount = this.$store.state.products.products.giftcards.filter(el => {
+            const filteredArrayDiscount = this.$store.state.products.products.filter(el => {
                 return el.oldPrice;
             })
 

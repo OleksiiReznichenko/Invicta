@@ -548,6 +548,7 @@ export default {
     z-index: 1000000;
     width: 100%;
     height: 100vh;
+    min-height: var(--app-height);
     background-color: rgba(black, .5);
     backdrop-filter: blur(5px);
     transition: all .2s;

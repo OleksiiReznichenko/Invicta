@@ -30,7 +30,7 @@
                             <div class="input-group">
                                 <label for="info">Info</label>
                                 <!-- <input class="" v-model="info" type="text" id="info" placeholder="Provide accurate info" required> -->
-                                <textarea @input="autoGrow" v-model="info" id="info" name="info" cols="30" rows="3" wrap="soft" placeholder="Provide accurate info"></textarea>
+                                <textarea @input="autoGrow" v-model="description" id="info" name="info" cols="30" rows="3" wrap="soft" placeholder="Provide accurate info"></textarea>
                             </div>
                             <button @click="report" @submit="report" type="submit" class="btn btn-gradient btn-medium"><span>Report</span></button>
                         </form>
@@ -50,8 +50,16 @@ export default {
     data() {
         return {
             reason: 'Misinformation',
-            info: '',
+            description: null,
         }
+    },
+
+    computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY USER
+        myUser() {
+            return this.$store.state.user; 
+        },
     },
     
     methods: {
@@ -62,6 +70,18 @@ export default {
                 text: 'Your report has been sent', 
                 isBad: false
             });
+
+            const reportObject = {
+                id: (this.$_uid * Date.now()).toString(),
+                category: this.reason,
+                description: this.description,
+                cards: this.product.name,
+                reporterId: this.myUser.id,
+                sellerId: this.product.sellerId,
+                status: 'opened',
+            }
+
+            this.$store.commit('adminDashboard/addReport', {newReport: reportObject});
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,13 +106,19 @@ export default {
                     this.$refs.selectionDropdown.style.opacity = 1;
                 }, 10);
             } else {
-                this.$refs.selectionDropdown.style.opacity = 0;
-                this.$refs.dropdownArrow.style.transform = 'rotate(0deg)';
-                setTimeout(() => {
-                    this.$refs.selectionDropdown.style.display = 'none';
-                    this.$refs.selectionDropdown.classList.remove('opened');
-                }, 200);
+                this.closeDropdown();
             }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE SELECTION DROPDOWN
+        closeDropdown() {
+            this.$refs.selectionDropdown.style.opacity = 0;
+            this.$refs.dropdownArrow.style.transform = 'rotate(0deg)';
+            setTimeout(() => {
+                this.$refs.selectionDropdown.style.display = 'none';
+                this.$refs.selectionDropdown.classList.remove('opened');
+            }, 200);
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,18 +128,24 @@ export default {
         },
     },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // FIND AND LOAD THE PRODUCT
+    created () {
+        // FIND PRODUCT IN PRODUCTS ARRAY
+        this.product = this.$store.state.products.products.find((product) => {
+            if (product.id === this.$route.params.id) {
+                return product;
+            }
+        })
+    },
+
     mounted () {
         // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
         window.addEventListener('click', (e) => {
-            const isClickInsideElement = this.$refs.dropdownOpener.contains(e.target);
+            const isClickInsideElement = this.$refs.dropdownOpener?.contains(e.target);
 
-            if (!isClickInsideElement && this.$refs.selectionDropdown.classList.contains('opened')) {
-                this.$refs.selectionDropdown.style.opacity = 0;
-                this.$refs.dropdownArrow.style.transform = 'rotate(0deg)';
-                setTimeout(() => {
-                    this.$refs.selectionDropdown.style.display = 'none';
-                    this.$refs.selectionDropdown.classList.remove('opened');
-                }, 200);
+            if (!isClickInsideElement && this.$refs.selectionDropdown?.classList.contains('opened')) {
+                this.closeDropdown();
             }
         });
     },

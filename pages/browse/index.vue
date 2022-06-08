@@ -747,17 +747,12 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // LOAD PRODUCTS AND SORT THEM
     created () {
-        // PRODUCTS OBJECT
-        const productsObject = this.$store.state.products.products;
-
-        // CONVERT PRODUCTS OBJECT TO ARRAY
-        const productsObjectToArray = Object.entries(productsObject);
+        // PRODUCTS ARRAY
+        const productsArrayBase = this.$store.state.products.products;
 
         // ADD PRODUCTS FROM PRODUCTS ARRAY TO LOCAL ARRAY
-        productsObjectToArray.forEach(([key, value]) => {
-            value.forEach(item => {
-                this.productsArray.push(item);
-            })
+        productsArrayBase.forEach((item) => {
+            this.productsArray.push(item);
         });
         
         // SORT LOCAL ARRAY

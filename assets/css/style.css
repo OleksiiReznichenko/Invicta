@@ -49,6 +49,10 @@
   color: #6744e3;
 }
 
+:root {
+  --app-height: 100%;
+}
+
 html,
 body,
 .layout {
@@ -68,6 +72,7 @@ body,
 .layout {
   overflow-x: hidden;
   position: relative;
+  min-height: var(--app-height);
 }
 
 ul {

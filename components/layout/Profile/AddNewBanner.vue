@@ -201,6 +201,7 @@ export default {
     z-index: 1000000;
     width: 100%;
     height: 100vh;
+        min-height: var(--app-height);
     background-color: rgba(black, .5);
     backdrop-filter: blur(5px);
     transition: all .2s;
@@ -243,15 +244,6 @@ export default {
         .content-center {
             @include abs-center;
             text-align: center;
-
-
-            .download-icon {
-
-            }
-
-            p {
-
-            }
         }
     }
 
@@ -296,10 +288,6 @@ export default {
 
         .button-change {
             background-image: linear-gradient(135deg, $color-primary 50%, transparent 50%);
-        }
-
-        .button-cancel {
-            
         }
     }
 }

@@ -22,7 +22,7 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // GET GIFTCARDS ARRAY AND LIMIT LENGTH TO 4 IF THERE IS AN EXCEPTION IGNORE IT
         cards() {
-            const filteredArray = this.$store.state.products.products.giftcards.filter((el, i) => {
+            const filteredArray = this.$store.state.products.products.filter((el, i) => {
                 if (this.exception) {
                     if (el.id !== this.exception) {
                         return i < 5;

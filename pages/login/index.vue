@@ -106,6 +106,12 @@ export default {
                 return;
             }
 
+            const correctUserCookie = {
+                id: correctUser.id,
+                username: correctUser.username,
+                avatar: correctUser.avatar
+            };
+
             // IF REMEMBER ME IS CLICKED - SAVE USER COOKIE FOR 14 DAYS
             // IF REMEMBER ME IS NOT CLICKED - SAVE USER COOKIE FOR 1 DAY
             if (this.$refs.rememberMeInput?.checked) {
@@ -113,7 +119,7 @@ export default {
                     path: '/',
                     maxAge: 60 * 60 * 24 * 14
                 });
-                this.$cookies.set('loggedInUser', JSON.stringify(correctUser), {
+                this.$cookies.set('loggedInUser', JSON.stringify(correctUserCookie), {
                     path: '/',
                     maxAge: 60 * 60 * 24 * 14
                 });
@@ -122,7 +128,7 @@ export default {
                     path: '/',
                     maxAge: 60 * 60 * 24
                 });
-                this.$cookies.set('loggedInUser', JSON.stringify(correctUser), {
+                this.$cookies.set('loggedInUser', JSON.stringify(correctUserCookie), {
                     path: '/',
                     maxAge: 60 * 60 * 24
                 });
@@ -207,6 +213,11 @@ export default {
                 border-radius: .4rem;
                 border: 1.5px solid white;
                 transition: all .2s;
+            
+                @media only screen and (max-width: 850px) {
+                    width: 1.85rem !important;
+                    height: 1.85rem !important;
+                }
             }
 
             #checkbox:checked + .check-mark {
@@ -216,10 +227,14 @@ export default {
             label {
                 cursor: pointer;
                 color: $color-text-grey;
-                font-size: 1.4rem;
+                font-size: 1.5rem;
                 display: inline-block;
                 margin-left: 1rem;
                 user-select: none;
+            
+                @media only screen and (max-width: 850px) {
+                    font-size: 1.65rem;
+                }
             }
 
             .check-mark {
@@ -230,6 +245,12 @@ export default {
                 z-index: 100;
                 transition: all .2s;
                 opacity: 0;
+            
+                @media only screen and (max-width: 850px) {
+                    width: 1.9rem;
+                    height: 1.9rem;
+                    left: 0;
+                }
             }
         }
 
@@ -237,9 +258,14 @@ export default {
             font-weight: 500 !important;
             color: $color-primary;
             transition: all .3s;
+            font-size: 1.5rem;
 
             &:hover {
                 color: lighten($color-primary, 5%);
+            }
+            
+            @media only screen and (max-width: 850px) {
+                font-size: 1.65rem;
             }
         }
 

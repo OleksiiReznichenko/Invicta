@@ -55,6 +55,7 @@ export default {
     z-index: 1000000;
     width: 100%;
     height: 100vh;
+    min-height: -webkit-fill-available;
     text-align: center;
     @include flex-center;
     transition: all .5s;

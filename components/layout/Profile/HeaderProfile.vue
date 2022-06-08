@@ -110,7 +110,7 @@
                                             </div>
                                         </ul>
                                     </div>
-                                <nuxt-link v-if="isLoggedIn && !isMyProfile" to="/reportUser" class="item">
+                                <nuxt-link v-if="isLoggedIn && !isMyProfile" :to="'/reportUser/' + user.id" class="item">
                                     <div class="icon-container">
                                         <img src="@/assets/svg/report.svg" alt="Report" class="icon">
                                     </div>
@@ -449,7 +449,7 @@ export default {
     @media only screen and (max-width: 850px) {
         width: 100% !important;
         height: 100vh;
-        min-height: 600px;
+        min-height: 700px;
         margin-bottom: 5rem;
     }
 
@@ -460,6 +460,7 @@ export default {
         z-index: 1000000;
         width: 100%;
         height: 100vh;
+        min-height: var(--app-height);
         background-color: rgba(black, .5);
         backdrop-filter: blur(5px);
         transition: all .2s;

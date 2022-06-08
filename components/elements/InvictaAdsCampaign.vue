@@ -106,7 +106,8 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 1.6rem 3rem;
-    background-color: $color-grey;
+    background-color: $color-grey-dark;
+    box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     margin-top: 2rem;
     cursor: pointer;

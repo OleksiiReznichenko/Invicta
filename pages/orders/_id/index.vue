@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="status-price-container">
                                     <div :class="{'border-text-green': isConfirmed, 'border-text-red': !isConfirmed}" class="status">{{order.status}}</div>
-                                    <div class="price">${{item.price}}</div>
+                                    <div class="price">${{order.price}}</div>
                                 </div>
                                 <div class="date-id-container mobile">
                                     <span class="id">order {{order.id}}</span>
@@ -374,19 +374,14 @@ export default {
             return el;
         })
 
-        
-        // PRODUCTS OBJECT
-        const productsObject = this.$store.state.products.products;
-
-        // CONVERT PRODUCTS OBJECT TO ARRAY
-        const productsObjectToArray = Object.entries(productsObject);
+        // PRODUCTS ARRAY
+        const productsArray = this.$store.state.products.products;
 
         // FIND PRODUCT IN PRODUCTS ARRAY
-        productsObjectToArray.forEach(([key, value]) => {
-            if (this.product) return;
-            this.product = value.find(product => {
-                return product.id === this.order.productId;
-            })
+        this.product = productsArray.find(product => {
+            if (product.id === this.order.productId) {
+                return product;
+            }
         })
         
         // FIND BUYER

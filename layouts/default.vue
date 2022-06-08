@@ -30,7 +30,24 @@ export default {
         },
     },
 
+    methods: {
+        appHeight() {
+            const doc = document.documentElement;
+            if (window.outerWidth < 1000) {
+                doc.style.setProperty('--app-height', `${window.innerHeight * 1.05}px`);
+            } else {
+                doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+            }
+        }
+    },
+
     mounted () {
+        // IF THERE IS A LOGIN COOKIE = LOG IN THE USER
+        // if (this.$cookies.get('loggedInUser') && !this.$store.state.isLoggedIn) {
+        //     const loggedInUser = this.$cookies.get('loggedInUser');
+        //     this.$store.commit('isLoggedInToTrue', {loggedInUser: loggedInUser})
+        // }
+
         // DOM
         this.dropdownOpener = document.getElementById('dropdown-opener');
         this.notificationWindow = document.getElementById('notificationWindow');
@@ -50,12 +67,15 @@ export default {
         // RESIZE
         let prevWidth = window.outerWidth;
         let prevHeight = window.outerHeight;
+        this.appHeight();
 
         window.addEventListener('resize', () => {
+            this.appHeight();
             if (prevWidth >= 850 && window.outerWidth < 850 ||
             prevWidth <= 850 && window.outerWidth > 850 ||
             prevHeight <= 600 && window.outerHeight > 600 && window.outerWidth > 600 ||
             prevHeight >= 600 && window.outerHeight < 600 && window.outerWidth > 600) {
+                this.nav.classList.remove('navigation-to-fit');
                 setTimeout(() => {
                     this.dropdownOpener = document.getElementById('dropdown-opener');
                     this.dropdown = document.getElementById('dropdown');
@@ -86,13 +106,15 @@ export default {
 .navigation-to-fit {
     
     @media only screen and (max-width: 850px) and (min-width: 600px) and (min-height: 600px) {
-        width: 50rem !important;
-        position: fixed !important;
+        display: none !important;
+        // width: 50rem !important;
+        // position: fixed !important;
     }
     
     @media only screen and (max-width: 600px) {
-        width: 44rem !important;
-        position: fixed !important;
+        display: none !important;
+        // width: 44rem !important;
+        // position: fixed !important;
     }
 }
 

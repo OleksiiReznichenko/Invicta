@@ -40,16 +40,6 @@
                 :oldPrice="product.oldPrice"
                 :amountInStock="product.amountInStock"
             />
-            <!-- <ProductCard 
-                v-for="product in products"
-                :key="product.id"
-                :id="product.id"
-                :name="product.name"
-                :photo="product.photo"
-                :price="product.price"
-                :oldPrice="product.oldPrice"
-                :amountInStock="product.amountInStock"
-            /> -->
         </div>
     </div>
 </template>
@@ -58,7 +48,7 @@
 import AddNewBanner from '@/components/layout/Profile/AddNewBanner';
 
 export default {
-    props: ['pageEdit', 'baseArray'],
+    props: ['pageEdit', 'baseArray', 'user'],
 
     components: {
         AddNewBanner,
@@ -81,13 +71,14 @@ export default {
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // USER
-        user() {
-            return this.$store.state.users.users.find(el => {
-                if (el.id === this.$store.state.user.id) {
-                    return el;
-                }
-            })
-        },
+        // user() {
+            // return this.userObject;
+            // return this.$store.state.users.users.find(el => {
+            //     if (el.id === this.$store.state.user.id) {
+            //         return el;
+            //     }
+            // })
+        // },
     },
 
     methods: {

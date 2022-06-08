@@ -20,7 +20,6 @@ export const mutations = {
     // LOG IN
     isLoggedInToTrue(state, {loggedInUser}) {
         state.user = loggedInUser;
-        // state.user.isMyProfile = true;
         state.isLoggedIn = true;
     },
 
@@ -28,41 +27,6 @@ export const mutations = {
     // EDIT USER PROFILE
     editProfile(state, {user}) {
         state.user = user;
-        // state.user.isMyProfile = true;
-    },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CHANGE USER BALANCE
-    changeBalance(state, {value}) {
-        state.user.balance = value;
-    },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ADD SHOPPING ITEM
-    addShoppingItem(state, {shoppingItem}) {
-        state.user.shoppingItems.push(shoppingItem);
-    },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ADD SHOPPING ITEM CHAT MESSAGE
-    addShoppingItemChatMessage(state, {itemId, message}) {
-        state.user.shoppingItems.find(el => {
-            if (el.id === itemId) {
-                el.chat.messages.push(message);
-            }
-        })
-    },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // SUBSCRIBE
-    subscribe(state) {
-        state.user.following += 1;
-    },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // UNSUBSCRIBE
-    unSubscribe(state) {
-        state.user.following -= 1;
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -121,7 +85,7 @@ export const actions = {
         })
 
         payload.closeNavBtn.addEventListener('click', () => {
-            if (window.outerWidth >= 850 || window.outerHeight < 600) return;
+            // if (window.outerWidth >= 850 || window.outerHeight < 600) return;
             
             payload.dropdown.style.opacity = 0;
             setTimeout(() => {

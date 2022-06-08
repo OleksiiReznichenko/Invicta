@@ -41,6 +41,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/core-components.js',
+    {src: '~/plugins/checkLogin.js', mode: 'client'},
+    '~/plugins/redirects.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -81,13 +83,12 @@ export default {
   },
 
   router: {
-    // extendRoutes(routes, resolve) {
-    //   routes.push({
-    //     path: '*',
-    //     // component: resolve(__dirname, 'projects/sikuria/pages/index.vue')
-    //     component: resolve(__dirname, '~/pages/index.vue')
-    //   })
-    // },
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '*',
+        component: resolve(__dirname, '~/pages/browse/index.vue')
+      })
+    },
     middleware: ['isPageExist', 'checkLogin'],
     base: '/projects/Invicta/',
     linkActiveClass: 'active-link'

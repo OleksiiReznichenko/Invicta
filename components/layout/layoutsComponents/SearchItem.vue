@@ -1,9 +1,9 @@
 <template>
-    <div class="search-item">
-        <div @click="closeSearch" class="search-item-link">
+    <div @click="closeSearch" class="search-item">
+        <div class="search-item-link">
             <img :src="image" alt="Image" class="item-image">
         </div>
-        <div @click="closeSearch" class="search-item-link">
+        <div class="search-item-link">
             <div class="item-info">
                 <h5 class="item-name">{{name}}</h5>
                 <div class="item-small-info">
@@ -59,6 +59,14 @@ export default {
 .search-item {
     display: flex;
     align-items: center;
+    transition: all .3s;
+    border-radius: 8px;
+    padding: .5rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-grey-2;
+    }
 
     &-link {
         display: flex;

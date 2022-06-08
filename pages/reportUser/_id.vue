@@ -53,6 +53,14 @@ export default {
             info: '',
         }
     },
+
+    computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY USER
+        myUser() {
+            return this.$store.state.user; 
+        },
+    },
     
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +70,18 @@ export default {
                 text: 'Your report has been sent', 
                 isBad: false
             });
+
+            const reportObject = {
+                id: (this.$_uid * Date.now()).toString(),
+                category: this.reason,
+                description: this.description,
+                cards: null,
+                reporterId: this.myUser.id,
+                sellerId: this.$route.params.id,
+                status: 'opened',
+            }
+
+            this.$store.commit('adminDashboard/addReport', {newReport: reportObject});
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +97,7 @@ export default {
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SELECTION DROPDOWN
-        toggleDropdown(e) {
+        toggleDropdown() {
             if (!this.$refs.selectionDropdown.classList.contains('opened')) {
                 this.$refs.selectionDropdown.classList.add('opened');
                 this.$refs.selectionDropdown.style.display = 'block';
@@ -86,13 +106,19 @@ export default {
                     this.$refs.selectionDropdown.style.opacity = 1;
                 }, 10);
             } else {
-                this.$refs.selectionDropdown.style.opacity = 0;
-                this.$refs.dropdownArrow.style.transform = 'rotate(0deg)';
-                setTimeout(() => {
-                    this.$refs.selectionDropdown.style.display = 'none';
-                    this.$refs.selectionDropdown.classList.remove('opened');
-                }, 200);
+                this.closeDropdown();
             }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE SELECTION DROPDOWN
+        closeDropdown() {
+            this.$refs.selectionDropdown.style.opacity = 0;
+            this.$refs.dropdownArrow.style.transform = 'rotate(0deg)';
+            setTimeout(() => {
+                this.$refs.selectionDropdown.style.display = 'none';
+                this.$refs.selectionDropdown.classList.remove('opened');
+            }, 200);
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,17 +131,10 @@ export default {
     mounted () {
         // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
         window.addEventListener('click', (e) => {
-            // const isClickInsideElement = this.$refs.selectionDropdown.contains(e.target);
-            const isClickInsideElement = this.$refs.dropdownOpener.contains(e.target);
+            const isClickInsideElement = this.$refs.dropdownOpener?.contains(e.target);
 
-
-            if (!isClickInsideElement && this.$refs.selectionDropdown.classList.contains('opened')) {
-                this.$refs.selectionDropdown.style.opacity = 0;
-                this.$refs.dropdownArrow.style.transform = 'rotate(0deg)';
-                setTimeout(() => {
-                    this.$refs.selectionDropdown.style.display = 'none';
-                    this.$refs.selectionDropdown.classList.remove('opened');
-                }, 200);
+            if (!isClickInsideElement && this.$refs.selectionDropdown?.classList.contains('opened')) {
+                this.closeDropdown();
             }
         });
     },

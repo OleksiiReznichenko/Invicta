@@ -102,8 +102,8 @@
                 <button @click="editProfileEvent" class="btn btn-gradient save-button save-margin-bottom"><span>Save changes</span></button>
 
                 <h1 class="section page-title">Profile banners</h1>
-                <UserCustomBanner :pageEdit='true' class="edit-class" />
-                <UserDiscountProducts :baseArray='productsBase' :pageEdit='true' class="edit-class" />
+                <UserCustomBanner :user='user' :pageEdit='true' class="edit-class" />
+                <UserDiscountProducts :user='user' :baseArray='productsBase' :pageEdit='true' class="edit-class" />
             </div>
             <img src="@/assets/img/gridEditProfile.png" alt="Grid" class="grid-image">
 
@@ -475,7 +475,9 @@ export default {
             // GET NEW AVATAR SOURCE
             this.avatarSrc = e.target.result;
 
-            this.openCropper();
+            this.saveImage(this.avatarSrc);
+
+            // this.openCropper();
         }
     },
 }

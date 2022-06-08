@@ -36,9 +36,7 @@
             :date='order.date'
             />
         </div>
-        <!-- <div v-if="orders.length > 10" class="pagination"> -->
         <div class="pagination">
-            <!-- <span class="showing-amount">Showing {{startText}} to {{endText}} of {{totalItems}} entries</span> -->
             <div class="page-numbers">
                 <span @click="paginationFunc" class="page-number page-number--first">1</span>
                 <span class="dots dots--first">...</span>
@@ -49,8 +47,6 @@
                 <span @click="paginationFunc" ref="lastPageNumber" class="page-number page-number--last">10</span>
             </div>
             <div class="buttons">
-                <!-- <button v-if="sliceStart !== 0" @click="prev" class="button-prev">Previous</button>
-                <button v-if="sliceEnd <= orders.length" @click="next" class="button-next">Next</button> -->
                 <button @click="prev" ref="prevButton" class="button-prev">Previous</button>
                 <button @click="next" ref="nextButton" class="button-next">Next</button>
             </div>
@@ -525,22 +521,11 @@ export default {
             opacity: .7 !important;
         }
 
-        // .showing-amount {
-        //     color: $color-orange;
-        //     font-weight: 600 !important;
-
-        //     @media only screen and (max-width: 850px) {
-        //         display: inline-block;
-        //         margin-bottom: 1.5rem;
-        //         font-size: 1.8rem;
-        //     }
-        // }
-
         .page-numbers {
             display: flex;
 
             @media only screen and (max-width: 850px) {
-                margin-bottom: 2rem;
+                margin-bottom: 2.5rem;
             }
 
             .active-page-number {
@@ -557,7 +542,8 @@ export default {
                 cursor: pointer;
 
                 @media only screen and (max-width: 850px) {
-                    font-size: 2rem;
+                    font-size: 2.2rem;
+                    margin-right: 1rem;
                 }
             }
 
@@ -605,6 +591,7 @@ export default {
         font-size: 2rem;
 
         @media only screen and (max-width: 850px) {
+            white-space: normal;
             font-family: Rowdies;
             font-weight: 300 !important;
             font-size: 3.75rem !important;
@@ -621,15 +608,15 @@ export default {
         padding: 2.5rem 2.5rem;
         margin-bottom: 2rem;
 
-        @media only screen and (max-width: 850px) {
-            display: none;
-        }
-
         .left {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 75%;
+
+            @media only screen and (max-width: 850px) {
+                display: none;
+            }
 
             span {
                 display: inline-block;
@@ -652,6 +639,10 @@ export default {
             display: flex;
             justify-content: flex-end;
             text-align: right;
+
+            @media only screen and (max-width: 850px) {
+                width: 100%;
+            }
         }
     }
 }
@@ -661,23 +652,16 @@ export default {
     margin-right: 1rem;
     position: relative;
 
-    @media only screen and (max-width: 900px) {
-        width: 11rem;
-    }
-
-    @media only screen and (max-width: 700px) {
-        width: 12rem;
-    }
-
     @media only screen and (max-width: 1050px) and (max-height: 520px) {
         width: 14rem;
     }
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 900px) {
+        width: 11rem;
+    }
+
+    @media only screen and (max-width: 850px) {
         width: 100%;
-        border-radius: 6px;
-        overflow: hidden;
-        margin-right: 3rem;
     }
 }
 
@@ -689,9 +673,9 @@ export default {
     width: 1.75rem;
     height: 1.75rem;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
-        width: 2rem;
-        height: 2rem;
+    @media only screen and (max-width: 850px) {
+        width: 2.5rem;
+        height: 2.5rem;
     }
 }
 
@@ -701,9 +685,10 @@ export default {
     color: white;
     font-family: Montserrat;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px) {
+    @media only screen and (max-width: 850px) {
         padding: 1rem 2rem;
-        padding-left: 4rem;
+        padding-left: 4.5rem;
+        font-size: 2.2rem;
     }
 
     &::placeholder {
