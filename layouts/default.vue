@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <!-- <Preloader /> -->
+        <Preloader />
         <div ref="notificationWindow" id="notificationWindow"></div>
         <Navigation/>
         <nuxt class="on-top" />
