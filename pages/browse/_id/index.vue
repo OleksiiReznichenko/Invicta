@@ -131,7 +131,7 @@
                                     <div @click="selectAccountsOption('Account 4')" class="option">Account 4</div>
                                 </div>
                             </div>
-                            <div class="select">
+                            <div class="select select-payments">
                                 <input ref="paymentsDropdownOpener" id="paymentsDropdownOpener" @click="togglePaymentsDropdown" v-model="paymentMethod" class="full-width" type="text" placeholder="Payment Methods" readonly>
                                 <img ref="paymentsDropdownArrow" id="paymentsDropdownArrow" src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                                 <div ref="paymentsSelectionDropdown" id="paymentsSelectionDropdown" class="options">
@@ -1002,6 +1002,10 @@ footer {
                 @media only screen and (max-width: 850px) {
                     width: 100%;
                     margin-top: 1.5rem;
+                }
+
+                .select-payments {
+                    z-index: 900;
                 }
 
                 .input-group {

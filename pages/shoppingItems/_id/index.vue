@@ -6,7 +6,7 @@
                 <div class="page-sequence">
                     <nuxt-link to="/">Main</nuxt-link>
                     <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
-                    <nuxt-link to="/myShopping">My shopping</nuxt-link>
+                    <nuxt-link to="/shoppingItems">My shopping</nuxt-link>
                     <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                     <span>{{product.name}}</span>
                 </div>
@@ -508,6 +508,10 @@ export default {
 
                             .id {
                                 padding-right: 1.5rem;
+
+                                @media only screen and (max-width: 430px) {
+                                    padding-bottom: .5rem;
+                                }
                             }
                         }
 

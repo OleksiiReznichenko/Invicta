@@ -201,9 +201,14 @@ export default {
         this.getData();
         this.setLabels();
 
+        let prevWidth = window.outerWidth;
+
         // RESIZE
         window.addEventListener('resize', () => {
-            this.chart.resize();
+            if (Math.abs(prevWidth - window.outerWidth) > 50) {
+                prevWidth = window.outerWidth;
+                this.chart.resize();
+            }
         });
     },
 }

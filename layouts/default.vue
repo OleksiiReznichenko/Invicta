@@ -62,9 +62,13 @@ export default {
         // RESIZE
         let prevWidth = window.outerWidth;
         let prevHeight = window.outerHeight;
+        // let resizeOccured = false;
         this.appHeight();
 
         window.addEventListener('resize', () => {
+            // console.log(prevWidth)
+            // console.log(prevHeight)
+            // console.log(true);
             this.appHeight();
             if (prevWidth >= 850 && window.outerWidth < 850 ||
             prevWidth <= 850 && window.outerWidth > 850 ||
@@ -76,10 +80,11 @@ export default {
                     this.dropdown = document.getElementById('dropdown');
                     this.closeNavBtn = document.querySelector('.close-nav-btn');
                     this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
+                    
+                    prevWidth = window.outerWidth;
+                    prevHeight = window.outerHeight;
                 }, 200);
             }
-            prevWidth = window.outerWidth;
-            prevHeight = window.outerHeight;
         })
     },
 }
