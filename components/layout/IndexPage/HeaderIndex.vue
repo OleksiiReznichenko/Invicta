@@ -37,7 +37,6 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // INIT 3D MODEL AND ANIMATION
         initAnimation() {
-            console.log(this.canvas);
             if (this.canvas) return;
             
             // SCENE
