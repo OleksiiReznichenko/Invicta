@@ -55,7 +55,8 @@
 
 <script>
 export default {
-    middleware: ['notLoggedIn', 'isWithdrawIdExist'],
+    // middleware: ['notLoggedIn', 'isAdmin', 'isWithdrawIdExist'],
+    middleware: ['notLoggedIn', 'isAdmin'],
 
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

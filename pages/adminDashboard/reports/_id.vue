@@ -52,7 +52,8 @@
 
 <script>
 export default {
-    middleware: ['notLoggedIn', 'isReportIdExist'],
+    // middleware: ['notLoggedIn', 'isAdmin', 'isReportIdExist'],
+    middleware: ['notLoggedIn', 'isAdmin'],
 
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -20,7 +20,7 @@ import UserProducts from '@/components/layout/Profile/UserProducts';
 import UserDiscountProducts from '@/components/layout/Profile/UserDiscountProducts';
 
 export default {
-    middleware: ['isUserExist'],
+    // middleware: ['isUserExist'],
 
     components: {
         HeaderProfile,

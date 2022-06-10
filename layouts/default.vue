@@ -104,14 +104,10 @@ export default {
     
     @media only screen and (max-width: 850px) and (min-width: 600px) and (min-height: 600px) {
         display: none !important;
-        // width: 50rem !important;
-        // position: fixed !important;
     }
     
     @media only screen and (max-width: 600px) {
         display: none !important;
-        // width: 44rem !important;
-        // position: fixed !important;
     }
 }
 
@@ -440,7 +436,6 @@ export default {
         .option {
             padding: 1rem 2rem;
             cursor: pointer;
-            // border-radius: 6px;
             border-top-right-radius: 6px;
             border-top-left-radius: 6px;
             transition: all .3s;
@@ -617,22 +612,13 @@ export default {
                 width: 24rem;
     
                 @media only screen and (max-width: 850px) {
-                    // width: 40rem !important;
                     width: 100% !important;
                 }
-    
-                // @media only screen and (max-width: 450px) {
-                //     width: 38rem !important;
-                // }
             }
 
             textarea {
                 width: 100%;
                 padding: 1.25rem 2.5rem;
-    
-                // @media only screen and (max-width: 850px) {
-                //     width: 40rem !important;
-                // }
             }
 
             .full-width {

@@ -142,7 +142,8 @@ import ChatMessage from '@/components/elements/Chat/Message';
 import ChatNotification from '@/components/elements/Chat/Notification';
 
 export default {
-    middleware: ['notLoggedIn', 'isShoppingItemExist'],
+    // middleware: ['notLoggedIn', 'isShoppingItemExist'],
+    middleware: ['notLoggedIn'],
 
     components: {
         ChatMessage,

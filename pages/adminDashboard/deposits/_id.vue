@@ -55,7 +55,8 @@
 
 <script>
 export default {
-    middleware: ['notLoggedIn', 'isDepositIdExist'],
+    // middleware: ['notLoggedIn', 'isAdmin', 'isDepositIdExist'],
+    middleware: ['notLoggedIn', 'isAdmin'],
 
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -182,6 +182,8 @@
 
 <script>
 export default {
+    middleware: ['notLoggedIn'],
+
     data() {
         return {
             title: null,

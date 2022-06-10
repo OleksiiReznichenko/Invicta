@@ -71,6 +71,8 @@
 import InvictaAdsCampaign from '@/components/elements/InvictaAdsCampaign';
 
 export default {
+    middleware: ['notLoggedIn'],
+
     components: {
         InvictaAdsCampaign,
     },

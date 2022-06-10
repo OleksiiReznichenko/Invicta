@@ -46,7 +46,8 @@
 
 <script>
 export default {
-    middleware: ['notLoggedIn', 'isApplicationIdExist'],
+    // middleware: ['notLoggedIn', 'isAdmin', 'isApplicationIdExist'],
+    middleware: ['notLoggedIn', 'isAdmin'],
 
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

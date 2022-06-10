@@ -175,7 +175,8 @@
 
 <script>
 export default {
-    middleware: ['isProductExist'],
+    // middleware: ['isProductExist'],
+    
     data() {
         return {
             paymentMethod: '',
