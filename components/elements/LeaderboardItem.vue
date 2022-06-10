@@ -4,10 +4,8 @@
             <div class="number">#{{number}}</div>
             <img :src="avatar" alt="User avatar" class="avatar">
             <div class="info">
-                <!-- <div class="top-container"> -->
-                    <h4 class="username-big">{{username}}</h4>
-                    <h5 class="username">@{{username}}</h5>
-                <!-- </div> -->
+                <h4 class="username-big">{{username}}</h4>
+                <h5 class="username">@{{username}}</h5>
                 <p class="date">Seller since {{registrationDate}}</p>
             </div>
         </div>

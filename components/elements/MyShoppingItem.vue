@@ -30,6 +30,7 @@
 <script>
 export default {
     props: ['productId', 'status', 'id', 'number', 'isValidated'],
+    
     created () {
         // PRODUCTS ARRAY
         const productsArray = this.$store.state.products.products;

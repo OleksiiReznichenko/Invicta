@@ -20,6 +20,7 @@
 <script>
 export default {
     props: ['image', 'name', 'inStock', 'country', 'price', 'oldPrice', 'id'],
+    
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CALCULATE DISCOUNT BASED ON OLD PRICE

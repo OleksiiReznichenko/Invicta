@@ -52,8 +52,8 @@ export default {
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
-        myUser() {
-            return this.$store.state.user; 
+        myUserId() {
+            return this.$store.state.user.id; 
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +64,8 @@ export default {
     },
 
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // WITHDRAW
         withdraw() {
             let isEveryInputValid = true;
 
@@ -141,8 +143,9 @@ export default {
     },
 
     created () {
+        // FIND USER
         this.user = this.$store.state.users.users.find(el => {
-            return el.id === this.myUser.id;
+            return el.id === this.myUserId;
         })
     },
 

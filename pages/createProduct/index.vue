@@ -158,7 +158,7 @@
                         :price="price"
                         :oldPrice="oldPrice"
                         :amountInStock="amountInStock"
-                        :createProductPage='true'
+                        :linkDisable='true'
                     />
                 </div>
             </div>
@@ -203,9 +203,17 @@ export default {
         }
     },
 
+    computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MY USER ID
+        myUserId() {
+            return this.$store.state.user.id; 
+        }
+    },
+
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // POSR
+        // POST
         post() {
             let isEveryInputValid = true;
 
@@ -330,11 +338,14 @@ export default {
                 description: validatedDescription,
                 warranty: validatedWarranty,
                 eta: validatedEta,
-                sellerId: this.$store.state.user.id,
+                sellerId: this.myUserId,
             };
 
-            // ADD NEW PRODUCT
-            this.$store.commit('products/createNewProduct', {newProduct: newProductObject})
+            // CREATE NEW PRODUCT
+            this.$store.commit('products/createNewProduct', {newProduct: newProductObject});
+
+            // CREATE NEW PRODUCT
+            this.$store.commit('users/createNewProduct', {userId: this.myUserId, newProduct: newProductObject});
 
             // IF NEW PRODUCT CREATED SUCCESSFULLY - SHOW MESSAGE
             this.$store.dispatch('showNotificationWindow', {
@@ -874,8 +885,6 @@ export default {
                     }
 
                     .buttons {
-                        // display: flex;
-                        // align-items: center;
                         margin-top: 3rem;
 
                         .button-preview {

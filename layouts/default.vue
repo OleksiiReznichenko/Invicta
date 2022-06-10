@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <Preloader />
+        <!-- <Preloader /> -->
         <div ref="notificationWindow" id="notificationWindow"></div>
         <Navigation/>
         <nuxt class="on-top" />
@@ -31,6 +31,7 @@ export default {
     },
 
     methods: {
+        // IF TOUCHPAD DEVICE'S HEIGHT CHANGES - CHANGE BASE 100VH HEIGHT
         appHeight() {
             const doc = document.documentElement;
             if (window.outerWidth < 1000) {
@@ -42,12 +43,6 @@ export default {
     },
 
     mounted () {
-        // IF THERE IS A LOGIN COOKIE = LOG IN THE USER
-        // if (this.$cookies.get('loggedInUser') && !this.$store.state.isLoggedIn) {
-        //     const loggedInUser = this.$cookies.get('loggedInUser');
-        //     this.$store.commit('isLoggedInToTrue', {loggedInUser: loggedInUser})
-        // }
-
         // DOM
         this.dropdownOpener = document.getElementById('dropdown-opener');
         this.notificationWindow = document.getElementById('notificationWindow');
@@ -115,6 +110,41 @@ export default {
         display: none !important;
         // width: 44rem !important;
         // position: fixed !important;
+    }
+}
+
+.product-card-container-wrapper {
+    border-radius: 8px;
+    position: relative;
+    height: 28.5rem;
+
+    @media only screen and (max-width: 850px) {
+        min-height: 28rem;
+    }
+
+    .product-card-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px dashed $color-primary;
+        border-radius: 8px;
+    }
+
+    .product-card-container-index {
+        display: none;
+    }
+
+    .btn-add {
+        @include abs-center;
+        padding: 1.4rem 5.5rem;
+        white-space: nowrap;
+        font-weight: 500 !important;
+        
+        .background {
+            background-color: #111;
+        }
     }
 }
 
@@ -372,6 +402,7 @@ export default {
 
 .select {
     position: relative;
+    z-index: 10000;
     
     .arrow {
         position: absolute;
@@ -391,7 +422,7 @@ export default {
 
     .options {
         position: absolute;
-        top: 100%;
+        top: 105%;
         left: 0;
         z-index: 1000;
         width: 100%;
@@ -407,11 +438,17 @@ export default {
         .option {
             padding: 1rem 2rem;
             cursor: pointer;
-            border-radius: 6px;
+            // border-radius: 6px;
+            border-top-right-radius: 6px;
+            border-top-left-radius: 6px;
             transition: all .3s;
 
             @media only screen and (max-width: 850px) {
                 padding: 1.5rem 2.5rem;
+            }
+
+            &:not(:last-of-type) {
+                border-bottom: 1px solid lighten($color-grey-2, 5%);
             }
 
             &:hover {

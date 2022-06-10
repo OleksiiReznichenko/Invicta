@@ -24,19 +24,6 @@ export default {
         AddNewBanner,
     },
 
-    computed: {
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // USER
-        // user() {
-            // return this.userObject;
-            // return this.$store.state.users.users.find(el => {
-            //     if (el.id === this.$store.state.user.id) {
-            //         return el;
-            //     }
-            // })
-        // },
-    },
-
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CLOSE WINDOW
@@ -52,6 +39,7 @@ export default {
     },
 
     mounted () {
+        // DOM
         this.addImageWindow = document.querySelector('.add-image-component');
         this.navigationRoot = document.querySelector('.navigation-root');
     },

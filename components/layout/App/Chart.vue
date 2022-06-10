@@ -20,6 +20,8 @@ export default {
     },
 
     watch: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IF PERIOD CHANGES = CHANGE PERIOD DATA
         period() {
             this.getData();
             this.setLabels();
@@ -42,25 +44,25 @@ export default {
         setLabels() {
             let labels = [];
             
-            if (this.period === 'week') {
+            if (this.period.toLowerCase() === 'week') {
                 labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 if (window.outerWidth < 850) {
                     labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 }
             }
             
-            if (this.period === 'month') {
+            if (this.period.toLowerCase() === 'month') {
                 labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
             }
             
-            if (this.period === 'year') {
+            if (this.period.toLowerCase() === 'year') {
                 labels = ['January', 'March', 'May', 'July', 'September', 'November'];
                 if (window.outerWidth < 850) {
                     labels = ['Jan', 'Mar', 'May', 'July', 'Sep', 'Nov'];
                 }
             }
             
-            if (this.period === 'all time') {
+            if (this.period.toLowerCase() === 'all time') {
                 labels = ['January', 'March', 'May', 'July', 'September', 'November'];
                 if (window.outerWidth < 850) {
                     labels = ['Jan', 'Mar', 'May', 'July', 'Sep', 'Nov'];
@@ -88,7 +90,6 @@ export default {
                 data: {
                     labels: [],
                     datasets: [{
-                        // label: "$",
                         data: [],
                         borderColor: borderGradient,
                         backgroundColor: fillGradient,
@@ -98,7 +99,6 @@ export default {
                         pointStyle: 'circle',
                         pointBackgroundColor: '#ffffff',
                         pointBorderColor: '#3751FF',
-                        // pointBorderWidth: 10,
                         pointHoverRadius: 5,
                     }]
                 },
@@ -147,11 +147,6 @@ export default {
                                     size: 12,
                                     family: 'Montserrat'
                                 },
-                                // callback: function(val, index, labels) {
-                                //     console.log(this.getLabelForValue(val), index, labels);
-                                //     // Hide the label of every 2nd dataset
-                                //     return this.getLabelForValue(val);
-                                // },
                             },
                         },
                     },
@@ -200,15 +195,17 @@ export default {
         },
     },
 
-    mounted () {
+    created () {
+        // SET INIAL DATA
         this.initChart();
         this.getData();
         this.setLabels();
+    },
 
+    mounted () {
+        // RESIZE
         window.addEventListener('resize', () => {
             this.chart.resize();
-            // this.setLabels();    
-            // this.chart.update();
         });
     },
 }

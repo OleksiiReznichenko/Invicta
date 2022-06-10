@@ -74,10 +74,14 @@ export default {
     props: ['id', 'findUserId', 'userId', 'statusForMobile', 'isAdmin', 'userAvatar', 'firstColumnText', 'secondColumnText', 'thirdColumnText', 'fourthColumnText', 'fifthColumnText', 'componentType'],
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // COMPONENT TYPE
         componentTypeComp() {
             return this.componentType;
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET ID FOR MOBILE
         idForMobileComp() {
             if (this.componentTypeComp === 'interventions' ||
             this.componentTypeComp === 'reports') {
@@ -87,6 +91,8 @@ export default {
             return this.secondColumnText;
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET STATUS FOR MOBILE
         statusForMobileComp() {
             if (this.statusForMobile) {
                 return this.statusForMobile;
@@ -99,6 +105,8 @@ export default {
             return null;
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET INFO TITLE FOR MOBILE
         infoTitleMobile() {
             if (this.componentTypeComp === 'interventions') {
                 return 'Transaction ID: ';
@@ -113,6 +121,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET INFO TEXT FOR MOBILE
         infoTextMobile() {
             if (this.componentTypeComp === 'interventions') {
                 return this.secondColumnText;
@@ -131,6 +141,8 @@ export default {
             return null;
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD CLASS TO MOBILE STATUS BASED ON STATUS
         addStatusClassToMobileStatus() {
             if (this.statusForMobileComp) {
                 const status = this.statusForMobileComp?.toLowerCase();
@@ -153,6 +165,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD STATUS CLASS TO THIRD COLUMN IN DESKTOP
         addStatusClassToThird() {
             if (this.componentTypeComp === 'interventions' ||
             this.componentTypeComp === 'applications' ||
@@ -174,6 +188,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD STATUS CLASS TO FOURTH COLUMN IN DESKTOP
         addStatusClassToFourth() {
             if (this.componentTypeComp === 'users') {
                 const status = this.fourthColumnTextComp?.toLowerCase();
@@ -188,6 +204,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD STATUS CLASS TO FIFTH COLUMN IN DESKTOP
         addStatusClassToFifth() {
             if (this.componentTypeComp === 'deposits' ||
             this.componentTypeComp === 'withdrawals') {
@@ -208,6 +226,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FIND USER
         foundUser() {
             if (!this.findUserId) return;
             return this.$store.state.users.users.find(el => {
@@ -215,6 +235,8 @@ export default {
             })
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET USE AVATAR
         photo() {
             if (this.userAvatar) {
                 return this.userAvatar;
@@ -223,11 +245,15 @@ export default {
             return this.foundUser.avatar;
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET USER USERNAME
         username() {
             if (!this.foundUser) return;
             return this.foundUser.username;
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET USER STATUS
         userStatus() {
             if (this.componentTypeComp !== 'users') return;
             if (this.isAdmin) {
@@ -237,6 +263,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FIRST COLUMN TEXT DESKTOP
         firstColumnTextComp() {
             if (this.firstColumnText) {
                 return this.firstColumnText;
@@ -245,6 +273,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SECOND COLUMN TEXT DESKTOP
         secondColumnTextComp() {
             if (this.secondColumnText) {
                 return this.secondColumnText;
@@ -253,6 +283,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // THIRD COLUMN TEXT DESKTOP
         thirdColumnTextComp() {
             if (this.thirdColumnText) {
 
@@ -267,6 +299,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FOURTH COLUMN TEXT DESKTOP
         fourthColumnTextComp() {
             if (this.fourthColumnText) {
 
@@ -283,6 +317,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FIFTH COLUMN TEXT DESKTOP
         fifthColumnTextComp() {
             if (this.fifthColumnText) {
                 return this.fifthColumnText;
@@ -293,10 +329,14 @@ export default {
     },
 
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // RANK USER DOWN EVENT
         rankDown() {
             this.$store.commit('users/rankDown', {id: this.userId});
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // RANK USER UP EVENT
         rankUp() {
             this.$store.commit('users/rankUp', {id: this.userId});
         },
@@ -482,13 +522,6 @@ export default {
         border-radius: 100%;
         object-fit: cover;
         margin-right: 1.5rem;
-
-        // @media only screen and (max-width: 850px) {
-        //     width: 9.5rem;
-        //     height: 9.5rem;
-        //     border-radius: 10px;
-        //     margin-right: 2.5rem;
-        // }
     }
 
     .item-link {

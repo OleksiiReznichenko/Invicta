@@ -55,6 +55,8 @@ export default {
     },
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET PRODUCTS ARRAY AND LIMIT IT
         products() {
             // GET PRODUCTS WITH DISCOUNT
             const filteredArrayDiscount = this.baseArray.filter(el => {
@@ -68,17 +70,6 @@ export default {
 
             return filteredArray;
         },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // USER
-        // user() {
-            // return this.userObject;
-            // return this.$store.state.users.users.find(el => {
-            //     if (el.id === this.$store.state.user.id) {
-            //         return el;
-            //     }
-            // })
-        // },
     },
 
     methods: {
@@ -96,6 +87,7 @@ export default {
     },
 
     mounted () {
+        // DOM
         this.addImageWindow = document.querySelector('.add-image-component-2');
         this.navigationRoot = document.querySelector('.navigation-root');
     },

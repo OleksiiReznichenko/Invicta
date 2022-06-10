@@ -143,6 +143,7 @@ import ChatNotification from '@/components/elements/Chat/Notification';
 
 export default {
     middleware: ['notLoggedIn', 'isShoppingItemExist'],
+
     components: {
         ChatMessage,
         ChatNotification,
@@ -232,7 +233,7 @@ export default {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CHANGE NOT VALIDATED TO VALIDATED
-        validateEvent(e) {
+        validateEvent() {
             // IF THIS ITEM IS ALREADY VALIDATED - STOP
             if (this.isValidated) return;
             

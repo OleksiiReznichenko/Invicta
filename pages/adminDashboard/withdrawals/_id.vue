@@ -58,6 +58,8 @@ export default {
     middleware: ['notLoggedIn', 'isWithdrawIdExist'],
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER RANK TEXT
         userRank() {
             if (this.user?.isAdmin) {
                 return 'Admin';
@@ -68,6 +70,8 @@ export default {
     },
 
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD CLASS TO STATUS BASED ON STATUS
         addStatusClass(status) {
             if (status) {
                 if (status === 'completed' || 
@@ -90,18 +94,22 @@ export default {
     },
     
     created () {
+        // FIND WITHDRAWAL
         this.withdrawal = this.$store.state.adminDashboard.withdrawals.find(el => {
             return el.id === this.$route.params.id;
         });
 
+        // FIND USER
         this.user = this.$store.state.users.users.find(el => {
             return el.id === this.withdrawal.userId;
         })
     },
 
     mounted () {
+        // DOM
         const statuses = Array.from(document.querySelectorAll('.status'));
 
+        // ADD CLASS TO STATUS BASED ON STATUS
         statuses.forEach(el => {
             el.classList.add(this.addStatusClass(el.textContent.toLowerCase()));
         })

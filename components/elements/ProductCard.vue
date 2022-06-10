@@ -1,31 +1,60 @@
 <template>
-    <nuxt-link class="product-card" :to="'/browse/' + this.id">
-        <div class="overlay"></div>
-        <div class="header">
-            <div class="top-rect"></div>
-            <img :src="photo" alt="Image" class="product-image">
-            <div class="container">
-                <div class="item items-in-stock">{{amountInStock}} {{itemsTextComp}}</div>
-                <div v-if="discountComp" class="item discount">save {{discountComp}}%</div>
-            </div>
-        </div>
-        <div class="info">
-            <div class="name">{{name}}</div>
-            <div class="container">
-                <div class="prices">
-                    <h3 class="new-price">${{price}}</h3>
-                    <span v-if="oldPrice" class="old-price">${{oldPrice}}</span>
+    <div class="product-card-wrapper">
+        <nuxt-link v-if="!linkDisable" class="product-card" :to="'/browse/' + this.id">
+            <div class="overlay"></div>
+            <div class="header">
+                <div class="top-rect"></div>
+                <img :src="photo" alt="Image" class="product-image">
+                <div class="container">
+                    <div class="item items-in-stock">{{amountInStock}} {{itemsTextComp}}</div>
+                    <div v-if="discountComp" class="item discount">save {{discountComp}}%</div>
                 </div>
-                <nuxt-link v-if="!createProductPage" class="btn" :to="'/browse/' + this.id">+Add</nuxt-link>
-                <button v-if="createProductPage" class="btn">+Add</button>
+            </div>
+            <div class="info">
+                <div class="name">{{name}}</div>
+                <div class="container">
+                    <div class="prices">
+                        <h3 class="new-price">${{price}}</h3>
+                        <span v-if="oldPrice" class="old-price">${{oldPrice}}</span>
+                    </div>
+                    <nuxt-link class="btn" :to="'/browse/' + this.id">+Add</nuxt-link>
+                </div>
+            </div>
+        </nuxt-link>
+        <div v-if="linkDisable" class="product-card">
+            <div class="product-id">{{id}}</div>
+            <div class="overlay">
+                <div class="buttons">
+                    <button class="btn btn-gradient btn-change-card"><span>Change</span></button>
+                    <button class="btn btn-gradient btn-remove-card"><span>Remove</span></button>
+                </div>
+            </div>
+            <div class="header">
+                <div class="top-rect"></div>
+                <img :src="photo" alt="Image" class="product-image">
+                <div class="container">
+                    <div class="item items-in-stock">{{amountInStock}} {{itemsTextComp}}</div>
+                    <div v-if="discountComp" class="item discount">save {{discountComp}}%</div>
+                </div>
+            </div>
+            <div class="info">
+                <div class="name">{{name}}</div>
+                <div class="container">
+                    <div class="prices">
+                        <h3 class="new-price">${{price}}</h3>
+                        <span v-if="oldPrice" class="old-price">${{oldPrice}}</span>
+                    </div>
+                    <button class="btn">+Add</button>
+                </div>
             </div>
         </div>
-    </nuxt-link>
+    </div>
 </template>
 
 <script>
 export default {
-    props: ['name', 'photo', 'price', 'oldPrice', 'amountInStock', 'id', 'createProductPage'],
+    props: ['name', 'photo', 'price', 'oldPrice', 'amountInStock', 'id', 'linkDisable'],
+
     data() {
         return {
             discount: 0,
@@ -33,6 +62,8 @@ export default {
     },
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CALCULATE DISCOUNT BY OLD PRICE
         discountComp() {
             if (this.oldPrice && this.price < this.oldPrice) {
                 this.discount = Math.round(100 - this.price / this.oldPrice * 100);
@@ -44,6 +75,9 @@ export default {
                 return null;
             }
         },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CHANGE ITEMS TEXT DEPENDING FROM AMOUNT IN STOCK
         itemsTextComp() {
             if (this.amountInStock == 1) {
                 return 'item';
@@ -64,12 +98,41 @@ export default {
     position: relative;
     overflow: hidden;
     transition: all .3s;
+    cursor: pointer;
 
     &:hover {
         background-color: lighten($color-grey, 4%);
     }
 
     .overlay {
+        display: none;
+
+        .buttons {
+            @include abs-center;
+
+
+            .btn-change-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .btn-change-card,
+            .btn-remove-card {
+                padding: 1.4rem 5.5rem;
+                position: static !important;
+                transform: translate(0,0);
+
+                &::before {
+                    opacity: 1 !important;
+                }
+
+                &:hover {
+                    transform: translate(0, 0) scale(1.05);
+                }
+            }
+        }
+    }
+
+    .product-id {
         display: none;
     }
 

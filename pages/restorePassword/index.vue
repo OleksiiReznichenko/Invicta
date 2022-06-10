@@ -46,7 +46,9 @@ export default {
     },
 
     methods: {
-        restorePassword(e) {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // RESTORE PASSWORD
+        restorePassword() {
             let isEveryInputValid = true;
 
             // CHECK IF EVERY INPUT IS VALID

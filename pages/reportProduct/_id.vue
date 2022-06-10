@@ -65,7 +65,7 @@ export default {
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REPORT FUNCTION
-        report(e) {
+        report() {
             this.$store.dispatch('showNotificationWindow', {
                 text: 'Your report has been sent', 
                 isBad: false
@@ -97,7 +97,7 @@ export default {
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SELECTION DROPDOWN
-        toggleDropdown(e) {
+        toggleDropdown() {
             if (!this.$refs.selectionDropdown.classList.contains('opened')) {
                 this.$refs.selectionDropdown.classList.add('opened');
                 this.$refs.selectionDropdown.style.display = 'block';
@@ -131,7 +131,6 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // FIND AND LOAD THE PRODUCT
     created () {
-        // FIND PRODUCT IN PRODUCTS ARRAY
         this.product = this.$store.state.products.products.find((product) => {
             if (product.id === this.$route.params.id) {
                 return product;

@@ -11,10 +11,6 @@
 
                 <span :class="addStatusClass" class="application-status">{{application.status}} application</span>
                 <h1 class="page-title">{{application.id}}</h1>
-                <!-- <div class="application-info">
-                    <span class="border-text-red application-status">open application</span>
-                    <span class="application-id">PR0SW1JB4ZVB</span>
-                </div> -->
 
                 <div class="form-container">
                     <div class="form">
@@ -37,7 +33,6 @@
                         <div class="buttons">
                             <button v-if="hideCloseButton" @click="accept" class="btn btn-gradient btn-medium"><span>Accept</span></button>
                             <button v-if="hideCloseButton" @click="deny" class="btn btn-gradient btn-medium"><span>Deny</span></button>
-                            <!-- <nuxt-link v-if="hideCloseButton" to="/adminDashboard" class="btn btn-transparent btn-medium"><div class="background"></div><span>Back to dashboard</span></nuxt-link> -->
                         </div>
                         <nuxt-link v-if="!hideCloseButton" to="/adminDashboard" class="btn btn-gradient btn-medium"><span>Back to dashboard</span></nuxt-link>
                     </div>
@@ -54,6 +49,8 @@ export default {
     middleware: ['notLoggedIn', 'isApplicationIdExist'],
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD CLASS TO STATUS BASED ON STATUS
         addStatusClass() {
             if (this.application.status) {
                 if (this.application.status === 'completed' || 
@@ -71,6 +68,8 @@ export default {
             }
         },
         
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // HIDE CLOSE BUTTON
         hideCloseButton() {
             if (this.application.status === 'completed' || 
             this.application.status === 'accepted' ||
@@ -84,6 +83,8 @@ export default {
     },
 
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ACCEPT
         accept() {
             this.$store.commit('adminDashboard/changeApplicationStatus', {id: this.application.id, newStatus: 'accepted'});
             this.$store.dispatch('showNotificationWindow', {
@@ -92,6 +93,8 @@ export default {
             });
         },
         
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // DENY
         deny() {
             this.$store.commit('adminDashboard/changeApplicationStatus', {id: this.application.id, newStatus: 'denied'});
             this.$store.dispatch('showNotificationWindow', {
@@ -102,10 +105,14 @@ export default {
     },
     
     created () {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FIND APPLICATION
         this.application = this.$store.state.adminDashboard.applications.find(el => {
             return el.id === this.$route.params.id;
         });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // FIND USER
         this.user = this.$store.state.users.users.find(el => {
             return el.id === this.application.userId;
         })

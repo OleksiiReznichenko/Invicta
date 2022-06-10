@@ -1,9 +1,11 @@
 export default function({app, store}) {
     app.router.beforeEach((to, from, next) => {
+        // IF PAGE URL DOESN'T EXIST - REDIRECT TO BROWSE PAGE
         if (!to.name && to.matched.length === 0) {
             return next('/browse');
         }
 
+        // IF USER IS NOT LOGGED IN - REDIRECT TO MAIN PAGE
         if (
             to.name === 'adminDashboard' ||
             to.name === 'createProduct' ||
@@ -22,6 +24,7 @@ export default function({app, store}) {
             }
         }
         
+        // IF USER IS LOGGED IN - REDIRECT TO HIS PROFILE
         if (
             to.name === 'confirmEmail' ||
             to.name === 'login' ||
@@ -34,6 +37,7 @@ export default function({app, store}) {
             }
         }
         
+        // IF USER DIDN'T SET AN EMAIL FOR FORGOT PASSWORD - REDIRECT TO SET EMAIL
         if (
             to.name === 'confirmEmail' ||
             to.name === 'restorePassword'

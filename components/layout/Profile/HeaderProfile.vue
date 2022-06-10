@@ -313,14 +313,12 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SUBSCRIBE ON USER EVENT
         subscribe() {
-            // this.$store.commit('subscribe');
             this.$store.commit('users/subscribe', {myId: this.$store.state.user.id, userId: this.user.id});
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // UNSUBSCRIBE FROM USER EVENT
         unSubscribe() {
-            // this.$store.commit('unSubscribe');
             this.$store.commit('users/unSubscribe', {myId: this.$store.state.user.id, userId: this.user.id});
         },
         
@@ -362,6 +360,8 @@ export default {
     },
 
     watch: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IF USER PROFILE BANNER CHANGES - CHANGE BACKGROUND BANNER
         'user.profileBanner'() {
             this.$refs.header.style.background = `url(${this.user.profileBanner})`;
             this.$refs.header.style.backgroundSize = 'cover';

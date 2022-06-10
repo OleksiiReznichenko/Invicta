@@ -81,11 +81,11 @@
         >
           <div class="profile-flex" id="dropdown-opener">
             <img
-              :src="user.avatar"
+              :src="userAvatar"
               alt="Avatar"
               class="user-avatar"
             />
-            <div class="user__name">{{user.username}}</div>
+            <div class="user__name">{{userUsername}}</div>
           </div>
           <NavDropdown />
         </div>
@@ -121,7 +121,7 @@
           </nuxt-link>
         </li>
         <li v-if="isLoggedIn" @click="checkLink" class="item">
-          <nuxt-link class="link" :to="'/users/' + user.id">
+          <nuxt-link class="link" :to="'/users/' + userId">
             <img src="@/assets/svg/user.svg" alt="Profile" class="icon" />
             <span>Profile</span>
           </nuxt-link>
@@ -168,6 +168,36 @@ export default {
                 return el;
               }
           })
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER ID
+        userId() {
+          if (this.user) {
+            return this.user.id;
+          } else {
+            return null;
+          }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER USERNAME
+        userUsername() {
+          if (this.user) {
+            return this.user.username;
+          } else {
+            return null;
+          }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER AVATAR
+        userAvatar() {
+          if (this.user) {
+            return this.user.avatar;
+          } else {
+            return null;
+          }
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -229,14 +259,6 @@ export default {
           return productsObject;
         },
     },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CHECK MOBILE VERSION
-    created() {
-        if (process.browser) {
-          this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
-        }
-    },
     
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -274,7 +296,7 @@ export default {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SHOW SEARCH RESULTS CONTAINER ON CLICK AND KEY TYPING IF SEARCH INPUT CONTAINS LETTERS
-        searchFunction(e) {
+        searchFunction() {
           if (this.searchValueValidated) {
             if (!this.$refs.searchResultsContainer.classList.contains('opened')) {
               this.$refs.searchResultsContainer.style.transition = 'none';
@@ -317,23 +339,7 @@ export default {
                     this.notificationsDropdown.style.opacity = 1;
                 }, 10);
             } else {
-                this.notificationsDropdown.style.opacity = 0;
-                setTimeout(() => {
-                    this.notificationsDropdown.style.display = 'none';
-                    this.notificationsDropdown.classList.remove('opened');
-                }, 200);
-            }
-        },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // CLOSE NOTIFICATIONS DROPDOWN
-        closeNotificationsDropdown() {
-            if (this.notificationsDropdown.classList.contains('opened')) {
-              this.notificationsDropdown.style.opacity = 0;
-              setTimeout(() => {
-                  this.notificationsDropdown.style.display = 'none';
-                  this.notificationsDropdown.classList.remove('opened');
-              }, 200);
+                this.closeNotificationsDropdown();
             }
         },
         
@@ -380,6 +386,14 @@ export default {
             }, 200);
           }
       }
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHECK MOBILE VERSION
+    created() {
+        if (process.browser) {
+          this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
+        }
     },
 
     mounted() {

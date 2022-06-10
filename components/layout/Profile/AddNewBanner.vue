@@ -10,7 +10,7 @@
                 </div>
             </div>
             <input @change="fileChanged" ref="imageInput" type="file" accept=".jpg, .jpeg, .png" id="imageInput">
-            <button v-if="userBanner" @click="setToInitial" class="return-to-initial">Set banner to initial</button>
+            <button v-if="userBanner" @click="setToInitial" class="return-to-initial">Set banner to default</button>
             <div class="buttons">
                 <button @click="attach" class="button-attach">Attach</button>
                 <button v-if="bannerSrc" key="changeBtn" @click="triggerFileSelection" class="button-change">Change</button>
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-    props: ['banner'],
+    props: ['banner', 'campaignId', 'campaignBannerSrc'],
 
     data() {
         return {
@@ -55,6 +55,8 @@ export default {
                 } else {
                     return this.user.profileBanner;
                 }
+            } else if (this.banner === 'campaignBanner' && this.campaignBannerSrc !== 'default') {
+                return true;
             }
         },
     },
@@ -86,6 +88,8 @@ export default {
                 this.$store.commit('users/changeSideBanner', {id: this.user.id, newBanner: null});
             } else if (this.banner === 'profileBanner') {
                 this.$store.commit('users/changeProfileBanner', {id: this.user.id, newBanner: '/projects/Invicta/backProfileImage.png'});
+            } else if (this.banner === 'campaignBanner' && this.campaignBannerSrc !== 'default') {
+                this.$store.commit('users/changeBannerSrc', {userId: this.user.id, campaignId: this.campaignId, newBanner: 'default'});
             }
 
             this.$store.dispatch('showNotificationWindow', {
@@ -150,6 +154,8 @@ export default {
                 this.$store.commit('users/changeSideBanner', {id: this.user.id, newBanner: this.bannerSrc});
             } else if (this.banner === 'profileBanner') {
                 this.$store.commit('users/changeProfileBanner', {id: this.user.id, newBanner: this.bannerSrc});
+            } else if (this.banner === 'campaignBanner') {
+                this.$store.commit('users/changeBannerSrc', {userId: this.user.id, campaignId: this.campaignId, newBanner: this.bannerSrc});
             }
 
             // IF YOUR BANNER IMAGE CHANGED SUCCESSFULLY - SHOW MESSAGE
@@ -201,7 +207,7 @@ export default {
     z-index: 1000000;
     width: 100%;
     height: 100vh;
-        min-height: var(--app-height);
+    min-height: var(--app-height);
     background-color: rgba(black, .5);
     backdrop-filter: blur(5px);
     transition: all .2s;

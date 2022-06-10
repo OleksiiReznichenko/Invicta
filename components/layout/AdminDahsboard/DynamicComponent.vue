@@ -180,6 +180,8 @@ export default {
     },
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET BASE ARRAY AND BASE TITLES
         baseArray() {
             this.componentType = this.componentTypeBase.toLowerCase();
             if (this.componentType === 'interventions') {
@@ -249,6 +251,8 @@ export default {
             }
         },
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET VALUES ARRAY AND LIMIT IT
         filteredArray() {
             if (this.searchValueValidated) {
                 this.finalArray = this.baseArray.filter(el => {
@@ -674,6 +678,7 @@ export default {
         this.pageDotsLast = document.querySelector('.dots--last');
         this.pagination = document.querySelector('.pagination');
 
+        // INIT PAGINATION
         this.paginationInit();
     },
 }
@@ -1066,11 +1071,6 @@ export default {
             margin-bottom: 2rem;
         }
     }
-
-    // .items {
-    //     display: flex;
-    //     flex-direction: column;
-    // }
 }
 
 .search-container {

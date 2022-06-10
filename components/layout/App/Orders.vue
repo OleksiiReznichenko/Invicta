@@ -78,6 +78,8 @@ export default {
     },
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET VALUES ARRAY AND LIMIT IT
         filteredOrders() {
             if (this.searchValueValidated) {
                 this.finalArray = this.orders.filter(el => {
@@ -494,6 +496,7 @@ export default {
         this.pageDotsLast = document.querySelector('.dots--last');
         this.pagination = document.querySelector('.pagination');
 
+        // INIT PAGINATION
         this.paginationInit();
     },
 }

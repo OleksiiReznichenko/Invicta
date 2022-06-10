@@ -1,7 +1,7 @@
 <template>
     <div class="root">
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
-        <div class="invicta-ads-page section">
+        <div class="invicta-ads-page section section-page">
             <div class="content">
                 <div class="page-sequence">
                     <nuxt-link to="/">Main</nuxt-link>
@@ -10,7 +10,7 @@
                 </div>
                 <div class="page-title-container">
                     <h1 class="page-title">Invicta.ads</h1>
-                    <button class="btn btn-gradient create-campaign-button"><span>Create new campaign</span></button>
+                    <button @click="addNewCampaign" class="btn btn-gradient create-campaign-button"><span>Create new campaign</span></button>
                 </div>
                 <div @click="toggleEvent" class="main-content">
                     <div class="campaigns-container campaigns-active-container">
@@ -18,13 +18,21 @@
                         <h3 v-if="campaignsActive.length == 0" class="no-campaigns">You have no active campaigns</h3>
                         <div v-if="campaignsActive.length > 0" class="campaigns-active">
                             <InvictaAdsCampaign
-                            v-for="campaign in campaignsActive"
+                            v-for="(campaign, index) in campaignsActive"
                             :key="campaign.id"
+                            :index='"active" + index'
                             :id='campaign.id'
                             :type='campaign.type'
                             :customName='campaign.customName'
-                            :name='campaign.name'
-                            :itemsAmount='campaign.itemsAmount'
+                            :bannerTypeBase='campaign.bannerType'
+                            :itemsAmountBase='campaign.itemsAmount'
+                            :currentDayBase='campaign.currentDay'
+                            :priorityBase='campaign.priority'
+                            :sales='campaign.sales'
+                            :revenue='campaign.revenue'
+                            :chartDataObject='campaign.chartData'
+                            :bannerSrc='campaign.bannerSrc'
+                            :cardsIds='campaign.cardsIds'
                             />
                         </div>
                     </div>
@@ -33,12 +41,21 @@
                         <h3 v-if="campaignsArchived.length == 0" class="no-campaigns">You have no archived campaigns</h3>
                         <div v-if="campaignsArchived.length > 0" class="campaigns-archived">
                             <InvictaAdsCampaign
-                            v-for="campaign in campaignsArchived"
+                            v-for="(campaign, index) in campaignsArchived"
                             :key="campaign.id"
+                            :index='"archived" + index'
                             :id='campaign.id'
+                            :type='campaign.type'
                             :customName='campaign.customName'
-                            :name='campaign.name'
-                            :itemsAmount='campaign.itemsAmount'
+                            :bannerTypeBase='campaign.bannerType'
+                            :itemsAmountBase='campaign.itemsAmount'
+                            :currentDayBase='campaign.currentDay'
+                            :priorityBase='campaign.priority'
+                            :sales='campaign.sales'
+                            :revenue='campaign.revenue'
+                            :chartDataObject='campaign.chartData'
+                            :bannerSrc='campaign.bannerSrc'
+                            :cardsIds='campaign.cardsIds'
                             />
                         </div>
                     </div>
@@ -58,17 +75,43 @@ export default {
         InvictaAdsCampaign,
     },
 
+    data() {
+        return {
+            userNotComp: {},
+            campaignsActiveNotCopm: [],
+            campaignsArchivedNotComp: [],
+        }
+    },
+
+    watch: {
+        'user.campaigns'() {
+            this.campaignsActiveNotCopm = this.user.campaigns.filter(el => {
+                return el.type === 'active';
+            });
+            
+            this.campaignsArchivedNotComp = this.user.campaigns.filter(el => {
+                return el.type === 'archived';
+            });
+        }
+    },
+
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER
+        user() {
+            return this.userNotComp;
+        },
+        
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CAMPAIGNS ACTIVE ARRAY
         campaignsActive() {
-            return this.activeCampaigns;
+            return this.campaignsActiveNotCopm;
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CAMPAIGNS ARCHIVED ARRAY
         campaignsArchived() {
-            return this.archivedCampaigns;
+            return this.campaignsArchivedNotComp;
         },
     },
 
@@ -106,18 +149,67 @@ export default {
                     }, timeoutTime);
                 }
             }
+        },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD NEW CAMPAIGN
+        addNewCampaign() {
+            const newCampaignObject = {
+                id: (this.$_uid * Date.now()).toString(),
+                type: 'active',
+                customName: 'New campaign',
+                bannerType: 'Vertical',
+                bannerSrc: null,
+                itemsAmount: 6,
+                cardsIds: [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                ],
+                sales: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                revenue: {
+                    daily: 1,
+                    weekly: 2,
+                    monthly: 5,
+                    yearly: 9,
+                    allTime: 10
+                },
+                chartData: {
+                    weekly: [10, 0, 5, 10, 15, 9, 8],
+                    monthly: [5, 2, 22, 10],
+                    yearly: [13, 4, 15, 8, 1, 3],
+                    allTime: [10, 0, 5, 5, 2, 22, 10],
+                }
+            }
+
+            this.$store.commit('users/addNewCampaign', {userId: this.user.id, newCampaign: newCampaignObject});
         }
     },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // GET BASE ARRAYS
     created () {
-        this.activeCampaigns = this.$store.state.campaigns.campaigns.active.map(el => {
-            return el
+        this.userNotComp = this.$store.state.users.users.find(el => {
+            return el.id === this.$store.state.user.id;
+        })
+        
+        this.campaignsActiveNotCopm = this.userNotComp.campaigns.filter(el => {
+            return el.type === 'active';
         });
-
-        this.archivedCampaigns = this.$store.state.campaigns.campaigns.archived.map(el => {
-            return el
+        
+        this.campaignsArchivedNotComp = this.userNotComp.campaigns.filter(el => {
+            return el.type === 'archived';
         });
     }
 }
@@ -131,31 +223,42 @@ export default {
         min-height: 70vh;
         position: relative;
         z-index: 100;
+            
+        @media only screen and (max-width: 850px) {
+            width: 66%;
+            margin: 0 auto;
+        }
+
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+        }
 
 
         .page-title-container {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            margin-bottom: 4rem;
 
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 850px) {
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: flex-start;
             }
 
             .page-title {
-                margin-bottom: 4rem;
+                margin-bottom: 0;
             }
 
             .create-campaign-button {
                 padding: 1rem 4rem;
                 border-radius: 6px !important;
+                font-size: 1.6rem;
                 font-weight: 500 !important;
 
-                @media only screen and (max-width: 500px) {
+                @media only screen and (max-width: 850px) {
                     margin-top: 1rem;
-                    padding: 1rem 5.5rem;
+                    padding: 1.25rem 5.5rem;
                 }
 
                 &:before,

@@ -11,10 +11,6 @@
 
                 <span :class="addStatusClass" class="report-status">{{report.status}} report</span>
                 <h1 class="page-title">{{report.id}}</h1>
-                <!-- <div class="report-info">
-                    <span class="border-text-red report-status">open report</span>
-                    <span class="report-id">PR0SW1JB4ZVB</span>
-                </div> -->
 
                 <div class="form-container">
                     <div class="form">
@@ -59,6 +55,8 @@ export default {
     middleware: ['notLoggedIn', 'isReportIdExist'],
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD CLASS TO STATUS BASED ON STATUS
         addStatusClass() {
             if (this.report.status) {
                 if (this.report.status === 'completed' || 
@@ -76,6 +74,8 @@ export default {
             }
         },
         
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // HIDE CLOSE BUTTON
         hideCloseButton() {
             if (this.report.status === 'completed' || 
             this.report.status === 'accepted' ||
@@ -88,6 +88,8 @@ export default {
     },
 
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE REPORT
         close() {
             this.$store.commit('adminDashboard/changeReportStatus', {id: this.report.id, newStatus: 'closed'});
             this.$store.dispatch('showNotificationWindow', {
@@ -98,14 +100,17 @@ export default {
     },
     
     created () {
+        // FIND REPORT
         this.report = this.$store.state.adminDashboard.reports.find(el => {
             return el.id === this.$route.params.id;
         });
 
+        // FIND REPORTER
         this.reporter = this.$store.state.users.users.find(el => {
             return el.id === this.report.reporterId;
         })
 
+        // FIND SELLER
         this.seller = this.$store.state.users.users.find(el => {
             return el.id === this.report.sellerId;
         })

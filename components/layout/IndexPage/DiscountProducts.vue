@@ -1,7 +1,7 @@
 <template>
     <div class="root">
         <div class="section heading-container">
-                <h4 class="heading">Take it at a discount</h4>
+            <h4 class="heading">Take it at a discount</h4>
         </div>
         <div class="banner-container banner-mobile">
             <div class="banner">
@@ -22,14 +22,14 @@
                 <img src="@/assets/img/bannerGirl.png" alt="Girl" class="girl">
             </div>
             <ProductCard 
-                v-for="card in cards"
-                :key="card.id"
-                :id="card.id"
-                :name="card.name"
-                :photo="card.photo"
-                :price="card.price"
-                :oldPrice="card.oldPrice"
-                :amountInStock="card.amountInStock"
+                v-for="product in products"
+                :key="product.id"
+                :id="product.id"
+                :name="product.name"
+                :photo="product.photo"
+                :price="product.price"
+                :oldPrice="product.oldPrice"
+                :amountInStock="product.amountInStock"
             />
         </div>
     </div>
@@ -38,8 +38,10 @@
 <script>
 export default {
     computed: {
-        cards() {
-            // GET GIFTCARDS WITH DISCOUNT
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // PRODUCTS ARRAY
+        products() {
+            // GET PRODUCTS WITH DISCOUNT
             const filteredArrayDiscount = this.$store.state.products.products.filter(el => {
                 return el.oldPrice;
             })

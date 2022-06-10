@@ -1056,12 +1056,8 @@ export const state = () => ({
 
 export const mutations = {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ADD NEW PRODUCT
+    // CREATE NEW PRODUCT
     createNewProduct(state, {newProduct}) {
-        if (newProduct.type === 'giftcard') {
-            state.products.giftcards.push(newProduct);
-        } else if (newProduct.type === 'account') {
-            state.products.accounts.push(newProduct);
-        }
+        state.products.push(newProduct);
     },
 }

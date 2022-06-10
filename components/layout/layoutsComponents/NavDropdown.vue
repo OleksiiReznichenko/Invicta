@@ -90,6 +90,7 @@ export default {
             isPhoneInitial: false,
         }
     },
+
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
@@ -158,13 +159,6 @@ export default {
         }
     },
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CHECK MOBILE VERSION
-    created(){
-        if (process.browser){
-            this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
-        }
-    },
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // LOG OUT
@@ -191,6 +185,14 @@ export default {
                 this.nav.classList.remove('navigation-to-fit');
             }
         },
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHECK MOBILE VERSION
+    created(){
+        if (process.browser){
+            this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
+        }
     },
 
     mounted () {

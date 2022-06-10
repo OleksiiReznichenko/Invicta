@@ -36,6 +36,7 @@ import MyShoppingItem from '@/components/elements/MyShoppingItem';
 
 export default {
     middleware: ['notLoggedIn'],
+    
     components: {
         MyShoppingItem,
     },

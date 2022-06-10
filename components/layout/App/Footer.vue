@@ -1,9 +1,9 @@
 <template>
     <footer class="section-page">
         <div class="left">
-                <img src="@/assets/img/logoText.png" alt="Logo" class="logo">
-                <p class="paragraph-primary">The best giftcard hub.</p>
-                <p class="paragraph-secondary">Copyright © 2022 invicta.cards. <br> All rights reserved.</p>
+            <img src="@/assets/img/logoText.png" alt="Logo" class="logo">
+            <p class="paragraph-primary">The best giftcard hub.</p>
+            <p class="paragraph-secondary">Copyright © 2022 invicta.cards. <br> All rights reserved.</p>
         </div>
         <div class="right">
             <div class="two-lists-container">

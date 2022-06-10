@@ -43,7 +43,9 @@ export default {
     },
 
     methods: {
-        sendCode(e) {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SEND CODE
+        sendCode() {
             let isEveryInputValid = true;
             let isEmailCorrect = false;
 

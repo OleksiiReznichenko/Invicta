@@ -29,6 +29,8 @@ export default {
     },
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USERS ARRAY
         users() {
             return this.$store.state.users.users;
         }
@@ -111,7 +113,7 @@ export default {
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // PAYMENTS SELECTION DROPDOWN
+        // TOGGLE PAYMENTS SELECTION DROPDOWN
         toggleActionDropdown() {
             if (!this.actionSelectionDropdown.classList.contains('opened')) {
                 this.actionSelectionDropdown.classList.add('opened');
@@ -121,13 +123,19 @@ export default {
                     this.actionSelectionDropdown.style.opacity = 1;
                 }, 10);
             } else {
-                this.actionSelectionDropdown.style.opacity = 0;
-                this.actionDropdownArrow.style.transform = 'rotate(0deg)';
-                setTimeout(() => {
-                    this.actionSelectionDropdown.style.display = 'none';
-                    this.actionSelectionDropdown.classList.remove('opened');
-                }, 200);
+                this.closeActionDropdown();
             }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CLOSE PAYMENTS SELECTION DROPDOWN
+        closeActionDropdown() {
+            this.actionSelectionDropdown.style.opacity = 0;
+            this.actionDropdownArrow.style.transform = 'rotate(0deg)';
+            setTimeout(() => {
+                this.actionSelectionDropdown.style.display = 'none';
+                this.actionSelectionDropdown.classList.remove('opened');
+            }, 200);
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,20 +147,17 @@ export default {
     },
 
     mounted () {
+        // DOM
         this.actionSelectionDropdown = document.getElementById('actionSelectionDropdown');
         this.actionDropdownArrow = document.getElementById('actionDropdownArrow');
         this.actionDropdownOpener = document.getElementById('actionDropdownOpener');
 
+        // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
         window.addEventListener('click', (e) => {
             const dropdownPaymentsOpener = this.actionDropdownOpener.contains(e.target);
             
             if (!dropdownPaymentsOpener && this.actionSelectionDropdown.classList.contains('opened')) {
-                this.actionSelectionDropdown.style.opacity = 0;
-                this.actionDropdownArrow.style.transform = 'rotate(0deg)';
-                setTimeout(() => {
-                    this.actionSelectionDropdown.style.display = 'none';
-                    this.actionSelectionDropdown.classList.remove('opened');
-                }, 200);
+                this.closeActionDropdown();
             }
         })
     },

@@ -519,19 +519,12 @@ export default {
         @include abs-center;
         background-color: $color-grey-2;
         box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
-        // width: 45rem;
-        // max-width: 60rem;
-        // max-height: 60rem;
         border-radius: 10px;
 
         .crop-image-container {
             @include flex-center;
             padding: 3rem;
             padding-bottom: 1.5rem;
-
-            .crop-image {
-                
-            }
         }
 
         .dont-crop {

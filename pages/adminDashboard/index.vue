@@ -160,6 +160,8 @@ export default {
     },
 
     watch: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // GET PERIOD DATA
         periodComp() {
             this.getDataByPeriod();
         },
@@ -396,6 +398,7 @@ export default {
     },
 
     created () {
+        // GET DATA BY PERIOD
         this.getDataByPeriod();
     },
 
@@ -633,7 +636,6 @@ export default {
 
             @media only screen and (max-width: 850px) {
                 flex-direction: column;
-                // align-items: center;
             }
         }
 
@@ -663,7 +665,6 @@ export default {
             background-color: $color-grey-dark;
             border-radius: 10px;
             box-shadow: 0 .5rem 5rem rgba(black, .4);
-            // width: 18rem;
             padding: 2.5rem;
             text-align: center;
             display: flex;
@@ -810,10 +811,7 @@ export default {
                 margin: 2rem 0 3.5rem;
                 width: 100%;
                 padding-bottom: 1rem;
-                // -webkit-mask-image: linear-gradient(90deg,#000,#000 70%,rgba(255, 255, 255, 0));
-                // mask-image: linear-gradient(90deg,#000,#000 70%,rgba(255, 255, 255, 0));
 
-                    // overflow-x: scroll;
                 @media only screen and (max-width: 850px) {
                     overflow-x: scroll !important;
 

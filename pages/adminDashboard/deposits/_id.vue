@@ -58,6 +58,8 @@ export default {
     middleware: ['notLoggedIn', 'isDepositIdExist'],
 
     computed: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // USER RANK TEXT
         userRank() {
             if (this.user?.isAdmin) {
                 return 'Admin';
@@ -68,6 +70,8 @@ export default {
     },
 
     methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ADD CLASS TO STATUS BASED ON STATUS
         addStatusClass(status) {
             if (status) {
                 if (status === 'completed' || 
@@ -90,18 +94,22 @@ export default {
     },
     
     created () {
+        // FIND DEPOSIT
         this.deposit = this.$store.state.adminDashboard.deposits.find(el => {
             return el.id === this.$route.params.id;
         });
 
+        // FIND USER
         this.user = this.$store.state.users.users.find(el => {
             return el.id === this.deposit.userId;
         })
     },
 
     mounted () {
+        // DOM
         const statuses = Array.from(document.querySelectorAll('.status'));
-
+        
+        // ADD CLASS TO STATUS BASED ON STATUS
         statuses.forEach(el => {
             el.classList.add(this.addStatusClass(el.textContent.toLowerCase()));
         })
@@ -201,7 +209,6 @@ export default {
         .deposit-status {
             padding: 1rem 5rem;
             margin-right: 1rem;
-            // color: white !important;
         }
         
         .amount-in-wallet {
@@ -236,7 +243,6 @@ export default {
             .user-rank {
                 padding: 5px 15px;
                 margin-right: 1rem;
-                // color: $color-orange;
             }
         }
 

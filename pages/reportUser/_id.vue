@@ -65,7 +65,7 @@ export default {
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REPORT FUNCTION
-        report(e) {
+        report() {
             this.$store.dispatch('showNotificationWindow', {
                 text: 'Your report has been sent', 
                 isBad: false

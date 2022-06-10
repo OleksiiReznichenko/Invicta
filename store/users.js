@@ -58,6 +58,169 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            campaigns: [
+                {
+                    id: 'activeCampaign1',
+                    type: 'active',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'activeCampaign2',
+                    type: 'active',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign1',
+                    type: 'archived',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign2',
+                    type: 'archived',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+            ],
+
             products: [
                 {
                     id: 'NikeUk',
@@ -198,6 +361,169 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            campaigns: [
+                {
+                    id: 'activeCampaign1',
+                    type: 'active',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'activeCampaign2',
+                    type: 'active',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign1',
+                    type: 'archived',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign2',
+                    type: 'archived',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+            ],
+
             products: [
                 {
                     id: 'NikeUk',
@@ -2643,6 +2969,169 @@ export const state = () => ({
             ],
             topBanner: null,
             sideBanner: null,
+            campaigns: [
+                {
+                    id: 'activeCampaign1',
+                    type: 'active',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'activeCampaign2',
+                    type: 'active',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign1',
+                    type: 'archived',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign2',
+                    type: 'archived',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+            ],
+
             products: [
                 {
                     id: 'NikeUk',
@@ -2783,6 +3272,169 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            campaigns: [
+                {
+                    id: 'activeCampaign1',
+                    type: 'active',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'activeCampaign2',
+                    type: 'active',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign1',
+                    type: 'archived',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign2',
+                    type: 'archived',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+            ],
+
             products: [
                 {
                     id: 'NikeUk',
@@ -2923,6 +3575,169 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            campaigns: [
+                {
+                    id: 'activeCampaign1',
+                    type: 'active',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'activeCampaign2',
+                    type: 'active',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign1',
+                    type: 'archived',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign2',
+                    type: 'archived',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+            ],
+
             products: [
                 {
                     id: 'NikeUk',
@@ -3063,6 +3878,169 @@ export const state = () => ({
             orders: [],
             topBanner: null,
             sideBanner: null,
+            campaigns: [
+                {
+                    id: 'activeCampaign1',
+                    type: 'active',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'activeCampaign2',
+                    type: 'active',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign1',
+                    type: 'archived',
+                    customName: 'Campaign 1',
+                    bannerType: 'Horizontal',
+                    bannerSrc: 'default',
+                    itemsAmount: 6,
+                    currentDay: 3,
+                    priority: 15,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+                {
+                    id: 'archivedCampaign2',
+                    type: 'archived',
+                    customName: 'Campaign 2',
+                    bannerType: 'Vertical',
+                    bannerSrc: null,
+                    itemsAmount: 4,
+                    currentDay: 2,
+                    priority: 20,
+                    cardsIds: [
+                        null,
+                        null,
+                        'NikeUk',
+                        'PG',
+                        null,
+                        null,
+                        'Dole',
+                        'Dell',
+                    ],
+                    sales: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    revenue: {
+                        daily: 1,
+                        weekly: 2,
+                        monthly: 5,
+                        yearly: 9,
+                        allTime: 10
+                    },
+                    chartData: {
+                        weekly: [10, 0, 5, 10, 15, 9, 8],
+                        monthly: [5, 2, 22, 10],
+                        yearly: [13, 4, 15, 8, 1, 3],
+                        allTime: [10, 0, 5, 5, 2, 22, 10],
+                    }
+                },
+            ],
+
             products: [
                 {
                     id: 'NikeUk',
@@ -3150,6 +4128,106 @@ export const state = () => ({
 })
 
 export const mutations = {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD NEW CAMPAIGN
+    addNewCampaign(state, {userId, newCampaign}) {
+        const user = state.users.find(el => {
+            return el.id === userId;
+        })
+
+        user.campaigns.unshift(newCampaign);
+    },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE CAMPAIGN NAME
+    changeCustomName(state, {userId, campaignId, newName}) {
+        const user = state.users.find(el => {
+            return el.id === userId;
+        })
+
+        const item = user.campaigns.find(el => {
+            return el.id === campaignId;
+        })
+
+        if (item) {
+            item.customName = newName;
+        }
+    },
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE ITEMS AMOUNT
+    changeItemsAmount(state, {userId, campaignId, value}) {
+        const user = state.users.find(el => {
+            return el.id === userId;
+        })
+
+        const item = user.campaigns.find(el => {
+            return el.id === campaignId;
+        })
+
+        if (item) {
+            item.itemsAmount = value;
+        }
+    },
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE BANNER TYPE
+    changeBannerType(state, {userId, campaignId, value}) {
+        const user = state.users.find(el => {
+            return el.id === userId;
+        })
+
+        const item = user.campaigns.find(el => {
+            return el.id === campaignId;
+        })
+
+        if (item) {
+            item.bannerType = value;
+        }
+    },
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CHANGE BANNER SRC
+    changeBannerSrc(state, {userId, campaignId, newBanner}) {
+        const user = state.users.find(el => {
+            return el.id === userId;
+        })
+
+        const item = user.campaigns.find(el => {
+            return el.id === campaignId;
+        })
+
+        if (item) {
+            item.bannerSrc = newBanner;
+        }
+    },
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ADD PRODUCT CARD
+    addProductCard(state, {userId, campaignId, index, cardId}) {
+        const user = state.users.find(el => {
+            return el.id === userId;
+        })
+
+        const item = user.campaigns.find(el => {
+            return el.id === campaignId;
+        })
+
+        if (item) {
+            item.cardsIds[index] = cardId;
+        }
+    },
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CREATE NEW PRODUCT
+    createNewProduct(state, {userId, newProduct}) {
+        const user = state.users.find(el => {
+            return el.id === userId;
+        })
+
+        user.products.push(newProduct);
+    },
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // SUBSCRIBE
     subscribe(state, {myId, userId}) {
@@ -3534,6 +4612,8 @@ export const mutations = {
             orders: [],
             topBanner: null,
             sideBanner: null,
+            campaigns: [],
+
             products: []
         })
     }

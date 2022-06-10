@@ -993,7 +993,6 @@ footer {
                 border-radius: 2rem;
                 padding: 2.75rem 3.75rem 4.75rem;
                 align-self: flex-start;
-                // flex-grow: 1;
                 width: 50rem;
 
                 @media only screen and (max-width: 1300px) {

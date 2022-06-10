@@ -15,6 +15,7 @@ export default {
             percent: 0
         }
     },
+
     computed: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PRELOADER PERCENT
@@ -22,11 +23,13 @@ export default {
             return this.percent;
         }
     },
+
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // LIMIT MAXIMAL PERCENT TO 100% AND VANISH PRELOADER ON 100%
         addToPercent() {
             if (this.percent >= 100) {
+                this.html.style.overflowY = 'visible';
                 this.$refs.preloader.style.opacity = 0;
 
                 // ADD 1 PERCENT EVERY 500 MS
@@ -34,13 +37,15 @@ export default {
                     this.$refs.preloader.style.display = 'none';
                 }, 500);
                 return;
-            }
+            } 
             this.percent += 1;
 
             requestAnimationFrame(this.addToPercent);
         }
     },
+
     mounted () {
+        this.html = document.querySelector('html');
         this.addToPercent();
     },
 }

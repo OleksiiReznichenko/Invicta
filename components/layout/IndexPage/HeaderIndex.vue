@@ -22,58 +22,95 @@
 <script>
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-// import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 export default {
-    mounted () {
-        // VARIABLES
-        let cardsModel;
-        let mixer;
-        let clips;
+    data() {
+        return {
+            clips: [],
+            mixer: null,
+            cardsModel: null,
+        }
+    },
+
+    methods: {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // INIT 3D MODEL AND ANIMATION
+        initAnimation() {
+            console.log(this.canvas);
+            if (this.canvas) return;
+            
+            // SCENE
+            this.scene = new THREE.Scene();
 
 
-        // SCENE
-        const container = document.querySelector('.cards-scene');
-        const scene = new THREE.Scene();
+            // CAMERA SETUP
+            this.fov = 35;
+            this.aspect = window.innerWidth / window.innerHeight;
+            this.near = 0.1;
+            this.far = 600;
+            this.camera = new THREE.PerspectiveCamera(this.fov, this.aspect, this.near, this.far);
+            this.camera.position.set(8, 8, 15);
+            this.camera.lookAt(this.scene.position);
 
 
-        // CAMERA SETUP
-        const fov = 35;
-        const aspect = window.innerWidth / window.innerHeight;
-        const near = 0.1;
-        const far = 600;
-        const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        camera.position.set(8, 8, 15);
-        camera.lookAt(scene.position);
+            // RENDERER SETUP
+            this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+            this.renderer.setPixelRatio(window.devicePixelRatio);
+            this.renderer.outputEncoding = THREE.sRGBEncoding;
+            this.container.appendChild(this.renderer.domElement);
 
 
-        // RENDERER SETUP
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.outputEncoding = THREE.sRGBEncoding;
-        container.appendChild(renderer.domElement);
+            // LIGHTNING SETUP
+            this.ambient = new THREE.AmbientLight(0xaaaaaa);
+            this.scene.add(this.ambient);
+
+            this.pointLight2 = new THREE.PointLight(0x2c14e1, 2, 1000);
+            this.pointLight2.position.set(10, 5, -10);
+            this.scene.add(this.pointLight2);
+
+            this.pointLight3 = new THREE.PointLight(0x4B36DA, 1, 500);
+            this.pointLight3.position.set(5, 5, -10);
+            this.scene.add(this.pointLight3);
+
+            this.pointLight4 = new THREE.PointLight(0x2c14e1, 10, 500);
+            this.pointLight4.position.set(15, 15, -10);
+            this.scene.add(this.pointLight4);
+
+            // LOAD SETUP
+            this.dracoLoader = new DRACOLoader();
+            this.dracoLoader.setDecoderPath('jst/libs/draco/gltf');
 
 
-        // LIGHTNING SETUP
-        const ambient = new THREE.AmbientLight(0xaaaaaa);
-        scene.add(ambient);
+            this.loader = new GLTFLoader();
+            this.loader.setDRACOLoader(this.dracoLoader);
+            this.dracoLoader.preload('/projects/Invicta/cards.glb');
+            this.loader.load('/projects/Invicta/cards.glb', (gltf) => {
+                this.cardsModel = gltf.scene;
+                this.scene.add(this.cardsModel);
+                
+                this.cardsModelScailing(this.cardsModel);
 
-        const pointLight2 = new THREE.PointLight(0x2c14e1, 2, 1000);
-        pointLight2.position.set(10, 5, -10);
-        scene.add(pointLight2);
+                this.clips = gltf.animations;
+                
+                this.mixer = new THREE.AnimationMixer(this.cardsModel);
+                this.clips.forEach(clip => {
+                    this.mixer.clipAction(clip).play();
+                })
 
-        const pointLight3 = new THREE.PointLight(0x4B36DA, 1, 500);
-        pointLight3.position.set(5, 5, -10);
-        scene.add(pointLight3);
-
-        const pointLight4 = new THREE.PointLight(0x2c14e1, 10, 500);
-        pointLight4.position.set(15, 15, -10);
-        scene.add(pointLight4);
+                // renderer.render( scene, camera );
+                this.animate();
+            });
 
 
-        // SCAILING
-        function cardsModelScailing(model) {
+            // ANIMATION
+            this.clock = new THREE.Clock();
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SCALE 3D MODEL
+        cardsModelScailing(model) {
             model.scale.set(1.65, 1.65, 1.65);
             if (window.outerWidth < 1000 && window.outerHeight > 600 || window.outerWidth < 600) {
                 model.scale.set(1.3, 1.3, 1.3);
@@ -87,58 +124,43 @@ export default {
             if (window.outerWidth < 700 && window.outerHeight > 600 || window.outerWidth < 600) {
                 model.scale.set(1.1, 1.1, 1.1);
             }
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ANIMATE 3D MODEL
+        animate() {
+            this.delta = this.clock.getDelta();
+            
+            if ( this.mixer ) this.mixer.update( this.delta );
+
+            this.renderer.render( this.scene, this.camera );
+
+            requestAnimationFrame( this.animate );
+        },
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // RESIZE 3D MODEL
+        onWindowResize() {
+            this.cardsModelScailing(this.cardsModel);
+
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+
+            this.camera.updateProjectionMatrix();
+
+            this.renderer.setSize(window.innerWidth, window.innerHeight)
         }
-        
+    },
 
-        // LOAD SETUP
-        // const dracoLoader = new DRACOLoader();
-        // dracoLoader.setDecoderPath('jst/libs/draco/gltf');
+    mounted () {
+        // DOM
+        this.container = document.querySelector('.cards-scene');
+        this.canvas = document.querySelector('.cards-scene canvas');
 
-        const loader = new GLTFLoader();
-        // loader.setDRACOLoader(dracoLoader);
-        loader.load('/projects/Invicta/cards.glb', (gltf) => {
-            cardsModel = gltf.scene;
-            scene.add(cardsModel);
-            
-            cardsModelScailing(cardsModel);
-
-            clips = gltf.animations;
-            
-            mixer = new THREE.AnimationMixer(cardsModel);
-            clips.forEach(clip => {
-                mixer.clipAction(clip).play();
-            })
-
-            // renderer.render( scene, camera );
-            animate();
-        });
-
-
-        // ANIMATION
-        const clock = new THREE.Clock();
-
-        function animate() {
-            const delta = clock.getDelta();
-            
-            if ( mixer ) mixer.update( delta );
-
-            renderer.render( scene, camera );
-
-            requestAnimationFrame( animate );
-        }
+        // INIT 3D MODEL AND ANIMATION
+        this.initAnimation();
 
         // RESIZE
-        function onWindowResize() {
-            cardsModelScailing(cardsModel);
-
-            camera.aspect = window.innerWidth / window.innerHeight;
-
-            camera.updateProjectionMatrix();
-
-            renderer.setSize(window.innerWidth, window.innerHeight)
-        }
-
-        window.addEventListener('resize', onWindowResize);
+        window.addEventListener('resize', this.onWindowResize);
     },
 }
 </script>

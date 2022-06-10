@@ -238,7 +238,7 @@ export default {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CHANGE NOT CONFIRMED TO CONFIRMED
-        validateEvent(e) {
+        validateEvent() {
             // IF INPUT IS NOT VALIDATED BY BUYER - SHOW ERROR
             if (!this.isValidated) {
                 this.$store.dispatch('showNotificationWindow', {

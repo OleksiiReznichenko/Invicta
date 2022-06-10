@@ -56,7 +56,9 @@ export default {
     },
 
     methods: {
-        register(e) {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // REGISTER
+        register() {
             let isEveryInputValid = true;
             let isUsernameTaken = false;
             let isEmailTaken = false;

@@ -58,7 +58,9 @@ export default {
     },
 
     methods: {
-        login(e) {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // LOGIN
+        login() {
             let isEveryInputValid = true;
             let isEmailCorrect = false;
             let isPasswordCorrect = false;
