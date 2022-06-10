@@ -27,7 +27,7 @@
         </div>
         <div class="title-container">
             <div class="title-container__left">
-                <input @input="setWidth" ref="customNameInput" @keypress.enter="addDisabled" @blur="addDisabled" disabled minlength="1" maxlength="18" type="text" class="input custom-name title" v-model="customNameLocal">
+                <input @input="setWidth" ref="customNameInput" @keypress.enter.prevent="addDisabled" @blur="addDisabled" disabled minlength="1" maxlength="18" type="text" class="custom-name title" v-model="customNameLocal">
                 <div class="icon-container">
                     <img src="@/assets/svg/editIcon.svg" alt="Icon" class="icon">
                 </div>
@@ -390,6 +390,9 @@ export default {
             } else {
                 this.customNameLocalCopy = this.customNameLocal;
                 this.initialInputSize = this.customNameLocal.length - 7;
+                if (this.initialInputSize < 3) {
+                    this.initialInputSize = 3;
+                }
                 this.$refs.customNameInput.setAttribute('size', this.initialInputSize);
 
                 this.$store.commit('users/changeCustomName', {userId: this.user.id, campaignId: this.id, newName: this.customNameLocal})
@@ -401,7 +404,7 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CHANGE INPUT WIDTH ON TYPING
         setWidth(e) {
-            if (e.target.value.length - 7 < 1) return
+            if (e.target.value.length - 7 <= 3) return;
             e.target.setAttribute('size', e.target.value.length - 7);
         },
         
@@ -579,7 +582,7 @@ export default {
         changeRangeLength() {
             const min = this.rangeInput.min;
             const max = this.rangeInput.max;
-            this.rangeInput.style.backgroundSize = (this.rangeDays - min) * 100 / (max - min) + '%';
+            this.rangeInput.style.backgroundSize = (this.rangeDays - min) * 100 / (max - min) + '% 100%';
         },
     },
 
@@ -613,6 +616,9 @@ export default {
     mounted () {
         // SET INITIAL INPUT WIDTH
         this.initialInputSize = this.$refs.customNameInput.value.length - 7;
+        if (this.initialInputSize < 3) {
+            this.initialInputSize = 3;
+        }
         this.$refs.customNameInput.setAttribute('size', this.initialInputSize);
 
         // SET INITIAL VALUES
@@ -834,6 +840,8 @@ export default {
             font-family: Rowdies;
             font-weight: 300 !important;
             font-size: 2.75rem;
+            color: white !important;
+            // min-width: 20rem !important;
 
             @media only screen and (max-width: 850px) {
                 font-size: 3.2rem;
@@ -841,7 +849,9 @@ export default {
         }
 
         .custom-name[disabled] {
+            -webkit-appearance: none;
             cursor: pointer;
+            color: white !important;
         }
 
         .icon-container {
@@ -1329,7 +1339,7 @@ export default {
                     width: 100%;
                     background-color: #111;
                     background-image: linear-gradient($color-primary, $color-primary);
-                    background-size: 0%;
+                    background-size: 0% 100%;
                     background-repeat: no-repeat;
                     border-radius: 10px;
 

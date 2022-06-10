@@ -23,83 +23,85 @@
                     <span>Edit profile</span>
                 </div>
                 <h1 class="section page-title">Edit profile</h1>
-                <div class="section edit-form">
-                    <div class="left">
-                        <input @change="fileChanged" ref="imageInput" type="file" accept=".jpg, .jpeg, .png" id="imageInput">
-                        <div @click="triggerFileSelection" class="avatar-container">
-                            <img :src="user.avatar" alt="Avatar" class="avatar">
+                <div class="section edit-form-container">
+                    <div class="edit-form">
+                        <div class="left">
+                            <input @change="fileChanged" ref="imageInput" type="file" accept=".jpg, .jpeg, .png" id="imageInput">
+                            <div @click="triggerFileSelection" class="avatar-container">
+                                <img :src="user.avatar" alt="Avatar" class="avatar">
+                            </div>
+                            <button @click="triggerFileSelection" class="change-button">
+                                <img src="@/assets/svg/editSquareIcon.svg" alt="Icon" class="icon">
+                                <span class="span-change">change</span>
+                            </button>
                         </div>
-                        <button @click="triggerFileSelection" class="change-button">
-                            <img src="@/assets/svg/editSquareIcon.svg" alt="Icon" class="icon">
-                            <span class="span-change">change</span>
-                        </button>
-                    </div>
-                    <div class="right">
-                        <div class="flex-container">
-                            <div class="input-group">
-                                <label for="username">Username</label>
-                                <input @keypress.enter="editProfileEvent" v-model="username" type="text" id="username" placeholder="mikhailjr">
-                            </div>
-                            <div class="input-group">
-                                <label for="telegramUsername">Telegram username</label>
-                                <input @keypress.enter="editProfileEvent" v-model="telegramUsername" type="text" id="telegramUsername" placeholder="mikhailjr">
-                            </div>
-                        </div>
-                        <div class="flex-container">
-                            <div class="input-group">
-                                <label for="email">Email</label>
-                                <input @keypress.enter="editProfileEvent" v-model="email" type="email" id="email" placeholder="E-mail">
-                            </div>
-                            <div class="input-group">
-                                <label for="discordUserId">Discord user ID</label>
-                                <input @keypress.enter="editProfileEvent" v-model="discordUserId" type="text" id="discordUserId" placeholder="352656">
-                            </div>
-                        </div>
-                        <div class="flex-container">
-                            <div class="input-group">
-                                <label for="password">Password</label>
-                                <div class="input-container">
-                                    <input @keypress.enter="editProfileEvent" ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6">
-                                    <div @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
-                                        <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
-                                    </div>
+                        <div class="right">
+                            <div class="flex-container">
+                                <div class="input-group">
+                                    <label for="username">Username</label>
+                                    <input @keypress.enter="editProfileEvent" v-model="username" type="text" id="username" placeholder="mikhailjr">
+                                </div>
+                                <div class="input-group">
+                                    <label for="telegramUsername">Telegram username</label>
+                                    <input @keypress.enter="editProfileEvent" v-model="telegramUsername" type="text" id="telegramUsername" placeholder="mikhailjr">
                                 </div>
                             </div>
-                            <div class="input-group">
-                                <label for="confirmPassword">Confirm Password</label>
-                                <input @keypress.enter="editProfileEvent" v-model="confirmPassword" type="password" class="password-input" id="confirmPassword" placeholder="Confirm password" minlength="6">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label for="bio">Bio</label>
-                            <textarea @keypress.enter.prevent='editProfileEvent' @input="autoGrow" v-model="bio" :maxlength="maxBioLength" ref="bioInput" id="bio" name="bio" cols="30" rows="5" wrap="soft" placeholder="Enter your bio"></textarea>
-                            <EmojiPicker class="emoji-main-container" @emoji="onEmoji">
-                                <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" 
-                                    @click.stop="clickEvent">
-                                    <button class="emoji-btn" type="button">
-                                        <img src="@/assets/svg/emojiButton.svg" alt="Emoji button" class="emoji-icon">
-                                    </button>
+                            <div class="flex-container">
+                                <div class="input-group">
+                                    <label for="email">Email</label>
+                                    <input @keypress.enter="editProfileEvent" v-model="email" type="email" id="email" placeholder="E-mail">
                                 </div>
-                                <div class="emoji-picker-wrapper" slot="emoji-picker" slot-scope="{ emojis, insert }">
-                                    <div class="emoji-picker">
-                                        <div v-for="(emojiGroup, category) in emojis" :key="category">
-                                            <h5>{{ category }}</h5>
-                                            <div>
-                                                <span class="emoji"
-                                                    v-for="(emoji, emojiName) in emojiGroup"
-                                                    :key="emojiName"
-                                                    @click="insert(emoji)"
-                                                    :title="emojiName"
-                                                >{{ emoji }}</span>
-                                            </div>
+                                <div class="input-group">
+                                    <label for="discordUserId">Discord user ID</label>
+                                    <input @keypress.enter="editProfileEvent" v-model="discordUserId" type="text" id="discordUserId" placeholder="352656">
+                                </div>
+                            </div>
+                            <div class="flex-container">
+                                <div class="input-group">
+                                    <label for="password">Password</label>
+                                    <div class="input-container">
+                                        <input @keypress.enter="editProfileEvent" ref="passwordInput" v-model="password" type="password" class="password-input" id="password" placeholder="Password" minlength="6">
+                                        <div @click.prevent="togglePasswordVisibility" class="show-password eye-container input-left-content">
+                                            <img src="@/assets/svg/eye.svg" alt="Eye" class="eye-icon">
                                         </div>
                                     </div>
                                 </div>
-                            </EmojiPicker>
+                                <div class="input-group">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input @keypress.enter="editProfileEvent" v-model="confirmPassword" type="password" class="password-input" id="confirmPassword" placeholder="Confirm password" minlength="6">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="bio">Bio</label>
+                                <textarea @keypress.enter.prevent='editProfileEvent' @input="autoGrow" v-model="bio" :maxlength="maxBioLength" ref="bioInput" id="bio" name="bio" cols="30" rows="5" wrap="soft" placeholder="Enter your bio"></textarea>
+                                <EmojiPicker class="emoji-main-container" @emoji="onEmoji">
+                                    <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" 
+                                        @click.stop="clickEvent">
+                                        <button class="emoji-btn" type="button">
+                                            <img src="@/assets/svg/emojiButton.svg" alt="Emoji button" class="emoji-icon">
+                                        </button>
+                                    </div>
+                                    <div class="emoji-picker-wrapper" slot="emoji-picker" slot-scope="{ emojis, insert }">
+                                        <div class="emoji-picker">
+                                            <div v-for="(emojiGroup, category) in emojis" :key="category">
+                                                <h5>{{ category }}</h5>
+                                                <div>
+                                                    <span class="emoji"
+                                                        v-for="(emoji, emojiName) in emojiGroup"
+                                                        :key="emojiName"
+                                                        @click="insert(emoji)"
+                                                        :title="emojiName"
+                                                    >{{ emoji }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </EmojiPicker>
+                            </div>
                         </div>
                     </div>
+                    <button @click="editProfileEvent" class="btn btn-gradient save-button save-margin-bottom"><span>Save changes</span></button>
                 </div>
-                <button @click="editProfileEvent" class="btn btn-gradient save-button save-margin-bottom"><span>Save changes</span></button>
 
                 <h1 class="section page-title">Profile banners</h1>
                 <UserCustomBanner :user='user' :pageEdit='true' class="edit-class" />
@@ -488,7 +490,7 @@ export default {
 ::v-deep {
     .section-page {
         width: 80%;
-        max-width: 1920px;
+        max-width: 1400px;
         margin: 0 auto;
     }
 
@@ -596,22 +598,22 @@ export default {
         z-index: 100;
 
         .save-button {
-            margin-left: 10%;
+            // margin-left: 10%;
             padding: 1.25rem 5rem;
             font-weight: 500 !important;
             margin-top: 4.5rem;
             
-            @media only screen and (max-width: 1000px) {
-                margin-left: 5%;
-            }
+            // @media only screen and (max-width: 1000px) {
+            //     margin-left: 5%;
+            // }
             
-            @media only screen and (max-width: 850px) {
-                margin-left: 17%;
-            }
+            // @media only screen and (max-width: 850px) {
+            //     margin-left: 17%;
+            // }
             
-            @media only screen and (max-width: 600px) {
-                margin-left: 5%;
-            }
+            // @media only screen and (max-width: 600px) {
+            //     margin-left: 5%;
+            // }
         }
 
         .save-margin-bottom {
@@ -630,6 +632,17 @@ export default {
             }
         }
 
+        .edit-form-container {
+            
+            @media only screen and (max-width: 850px) {
+                width: 66%;
+            }
+
+            @media only screen and (max-width: 600px) {
+                width: 90%;
+            }
+        }
+
         .edit-form {
             background: $color-grey-dark;
             box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
@@ -638,22 +651,18 @@ export default {
             width: 90rem;
             padding: 3.25rem 6.5rem 3.25rem 3.75rem;
             margin-top: 4.25rem;
-            margin-left: 10%;
+            // margin-left: 10%;
             
-            @media only screen and (max-width: 1000px) {
-                margin-left: 5%;
-            }
+            // @media only screen and (max-width: 1000px) {
+            //     margin-left: 5%;
+            // }
             
             @media only screen and (max-width: 850px) {
                 margin-left: auto;
-                width: 66%;
+                width: 100%;
                 flex-direction: column;
                 align-items: center;
                 padding: 4.5rem 4.5rem 4.5rem 4.5rem;
-            }
-            
-            @media only screen and (max-width: 600px) {
-                width: 90%;
             }
             
             .left {

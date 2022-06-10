@@ -243,11 +243,11 @@ html {
   }
 }
 
-@media only screen and (min-width: 1850px) {
+/* @media only screen and (min-width: 1850px) {
   html {
     font-size: 13.6px;
   }
-}
+} */
 
 /* @media only screen and (min-width: 2000px) {
   html {
@@ -276,8 +276,13 @@ html {
 
 .section {
   width: 80%;
-  max-width: 1920px;
+  /* max-width: 1920px; */
+  max-width: 1400px !important;
   margin: 0 auto;
+}
+
+.section-page {
+  max-width: 1400px !important;
 }
 
 @media only screen and (max-width: 1000px) {

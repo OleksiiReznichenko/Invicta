@@ -62,8 +62,6 @@ export default {
     display: flex;
     align-items: center;
     margin: 2rem auto 3.5rem;
-    -webkit-mask-image: linear-gradient(90deg,#000,#000 70%,rgba(255, 255, 255, 0));
-    mask-image: linear-gradient(90deg,#000,#000 70%,rgba(255, 255, 255, 0));
     padding-bottom: 1rem;
 
     @media only screen and (max-width: 850px) and (min-width: 600px) {

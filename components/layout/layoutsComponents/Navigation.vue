@@ -20,7 +20,7 @@
       <div class="nav__right">
         <div ref="searchContainer" class="search-container">
           <input @focus="focusSearch" @blur="unfocusSearch" @click="searchFunction" @keyup="searchFunction" ref="searchInput" v-model="searchValue"
-          type="search" id="searchInput" placeholder="Search" />
+          type="text" id="searchInput" placeholder="Search" />
           <img
             src="@/assets/svg/searchIcon.svg"
             alt="Search icon"
@@ -227,10 +227,10 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // ARRAY OF FILTERED PRODUCTS ON NAME SEARCH
         productsFiltered() {
-        // PRODUCTS ARRAY
+          // PRODUCTS ARRAY
           const productsArray = this.$store.state.products.products;
 
-        // PRODUCTS ARRAY FILTERED BY NAME
+          // PRODUCTS ARRAY FILTERED BY NAME
           const productsArrayFiltered = productsArray.filter((product) => {
               return product.name.toLowerCase().includes(this.searchValueValidated);
           })
@@ -365,7 +365,7 @@ export default {
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // UNFOCUS SEARCH EVENT
-        unfocusSearch() {
+        unfocusSearch(e) {
             this.nav.classList.remove('focused-search');
         },
     },
@@ -467,6 +467,7 @@ export default {
     width: 100% !important;
     background-color: $color-grey;
     box-shadow: 0px .5rem 5rem 0px rgba(#000000, .4);
+    padding: 1.5rem;
     padding-left: 1rem;
     border-radius: 6px;
     margin-right: 2rem;
@@ -792,7 +793,7 @@ export default {
   background-color: rgba($color-grey-2, 0.9);
   padding: 2rem 0;
   position: fixed;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   z-index: 10000;
 

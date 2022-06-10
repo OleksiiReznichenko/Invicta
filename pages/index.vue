@@ -44,7 +44,7 @@ footer {
 ::v-deep {
     .section-page {
         width: 80%;
-        max-width: 1920px;
+        max-width: 1400px;
         margin: 0 auto;
     }
 

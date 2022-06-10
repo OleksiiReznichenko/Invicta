@@ -88,7 +88,7 @@ export default {
                 this.cardsModel = gltf.scene;
                 this.scene.add(this.cardsModel);
                 
-                this.cardsModelScailing(this.cardsModel);
+                this.cardsModelScailing();
 
                 this.clips = gltf.animations;
                 
@@ -108,19 +108,20 @@ export default {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SCALE 3D MODEL
-        cardsModelScailing(model) {
-            model.scale.set(1.65, 1.65, 1.65);
+        cardsModelScailing() {
+            if (!this.cardsModel) return;
+            this.cardsModel.scale.set(1.65, 1.65, 1.65);
             if (window.outerWidth < 1000 && window.outerHeight > 600 || window.outerWidth < 600) {
-                model.scale.set(1.3, 1.3, 1.3);
-                model.position.set(-1, 0, 0);
+                this.cardsModel.scale.set(1.3, 1.3, 1.3);
+                this.cardsModel.position.set(-1, 0, 0);
             }
 
             if (window.outerWidth < 1000 && window.outerHeight < 520 && window.outerWidth > 600) {
-                model.scale.set(1.85, 1.85, 1.85);
+                this.cardsModel.scale.set(1.85, 1.85, 1.85);
             }
             
             if (window.outerWidth < 700 && window.outerHeight > 600 || window.outerWidth < 600) {
-                model.scale.set(1.1, 1.1, 1.1);
+                this.cardsModel.scale.set(1.1, 1.1, 1.1);
             }
         },
 
@@ -139,7 +140,8 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // RESIZE 3D MODEL
         onWindowResize() {
-            this.cardsModelScailing(this.cardsModel);
+            if (!this.camera) return;
+            this.cardsModelScailing();
 
             this.camera.aspect = window.innerWidth / window.innerHeight;
 
