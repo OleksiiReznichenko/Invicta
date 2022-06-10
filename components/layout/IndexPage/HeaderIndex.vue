@@ -85,7 +85,6 @@ export default {
 
             this.loader = new GLTFLoader();
             this.loader.setDRACOLoader(this.dracoLoader);
-            this.dracoLoader.preload('/projects/Invicta/cards.glb');
             this.loader.load('/projects/Invicta/cards.glb', (gltf) => {
                 this.cardsModel = gltf.scene;
                 this.scene.add(this.cardsModel);
