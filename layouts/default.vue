@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <!-- <Preloader /> -->
+        <Preloader />
         <div ref="notificationWindow" id="notificationWindow"></div>
         <Navigation/>
         <nuxt class="on-top" />
@@ -20,7 +20,7 @@ export default {
     watch: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REINIT NAVIGATION DROPDOWN ON LOG IN & LOG OUT
-        '$store.state.isLoggedIn'(newValue, oldValue) {
+        '$store.state.isLoggedIn'() {
             setTimeout(() => {
                 this.dropdownOpener = document.getElementById('dropdown-opener');
                 this.dropdown = document.getElementById('dropdown');
