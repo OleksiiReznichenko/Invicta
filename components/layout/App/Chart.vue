@@ -195,14 +195,12 @@ export default {
         },
     },
 
-    created () {
+    mounted () {
         // SET INIAL DATA
         this.initChart();
         this.getData();
         this.setLabels();
-    },
 
-    mounted () {
         // RESIZE
         window.addEventListener('resize', () => {
             this.chart.resize();
