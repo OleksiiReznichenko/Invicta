@@ -39,7 +39,7 @@
                     <nuxt-link to="/leaderboard">Leaderboard</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn" key="ads">
-                    <nuxt-link to="/InvictaAds">Invicta.ads</nuxt-link>
+                    <nuxt-link to="/invictaAds">Invicta.ads</nuxt-link>
                 </li>
                 <li v-if="isLoggedIn" key="shoppingItems">
                     <nuxt-link to="/shoppingItems">My shopping <span class="span-red">({{shoppingItemsAmount}})</span></nuxt-link>
