@@ -12,7 +12,6 @@
     "chart.js": "^3.8.0",
     "cookie-universal-nuxt": "^2.1.5",
     "core-js": "^3.15.1",
-    "cropperjs": "^1.5.12",
     "nuxt": "^2.15.7",
     "nuxt-uid-module": "^0.2.0",
     "sharer.js": "^0.5.1",

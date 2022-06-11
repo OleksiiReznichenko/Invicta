@@ -4,7 +4,7 @@
             <div class="overlay"></div>
             <div class="header">
                 <div class="top-rect"></div>
-                <img :src="photo" alt="Image" class="product-image">
+                <img :src="photo" alt="Product image" class="product-image">
                 <div class="container">
                     <div class="item items-in-stock">{{amountInStock}} {{itemsTextComp}}</div>
                     <div v-if="discountComp" class="item discount">save {{discountComp}}%</div>
@@ -31,7 +31,7 @@
             </div>
             <div class="header">
                 <div class="top-rect"></div>
-                <img :src="photo" alt="Image" class="product-image">
+                <img :src="photo" alt=" " class="product-image">
                 <div class="container">
                     <div class="item items-in-stock">{{amountInStock}} {{itemsTextComp}}</div>
                     <div v-if="discountComp" class="item discount">save {{discountComp}}%</div>

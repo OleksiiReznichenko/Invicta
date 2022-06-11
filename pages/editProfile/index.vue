@@ -1,6 +1,5 @@
 <template>
     <div class="edit-profile-page">
-        <!-- <AvatarCropper /> -->
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="relative-container">
             <div class="content">
@@ -104,9 +103,7 @@
 </template>
 
 <script>
-import Cropper from 'cropperjs';
 import EmojiPicker from 'vue-emoji-picker';
-// import AvatarCropper from '@/components/layout/Profile/AvatarCropper';
 import UserCustomBanner from '@/components/layout/Profile/UserCustomBanner';
 import UserDiscountProducts from '@/components/layout/Profile/UserDiscountProducts';
 
@@ -115,7 +112,6 @@ export default {
     
     components: {
         EmojiPicker,
-        // AvatarCropper,
         UserCustomBanner,
         UserDiscountProducts,
     },
@@ -179,18 +175,6 @@ export default {
                 this.selectedAvatarFile = files;
             }
         },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // CLOSE CROPPER
-        // openCropper() {
-        //     if (this.$refs.cropperContainer.classList.contains('opened')) return;
-        //     this.$refs.cropperContainer.style.display = 'block';
-        //     this.$refs.cropperContainer.classList.add('opened');
-        //     setTimeout(() => {
-        //         this.$refs.cropperContainer.style.opacity = 1;
-        //         this.navigationRoot.style.display = 'none';
-        //     }, 10)
-        // },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // GROW TEXTAREA ON TEXT WRAP
@@ -422,117 +406,14 @@ export default {
 
 .edit-profile-page {
 
-    .crop-container-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000000;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(black, .5);
-        backdrop-filter: blur(5px);
-        transition: all .2s;
-        display: none;
-        opacity: 0;
-    }
-
-    .crop-container {
-        @include abs-center;
-        background-color: $color-grey-dark;
-        box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
-        border-radius: 10px;
-
-        .crop-image-container {
-            @include flex-center;
-            padding: 3rem;
-            padding-bottom: 1.5rem;
-        }
-
-        .dont-crop {
-            display: block;
-            margin: 0 auto;
-            font-weight: 600 !important;
-            color: $color-text-grey;
-            font-size: 1.6rem;
-            transition: all .3s;
-
-            &:hover {
-                color: lighten($color-primary, 15%);
-            }
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            padding: 2rem;
-
-            .btn {
-                padding: 1.25rem 4rem;
-                width: 45%;
-
-                &:not(:last-of-type) {
-                    margin-right: 2rem;
-                }
-            
-                @media only screen and (max-width: 850px) {
-                    font-size: 2rem;
-                }
-            
-                @media only screen and (max-width: 400px) {
-                    padding: 1.25rem 3rem;
-                    white-space: nowrap;
-                }
-
-                .background {
-                    background-color: $color-grey-dark;
-                    border-radius: 6px;
-                }
-
-                &:hover {
-                    transform: scale(1.05);
-                    border: 1px solid transparent;
-                }
-            }
-
-            .btn-gradient {
-                &:hover::before {
-                    opacity: 1;
-                }
-            }
-
-            .btn-transparent {
-                &:hover::before {
-                    opacity: 0;
-                }
-
-                &:hover::after {
-                    opacity: 1;
-                }
-            }
-        }
-    }
-
     .content {
         position: relative;
         z-index: 100;
 
         .save-button {
-            // margin-left: 10%;
             padding: 1.25rem 5rem;
             font-weight: 500 !important;
             margin-top: 4.5rem;
-            
-            // @media only screen and (max-width: 1000px) {
-            //     margin-left: 5%;
-            // }
-            
-            // @media only screen and (max-width: 850px) {
-            //     margin-left: 17%;
-            // }
-            
-            // @media only screen and (max-width: 600px) {
-            //     margin-left: 5%;
-            // }
         }
 
         .save-margin-bottom {

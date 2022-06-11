@@ -29,9 +29,9 @@
             <div v-if="isLoggedIn" key="line" class="line"></div>
 
             <ul class="list">
-                <li v-if="!isPhone">
+                <!-- <li v-if="!isPhone">
                     <nuxt-link to="/browse">Browse</nuxt-link>
-                </li>
+                </li> -->
                 <li v-if="!isLoggedIn || isLoggedIn && isPhone"  key="updates">
                     <nuxt-link to="/updates">Updates</nuxt-link>
                 </li>
@@ -60,6 +60,7 @@
                 <nuxt-link to="/withdraw" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
                 <nuxt-link to="/dashboard" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
                 <nuxt-link v-if="user.isAdmin" to="/adminDashboard" class="btn btn-pink"><span>Admin Dashboard</span></nuxt-link>
+                <nuxt-link to="/createProduct" class="btn btn-gradient"><div class="background"></div><span>Create product</span></nuxt-link>
             </div>
 
             <div v-if="isLoggedIn" key="line-3" class="line"></div>
@@ -335,6 +336,10 @@ export default {
             margin-bottom: 2.5rem;
             font-size: 2rem;
         }
+        
+        @media only screen and (max-width: 850px) and (max-height: 730px) {
+            margin-bottom: 2rem;
+        }
 
         .avatar {
             background-color: white;
@@ -354,8 +359,12 @@ export default {
 
         @media only screen and (max-width: 850px) and (min-height: 600px),
         only screen and (max-width: 600px) {
-            padding: 1.5rem 0;
+            padding: 1.5rem 0 !important;
             font-size: 2rem !important;
+        }
+        
+        @media only screen and (max-width: 850px) and (max-height: 730px) {
+            padding: 1.25rem 0 !important;
         }
 
         &-blue {
@@ -376,7 +385,7 @@ export default {
         }
         
         @media only screen and (max-width: 850px) and (max-height: 730px) {
-            margin-top: 2.5rem;
+            margin-top: 2.25rem;
         }
 
         .btn {
@@ -394,6 +403,11 @@ export default {
             &-pink:hover {
                 background-color: darken($color-pink, 20%);
             }
+        }
+
+        .btn-gradient {
+            padding: .95rem 0;
+            font-weight: 400 !important;
         }
     }
 

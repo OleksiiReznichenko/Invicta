@@ -3,7 +3,8 @@
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <HeaderIndex />
         <main>
-            <DiscountBlock />
+            <!-- <DiscountBlockOrange /> -->
+            <DiscountBlockPurple />
             <ProductsLine />
             <DiscountProducts />
             <Signup/>
@@ -14,14 +15,16 @@
 
 <script>
 import HeaderIndex from '@/components/layout/IndexPage/HeaderIndex';
-import DiscountBlock from '@/components/layout/IndexPage/DiscountBlock';
+// import DiscountBlockOrange from '@/components/layout/IndexPage/DiscountBlockOrange';
+import DiscountBlockPurple from '@/components/layout/IndexPage/DiscountBlockPurple';
 import DiscountProducts from '@/components/layout/IndexPage/DiscountProducts';
 import Signup from '@/components/layout/IndexPage/Signup';
 
 export default {
     components: {
         HeaderIndex,
-        DiscountBlock,
+        // DiscountBlockOrange,
+        DiscountBlockPurple,
         DiscountProducts,
         Signup,
     },
