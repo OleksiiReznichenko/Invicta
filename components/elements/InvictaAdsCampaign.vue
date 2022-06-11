@@ -27,8 +27,8 @@
         </div>
         <div class="title-container">
             <div class="title-container__left">
-                <input @input="setWidth" ref="customNameInput" @keypress.enter.prevent="addDisabled" @blur="addDisabled" disabled minlength="1" maxlength="18" type="text" class="custom-name title" v-model="customNameLocal">
-                <div class="icon-container">
+                <input ref="customNameInput" @keypress.enter.prevent="addReadonly" @blur="addReadonly" v-model="customNameLocal" readonly minlength="1" maxlength="18" type="text" class="custom-name title">
+                <div @click="removeReadonly" class="icon-container">
                     <img src="@/assets/svg/editIcon.svg" alt="Icon" class="icon">
                 </div>
             </div>
@@ -226,6 +226,7 @@ export default {
             priority: 10,
             rangeDays: 1,
             rangePrice: 200,
+            readonlyRemovedIndicator: false,
         }
     },
 
@@ -382,30 +383,33 @@ export default {
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // DISABLE INPUT IF NOT FOCUSED AND UPDATE VARIABLES AND INPUT WIDTH
-        addDisabled() {
-            if (!this.customNameValidated) {
-                this.customNameLocal = this.customNameLocalCopy;
-                this.$refs.customNameInput.setAttribute('size', this.initialInputSize);
-            } else {
-                this.customNameLocalCopy = this.customNameLocal;
-                this.initialInputSize = this.customNameLocal.length - 7;
-                if (this.initialInputSize < 3) {
-                    this.initialInputSize = 3;
-                }
-                this.$refs.customNameInput.setAttribute('size', this.initialInputSize);
-
-                this.$store.commit('users/changeCustomName', {userId: this.user.id, campaignId: this.id, newName: this.customNameLocal})
-            }
-            this.$refs.customNameInput.classList.remove('not-disabled');
-            this.$refs.customNameInput.setAttribute('disabled', true)
+        // FOCUS INPUT AND REMOVE READONLY
+        removeReadonly() {
+            // console.log(this.readonlyRemovedIndicator);
+            // if (!this.readonlyRemovedIndicator) {
+                // this.readonlyRemovedIndicator = true;
+                this.$refs.customNameInput.removeAttribute('readonly');
+                this.$refs.customNameInput.focus();
+                console.log('REMOVED');
+            // } else {
+            //     this.addReadonly();
+            //     console.log('ADDED');
+            //     this.readonlyRemovedIndicator = false;
+            // }
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // CHANGE INPUT WIDTH ON TYPING
-        setWidth(e) {
-            if (e.target.value.length - 7 <= 3) return;
-            e.target.setAttribute('size', e.target.value.length - 7);
+        // DISABLE INPUT IF NOT FOCUSED AND UPDATE VARIABLES AND INPUT WIDTH
+        addReadonly() {
+            if (!this.customNameValidated) {
+                this.customNameLocal = this.customNameLocalCopy;
+            } else {
+                this.customNameLocalCopy = this.customNameLocal;
+
+                this.$store.commit('users/changeCustomName', {userId: this.user.id, campaignId: this.id, newName: this.customNameLocal})
+            }
+            this.$refs.customNameInput.classList.remove('not-readonly');
+            this.$refs.customNameInput.setAttribute('readonly', true)
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -614,13 +618,6 @@ export default {
     },
 
     mounted () {
-        // SET INITIAL INPUT WIDTH
-        this.initialInputSize = this.$refs.customNameInput.value.length - 7;
-        if (this.initialInputSize < 3) {
-            this.initialInputSize = 3;
-        }
-        this.$refs.customNameInput.setAttribute('size', this.initialInputSize);
-
         // SET INITIAL VALUES
         if (this.itemsAmountBase) {
             this.itemsAmountNotComp = this.itemsAmountBase;
@@ -831,6 +828,7 @@ export default {
     &__left {
         display: flex;
         align-items: center;
+        flex-direction: row-reverse;
 
         @media only screen and (max-width: 850px) {
             margin-bottom: 1rem;
@@ -841,14 +839,18 @@ export default {
             font-weight: 300 !important;
             font-size: 2.75rem;
             color: white !important;
-            // min-width: 20rem !important;
+            width: fit-content;
+            min-width: 18rem;
+            max-width: 32rem;
 
             @media only screen and (max-width: 850px) {
                 font-size: 3.2rem;
+                max-width: 34rem;
+                // min-width: 25rem;
             }
         }
 
-        .custom-name[disabled] {
+        .custom-name[readonly] {
             -webkit-appearance: none;
             cursor: pointer;
             color: white !important;
@@ -857,7 +859,7 @@ export default {
         .icon-container {
             width: 3rem;
             height: 3rem;
-            margin-left: 2rem;
+            margin-right: 1.5rem;
             margin-top: -1rem;
             transition: all .3s;
             border-radius: 5px;
@@ -866,6 +868,7 @@ export default {
             @media only screen and (max-width: 850px) {
                 width: 4rem;
                 height: 4rem;
+                margin-right: 2rem;
             }
 
             &:hover {

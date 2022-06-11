@@ -124,11 +124,11 @@ export default {
             const parent = e.target?.closest('.toggle-container');
             const customNameInput = parent?.querySelector('.custom-name');
 
-            if (customNameInput?.classList.contains('not-disabled')) return;
+            if (customNameInput?.classList.contains('not-readonly')) return;
             if (e.target.classList.contains('icon-container') || e.target.classList.contains('title-container__left')) {
-                customNameInput.removeAttribute('disabled');
+                customNameInput.removeAttribute('readonly');
 
-                customNameInput.classList.add('not-disabled');
+                customNameInput.classList.add('not-readonly');
                 
                 customNameInput.focus();
             } else {
