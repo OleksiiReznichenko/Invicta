@@ -159,8 +159,18 @@ export default {
         // INIT 3D MODEL AND ANIMATION
         this.initAnimation();
 
+        let prevWidth = window.outerWidth;
+        let prevHeight = window.outerHeight;
+
         // RESIZE
-        window.addEventListener('resize', this.onWindowResize);
+        window.addEventListener('resize', () => {
+            if (Math.abs(prevWidth - window.outerWidth) > 30 || 
+            Math.abs(prevHeight - window.outerHeight) > 35) {
+                this.onWindowResize();
+                prevWidth = window.outerWidth;
+                prevHeight = window.outerHeight;
+            }
+        });
     },
 }
 </script>
