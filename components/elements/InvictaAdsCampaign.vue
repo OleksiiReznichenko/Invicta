@@ -385,17 +385,8 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // FOCUS INPUT AND REMOVE READONLY
         removeReadonly() {
-            // console.log(this.readonlyRemovedIndicator);
-            // if (!this.readonlyRemovedIndicator) {
-                // this.readonlyRemovedIndicator = true;
-                this.$refs.customNameInput.removeAttribute('readonly');
-                this.$refs.customNameInput.focus();
-                console.log('REMOVED');
-            // } else {
-            //     this.addReadonly();
-            //     console.log('ADDED');
-            //     this.readonlyRemovedIndicator = false;
-            // }
+            this.$refs.customNameInput.removeAttribute('readonly');
+            this.$refs.customNameInput.focus();
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -846,7 +837,6 @@ export default {
             @media only screen and (max-width: 850px) {
                 font-size: 3.2rem;
                 max-width: 34rem;
-                // min-width: 25rem;
             }
         }
 
