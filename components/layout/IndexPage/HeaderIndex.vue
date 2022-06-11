@@ -30,6 +30,13 @@ export default {
             clips: [],
             mixer: null,
             cardsModel: null,
+            scene: null,
+            camera: null,
+            renderer: null,
+            mixer: null,
+            clock: null,
+            container: null,
+            cardsModel: null,
         }
     },
 
@@ -62,20 +69,20 @@ export default {
 
 
             // LIGHTNING SETUP
-            this.ambient = new THREE.AmbientLight(0xaaaaaa);
-            this.scene.add(this.ambient);
+            const ambient = new THREE.AmbientLight(0xaaaaaa);
+            this.scene.add(ambient);
 
-            this.pointLight2 = new THREE.PointLight(0x2c14e1, 2, 1000);
-            this.pointLight2.position.set(10, 5, -10);
-            this.scene.add(this.pointLight2);
+            const pointLight2 = new THREE.PointLight(0x2c14e1, 2, 1000);
+            pointLight2.position.set(10, 5, -10);
+            this.scene.add(pointLight2);
 
-            this.pointLight3 = new THREE.PointLight(0x4B36DA, 1, 500);
-            this.pointLight3.position.set(5, 5, -10);
-            this.scene.add(this.pointLight3);
+            const pointLight3 = new THREE.PointLight(0x4B36DA, 1, 500);
+            pointLight3.position.set(5, 5, -10);
+            this.scene.add(pointLight3);
 
-            this.pointLight4 = new THREE.PointLight(0x2c14e1, 10, 500);
-            this.pointLight4.position.set(15, 15, -10);
-            this.scene.add(this.pointLight4);
+            const pointLight4 = new THREE.PointLight(0x2c14e1, 10, 500);
+            pointLight4.position.set(15, 15, -10);
+            this.scene.add(pointLight4);
 
             // LOAD SETUP
             this.dracoLoader = new DRACOLoader();
@@ -128,13 +135,16 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // ANIMATE 3D MODEL
         animate() {
+            if (!this.clock || !this.renderer) return;
             this.delta = this.clock.getDelta();
             
-            if ( this.mixer ) this.mixer.update( this.delta );
+            if (this.mixer) {
+                this.mixer.update(this.delta);
+            }
 
-            this.renderer.render( this.scene, this.camera );
+            this.renderer.render(this.scene, this.camera);
 
-            requestAnimationFrame( this.animate );
+            requestAnimationFrame(this.animate);
         },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,21 +174,34 @@ export default {
 
         // RESIZE
         window.addEventListener('resize', () => {
-            if (Math.abs(prevWidth - window.outerWidth) > 30 || 
-            Math.abs(prevHeight - window.outerHeight) > 35) {
+            if ((window.outerWidth < 1000 && (Math.abs(prevWidth - window.outerWidth) > 30 || 
+            Math.abs(prevHeight - window.outerHeight) > 50)) || window.outerWidth >= 1000) {
                 this.onWindowResize();
                 prevWidth = window.outerWidth;
                 prevHeight = window.outerHeight;
             }
         });
     },
+
+    beforeDestroy() {
+        this.container.innerHTML = '';
+        this.clips = [];
+        this.mixer = null;
+        this.cardsModel = null;
+        this.scene = null;
+        this.camera = null;
+        this.renderer = null;
+        this.mixer = null;
+        this.clock = null;
+        this.container = null;
+        this.cardsModel = null;
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 header {
     height: 100vh;
-    min-height: -webkit-fill-available;
 
     @media only screen and (max-width: 600px) {
         min-height: 600px;

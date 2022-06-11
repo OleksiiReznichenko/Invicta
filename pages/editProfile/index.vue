@@ -1,17 +1,6 @@
 <template>
     <div class="edit-profile-page">
-        <div @click="closeCropperOnBackground" ref="cropperContainer" class="crop-container-wrapper">
-            <div class="crop-container">
-                <div class="crop-image-container">
-                    <img ref="cropImage" :src="avatarSrc" alt="" class="crop-image">
-                </div>
-                <button @click="dontCrop" class="dont-crop">Save without crop</button>
-                <div class="buttons">
-                    <button @click="closeCropper" class="btn btn-transparent button-cancel"><div class="background"></div><span>Cancel</span></button>
-                    <button @click="handleCropImage" class="btn btn-gradient button-crop"><span>Crop</span></button>
-                </div>
-            </div>
-        </div>
+        <!-- <AvatarCropper /> -->
         <img src="@/assets/img/cornerLight.png" alt="Corner light" class="corner-light">
         <div class="relative-container">
             <div class="content">
@@ -117,6 +106,7 @@
 <script>
 import Cropper from 'cropperjs';
 import EmojiPicker from 'vue-emoji-picker';
+// import AvatarCropper from '@/components/layout/Profile/AvatarCropper';
 import UserCustomBanner from '@/components/layout/Profile/UserCustomBanner';
 import UserDiscountProducts from '@/components/layout/Profile/UserDiscountProducts';
 
@@ -124,14 +114,15 @@ export default {
     middleware: ['notLoggedIn'],
     
     components: {
-        UserCustomBanner,
-        UserDiscountProducts,
         EmojiPicker,
         // AvatarCropper,
+        UserCustomBanner,
+        UserDiscountProducts,
     },
 
     data() {
         return {
+            fileClearIndicator: false,
             selectedAvatarFile: null,
             avatarSrc: null,
             isOpenNofication: false,
@@ -191,76 +182,15 @@ export default {
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CLOSE CROPPER
-        openCropper() {
-            if (this.$refs.cropperContainer.classList.contains('opened')) return;
-            this.$refs.cropperContainer.style.display = 'block';
-            this.$refs.cropperContainer.classList.add('opened');
-            setTimeout(() => {
-                this.$refs.cropperContainer.style.opacity = 1;
-                this.navigationRoot.style.display = 'none';
-            }, 10)
-        },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // CLOSE CROPPER
-        closeCropper() {
-            if (!this.$refs.cropperContainer.classList.contains('opened')) return;
-            this.fileCleared();
-            this.$refs.cropperContainer.style.opacity = 0;
-            this.navigationRoot.style.display = 'block';
-            setTimeout(() => {
-                this.$refs.cropperContainer.style.display = 'none';
-                this.$refs.cropperContainer.classList.remove('opened');
-            }, 200)
-        },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // CLOSE CROPPER ON BACKGROUND CLICK
-        closeCropperOnBackground(e) {
-            if (!e.target.classList.contains('crop-container-wrapper')) return;
-            this.closeCropper();
-        },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // EVENT IF FILE IS CLEARED
-        fileCleared() {
-            this.$refs.imageInput.value = null;
-            this.$refs.imageInput.values = [];
-            this.selectedAvatarFile = null;
-            this.avatarSrc = null;
-        },
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // SAVE NEW USER AVATAR
-        saveImage(newAvatar) {
-            // SET NEW USER AVATAR
-            this.$store.commit('users/changeAvatar', {id: this.user.id, newAvatar: newAvatar});
-
-            // IF USER AVATAR CHANGED SUCCESSFULLY - SHOW MESSAGE
-            this.$store.dispatch('showNotificationWindow', {
-                text: 'User avatar changed successfully', 
-                isBad: false
-            });
-        },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // HANDLE CROP IMAGE
-        handleCropImage() {
-            this.avatarSrc = this.cropper.getCroppedCanvas({
-                width: 400,
-                height: 400,
-            }).toDataURL();
-            
-            this.saveImage(this.avatarSrc);
-            this.closeCropper();
-        },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // DO NOT CROP IMAGE
-        dontCrop() {
-            this.saveImage(this.avatarSrc);
-            this.closeCropper();
-        },
+        // openCropper() {
+        //     if (this.$refs.cropperContainer.classList.contains('opened')) return;
+        //     this.$refs.cropperContainer.style.display = 'block';
+        //     this.$refs.cropperContainer.classList.add('opened');
+        //     setTimeout(() => {
+        //         this.$refs.cropperContainer.style.opacity = 1;
+        //         this.navigationRoot.style.display = 'none';
+        //     }, 10)
+        // },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // GROW TEXTAREA ON TEXT WRAP
@@ -446,40 +376,29 @@ export default {
                 this.fileReader.readAsDataURL(this.selectedAvatarFile);
             }
         },
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // FILE SELECTED - CHANGE CROPPER IMAGE SOURCE
-        avatarSrc() {
-            if (this.selectedAvatarFile?.name) {
-                this.cropper.replace(this.avatarSrc);
-            } else {
-                this.avatarSrc = null;
-            }
-        },
     },
     
     mounted () {
+        // DOM
         this.navigationRoot = document.querySelector('.navigation-root');
 
         this.assignInputValues();
 
         // FILE READER
         this.fileReader = new FileReader();
-
-        // AVATAR CROPPER CONFIG
-        this.cropper = new Cropper(this.$refs.cropImage, {
-            aspectRatio: 16 / 9,
-            dragMode: 'move',
-            cropBoxMovable: false,
-        });
         
         this.fileReader.onload = (e) => {
             // GET NEW AVATAR SOURCE
             this.avatarSrc = e.target.result;
 
-            this.saveImage(this.avatarSrc);
+            // SET NEW USER AVATAR
+            this.$store.commit('users/changeAvatar', {id: this.user.id, newAvatar: this.avatarSrc});
 
-            // this.openCropper();
+            // IF USER AVATAR CHANGED SUCCESSFULLY - SHOW MESSAGE
+            this.$store.dispatch('showNotificationWindow', {
+                text: 'User avatar changed successfully', 
+                isBad: false
+            });
         }
     },
 }
@@ -519,7 +438,7 @@ export default {
 
     .crop-container {
         @include abs-center;
-        background-color: $color-grey-2;
+        background-color: $color-grey-dark;
         box-shadow: 0 .5rem 5rem rgba(0, 0, 0, 0.4);
         border-radius: 10px;
 
@@ -565,7 +484,7 @@ export default {
                 }
 
                 .background {
-                    background-color: $color-grey-2;
+                    background-color: $color-grey-dark;
                     border-radius: 6px;
                 }
 

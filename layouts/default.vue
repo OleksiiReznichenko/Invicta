@@ -62,15 +62,17 @@ export default {
         // RESIZE
         let prevWidth = window.outerWidth;
         let prevHeight = window.outerHeight;
+        let resized = false;
         this.appHeight();
 
         window.addEventListener('resize', () => {
             this.appHeight();
 
-            if (prevWidth >= 850 && window.outerWidth < 850 ||
+            if ((prevWidth >= 850 && window.outerWidth < 850 ||
             prevWidth <= 850 && window.outerWidth > 850 ||
             prevHeight <= 600 && window.outerHeight > 600 && window.outerWidth < 850 ||
-            prevHeight >= 600 && window.outerHeight < 600 && window.outerWidth < 850) {
+            prevHeight >= 600 && window.outerHeight < 600 && window.outerWidth < 850) && !resized) {
+                resized = true;
                 this.nav.classList.remove('navigation-to-fit');
                 setTimeout(() => {
                     this.dropdownOpener = document.getElementById('dropdown-opener');
@@ -80,6 +82,9 @@ export default {
                     
                     prevWidth = window.outerWidth;
                     prevHeight = window.outerHeight;
+                }, 200);
+                setTimeout(() => {
+                    resized = false;
                 }, 200);
             }
         })
