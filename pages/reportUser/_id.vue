@@ -185,6 +185,10 @@ export default {
         
         textarea {
             min-height: 8rem;
+                
+            @media only screen and (max-width: 850px) {
+                min-height: 9rem;
+            }
         }
 
         .page-title {

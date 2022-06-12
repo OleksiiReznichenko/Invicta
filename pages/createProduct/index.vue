@@ -814,6 +814,10 @@ export default {
                             min-height: 8rem;
                             width: 100%;
                             padding: 1.25rem 2.5rem;
+                
+                            @media only screen and (max-width: 850px) {
+                                min-height: 9rem;
+                            }
                         }
                     }
 
