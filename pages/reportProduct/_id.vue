@@ -29,8 +29,7 @@
                             </div>
                             <div class="input-group">
                                 <label for="info">Info</label>
-                                <!-- <input class="" v-model="info" type="text" id="info" placeholder="Provide accurate info" required> -->
-                                <textarea @input="autoGrow" v-model="description" id="info" name="info" cols="30" rows="3" wrap="soft" placeholder="Provide accurate info"></textarea>
+                                <textarea @input="autoGrow" v-model="description" id="info" name="info" cols="30" wrap="soft" placeholder="Provide accurate info"></textarea>
                             </div>
                             <button @click="report" @submit="report" type="submit" class="btn btn-gradient btn-medium"><span>Report</span></button>
                         </form>
@@ -87,12 +86,8 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // GROW TEXTAREA ON TEXT WRAP
         autoGrow(e) {
-            e.target.style.height = this.minHeight + "px";
-            if (e.target.scrollHeight <= this.minHeight) {
-                e.target.style.height = this.minHeight + "px";
-            } else {
-                e.target.style.height = (e.target.scrollHeight) + "px";
-            }
+            e.target.style.height = "5px";
+            e.target.style.height = (e.target.scrollHeight) + "px";
         },
         
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,6 +191,10 @@ export default {
         input,
         textarea {
             width: 37rem;
+        }
+        
+        textarea {
+            min-height: 8rem;
         }
 
         .page-title {

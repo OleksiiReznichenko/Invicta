@@ -57,9 +57,9 @@
 
         <nuxt-link
         to="/login"
-          v-if="!isPhone && !isLoggedIn"
+          v-if="!isLoggedIn"
           key="nav-login-link"
-          class="btn btn-gradient"
+          class="btn btn-gradient login-button"
         >
         <span>Login</span>
         </nuxt-link>
@@ -368,6 +368,16 @@ export default {
         unfocusSearch(e) {
             this.nav.classList.remove('focused-search');
         },
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // UNFOCUS SEARCH EVENT
+        changeNotficationIconStyle(value) {
+            if (value === true) {
+              this.notificationsDropdownContainer.style.right = '0';
+            } else if (value === false) {
+              this.notificationsDropdownContainer.style.right = '13rem';
+            }
+        },
     },
 
     watch: {
@@ -385,6 +395,14 @@ export default {
                 this.$refs.searchResultsContainer.classList.remove('opened');
             }, 200);
           }
+      },
+      
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // CHANGE NOTIFICATIONS ICON RIGHT POSITION ON LOGGED IN
+      isLoggedIn(newValue, oldValue) {
+        this.nav.classList.remove('navigation-to-fit');
+        if (window.outerWidth > 850 || window.outerWidth < 850 && window.outerHeight < 600) return
+          this.changeNotficationIconStyle(newValue);
       }
     },
 
@@ -404,6 +422,9 @@ export default {
       this.dropdown = document.getElementById('dropdown');
       this.notificationsDropdown = document.getElementById('notifications-dropdown');
       this.notificationsDropdownOpener = document.getElementById('notifications-opener');
+      this.notificationsDropdownContainer = document.getElementById('notifications-opener-parent');
+
+      this.changeNotficationIconStyle(this.isLoggedIn);
 
       // CLOSE DROPDOWN AND CHANGE STYLES BACK ON UNFOCUS
       window.addEventListener('click', (e) => {
@@ -533,10 +554,10 @@ export default {
     align-items: center;
     transition: all .3s;
 
-    @media only screen and (max-width: 850px) and (min-height: 600px),
-    only screen and (max-width: 600px) {
-      order: 1;
-    }
+    // @media only screen and (max-width: 850px) and (min-height: 600px),
+    // only screen and (max-width: 600px) {
+    //   order: 1;
+    // }
   }
 
   &__right {
@@ -558,7 +579,7 @@ export default {
 
     @media only screen and (max-width: 850px) and (min-height: 600px),
     only screen and (max-width: 600px) {
-      margin-right: 0;
+      margin-right: 1rem;
       width: 3.5rem;
       height: 3.5rem;
     }
@@ -582,6 +603,19 @@ export default {
     }
   }
 
+  .login-button {
+    @media only screen and (max-width: 850px) and (min-height: 600px),
+    only screen and (max-width: 600px) {
+      position: absolute;
+      top: 0;
+      right: 0%;
+      padding: 1.25rem 0;
+      text-align: center;
+      width: 12rem;
+      font-weight: 500 !important;
+    }
+  }
+
   .notifications-container {
     position: relative;
 
@@ -589,8 +623,7 @@ export default {
     only screen and (max-width: 600px) {
       position: absolute;
       top: .8rem;
-      // right: -140%;
-      right: 0%;
+      right: 13rem;
     }
   }
 

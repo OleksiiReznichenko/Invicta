@@ -811,6 +811,7 @@ export default {
                         }
 
                         textarea {
+                            min-height: 8rem;
                             width: 100%;
                             padding: 1.25rem 2.5rem;
                         }
