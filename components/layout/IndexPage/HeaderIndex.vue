@@ -169,17 +169,17 @@ export default {
         // INIT 3D MODEL AND ANIMATION
         this.initAnimation();
 
-        let prevWidth = window.outerWidth;
-        let prevHeight = window.outerHeight;
+        // let prevWidth = window.outerWidth;
+        // let prevHeight = window.outerHeight;
 
         // RESIZE
         window.addEventListener('resize', () => {
-            if ((window.outerWidth < 1000 && (Math.abs(prevWidth - window.outerWidth) > 30 || 
-            Math.abs(prevHeight - window.outerHeight) > 50)) || window.outerWidth >= 1000) {
+            // if ((window.outerWidth < 1000 && (Math.abs(prevWidth - window.outerWidth) > 30 || 
+            // Math.abs(prevHeight - window.outerHeight) > 50)) || window.outerWidth >= 1000) {
                 this.onWindowResize();
-                prevWidth = window.outerWidth;
-                prevHeight = window.outerHeight;
-            }
+                // prevWidth = window.outerWidth;
+                // prevHeight = window.outerHeight;
+            // }
         });
     },
 

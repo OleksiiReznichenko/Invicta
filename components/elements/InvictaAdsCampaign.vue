@@ -503,6 +503,7 @@ export default {
 
             if (e.target.classList.contains('btn-remove-card') || e.target.parentNode.classList.contains('btn-remove-card')) {
                 this.currentAddCardContainer = e.target?.closest('.product-card-container-wrapper');
+                // console.log(this.currentAddCardContainer);
                 this.currentIndex = +this.currentAddCardContainer.querySelector('.product-card-container-index').textContent;
                 this.$store.commit('users/addProductCard', {userId: this.user.id, campaignId: this.id, index: this.currentIndex, cardId: null});
                 this.currentAddCardContainer.innerHTML = `
@@ -562,6 +563,9 @@ export default {
             const productCardId = productCard.querySelector('.product-id')?.textContent;
             this.$store.commit('users/addProductCard', {userId: this.user.id, campaignId: this.id, index: this.currentIndex, cardId: productCardId});
             this.currentAddCardContainer.innerHTML = '';
+            this.currentAddCardContainer.insertAdjacentHTML('beforeend', `
+                <div class="product-card-container-index">${this.currentIndex}</div>
+            `);
             this.currentAddCardContainer.appendChild(productCard);
             this.closeAddCardWindowFast();
         },

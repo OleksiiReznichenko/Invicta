@@ -619,6 +619,7 @@ export default {
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 .5rem 5rem rgba(black, .4);
+            pointer-events: none;
 
             @media only screen and (max-width: 850px) {
                 width: 100%;

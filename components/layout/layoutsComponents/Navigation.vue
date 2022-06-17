@@ -372,9 +372,10 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // UNFOCUS SEARCH EVENT
         changeNotficationIconStyle(value) {
-            if (value === true) {
+            // if (window.outerWidth > 850 || window.outerWidth < 850 && window.outerHeight < 600) return;
+            if (value === true || (window.outerWidth > 850 || window.outerWidth < 850 && window.outerHeight < 600)) {
               this.notificationsDropdownContainer.style.right = '0';
-            } else if (value === false) {
+            } else if (value === false && (window.outerWidth < 850 && window.outerHeight > 600)) {
               this.notificationsDropdownContainer.style.right = '13rem';
             }
         },
@@ -401,8 +402,7 @@ export default {
       // CHANGE NOTIFICATIONS ICON RIGHT POSITION ON LOGGED IN
       isLoggedIn(newValue, oldValue) {
         this.nav.classList.remove('navigation-to-fit');
-        if (window.outerWidth > 850 || window.outerWidth < 850 && window.outerHeight < 600) return
-          this.changeNotficationIconStyle(newValue);
+        this.changeNotficationIconStyle(newValue);
       }
     },
 
@@ -467,6 +467,7 @@ export default {
       // RESIZE
       window.addEventListener('resize', () => {
         this.dropdown = document.getElementById('dropdown');
+        this.changeNotficationIconStyle(this.isLoggedIn);
         if (window.outerWidth <= 850 && window.outerHeight > 600 && window.outerWidth > 600 || window.outerWidth < 600) {
             this.isPhoneInitial = true;
         } else {
