@@ -42,7 +42,7 @@
                             <div class="flex-container">
                                 <div class="input-group">
                                     <label for="type">Type</label>
-                                    <div class="select">
+                                    <div class="select type-select">
                                         <input ref="typeDropdownOpener" id="typeDropdownOpener" @click="toggleTypeDropdown" v-model="type" class="full-width" type="text" placeholder="Select the type" readonly>
                                         <img ref="typeDropdownArrow" id="typeDropdownArrow" src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                                         <div ref="typeSelectionDropdown" id="typeSelectionDropdown" class="options">
@@ -74,11 +74,11 @@
                             <div class="flex-container">
                                 <div class="input-group">
                                     <label for="price">Price</label>
-                                    <input v-model="price" type="number" class="input-validate" id="price" min="1" placeholder="99.99" required>
+                                    <input v-model="price" type="number" class="input-validate" id="price" min="1" step="any" placeholder="99.99" required>
                                 </div>
                                 <div class="input-group">
                                     <label for="oldPrice">Old price</label>
-                                    <input v-model="oldPrice" type="number" class="input-validate" id="oldPrice" min="1" placeholder="199.99">
+                                    <input v-model="oldPrice" type="number" class="input-validate" id="oldPrice" min="1" step="any" placeholder="199.99">
                                 </div>
                             </div>
                             <div class="flex-container">
@@ -167,6 +167,7 @@
         <div @click="closePreviewOnBackground" ref="addImageWindow" class="preview-window">
             <div class="center-container">
                 <ProductCard 
+                    class="product-card"
                     :name="title"
                     :photo="imageSrc"
                     :price="price"
@@ -574,6 +575,11 @@ export default {
 
     .center-container {
         @include abs-center;
+
+        .product-card {
+            width: 30rem;
+            height: 33rem;
+        }
     }
 
     .button-preview-close {
@@ -764,6 +770,10 @@ export default {
                                 margin-right: 0;
                             }
                         }
+                    }
+
+                    .type-select {
+                        z-index: 14000 !important;
                     }
 
                     .options {
