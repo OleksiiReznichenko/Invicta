@@ -52,6 +52,7 @@ export default {
             email: '',
             password: '',
             confirmPassword: '',
+            users: [],
         }
     },
 

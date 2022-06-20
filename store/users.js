@@ -4561,6 +4561,7 @@ export const mutations = {
             username: username,
             email: email,
             password: password,
+            isAdmin: false,
             balance: 0,
             avatar: '/projects/Invicta/defaultUserAvatar.jpg',
             registrationDate: date,

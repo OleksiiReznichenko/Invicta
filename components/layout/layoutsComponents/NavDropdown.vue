@@ -14,7 +14,7 @@
 
             <div v-if="!isLoggedIn" key="line-top" class="line line-top"></div>
 
-            <nuxt-link v-if="isLoggedIn" key="userLogin" :to="'/users/' + user.id" class="user">
+            <nuxt-link v-if="isLoggedIn" key="userLogin" :to="'/users/' + user.username" class="user">
                 <img
                     :src="user.avatar"
                     alt="Avatar"
