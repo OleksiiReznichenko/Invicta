@@ -38,8 +38,8 @@
 
 <script>
 export default {
-    middleware: ['notLoggedIn'],
-    
+    middleware: ['notLoggedIn', 'financialDemoDisabled'],
+
     data() {
         return {
             total: 5,
@@ -53,9 +53,9 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
         myUserId() {
-            return this.$store.state.user.id; 
+            return this.$store.state.user.id;
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER BALANCE
         balance() {
@@ -82,7 +82,7 @@ export default {
             // IF YOU DONT HAVE ENOGH MONEY - SHOW ERROR
             if (this.total > parseFloat(this.user.balance)) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'You don\'t have enough money', 
+                    text: 'You don\'t have enough money',
                     isBad: true
                 });
                 return;
@@ -137,7 +137,7 @@ export default {
             ]
 
             const month = months[monthNumber];
-            
+
             return `${day} ${month} ${year}, ${hours}:${minutesFormatted}`;
         }
     },
@@ -164,7 +164,7 @@ export default {
 
 .withdraw-id-page {
     min-height: calc(100vh - 11rem);
-            
+
     @media only screen and (max-width: 850px) {
         min-height: calc(100vh - 15rem);
     }
@@ -174,7 +174,7 @@ export default {
         right: -10rem;
         height: auto;
         width: 85rem;
-            
+
         @media only screen and (max-width: 850px) {
             display: none;
         }
@@ -184,7 +184,7 @@ export default {
     .content {
         position: relative;
         z-index: 100;
-            
+
         @media only screen and (max-width: 850px) {
             width: 66%;
             margin: 0 auto;
@@ -233,7 +233,7 @@ export default {
         .form,
         .form-container {
             width: fit-content;
-            
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }

@@ -86,9 +86,9 @@
                             <div class="line"></div>
                         </div>
                         <div class="products-list">
-                            <ProductCard 
+                            <ProductCard
                                 v-for="card in filteredProducts"
-                                :key="card.id + Math.random()"
+                                :key="card.id"
                                 :id="card.id"
                                 :name="card.name"
                                 :photo="card.photo"
@@ -151,8 +151,8 @@ export default {
             // CHECK IF THERE IS TYPE FILTRATION AND NO CATEGORY FILTRATION
             if (this.filteredTypeProductsArray.length > 0 && this.filteredCategoryProductsArray.length === 0) {
                 this.filteredProductsArray = this.filteredTypeProductsArray;
-            } 
-            
+            }
+
             // CHECK IF THERE IS CATEGORY FILTRATION
             if (this.filteredCategoryProductsArray.length > 0) {
                 this.filteredProductsArray = this.filteredCategoryProductsArray;
@@ -171,7 +171,7 @@ export default {
             // LIMIT AMOUNT OF PRODUCTS ON PAGE
             return this.finalArray.slice(this.sliceStart, this.sliceEnd);
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SORT PRICE TEXT
         sortPriceTextComp() {
@@ -201,7 +201,7 @@ export default {
                 this.productsArray.sort(this.fromExpensive)
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SORT FROM EXPENSIVE
         fromExpensive( a, b ) {
@@ -215,7 +215,7 @@ export default {
 
             return 0;
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SORT FROM CHEAP
         fromCheap( a, b ) {
@@ -229,7 +229,7 @@ export default {
 
             return 0;
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // TYPE FILTRATION FUNCTIONAL
         typeFiltration(e) {
@@ -272,7 +272,7 @@ export default {
                     this.productsPagination.style.display = 'none';
                 } else {
                     this.productsPagination.style.display = 'flex';
-                    
+
                     if (window.outerWidth < 850) {
                         this.$refs.nextButtonSpanLoad.textContent = 'Load more';
                         this.$refs.nextButton.classList.remove('button-to-top');
@@ -282,7 +282,7 @@ export default {
                 // UPDATE VARIABLES
                 this.prevType = this.type;
                 this.sliceStart = 0;
-                
+
                 // CHANGE PARAMETERS FOR MOBILE & DESKTOP VERSIONS
                 if (window.outerWidth > 850) {
                     this.sliceEnd = 9;
@@ -298,7 +298,7 @@ export default {
                 this.categoryFiltrationPart();
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CATEGORY FILTRATION FUNCTIONAL
         categoryFiltrationPart() {
@@ -346,7 +346,7 @@ export default {
 
             // UPDATE VARIABLES
             this.sliceStart = 0;
-                
+
             // CHANGE PARAMETERS FOR MOBILE & DESKTOP VERSIONS
             if (window.outerWidth > 850) {
                 this.sliceEnd = 9;
@@ -355,7 +355,7 @@ export default {
                 this.sliceEnd = 20;
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CATEGORY FILTRATION (CATEGORY SELECTION & CATEGORY ACTIVE CLASSES MANIPULATION)
         categoryFiltration(e) {
@@ -378,7 +378,7 @@ export default {
                 this.categoryFiltrationPart();
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // NEXT BUTTON FUNCTIONAL
         nextProductsPageButton() {
@@ -402,12 +402,12 @@ export default {
                 if (this.$refs.prevButton.style.display === 'none') {
                     this.$refs.prevButton.style.display = 'flex';
                 }
-                
+
                 // IF NOT MOBILE UPDATE SLICE START VALUE
                 if (window.outerWidth > 850) {
                     this.sliceStart += this.amountOfProductsInPage;
                 }
-                
+
                 // UPDATE SLICE END VALUE AND CURRENT PAGE NUMBER
                 this.sliceEnd += this.amountOfProductsInPage;
                 this.currentProductsPage += 1;
@@ -423,10 +423,10 @@ export default {
                     this.$refs.nextButton.classList.add('button-to-top');
                 }
             }
-                
+
             this.paginationOnButtons();
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PREV BUTTON FUNCTIONAL
         prevProductsPageButton() {
@@ -435,7 +435,7 @@ export default {
                 if (this.$refs.prevButton.style.display === 'none') {
                     this.$refs.prevButton.style.display = 'flex';
                 }
-                
+
                 // SHOW NEXT BUTTON IF IT WAS HIDDEN
                 if (this.$refs.nextButton.style.display === 'none') {
                     this.$refs.nextButton.style.display = 'flex';
@@ -451,10 +451,10 @@ export default {
                     this.$refs.prevButton.style.display = 'none';
                 }
             }
-                
+
             this.paginationOnButtons();
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PAGINATION FUNCTIONAL WHEN USE PREV & NEXT BUTTONS
         paginationOnButtons() {
@@ -535,7 +535,7 @@ export default {
                 }
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PAGINATION FUNCTIONAL
         pagination(e) {
@@ -613,7 +613,7 @@ export default {
             }
 
             // CHECK IF CLICKED PAGINATION BUTTON IS THE FIRST BUTTON AND AMOUNT OF PAGES
-            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW 
+            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW
             // LAST PAGINATION DOTS & HIDE FIRST PAGINATION DOTS
             if (e.target.classList.contains('page-number--first') && this.productsPages >= 6) {
                 this.pageDotsLast.style.display = 'inline-block';
@@ -624,7 +624,7 @@ export default {
             }
 
             // CHECK IF CLICKED PAGINATION BUTTON IS THE LAST BUTTON AND AMOUNT OF PAGES
-            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW 
+            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW
             // FIRST PAGINATION DOTS & HIDE LAST PAGINATION DOTS
             if (e.target.classList.contains('page-number--last') && this.productsPages >= 6) {
                 this.pageDotsFirst.style.display = 'inline-block';
@@ -709,7 +709,7 @@ export default {
             this.pageNumberCentralCentral.textContent = 3;
             this.pageNumberCentralRight.textContent = 4;
             this.pageNumberLast.textContent = this.productsPages;
-            
+
             // REINIT BASIC VARIABLES
             this.sliceStart = 0;
             this.sliceEnd = 9;
@@ -754,7 +754,7 @@ export default {
         productsArrayBase.forEach((item) => {
             this.productsArray.push(item);
         });
-        
+
         // SORT LOCAL ARRAY
         this.productsArray.sort(this.fromExpensive);
     },
@@ -781,7 +781,7 @@ export default {
 
         // FIRST PAGINATION BUTTON DISPLAY TO NONE
         this.$refs.prevButton.style.display = 'none';
-        
+
         // CHECK AMOUNT OF PRODUCT PAGES & SHOW OR HIDE PAGINATION
         if (this.productsPages < 2) {
             this.productsPagination.style.display = 'none';
@@ -827,11 +827,11 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    
+
     a {
         color: $color-text-grey-dark;
         transition: all .3s;
-            
+
         @media only screen and (max-width: 850px) {
             font-size: 1.6rem;
         }
@@ -897,7 +897,7 @@ export default {
                 align-items: center;
                 cursor: pointer;
                 transition: all .3s;
-            
+
                 @media only screen and (max-width: 850px) {
                     font-size: 1.8rem;
                 }
@@ -909,7 +909,7 @@ export default {
                 .arrow {
                     transform: rotate(-180deg);
                     width: 1.25rem;
-            
+
                     @media only screen and (max-width: 850px) {
                         width: 1.75rem;
                     }
@@ -924,7 +924,7 @@ export default {
 
         .main-content {
             display: flex;
-            
+
             @media only screen and (max-width: 850px) {
                 flex-direction: column;
             }
@@ -934,7 +934,7 @@ export default {
                 width: 20rem !important;
                 margin-top: 50px;
                 margin-right: 14rem;
-            
+
                 @media only screen and (max-width: 1100px) {
                     margin-right: 10rem;
                 }
@@ -1123,7 +1123,7 @@ export default {
 
             .products-container {
                 width: 100%;
-                
+
                 .no-products {
                     width: 45rem;
                     display: none;
@@ -1161,7 +1161,7 @@ export default {
                     align-items: center;
                     position: relative;
                     width: 100%;
-                    
+
                     @media only screen and (max-width: 850px) {
                         justify-content: center;
                     }
@@ -1169,7 +1169,7 @@ export default {
                     .page-numbers {
                         display: flex;
                         @include abs-center;
-                        
+
                         @media only screen and (max-width: 850px) {
                             display: none;
                         }
@@ -1248,7 +1248,7 @@ export default {
                             width: 1rem;
                             margin-left: 1rem;
                             margin-bottom: -2px;
-                            
+
                             @media only screen and (max-width: 850px) {
                                 transform: rotate(0);
                                 width: 1.5rem;
@@ -1283,7 +1283,7 @@ export default {
                         }
                     }
                 }
-            }            
+            }
         }
     }
 }

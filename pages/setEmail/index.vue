@@ -34,7 +34,7 @@
 
 <script>
 export default {
-    middleware: ['loggedIn'],
+    middleware: ['loggedIn', 'demoDisabled'],
 
     data() {
         return {
@@ -69,7 +69,7 @@ export default {
             // IF EMAIL DOESNT EXIST - SHOW ERROR
             if (!isEmailCorrect) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'There is no account with that email', 
+                    text: 'There is no account with that email',
                     isBad: true
                 });
                 return;
@@ -98,7 +98,7 @@ export default {
 <style lang="scss" scoped>
 .send-code-page {
     min-height: calc(100vh - 11rem);
-            
+
     @media only screen and (max-width: 850px) {
         min-height: calc(100vh - 15rem);
     }
@@ -112,7 +112,7 @@ export default {
     .content {
         position: relative;
         z-index: 100;
-            
+
         @media only screen and (max-width: 850px) {
             width: 66%;
             margin: 0 auto;
@@ -130,7 +130,7 @@ export default {
             height: auto !important;
             width: 55rem;
             bottom: -8rem;
-            
+
             @media only screen and (max-width: 850px) {
                 display: none;
             }
@@ -140,7 +140,7 @@ export default {
             display: flex;
             align-items: center;
             margin-top: 3rem;
-            
+
             .btn {
                 margin-top: 0 !important;
                 margin-right: 2rem;
@@ -158,7 +158,7 @@ export default {
 
         .info {
             width: 36rem;
-    
+
             @media only screen and (max-width: 850px) {
                 width: 40rem !important;
             }
@@ -170,12 +170,12 @@ export default {
 
         input {
             width: 36rem;
-            
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }
         }
-        
+
         .info {
             color: $color-text-grey;
             font-size: 1.5rem;
@@ -184,7 +184,7 @@ export default {
 
         .form {
             width: fit-content;
-            
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }

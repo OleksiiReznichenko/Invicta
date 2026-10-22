@@ -36,7 +36,7 @@
                             <div class="top-container">
                                 <h3 v-if="item.chat.messages.length == 0" class="no-messages">No messages yet</h3>
                                 <div v-if="item.chat.messages.length > 0" class="messages">
-                                    <ChatMessage 
+                                    <ChatMessage
                                     v-for="message in item.chat.messages"
                                     :key="message.id"
                                     :person='message.person === "buyer" ? user : seller'
@@ -48,7 +48,7 @@
                             </div>
                             <div class="input-container">
                                 <EmojiPicker class="emoji-main-container" @emoji="onEmoji">
-                                    <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" 
+                                    <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }"
                                         @click.stop="clickEvent">
                                         <button class="emoji-btn" type="button">
                                             <img src="@/assets/svg/emojiButton.svg" alt="Emoji button" class="emoji-icon">
@@ -84,7 +84,7 @@
                                     <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                                 </div>
                                 <div class="notifications-list description-container">
-                                    <ChatNotification 
+                                    <ChatNotification
                                     v-for="notification in item.chat.notifications"
                                     :key="notification.id"
                                     :text='notification.text'
@@ -123,7 +123,7 @@
                                 <p class="description">
                                     If the terms of the deal have not been fulfilled, let us know.
                                 </p>
-                                <a class="support-link" href="https://t.me/invictacards" target="_blank">Write to support</a>
+                                <a class="support-link" href="#" target="_blank">Write to support</a>
                             </div>
                         </div>
                         <button @click="validateEvent" :class="{'validated': isValidated}" class="validate-button">{{buttonContent}}</button>
@@ -237,7 +237,7 @@ export default {
         validateEvent() {
             // IF THIS ITEM IS ALREADY VALIDATED - STOP
             if (this.isValidated) return;
-            
+
             // SET STATUS TO VALIDATED
             this.$store.commit('users/statusToValidated', {item: this.item});
 
@@ -250,7 +250,7 @@ export default {
 
             // SEND NOTIFICATION
             this.$store.commit('users/addNotification', {
-                item: this.item, 
+                item: this.item,
                 notification: notificationObject
             });
         },
@@ -318,7 +318,7 @@ export default {
             ]
 
             const month = months[monthNumber];
-            
+
             return `${day} ${month}, ${hours}:${minutesFormatted}`;
         },
 
@@ -328,7 +328,7 @@ export default {
             e.preventDefault();
 
             this.validateMessageValue();
-            
+
             // IF THERE IS NO MESSAGE - STOP
             if (!this.newMessageValidated) return;
 
@@ -360,7 +360,7 @@ export default {
             if (this.item || el.id !== this.$route.params.id) return;
             return el;
         })
-        
+
         // PRODUCTS ARRAY
         const productsArray = this.$store.state.products.products;
 
@@ -370,7 +370,7 @@ export default {
                 return product;
             }
         })
-        
+
         // FIND SELLER IN USERS ARRAY
         this.sellerFound = this.$store.state.users.users.find(el => {
             if (el.id === this.product.sellerId) {
@@ -464,7 +464,7 @@ export default {
                         object-fit: cover;
                         border-radius: 100%;
                         margin-right: 1.75rem;
-                        
+
                         @media only screen and (max-width: 850px) {
                             margin-right: 3rem;
                             border-radius: 10px;
@@ -621,7 +621,7 @@ export default {
                             left: 2rem;
                             top: 53%;
                             transform: translateY(-50%);
-                            
+
                             .emoji-picker-wrapper {
                                 position: absolute;
                                 left: 0;
@@ -726,22 +726,22 @@ export default {
                         padding: 2rem 4rem;
 
                         &:first-of-type {
-                           padding: 3rem 4rem 2rem; 
+                           padding: 3rem 4rem 2rem;
                         }
 
                         &:last-of-type {
-                           padding: 2rem 4rem 3rem; 
+                           padding: 2rem 4rem 3rem;
                         }
 
                         @media only screen and (max-width: 850px) {
                             padding: 2rem 6rem;
 
                             &:first-of-type {
-                            padding: 3rem 6rem 2rem; 
+                            padding: 3rem 6rem 2rem;
                             }
 
                             &:last-of-type {
-                            padding: 2rem 6rem 3rem; 
+                            padding: 2rem 6rem 3rem;
                             }
                         }
 

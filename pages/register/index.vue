@@ -44,7 +44,7 @@
 
 <script>
 export default {
-    middleware: ['loggedIn'],
+    middleware: ['loggedIn', 'demoDisabled'],
 
     data() {
         return {
@@ -77,7 +77,7 @@ export default {
             // IF USER EMAIL CONTAINS WHITE SPACE - SHOW ERROR
             if (this.username.includes(' ')) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'Username can\'t contain white space', 
+                    text: 'Username can\'t contain white space',
                     isBad: true
                 });
                 this.$refs.usernameInput.focus();
@@ -89,7 +89,7 @@ export default {
                 if (user.username === this.username) {
                     isUsernameTaken = true;
                 }
-                
+
                 if (user.email === this.email) {
                     isEmailTaken = true;
                 }
@@ -98,7 +98,7 @@ export default {
             // IF USERNAME IS TAKEN - SHOW ERROR
             if (isUsernameTaken) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'This username is taken', 
+                    text: 'This username is taken',
                     isBad: true
                 });
                 this.$refs.usernameInput.focus();
@@ -108,28 +108,28 @@ export default {
             // IF USER EMAIL IS TAKEN - SHOW ERROR
             if (isEmailTaken) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'This email is taken', 
+                    text: 'This email is taken',
                     isBad: true
                 });
                 this.$refs.emailInput.focus();
                 return;
             }
-            
+
             // IF PASSWORD AND CONFIRM PASSWORD ARE NOT THE SAME - SHOW ERROR
             if (this.password !== this.confirmPassword) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'The password and confirm password must be the same', 
+                    text: 'The password and confirm password must be the same',
                     isBad: true
                 });
                 this.$refs.confirmPasswordInput.focus();
                 return;
             }
-            
+
             // REGISTER USER EVENT
             this.$store.commit('users/addUser', {
                 id: (this.$_uid * Date.now()).toString(),
-                username: this.username, 
-                email: this.email, 
+                username: this.username,
+                email: this.email,
                 password: this.password,
             });
 
@@ -163,7 +163,7 @@ export default {
 <style lang="scss" scoped>
 .register-page {
     min-height: calc(100vh - 11rem);
-            
+
     @media only screen and (max-width: 850px) {
         min-height: calc(100vh - 15rem);
     }
@@ -177,7 +177,7 @@ export default {
     .content {
         position: relative;
         z-index: 100;
-            
+
         @media only screen and (max-width: 850px) {
             width: 66%;
             margin: 0 auto;
@@ -194,7 +194,7 @@ export default {
         .graph-image {
             height: auto !important;
             width: 65rem;
-            
+
             @media only screen and (max-width: 850px) {
                 display: none;
             }
@@ -204,7 +204,7 @@ export default {
             display: flex;
             align-items: center;
             margin-top: 3rem;
-            
+
             .btn {
                 margin-top: 0 !important;
                 margin-right: 2rem;
@@ -222,7 +222,7 @@ export default {
 
         input {
             width: 36rem;
-            
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }
@@ -230,7 +230,7 @@ export default {
 
         .form {
             width: fit-content;
-            
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }

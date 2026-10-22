@@ -30,11 +30,11 @@
                                 <img src="@/assets/svg/checkMark2.svg" alt="Check mark" class="check-mark">
                                 <label for="checkbox">Remember me</label>
                             </div>
-                            <nuxt-link to="/setEmail" class="forgot-password">Forgot password?</nuxt-link>
+                            <nuxt-link to="/browse" class="forgot-password">Browse as guest</nuxt-link>
                         </div>
                         <div class="buttons">
                             <button @click="login" @submit="login" type="submit" class="btn btn-gradient btn-big"><span>Sign in</span></button>
-                            <nuxt-link to="/register" class="register-link">Register</nuxt-link>
+                            <nuxt-link to="/" class="register-link">Back to home</nuxt-link>
                         </div>
                         <div class="demo-access">
                             <span>Just looking around?</span>

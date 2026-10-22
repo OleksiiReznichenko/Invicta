@@ -18,13 +18,17 @@
                 </ul>
             </div>
             <ul>
-                <h4>Account</h4>
+                <h4>{{ isLoggedIn ? 'Account' : 'Demo' }}</h4>
                 <li v-if="!isLoggedIn">
-                    <nuxt-link to="/login">Login</nuxt-link>
+                    <nuxt-link to="/login">Explore demo</nuxt-link>
                 </li>
-                <li v-if="!isLoggedIn">
-                    <nuxt-link to="/register">Register</nuxt-link>
-                </li>
+                <a
+                    href="https://github.com/OleksiiReznichenko/Invicta"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Source code
+                </a>
                 <li v-if="isLoggedIn">
                     <nuxt-link :to="'/users/' + user.id">Profile</nuxt-link>
                 </li>

@@ -15,7 +15,7 @@
                 </p>
                 <div class="buttons">
                     <div class="btn-container btn-gradient-container">
-                        <nuxt-link v-if="!isLoggedIn" key="beforeLogin" class="btn btn-gradient" to="/register"><span>Sign up</span></nuxt-link>
+                        <nuxt-link v-if="!isLoggedIn" key="beforeLogin" class="btn btn-gradient" to="/login"><span>Explore demo</span></nuxt-link>
                         <nuxt-link v-if="isLoggedIn" key="afterLogin" class="btn btn-gradient" to="/createProduct"><span>Create product</span></nuxt-link>
                     </div>
                     <div class="btn-container btn-transparent-container">

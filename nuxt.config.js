@@ -7,8 +7,8 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: 'Archived frontend demo of Invicta, a digital marketplace built with Nuxt, Vue and JavaScript.' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [

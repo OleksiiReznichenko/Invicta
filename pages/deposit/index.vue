@@ -37,7 +37,7 @@
 
 <script>
 export default {
-    middleware: ['notLoggedIn'],
+    middleware: ['notLoggedIn', 'financialDemoDisabled'],
 
     data() {
         return {
@@ -52,7 +52,7 @@ export default {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER
         myUserId() {
-            return this.$store.state.user.id; 
+            return this.$store.state.user.id;
         },
     },
 
@@ -122,7 +122,7 @@ export default {
             ]
 
             const month = months[monthNumber];
-            
+
             return `${day} ${month} ${year}, ${hours}:${minutesFormatted}`;
         }
     },
@@ -144,7 +144,7 @@ export default {
 <style lang="scss" scoped>
 .deposit-id-page {
     min-height: calc(100vh - 11rem);
-            
+
     @media only screen and (max-width: 850px) {
         min-height: calc(100vh - 15rem);
     }
@@ -154,7 +154,7 @@ export default {
         right: -10rem;
         height: auto;
         width: 85rem;
-            
+
         @media only screen and (max-width: 850px) {
             display: none;
         }
@@ -164,7 +164,7 @@ export default {
     .content {
         position: relative;
         z-index: 100;
-            
+
         @media only screen and (max-width: 850px) {
             width: 66%;
             margin: 0 auto;
@@ -213,7 +213,7 @@ export default {
         .form,
         .form-container {
             width: fit-content;
-            
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }

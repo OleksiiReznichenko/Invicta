@@ -28,7 +28,7 @@
         <div v-if="orders && orders.length > 0" ref="orders" class="orders">
             <OrderItem
             v-for="(order, i) in filteredOrders"
-            :key="i"
+            :key="order.id"
             :id='order.id'
             :productTitle='order.productTitle'
             :productPhoto='order.productPhoto'
@@ -105,14 +105,14 @@ export default {
         searchValue() {
             this.validateSearchValue();
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REINIT PAGINATION ON ARRAY CHANGE
         'finalArray.length'() {
             this.paginationInit();
         }
     },
-    
+
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REMOVE EXCESSIVE WHITE SPACES IN VALUE AND CONVERT TO LOWERCASE
@@ -133,7 +133,7 @@ export default {
                 this.searchValueValidated = this.searchValue.toLowerCase();
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PREV BUTTON FUNCTIONAL
         prev() {
@@ -142,7 +142,7 @@ export default {
                 if (this.$refs.prevButton.classList.contains('disabled-button')) {
                     this.$refs.prevButton.classList.remove('disabled-button');
                 }
-                
+
                 // SHOW NEXT BUTTON IF IT WAS HIDDEN
                 if (this.$refs.nextButton.classList.contains('disabled-button')) {
                     this.$refs.nextButton.classList.remove('disabled-button');
@@ -158,10 +158,10 @@ export default {
                     this.$refs.prevButton.classList.add('disabled-button');
                 }
             }
-                
+
             this.paginationOnButtons();
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // NEXT BUTTON FUNCTIONAL
         next() {
@@ -178,10 +178,10 @@ export default {
                 if (this.$refs.prevButton.classList.contains('disabled-button')) {
                     this.$refs.prevButton.classList.remove('disabled-button');
                 }
-                
+
                 // IF NOT MOBILE UPDATE SLICE START VALUE
                 this.sliceStart += this.amountOfItemsInPage;
-                
+
                 // UPDATE SLICE END VALUE AND CURRENT PAGE NUMBER
                 this.sliceEnd += this.amountOfItemsInPage;
                 this.currentProductsPage += 1;
@@ -190,10 +190,10 @@ export default {
                     this.$refs.nextButton.classList.add('disabled-button');
                 }
             }
-                
+
             this.paginationOnButtons();
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PAGINATION FUNCTIONAL WHEN USE PREV & NEXT BUTTONS
         paginationOnButtons() {
@@ -274,7 +274,7 @@ export default {
                 }
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // PAGINATION FUNCTIONAL
         paginationFunc(e) {
@@ -352,7 +352,7 @@ export default {
             }
 
             // CHECK IF CLICKED PAGINATION BUTTON IS THE FIRST BUTTON AND AMOUNT OF PAGES
-            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW 
+            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW
             // LAST PAGINATION DOTS & HIDE FIRST PAGINATION DOTS
             if (e.target.classList.contains('page-number--first') && this.productsPages >= 6) {
                 this.pageDotsLast.style.display = 'inline-block';
@@ -363,7 +363,7 @@ export default {
             }
 
             // CHECK IF CLICKED PAGINATION BUTTON IS THE LAST BUTTON AND AMOUNT OF PAGES
-            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW 
+            // IS MORE THAN 6 IF SO UPDATE CENTRAL PAGINATION BUTTONS NUMBERS & SHOW
             // FIRST PAGINATION DOTS & HIDE LAST PAGINATION DOTS
             if (e.target.classList.contains('page-number--last') && this.productsPages >= 6) {
                 this.pageDotsFirst.style.display = 'inline-block';
@@ -448,7 +448,7 @@ export default {
             this.pageNumberCentralCentral.textContent = 3;
             this.pageNumberCentralRight.textContent = 4;
             this.pageNumberLast.textContent = this.productsPages;
-            
+
             // REINIT BASIC VARIABLES
             this.sliceStart = 0;
             this.sliceEnd = 10;
@@ -517,7 +517,7 @@ export default {
             flex-direction: column;
             justify-content: center;
         }
-            
+
         .disabled-button {
             cursor: default !important;
             pointer-events: none !important;

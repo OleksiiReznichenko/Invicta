@@ -153,7 +153,7 @@ export const state = () => {
                 profileBanner: '/backProfileImage.png',
                 discordId: '',
                 telegramUsername: telegramUsername || '',
-                referralLink: 'https://invicta.cards/register/6632f60f652',
+                referralLink: '#',
                 achievements: {
                     achievementHeart: achievements[0],
                     achievementComment: achievements[1],
@@ -165,7 +165,9 @@ export const state = () => {
                 topBanner: null,
                 sideBanner: null,
                 campaigns: createCampaigns(),
-                products: DEMO_PROFILE_PRODUCTS.map(product => ({ ...product }))
+                products: DEMO_PROFILE_PRODUCTS
+                    .filter(product => product.sellerId === profile.id)
+                    .map(product => ({ ...product }))
             };
         })
     };
@@ -588,7 +590,7 @@ export const mutations = {
             profileBanner: '/backProfileImage.png',
             discordId: '',
             telegramUsername: '',
-            referralLink: 'https://invicta.cards/register/6632f60f652',
+            referralLink: '#',
             achievements: {
                 achievementHeart: false,
                 achievementComment: false,

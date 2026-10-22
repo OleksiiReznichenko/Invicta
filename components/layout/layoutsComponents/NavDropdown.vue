@@ -56,8 +56,8 @@
             <nuxt-link to="/login" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></nuxt-link>
 
             <div v-if="isLoggedIn" key="buttonsDropdown" class="buttons">
-                <nuxt-link to="/deposit" class="btn btn-blue"><span>Deposit</span></nuxt-link>
-                <nuxt-link to="/withdraw" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
+                <!-- <nuxt-link to="/deposit" class="btn btn-blue"><span>Deposit</span></nuxt-link>
+                <nuxt-link to="/withdraw" class="btn btn-blue"><span>Withdraw</span></nuxt-link> -->
                 <nuxt-link to="/dashboard" class="btn btn-pink"><span>Seller Dashboard</span></nuxt-link>
                 <nuxt-link v-if="user.isAdmin" to="/adminDashboard" class="btn btn-pink"><span>Admin Dashboard</span></nuxt-link>
                 <nuxt-link to="/createProduct" class="btn btn-gradient"><div class="background"></div><span>Create product</span></nuxt-link>
