@@ -89,7 +89,7 @@ export default {
         component: resolve(__dirname, '~/pages/browse/index.vue')
       })
     },
-    middleware: ['isPageExist', 'checkLogin'],
+    middleware: ['isPageExist'],
     base: '/',
     linkActiveClass: 'active-link'
   },
