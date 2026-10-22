@@ -36,7 +36,7 @@
                             <div class="top-container">
                                 <h3 v-if="order.chat.messages.length == 0" class="no-messages">No messages yet</h3>
                                 <div v-if="order.chat.messages.length > 0" class="messages">
-                                    <ChatMessage 
+                                    <ChatMessage
                                     v-for="message in order.chat.messages"
                                     :key="message.id"
                                     :person='message.person === "seller" ? user : buyer'
@@ -48,7 +48,7 @@
                             </div>
                             <div class="input-container">
                                 <EmojiPicker class="emoji-main-container" @emoji="onEmoji">
-                                    <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" 
+                                    <div class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }"
                                         @click.stop="clickEvent">
                                         <button class="emoji-btn" type="button">
                                             <img src="@/assets/svg/emojiButton.svg" alt="Emoji button" class="emoji-icon">
@@ -84,7 +84,7 @@
                                     <img src="@/assets/svg/arrowSmall.svg" alt="Arrow" class="arrow">
                                 </div>
                                 <div class="notifications-list description-container">
-                                    <ChatNotification 
+                                    <ChatNotification
                                     v-for="notification in order.chat.notifications"
                                     :key="notification.id"
                                     :text='notification.text'
@@ -243,7 +243,7 @@ export default {
             // IF INPUT IS NOT VALIDATED BY BUYER - SHOW ERROR
             if (!this.isValidated) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'Buyer needs to validate this order first', 
+                    text: 'Buyer needs to validate this order first',
                     isBad: true
                 });
                 return;
@@ -251,7 +251,7 @@ export default {
 
             // IF THIS ORDER IS ALREADY CONFIRMED - STOP
             if (this.isConfirmed) return;
-            
+
             // SET STATUS TO CONFIRMED
             this.$store.commit('users/statusToConfirmed', {item: this.order});
 
@@ -264,7 +264,7 @@ export default {
 
             // SEND NOTIFICATION
             this.$store.commit('users/addNotification', {
-                item: this.order, 
+                item: this.order,
                 notification: notificationObject
             });
         },
@@ -332,7 +332,7 @@ export default {
             ]
 
             const month = months[monthNumber];
-            
+
             return `${day} ${month}, ${hours}:${minutesFormatted}`;
         },
 
@@ -365,33 +365,35 @@ export default {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // FIND AND LOAD THE ORDER
-    created () {
-        // MY ORDERS ARRAY
-        const ordersArray = this.orders;
+    created() {
+        const orderId = this.$route.params.id;
 
-        // FIND ORDER IN MY ORDERS ARRAY
-        this.order = ordersArray.find(el => {
-            if (this.order || el.id !== this.$route.params.id) return;
-            return el;
-        })
+        this.order = this.orders.find(
+            order => order.id === orderId
+        );
 
-        // PRODUCTS ARRAY
-        const productsArray = this.$store.state.products.products;
+        if (!this.order) {
+            this.$router.replace('/orders');
+            return;
+        }
 
-        // FIND PRODUCT IN PRODUCTS ARRAY
-        this.product = productsArray.find(product => {
-            if (product.id === this.order.productId) {
-                return product;
-            }
-        })
-        
-        // FIND BUYER
-        this.buyerFound = this.$store.state.users.users.find(el => {
-            if (el.id === this.order.buyerId) {
-                return el;
-            }
-        })
-    },
+        this.product = this.$store.state.products.products.find(
+            product => product.id === this.order.productId
+        );
+
+        if (!this.product) {
+            this.$router.replace('/orders');
+            return;
+        }
+
+        this.buyerFound = this.$store.state.users.users.find(
+            user => user.id === this.order.buyerId
+        );
+
+        if (!this.buyerFound) {
+            this.$router.replace('/orders');
+        }
+    }
 }
 </script>
 
@@ -479,7 +481,7 @@ export default {
                         object-fit: cover;
                         border-radius: 100%;
                         margin-right: 1.75rem;
-                        
+
                         @media only screen and (max-width: 850px) {
                             margin-right: 3rem;
                             border-radius: 10px;
@@ -632,7 +634,7 @@ export default {
                             left: 2rem;
                             top: 53%;
                             transform: translateY(-50%);
-                            
+
                             .emoji-picker-wrapper {
                                 position: absolute;
                                 left: 0;
@@ -737,22 +739,22 @@ export default {
                         padding: 2rem 4rem;
 
                         &:first-of-type {
-                           padding: 3rem 4rem 2rem; 
+                           padding: 3rem 4rem 2rem;
                         }
 
                         &:last-of-type {
-                           padding: 2rem 4rem 3rem; 
+                           padding: 2rem 4rem 3rem;
                         }
 
                         @media only screen and (max-width: 850px) {
                             padding: 2rem 6rem;
 
                             &:first-of-type {
-                            padding: 3rem 6rem 2rem; 
+                            padding: 3rem 6rem 2rem;
                             }
 
                             &:last-of-type {
-                            padding: 2rem 6rem 3rem; 
+                            padding: 2rem 6rem 3rem;
                             }
                         }
 

@@ -3,12 +3,14 @@
         <header class="section">
             <img src="@/assets/img/gridIndexHeader.png" alt="Grid" class="grid-image">
             <div class="info">
-                <span class="border-text-blue">buy, sell & save money</span>
+                <span class="border-text-blue">gift cards & digital products</span>
                 <h1>
                     T<img src="@/assets/svg/bigH.svg" alt="H" class="h">e best giftcard hub
                 </h1>
                 <p>
-                    Led as possible mistress relation elegance eat likewise debating. <br> By message or am nothing amongst chiefly address. The its enable direct men depend highly. Ham windows sixteen who inquiry fortune demands. Is be upon sang fond must show.
+                    Browse gift cards and digital products from different sellers.
+                    Explore categories, compare offers and find what you're
+                    looking for, all in one place.
                 </p>
                 <div class="btn-container">
                     <nuxt-link class="btn btn-transparent" to="/browse"><div class="background"></div><span>Browse products</span></nuxt-link>

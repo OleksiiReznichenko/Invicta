@@ -2,7 +2,7 @@
     <footer class="section-page">
         <div class="left">
             <img src="@/assets/img/logoText.png" alt="Logo" class="logo">
-            <p class="paragraph-primary">The best giftcard hub.</p>
+            <p class="paragraph-primary">A marketplace for gift cards and digital products.</p>
             <p class="paragraph-secondary">Copyright © 2022 invicta.cards. <br> All rights reserved.</p>
         </div>
         <div class="right">
@@ -14,15 +14,6 @@
                     </li>
                     <li>
                         <nuxt-link to="/browse">Browse</nuxt-link>
-                    </li>
-                </ul>
-                <ul>
-                    <h4>Info</h4>
-                    <li>
-                        <nuxt-link to="/termsOfService">Terms of service</nuxt-link>
-                    </li>
-                    <li>
-                        <a href="https://t.me/invictacards" target="_blank">Support</a>
                     </li>
                 </ul>
             </div>
@@ -191,7 +182,7 @@ footer {
     .logo {
         width: 17rem;
         margin-left: -4px;
-        
+
         @media only screen and (max-width: 450px) {
             width: 20rem;
         }

@@ -3,6 +3,20 @@
         <Preloader />
         <div ref="notificationWindow" id="notificationWindow"></div>
         <Navigation/>
+        <div v-if="showDemoNotice" class="demo-notice">
+          <span>
+              Frontend demo with sample accounts and data. No real purchases or payments.
+          </span>
+
+          <button
+              type="button"
+              class="demo-notice-close"
+              aria-label="Close notice"
+              @click="showDemoNotice = false"
+          >
+              &times;
+          </button>
+        </div>
         <nuxt class="on-top" />
     </div>
 </template>
@@ -16,7 +30,13 @@ export default {
         Navigation,
         Preloader,
     },
-    
+
+    data() {
+      return {
+        showDemoNotice: true,
+      };
+    },
+
     watch: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // REINIT NAVIGATION DROPDOWN ON LOG IN & LOG OUT
@@ -79,7 +99,7 @@ export default {
                     this.dropdown = document.getElementById('dropdown');
                     this.closeNavBtn = document.querySelector('.close-nav-btn');
                     this.$store.dispatch('dropdownFunctional', {dropdownOpener: this.dropdownOpener, dropdown: this.dropdown, nav: this.nav, closeNavBtn: this.closeNavBtn});
-                    
+
                     prevWidth = window.outerWidth;
                     prevHeight = window.outerHeight;
                 }, 200);
@@ -105,12 +125,67 @@ export default {
 </style>
 
 <style lang='scss'>
+.demo-notice {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    max-width: 420px;
+    padding: 12px 14px 12px 16px;
+
+    font-size: 13px;
+    line-height: 1.5;
+    color: #c9c9d1;
+
+    background: rgba(28, 28, 36, 0.95);
+    border: 1px solid #383844;
+    border-radius: 8px;
+    z-index: 1000000;
+
+    .demo-notice-close {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        padding: 0;
+
+        background: transparent;
+        color: #c9c9d1;
+
+        font-size: 22px;
+        line-height: 1;
+        transition: all .2s;
+
+        &:hover {
+            color: #fff;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #a78bfa;
+            outline-offset: 2px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        max-width: none;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+}
+
 .navigation-to-fit {
-    
+
     @media only screen and (max-width: 850px) and (min-width: 600px) and (min-height: 600px) {
         display: none !important;
     }
-    
+
     @media only screen and (max-width: 600px) {
         display: none !important;
     }
@@ -144,7 +219,7 @@ export default {
         padding: 1.4rem 5.5rem;
         white-space: nowrap;
         font-weight: 500 !important;
-        
+
         .background {
             background-color: #111;
         }
@@ -338,7 +413,7 @@ export default {
     align-items: center;
     margin-bottom: 30px;
 }
-    
+
 .page-sequence a {
     color: $color-text-grey-dark;
     transition: all .3s;
@@ -406,14 +481,14 @@ export default {
 .select {
     position: relative;
     z-index: 10000;
-    
+
     .arrow {
         position: absolute;
         right: 2rem;
         top: 1.5rem;
         width: 1.5rem;
         transition: all .2s;
-    
+
         @media only screen and (max-width: 850px) {
             top: 1.75rem;
         }
@@ -485,15 +560,15 @@ export default {
         padding: 4rem;
         margin-top: 4rem;
         position: relative;
-    
+
         @media only screen and (max-width: 850px) {
             padding: 5rem;
         }
-    
+
         @media only screen and (max-width: 500px) {
             padding: 5rem 4rem;
         }
-    
+
         @media only screen and (max-width: 400px) {
             padding: 5rem 3rem;
         }
@@ -501,14 +576,14 @@ export default {
         .flex-container {
             display: flex;
             align-items: center;
-    
+
             @media only screen and (max-width: 850px) {
                 flex-direction: column;
             }
 
             .input-group:first-of-type {
                 margin-right: 2.5rem;
-    
+
                 @media only screen and (max-width: 850px) {
                     margin-right: 0;
                 }
@@ -592,11 +667,11 @@ export default {
 
         .input-group {
             position: relative;
-    
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }
-                    
+
             input,
             textarea {
                 display: block;
@@ -606,7 +681,7 @@ export default {
                 border-radius: 8px;
                 padding: 1rem 2.5rem;
                 margin-bottom: 1.75rem;
-    
+
                 @media only screen and (max-width: 850px) {
                     padding: 1.1rem 2.5rem;
                     margin-bottom: 2.5rem;
@@ -615,7 +690,7 @@ export default {
 
             input {
                 width: 24rem;
-    
+
                 @media only screen and (max-width: 850px) {
                     width: 100% !important;
                 }
@@ -633,7 +708,7 @@ export default {
             label {
                 display: inline-block;
                 margin-bottom: .8rem;
-    
+
                 @media only screen and (max-width: 850px) {
                     margin-bottom: 1.1rem;
                 }

@@ -9,7 +9,7 @@
             <span class="cell order-amount">{{itemsAmount}}</span>
             <span class="cell order-time">{{date}}</span>
         </div>
-        <nuxt-link class="desktop order-item-link" :to="'/orders/' + id">watch order</nuxt-link>
+        <span class="desktop order-item-link">View order</span>
 
         <img :src="productPhoto" alt="Order image" class="mobile image">
         <div class="mobile info">
@@ -21,7 +21,7 @@
                 <span class="order-id">{{id}}</span>
                 <span class="order-time">{{date}}</span>
             </div>
-            <nuxt-link class="mobile order-item-link" :to="'/orders/' + id">watch order</nuxt-link>
+            <span class="mobile order-item-link">View order</span>
         </div>
     </nuxt-link>
 </template>
@@ -50,7 +50,7 @@ export default {
     &:hover {
         background-color: lighten($color-grey-dark, 5%);
     }
-    
+
     @media only screen and (max-width: 850px) {
         justify-content: center;
         padding: 3rem 3.5rem;

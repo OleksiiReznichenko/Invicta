@@ -12,7 +12,7 @@
                 <div class="form-container">
                     <form @submit.prevent action="#" class="form">
                         <p class="info">
-                            Please login before purchasing cards! This helps us better protect you in the event of a scam
+                            Use a demo account to explore Invicta. No real purchases or payments.
                         </p>
                         <div class="input-group input-group-login">
                             <input ref="emailInput" v-model="email" type="email" id="email" placeholder="E-mail" required>
@@ -36,6 +36,14 @@
                             <button @click="login" @submit="login" type="submit" class="btn btn-gradient btn-big"><span>Sign in</span></button>
                             <nuxt-link to="/register" class="register-link">Register</nuxt-link>
                         </div>
+                        <div class="demo-access">
+                            <span>Just looking around?</span>
+
+                            <button type="button" @click="loginAsDemo">
+                                Explore demo
+                                <span aria-hidden="true">→</span>
+                            </button>
+                        </div>
                     </form>
                     <img src="@/assets/img/user.png" alt="User" class="user-image form-image">
                 </div>
@@ -58,6 +66,38 @@ export default {
     },
 
     methods: {
+        loginAsDemo() {
+            const demoUser = this.$store.state.users.users.find(
+                user => user.id === 'antoniojr'
+            );
+
+            if (!demoUser) return;
+
+            const cookieUser = {
+                id: demoUser.id,
+                username: demoUser.username,
+                avatar: demoUser.avatar
+            };
+
+            const cookieOptions = {
+                path: '/',
+                maxAge: 60 * 60 * 24
+            };
+
+            this.$cookies.set('isLoggedIn', true, cookieOptions);
+            this.$cookies.set(
+                'loggedInUser',
+                JSON.stringify(cookieUser),
+                cookieOptions
+            );
+
+            this.$store.commit('isLoggedInToTrue', {
+                loggedInUser: demoUser
+            });
+
+            this.$router.push('/dashboard');
+        },
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // LOGIN
         login() {
@@ -91,7 +131,7 @@ export default {
             // IF USER EMAIL IS NOT CORRECT - SHOW ERORR
             if (!isEmailCorrect) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'There is no account with that email', 
+                    text: 'There is no account with that email',
                     isBad: true
                 });
                 this.$refs.emailInput.focus();
@@ -101,7 +141,7 @@ export default {
             // IF USER PASSWORD IS NOT CORRECT - SHOW ERORR
             if (!isPasswordCorrect) {
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'This password is incorrect', 
+                    text: 'This password is incorrect',
                     isBad: true
                 });
                 this.$refs.passwordInput.focus();
@@ -167,9 +207,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.demo-access {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .75rem;
+
+    margin-top: 1.4rem;
+    font-size: 1.5rem;
+    color: $color-text-grey;
+
+    button {
+        background: transparent;
+        color: $color-primary;
+        font: inherit;
+        font-weight: 900 !important;
+        transition: all .2s;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 4px;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        gap: .5rem;
+    }
+}
+
+
 .login-page {
     min-height: calc(100vh - 11rem);
-            
+
     @media only screen and (max-width: 850px) {
         min-height: calc(100vh - 15rem);
     }
@@ -182,7 +256,7 @@ export default {
     .content {
         position: relative;
         z-index: 100;
-            
+
         @media only screen and (max-width: 850px) {
             width: 66%;
             margin: 0 auto;
@@ -215,7 +289,7 @@ export default {
                 border-radius: .4rem;
                 border: 1.5px solid white;
                 transition: all .2s;
-            
+
                 @media only screen and (max-width: 850px) {
                     width: 1.85rem !important;
                     height: 1.85rem !important;
@@ -233,7 +307,7 @@ export default {
                 display: inline-block;
                 margin-left: 1rem;
                 user-select: none;
-            
+
                 @media only screen and (max-width: 850px) {
                     font-size: 1.65rem;
                 }
@@ -247,7 +321,7 @@ export default {
                 z-index: 100;
                 transition: all .2s;
                 opacity: 0;
-            
+
                 @media only screen and (max-width: 850px) {
                     width: 1.9rem;
                     height: 1.9rem;
@@ -265,7 +339,7 @@ export default {
             &:hover {
                 color: lighten($color-primary, 5%);
             }
-            
+
             @media only screen and (max-width: 850px) {
                 font-size: 1.65rem;
             }
@@ -275,7 +349,7 @@ export default {
             height: auto !important;
             width: 65rem;
             bottom: -8rem;
-            
+
             @media only screen and (max-width: 850px) {
                 display: none;
             }
@@ -285,7 +359,7 @@ export default {
             display: flex;
             align-items: center;
             margin-top: 3rem;
-            
+
             .btn {
                 margin-top: 0 !important;
                 margin-right: 2rem;
@@ -303,7 +377,8 @@ export default {
 
         .info {
             width: 36rem;
-    
+            max-width: 100%;
+
             @media only screen and (max-width: 850px) {
                 width: 40rem !important;
             }
@@ -315,12 +390,12 @@ export default {
 
         input {
             width: 36rem;
-            
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }
         }
-        
+
         .info {
             color: $color-text-grey;
             font-size: 1.5rem;
@@ -329,7 +404,7 @@ export default {
 
         .form {
             width: fit-content;
-            
+
             @media only screen and (max-width: 850px) {
                 width: 100%;
             }
