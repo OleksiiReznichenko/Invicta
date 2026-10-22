@@ -3,7 +3,7 @@
 
 An archived frontend project for a gift-card and digital-product marketplace, built with Nuxt 2 and Vue 2.
 
-**Live demo:** https://invicta.oleksiireznichenko.com/
+**Live demo:** https://invicta.oleksiireznichenko.com
 
 I worked on the frontend, implementing multiple pages, interactive components, responsive layouts and animated 3D visuals. The project also involved application state, product data and account-related functionality.
 
