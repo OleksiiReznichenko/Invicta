@@ -41,7 +41,7 @@ export default {
                 }
             })
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // USER BANNER
         userBanner() {
@@ -50,7 +50,7 @@ export default {
             } else if (this.banner === 'sideBanner') {
                 return this.user.sideBanner;
             } else if (this.banner === 'profileBanner') {
-                if (this.user.profileBanner === '/projects/Invicta/backProfileImage.png') {
+                if (this.user.profileBanner === '/backProfileImage.png') {
                     return null;
                 } else {
                     return this.user.profileBanner;
@@ -68,7 +68,7 @@ export default {
             if (!this.bannerSrc) {
                 // IF YOU DIDN'T ATTACH THE FILE - SHOW ERROR
                 this.$store.dispatch('showNotificationWindow', {
-                    text: 'You need to attach image first', 
+                    text: 'You need to attach image first',
                     isBad: true
                 });
                 return;
@@ -76,7 +76,7 @@ export default {
             this.saveImage();
             this.closeWindow();
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SET TO INITIAL
         setToInitial() {
@@ -87,13 +87,13 @@ export default {
             } else if (this.banner === 'sideBanner') {
                 this.$store.commit('users/changeSideBanner', {id: this.user.id, newBanner: null});
             } else if (this.banner === 'profileBanner') {
-                this.$store.commit('users/changeProfileBanner', {id: this.user.id, newBanner: '/projects/Invicta/backProfileImage.png'});
+                this.$store.commit('users/changeProfileBanner', {id: this.user.id, newBanner: '/backProfileImage.png'});
             } else if (this.banner === 'campaignBanner' && this.campaignBannerSrc !== 'default') {
                 this.$store.commit('users/changeBannerSrc', {userId: this.user.id, campaignId: this.campaignId, newBanner: 'default'});
             }
 
             this.$store.dispatch('showNotificationWindow', {
-                text: 'Banner was set to initial', 
+                text: 'Banner was set to initial',
                 isBad: false
             });
         },
@@ -103,7 +103,7 @@ export default {
         triggerFileSelection() {
             this.$refs.imageInput.click();
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // EVENT IF FILE IS SELECTED
         fileChanged(e) {
@@ -114,7 +114,7 @@ export default {
                 this.selctedFile = files;
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CLOSE WINDOW
         closeWindow() {
@@ -127,14 +127,14 @@ export default {
                 this.$refs.addImageWindow.classList.remove('opened');
             }, 200)
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CLOSE Window ON BACKGROUND CLICK
         closeWindowOnBackground(e) {
             if (!e.target.classList.contains('add-image-window-wrapper')) return;
             this.closeWindow();
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // EVENT IF FILE IS CLEARED
         fileCleared() {
@@ -160,12 +160,12 @@ export default {
 
             // IF YOUR BANNER IMAGE CHANGED SUCCESSFULLY - SHOW MESSAGE
             this.$store.dispatch('showNotificationWindow', {
-                text: 'Your banner image changed successfully', 
+                text: 'Your banner image changed successfully',
                 isBad: false
             });
         },
     },
-    
+
     watch: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // SELECTED FILE CHANGES - CHANGE IMAGE SOURCE
@@ -181,7 +181,7 @@ export default {
 
         // FILE READER
         this.fileTopBannerReader = new FileReader();
-        
+
         this.fileTopBannerReader.onload = (e) => {
             // GET NEW AVATAR SOURCE
             this.bannerSrc = e.target.result;

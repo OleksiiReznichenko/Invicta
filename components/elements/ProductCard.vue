@@ -17,7 +17,7 @@
                         <h3 class="new-price">${{price}}</h3>
                         <span v-if="oldPrice" class="old-price">${{oldPrice}}</span>
                     </div>
-                    <nuxt-link class="btn" :to="'/browse/' + this.id">+Add</nuxt-link>
+                    <span  class="btn">+Add</span>
                 </div>
             </div>
         </nuxt-link>
@@ -75,7 +75,7 @@ export default {
                 return null;
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CHANGE ITEMS TEXT DEPENDING FROM AMOUNT IN STOCK
         itemsTextComp() {
@@ -169,7 +169,7 @@ export default {
             bottom: -1rem;
             left: 50%;
             transform: translateX(-50%);
-                
+
                 @media only screen and (max-width: 1100px) {
                     transform: translateX(-50%) scale(.9);
                     bottom: -1.5rem;
@@ -210,7 +210,7 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
-                
+
             @media only screen and (min-width: 1050px) {
                 display: flex;
                 align-items: center;
@@ -222,7 +222,7 @@ export default {
             }
 
             .prices {
-                
+
                 @media only screen and (min-width: 1450px),
                 only screen and (max-width: 450px) {
                     display: flex;
@@ -263,7 +263,7 @@ export default {
                     margin-top: 1.8rem;
                     padding: .35rem 2rem;
                 }
-                
+
                 &:hover {
                     background-color: $color-primary;
                     border: 2px solid transparent;

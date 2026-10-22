@@ -93,7 +93,7 @@
 
       <div ref="searchResultsContainer" class="search-results-container">
         <SearchCategory v-for="(category, i) in productsObject"
-         :key="i" 
+         :key="i"
          :categoryName='i'
          :categoryItems='category'
          />
@@ -199,7 +199,7 @@ export default {
             return null;
           }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // IS LOGGED IN
         isLoggedIn() {
@@ -259,7 +259,7 @@ export default {
           return productsObject;
         },
     },
-    
+
     methods: {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // LOG OUT
@@ -309,7 +309,7 @@ export default {
             }
           }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CLOSE DROPDOWN BEFORE GOING TO ANOTHER PAGE
         checkLink(e) {
@@ -323,12 +323,12 @@ export default {
 
                 this.nav.classList.remove('navigation-to-fit');
             }
-            
+
             if (target == 'a') {
                 this.closeNotificationsDropdown();
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // TOGGLE NOTIFICATIONS DROPDOWN
         toggleNotificationsDropdown() {
@@ -342,7 +342,7 @@ export default {
                 this.closeNotificationsDropdown();
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CLOSE NOTIFICATIONS DROPDOWN
         closeNotificationsDropdown() {
@@ -354,7 +354,7 @@ export default {
               }, 200);
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // FOCUS SEARCH EVENT
         focusSearch() {
@@ -362,13 +362,13 @@ export default {
               this.nav.classList.add('focused-search');
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // UNFOCUS SEARCH EVENT
         unfocusSearch(e) {
             this.nav.classList.remove('focused-search');
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // UNFOCUS SEARCH EVENT
         changeNotficationIconStyle(value) {
@@ -397,7 +397,7 @@ export default {
             }, 200);
           }
       },
-      
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       // CHANGE NOTIFICATIONS ICON RIGHT POSITION ON LOGGED IN
       isLoggedIn(newValue, oldValue) {
@@ -406,15 +406,12 @@ export default {
       }
     },
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CHECK MOBILE VERSION
-    created() {
-        if (process.browser) {
-          this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
-        }
-    },
-
     mounted() {
+      const width = window.outerWidth;
+      const height = window.outerHeight;
+
+      this.isPhoneInitial = (width <= 850 && height > 600) || width < 600;
+
       // DOM
       this.navLeft = document.querySelector('.nav__left');
       this.navRight = document.querySelector('.nav__right');
@@ -436,7 +433,7 @@ export default {
             const isClickSearchInput = this.$refs.searchInput.contains(e.target);
 
             if (!isClickInsideElement && !isClickSearchInput && this.$refs.searchResultsContainer.classList.contains('opened')) {
-                
+
                 this.$refs.searchResultsContainer.style.transition = 'all .2s';
 
                 this.$refs.searchResultsContainer.style.opacity = 0;
@@ -452,12 +449,12 @@ export default {
             const isClickInsideElement = this.notificationsDropdown.contains(e.target);
             const isClickInsideElement2 = this.notificationsDropdownOpener.contains(e.target);
 
-            if (!isClickInsideElement && 
-            !isClickInsideElement2 && 
+            if (!isClickInsideElement &&
+            !isClickInsideElement2 &&
             !e.target.classList.contains('notifications-dropdown') &&
             !e.target.classList.contains('top-notifications') &&
             !e.target.classList.contains('title-notifications')) {
-                
+
               this.closeNotificationsDropdown();
             }
           }

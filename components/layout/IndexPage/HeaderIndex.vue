@@ -45,7 +45,7 @@ export default {
         // INIT 3D MODEL AND ANIMATION
         initAnimation() {
             if (this.canvas) return;
-            
+
             // SCENE
             this.scene = new THREE.Scene();
 
@@ -91,14 +91,14 @@ export default {
 
             this.loader = new GLTFLoader();
             this.loader.setDRACOLoader(this.dracoLoader);
-            this.loader.load('/projects/Invicta/cards.glb', (gltf) => {
+            this.loader.load('/cards.glb', (gltf) => {
                 this.cardsModel = gltf.scene;
                 this.scene.add(this.cardsModel);
-                
+
                 this.cardsModelScailing();
 
                 this.clips = gltf.animations;
-                
+
                 this.mixer = new THREE.AnimationMixer(this.cardsModel);
                 this.clips.forEach(clip => {
                     this.mixer.clipAction(clip).play();
@@ -126,7 +126,7 @@ export default {
             if (window.outerWidth < 1000 && window.outerHeight < 520 && window.outerWidth > 600) {
                 this.cardsModel.scale.set(1.85, 1.85, 1.85);
             }
-            
+
             if (window.outerWidth < 700 && window.outerHeight > 600 || window.outerWidth < 600) {
                 this.cardsModel.scale.set(1.1, 1.1, 1.1);
             }
@@ -137,7 +137,7 @@ export default {
         animate() {
             if (!this.clock || !this.renderer) return;
             this.delta = this.clock.getDelta();
-            
+
             if (this.mixer) {
                 this.mixer.update(this.delta);
             }
@@ -174,7 +174,7 @@ export default {
 
         // RESIZE
         window.addEventListener('resize', () => {
-            // if ((window.outerWidth < 1000 && (Math.abs(prevWidth - window.outerWidth) > 30 || 
+            // if ((window.outerWidth < 1000 && (Math.abs(prevWidth - window.outerWidth) > 30 ||
             // Math.abs(prevHeight - window.outerHeight) > 50)) || window.outerWidth >= 1000) {
                 this.onWindowResize();
                 // prevWidth = window.outerWidth;

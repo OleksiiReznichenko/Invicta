@@ -54,7 +54,7 @@
             </nuxt-link>
 
             <nuxt-link to="/login" v-if="!isLoggedIn" key="loginBtn" class="btn btn-gradient"><span>Login</span></nuxt-link>
-            
+
             <div v-if="isLoggedIn" key="buttonsDropdown" class="buttons">
                 <nuxt-link to="/deposit" class="btn btn-blue"><span>Deposit</span></nuxt-link>
                 <nuxt-link to="/withdraw" class="btn btn-blue"><span>Withdraw</span></nuxt-link>
@@ -140,7 +140,7 @@ export default {
                 return 0;
             }
         },
-        
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // MY USER BALANCE
         balance() {
@@ -188,15 +188,12 @@ export default {
         },
     },
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CHECK MOBILE VERSION
-    created(){
-        if (process.browser){
-            this.isPhoneInitial = window.outerWidth <= 850 && window.outerHeight > 600 || window.outerWidth < 600;
-        }
-    },
-
     mounted () {
+        const width = window.outerWidth;
+        const height = window.outerHeight;
+
+        this.isPhoneInitial = (width <= 850 && height > 600) || width < 600;
+
         // DOM
         this.nav = document.querySelector('.nav');
 
@@ -257,11 +254,11 @@ export default {
             // top: 48% !important;
             top: 45% !important;
         }
-        
+
         @media only screen and (max-width: 850px) and (max-height: 730px) {
             top: 42% !important;
         }
-        
+
         @media only screen and (max-width: 550px) {
             width: 44rem;
         }
@@ -281,7 +278,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2.5rem;
-        
+
         @media only screen and (max-width: 850px) and (max-height: 730px) {
             margin-bottom: 1rem;
         }
@@ -320,7 +317,7 @@ export default {
         only screen and (max-width: 600px) {
             margin: 2.5rem 0;
         }
-        
+
         @media only screen and (max-width: 850px) and (max-height: 730px) {
             margin: 1.75rem;
         }
@@ -336,7 +333,7 @@ export default {
             margin-bottom: 2.5rem;
             font-size: 2rem;
         }
-        
+
         @media only screen and (max-width: 850px) and (max-height: 730px) {
             margin-bottom: 2rem;
         }
@@ -362,7 +359,7 @@ export default {
             padding: 1.5rem 0 !important;
             font-size: 2rem !important;
         }
-        
+
         @media only screen and (max-width: 850px) and (max-height: 730px) {
             padding: 1.25rem 0 !important;
         }
@@ -383,7 +380,7 @@ export default {
         only screen and (max-width: 600px) {
             margin-top: 3.5rem;
         }
-        
+
         @media only screen and (max-width: 850px) and (max-height: 730px) {
             margin-top: 2.25rem;
         }
@@ -422,13 +419,13 @@ export default {
             only screen and (max-width: 600px) {
                 margin-bottom: 3.25rem;
             }
-        
+
             @media only screen and (max-width: 850px) and (max-height: 730px) {
                 margin-bottom: 2.5rem;
             }
         }
 
-        a, 
+        a,
         .link-flex {
             transition: all .3s !important;
 
@@ -442,7 +439,7 @@ export default {
             }
         }
     }
-    
+
     .link-flex {
         display: flex;
         align-items: center;

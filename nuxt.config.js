@@ -1,5 +1,5 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  target: 'static',
   head: {
     title: 'Invicta',
     htmlAttrs: {
@@ -12,7 +12,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/projects/Invicta/favicon.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       { rel: 'preload', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap', as: 'style' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap' },
@@ -27,7 +27,7 @@ export default {
         src: "https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"
       },
       {
-        src: "/projects/Invicta/librariesScript.js"
+        src: "/librariesScript.js"
         // src: "/librariesScript.js"
       }
     ]
@@ -90,7 +90,7 @@ export default {
       })
     },
     middleware: ['isPageExist', 'checkLogin'],
-    base: '/projects/Invicta/',
+    base: '/',
     linkActiveClass: 'active-link'
   },
 
